@@ -3,26 +3,21 @@
 
 //--OnFirstBoot--
 
-//*********************Advanced User Info*******************************
-//Because this only runs once and under an odd set of circumstances, it can be hard to test if this function is working properly. Trying to run the entire function using \![raise,OnFirstBoot] will instead bring up your alternate dialogue, so sadly you can't check it that way. You CAN get it to run using \![raise,OnFirstBoot,0] though.
-//***********************************************************************
-
 
 OnFirstBoot
 {
-//OnFirstBoot begins with some code at first to define some values your ghost will be using.
-
  	lastTalk = "" //This is part of how chained conversations work (see aitalk.dic).
 	passhour = 0
 	passmin = 0 
 	passsec = 0 // These keep track of the time.
 	stroke           = 0	// Sets their being-pet state to zero.
 	mikireflag       = 0	// Determines behavior at certain points.
- 	aitalkinterval = 300 //Their default talk rate.
+ 	aitalkinterval = 600 //Their default talk rate.
 	talktime = "every 10 minutes" //How the value aitalkinterval will display in the config menu.
-	firstboot = 1 //This marks that this is the first time you've run the ghost. It's so it won't reroute to general name changing dialogue when the user inputs their name.
 	
 	spookmode = "off"
+	spookchance = 0
+	//visitcount = 0 // count how many times the ghost has been opened. using for special (not spooky) onboot dialogue
 
 	if reference0 == 0 
  	{
@@ -66,19 +61,32 @@ dayslot
 
 
 //-----------------------Normal Booting----------------------------
+/*
+OnInitialize
+{
+	if reference0 != "reload" //For things you want to reset EXCEPT when just reloading; a convenience for you the dev, basically
+	{	
+		passhour = 0
+		passmin = 0
+		passsec = 0
 
-
-
+		visitcount++
+		
+		LastTalk = ""
+	}
+}
+*/
 //--OnBoot
 
 OnBoot
- {
+{
 	lastTalk = "" 
 	passhour = 0
 	passmin = 0
 	passsec = 0
 
-	if hour >= 0 && hour <= 4	{
+	/* hopefully implementing later...
+	if spookmode == "on"	{
 		_spooktime
 
 		_spooktime = RAND(20)
@@ -91,15 +99,21 @@ OnBoot
 		}
 	}
 	else	{
-		"\0\s[0](@)Hello, neighbor...!"
-		"\0\s[0](@)It's good to see you again."
+		""
 	}
+
+	if visitcount == 20	{
+		"\0\s[0](@)I've been seeing you a lot...\n Why is that?"
+	}
+	*/
+
+	"\0\s[0](@)Hello,\w5 neighbor...!"
+	"\0\s[0](@)Did you miss me,\w5 Neighbor?"
+	"\0\s[0](@)It's good to see you again."
+	"\0\s[0](@)What brings you here today?"
 }
 
 //--OnClose
-
-//OnClose runs when you close your ghost. Like OnBoot, this can be customized for times and days if you like, as you saw above. It can also be easily simplified down to. Although do note, close dialogue must end with a \- instead of \e. \- will close the program.
-//Note though that each bit here ends with \w8 instead of \e. That's because the actual end statement to close the ghost is at the very end, one of the very very rare times you won't have to end a line with \e. Instead, end it with \w8 so there's a little bit of a pause for the user before your ghost closes so they can read the last message.
 
 OnClose
 {
@@ -108,6 +122,7 @@ OnClose
 	"\0\s[0](@)Goodbye..."
 	"\0\s[0](@)I'll be seeing you..."
 	"\0\s[0](@)I'm sure we will meet again soon..."
+	"\0\s[0](@)That was fun. I hope to see you again."
  	--
 	"\-" //this bit of code actually closes and ends the ghost. Because \e is here, you don't have to end each line above with it.
 }
@@ -119,6 +134,8 @@ OnClose
 
 //--OnGhostChanging
 
+/*
+//might not use
 OnGhostChanging
  {
 	if reference0 == "Girl" //Replace this with the name of your Sakura character as you put in install.txt or descript.txt.
@@ -127,15 +144,17 @@ OnGhostChanging
 	}
  	else //If you're switching to another Ghost.
 	{
-		"(replace dialogue later)"		
+		//"(replace dialogue later)"		
 	}
 }
-
+*/
 
 //--OnGhostChanged
 
 //A sister to the above, this runs after the ghost has either reloaded itself, or when you switch from another ghost to this ghost.
 
+/*
+//also might not use
 OnGhostChanged
 {
 	"\0\s[0]\1\s[10]" //this sets up their default poses
@@ -149,5 +168,6 @@ OnGhostChanged
 	{
 		"(replace dialogue later)"
 	}
-	*/
+	
 }
+*/

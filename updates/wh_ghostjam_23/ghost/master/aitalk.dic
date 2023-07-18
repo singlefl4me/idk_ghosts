@@ -5,27 +5,16 @@
 
 OnAiTalk
 {
-	if RAND(100) < communicateratio
-	{
-		StartCommunicate
+	if CHAIN.IDName == "" {
+		if spookmode == "on"
+			OnSpookTime
+		else
+			lastTalk = RandomTalk
 	}
 	else
-	{
-		if mikireflag == 0
-		{
-			if CHAIN.IDName == "" {
-				lastTalk = RandomTalk
-			}
-			else {
-				lastTalk = ChainTalk
-			}
-			lastTalk
-		}
-		else
-		{ 
-		MikireTalk
-		}
-	}
+		lastTalk = ChainTalk
+
+	lastTalk
 }
 
 
@@ -37,15 +26,37 @@ RandomTalk: nonoverlap_pool
 	"\0\s[0](@)You look wonderful today,\w5 Neighbor."
 	"\0\s[0](@)I hope the day has treated you well."
 	"\0\s[0](@)Do you have any special plans today?"
-	"\0\s[8]"
+	"\0\s[8]"//possible chain?\![embed,OnChainEnding]
 	"\0\s[5](@)\f[italic,1]ha\w4 ha,\w6 ha\w4 ha\w4 ha!\f[italic,0]\w8\n\s[0]\w8\nOh,\w5 sorry.\s[8]\w8Just thinking about something..."
 	"\0\s[0](@)Are you doing alright?"
 	"\0\s[8](@)Where are my friends?\w8 Where did they go.\w8.\w8.\w8"
 	"\0\s[0](@)How was your day,\w6 Neighbor?"
 	"\0\s[0](@)What do you like to do for fun?"
+	//jokes/random obtuse pranks
+	"\0\s[0](@)Did you know...\w6 you have something on your face.\n\w8\w8.\w8.\w8.\w8\f[italic,1]\s[5]ha\w4 ha\w4 ha\w4!\f[italic,0]\w8\s[0] I'm only kidding.\w8 Was that a good joke?"
+	//"\0\s[0](@)..."
+	//"\0\s[0](@)..."
+	
+	"\0\s[0](@)Are you having fun?\w8\n\.\w8.\w8.\w8\n\w8That's good,\w6 I think..."
+	{
+		"\0\s[0](@)Have you ever "
+		--
+		"sang a song"
+		"played a game"
+		"spent time"
+		--
+		" with someone special?\n\w8 I think thats the most!"
+	}
+	
+	{//here too
+		"\0\s[0](@)Can I tell you something?\n .\w8.\w8.\w8\n"
+		--
+		"oh,\w6 nevermind.\w8 Nothing to worry about..."
+		"I'm glad you came to see me."
+	}
 }
 
-spookme: nonoverlap_pool
+spooktalk: nonoverlap_pool
 {
 	//here too
 	"\0\s[0]\i[3000]\i[12]"
@@ -57,33 +68,95 @@ spookme: nonoverlap_pool
 	"i see you.\_w[4000]\_l[-65,110]hello"
 	"do\w8\w9 you\w8\w9\n\_l[,@20%] remember?\_l[@-275%,@20%] remember?\_l[@-275%,@20%] remember?\_l[@-275%,@20%] remember?\_l[@-275%,@20%] remember?\_l[@-275%,@20%] remember?\_l[@-275%,@20%] remember\n\n\n me\w9?"
 	"\![set,balloonwait,350%]\f[color,220,213,213]I WAS ALWAYS HERE"
+
+	/*
+	//for inspo. may add in l8r
+	"don't move"
+	"where are you""i cant"
+	"i know who you are"
+	"are you out there? can you see me?"
+	*/
 }
 
+/*OnChainEnding
+{
+	temptalkinterval = aitalkinterval
+	aitalkinterval = 60
+	--
+	"\e:chain=chain_a"
+	"\e:chain=chain_b"
+	"\e:chain=chain_c"
+}
+
+OnChainReset
+{
+	aitalkinterval = temptalkinterval
+}
+
+*/
 
 //--Chains
 //Here is where you will put your bits of chain dialogue.
 //Each chain function will go through each part of the chain in order even if it's in one function, until it goes to \e:chain=end which will end the chain. So you can put the entire chain dialogue into one place.
 
 /*
-achain
+scenario_a
+//gonna do something special with this next update
+//cant wait
+//@;)
 {{CHAIN
-	//this will happen the first time the chain is called
-	"\0\s[0]Here is the second part of the chain.\w8\1\s[10]Will there be more?\e"
-	
-	//they will then go to this dialogue next
-	"\0\s[0]This is the third part of chained dialogue.\1\w8\s[10]This will lead to a fourth part.\e"
-	
-	//this will be the last piece of dialogue in the chain, then they will go back to their normal dialogue
-	"\0\s[0]This is the fourth piece of chained dialogue.\1\w8\s[10]This is the end.\e:chain=end"
+	"\0\s[0]Here is the second part of the chain.\w8\1\s[10]Will there be more?\![embed,OnChainReset]\e:chain=end"
 }}CHAIN
+
+/*
+OnFakeChain
+{
+	"\0\s[8](@).\w4.\w4.\w4\w8\w8!\n\w8\s[0]"
+}
 */
 
 //Pay careful attention to the CHAIN text and double brackets for these.
 //Note also it ends with \e:chain=end, basically ending the chain.
 
+OnSpookTime
+{
+	_spooktime
+
+	if ghostupmin >= 60 && ghostupmin < 120	{
+		_spooktime = RAND(6)
+		if _spooktime == 0	
+			lastTalk = spooktalk
+		else
+			lastTalk = RandomTalk
+	}
+	elseif ghostupmin >= 120 && ghostupmin < 180	{
+		if spookchance == 1	{
+			_spooktime = RAND(4)
+			if _spooktime == 0	
+				lastTalk = spooktalk
+			else
+				lastTalk = RandomTalk
+		}
+		elseif spookchance != 1
+			lastTalk = RandomTalk
+	}
+	elseif ghostupmin >= 180	{
+		if spookchance == 1	{
+			_spooktime = RAND(3)
+			if _spooktime == 0	
+				lastTalk = spooktalk
+			else
+				lastTalk = RandomTalk
+		}
+		elseif spookchance != 1
+			lastTalk = RandomTalk
+	}
+	else
+		lastTalk = RandomTalk
+}
+
 
 //-OnMinuteChange
-//These are time-related bits of dialogue for your ghost to say. If you're uninterested, you can delete it all except for a line for MikireTalk. 
 
 //Keeps track of if an hour has passed. Just ignore this.
 HourCheck
@@ -92,6 +165,8 @@ if passmin >= 59
 	{
 		passmin = 0
 		passhour = passhour + 1
+		
+		spookchance = RAND(1)
 	}
 }
 
@@ -100,25 +175,8 @@ OnMinuteChange //This is what will trigger time-based dialogue for your Ghost.
 {
 	HourCheck //checks to see if an hour has passed, ignore it
 	--
- 	if minute == 0 //These ifs will check what time it is. 
-	{
-		if spookmode == "on"	{
-			if hour >= 0 && hour <= 4	{
-				_spooktime
-
-				_spooktime = RAND(30)
-				if _spooktime == 0	
-					"%(spookme)"
-				else
-					""
-		}
-		elseif spookmode == "off"
-			""
-		}
-	}
-
 	//Don't touch this part.
-	elseif mikireflag == 1
+	if mikireflag == 1
  	{
  		MikireTalk
 	}
@@ -137,6 +195,7 @@ OnSecondChange
  		{
 	 	passsec = passsec + 1
 		}
+	/*
 	if mikireflag == 0 && reference1 == 1 //Dialogue for putting them off the screen. You could make this a unique line if you wanted (Like "Hey! What are you doing?"), and have MikireTalk below be for if they continue to be offscreen ("Why are you leaving me out here? Help!" for example). I'll add an example bit of dialogue and comment it out, you can uncomment it and use it if you like, or just leave it out and use MikireTalk below.
 	{
 		//"\0\s[0]You've moved me off screen."
@@ -152,6 +211,7 @@ OnSecondChange
 	{
 		""
 	}
+	*/
 }
 
  //---- MikireTalk ---------------------------------------------------------------------
@@ -175,18 +235,11 @@ EndMikireTalk//may delete later
 
 OnSurfaceRestore
 {
- 	//if reference0 == 4 || reference0 == 6 //This is checking what poses they are in. This looks to see if Girl is in pose 4 or pose 6, since she is reference0.
- 	//{
- 	//"\1\s[10]You're in a sad pose.\w8\0\s[0]I'll go back to normal then.\e"
- 	//}
- 	//elseif reference1 == 14 || reference1 == 16 //This is doing the same but for Triangle, since he's reference1. It looks to see if he's in pose 14 or post 16.
- 	//{
- 	//"\0\s[0]You look sad.\w8\1\s[10]I'll go back to normal.\e"
- 	//}
- 	//else
- 	//{
+ 	//if lastTalk == "\0\s[8]"
+ 		//OnFakeChain
+ 	//else	
 	"\0\s[0]\e"
-	//}
+	//
 }
 
  
@@ -196,15 +249,9 @@ OnSurfaceRestore
 OnKeyPress
 {
 	if reference0 == "t"
-	{
-	OnAiTalk
-	}
+		OnAiTalk
 	elseif reference0 == "r"
-	{
-	OnLastTalk
-	}
+		OnLastTalk
 	elseif reference0 == "f1"
-	{
-	"\![open,readme]"
-	}
+		"\![open,readme]"
 }

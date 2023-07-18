@@ -75,56 +75,60 @@ Select.BACKTOMENU
 
 Select.talkinter
 {
-	"\0\s[0]The interval is currently set to %(talktime)./
+	"\0\s[0]\_qThe interval is currently set to %(talktime)./
 	\0\n\n[half]/
 	\![*]\q[Every 30 seconds,TALKMAX]\n/
 	\![*]\q[Every minute,TALKHIGH]\n/
 	\![*]\q[Every 3 minutes,TALKNORMAL]\n/
 	\![*]\q[Every 5 minutes,TALKPOOR]\n/
+	\![*]\q[Every 10 minutes,TALKVPOOR]\n/
 	\![*]\q[Don't speak,TALKNONE]\n\n[half]/
 	\![*]\q[Don't change,TalksTill]\e"
 }
 
-//If the user doesn't want to change the rate.
 Select.TalksTill
 {
-	"(The interval is now %(talktime).)"
+	"\_q(The interval is now %(talktime).)"
 }
 
-//If the user chooses every 30 seconds.
 Select.TALKMAX
 {
 	talktime = "every 30 seconds" //this sets up the envelope properly
 	aitalkinterval = 30 //this changes the actual rate
 
-	"(The interval is now %(talktime).)"
+	"\_q(The interval is now %(talktime).)"
 }
 
-//If the user chooses every minute.
 Select.TALKHIGH
 {
 	talktime = "every minute"
 	aitalkinterval = 60
 
-	"(The interval is now %(talktime).)"
+	"\_q(The interval is now %(talktime).)"
 }
 
-//If the user chooses every three minutes.
 Select.TALKNORMAL
 {
 	talktime = "every 3 minutes"
 	aitalkinterval = 180
 
-	"(The interval is now %(talktime).)"
+	"\_q(The interval is now %(talktime).)"
 }
 
-//If the user chooses every five minutes. This is the default rate the ghost will start up in, as seen in bootend.dic.
 Select.TALKPOOR
 {
 	talktime = "every 5 minutes"
 	aitalkinterval = 300
 
-	"(The interval is now %(talktime).)"
+	"\_q(The interval is now %(talktime).)"
+}
+
+Select.TALKVPOOR
+{
+	talktime = "every 10 minutes"
+	aitalkinterval = 600
+
+	"\_q(The interval is now %(talktime).)"
 }
 
 //If the user chooses to not have them speak.
@@ -133,13 +137,13 @@ Select.TALKNONE
 	talktime = "disabled"
 	aitalkinterval = 0
 
-	"(The interval is now %(talktime).)"
+	"\_q(The interval is now %(talktime).)"
 }
 
 //If the user selects cancel in a menu.
 Select.CANCEL
 {
-	"OpenSakuraMenu"
+	OpenSakuraMenu
 }
 
 

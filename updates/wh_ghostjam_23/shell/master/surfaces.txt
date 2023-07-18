@@ -35,8 +35,15 @@ animation10.pattern2,overlay,-1,150,0,0
 //--Talking-----------------------------------------------------------------------------
 
 animation11.interval,talk,4
-animation11.pattern0,overlay,1101,140,0,0
-animation11.pattern1,overlay,-1,100,0,0
+animation11.pattern0,alternativestart,(13,14)
+
+animation13.interval,never
+animation13.pattern0,overlay,1101,140,0,0
+animation13.pattern1,overlay,-1,100,0,0
+
+animation14.interval,never
+animation14.pattern0,overlay,1101,100,0,0
+animation14.pattern1,overlay,-1,140,0,0
 
 //stop
 animation12.interval,never
