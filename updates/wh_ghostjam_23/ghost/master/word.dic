@@ -1,0 +1,11 @@
+﻿//---------------------------Envelopes--------------------------
+
+//might use later, leaving for now
+
+ //**** Don't touch this ***************************************************************
+ //This is code stuff and nothing for you to worry about, just save the .dic and move on! You're done!
+ 
+ On_\person
+{
+ 	person
+}

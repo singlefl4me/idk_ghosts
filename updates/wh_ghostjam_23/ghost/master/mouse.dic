@@ -1,0 +1,65 @@
+﻿//---------------------------Mouse Functions--------------------------
+
+
+//--OnMouseMove
+
+OnMouseMove
+{
+		if reference3 == 0
+		{
+			MouseMoveSakura
+		}
+		else
+		{
+			
+		}
+}
+ //--MouseMoveSakura
+ //The petting function for your main character.
+ 
+MouseMoveSakura
+{
+	if reference4 != "" //ignore
+ 	{
+ 		stroke++ //if you move the mouse over the right areas, the stroke count will go up.
+ 		if stroke >= 40 //if the stroke count is above a certain number, the petting dialogue will kick in. You can change this number to make the petting take longer or shorter if you want. FLELEs have it set to 50 for some reason, which makes it take longer than this.
+		{
+ 			stroke = 0 //resetting the stroke count
+			if reference4 == "Hair"
+ 			{
+				"\0\s[20]\_w[3000]\s[0]"
+ 			}
+ 			elseif reference4 == "Face"
+ 			{
+ 				"\0\s[21]\_w[3000]\s[0]"
+ 			}
+			
+ 		}
+	}
+ 	else
+	{
+ 		// If the mouse isn't over the ghost, it'll zero out the stroke value.
+		stroke = 0
+ 	}
+}
+
+//---- OnMouseDoubleClick -------------------------------------------------------
+//This is set up much like OnMouseMove above, except this is checking to see if the user is double clicking on the ghost.
+
+OnMouseDoubleClick
+{
+	//---- like with the OnMouseMove function above, this determines who the user is clicking on.
+	if reference5 == 0	{
+	 	if reference3 == 0	{
+			/*
+			if reference4 == "Hair" || reference4 == "Face"		{
+				"(replace dialogue later)"
+			}
+			else	{
+				
+			}
+			*/
+			OpenSakuraMenu
+		}
+	}
+}

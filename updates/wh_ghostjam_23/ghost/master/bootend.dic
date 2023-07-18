@@ -1,0 +1,153 @@
+﻿//---------------------------Booting and Ending--------------------------
+
+
+//--OnFirstBoot--
+
+//*********************Advanced User Info*******************************
+//Because this only runs once and under an odd set of circumstances, it can be hard to test if this function is working properly. Trying to run the entire function using \![raise,OnFirstBoot] will instead bring up your alternate dialogue, so sadly you can't check it that way. You CAN get it to run using \![raise,OnFirstBoot,0] though.
+//***********************************************************************
+
+
+OnFirstBoot
+{
+//OnFirstBoot begins with some code at first to define some values your ghost will be using.
+
+ 	lastTalk = "" //This is part of how chained conversations work (see aitalk.dic).
+	passhour = 0
+	passmin = 0 
+	passsec = 0 // These keep track of the time.
+	stroke           = 0	// Sets their being-pet state to zero.
+	mikireflag       = 0	// Determines behavior at certain points.
+ 	aitalkinterval = 300 //Their default talk rate.
+	talktime = "every 10 minutes" //How the value aitalkinterval will display in the config menu.
+	firstboot = 1 //This marks that this is the first time you've run the ghost. It's so it won't reroute to general name changing dialogue when the user inputs their name.
+	
+	spookmode = "off"
+
+	if reference0 == 0 
+ 	{
+		//might replace later, might not
+		"\0\s[0](@)\_w[1000]Oh.\w8 Hello.\w8 Didn't see you there.\n\w8\n[half]\w8I don't believe we met.\w8 I'm Wally.\w8\w8 It's always nice to meet a new neighbor,\w6 \s[5]\f[italic,1]ha\w5 ha\w5 ha...\f[italic,0]\w8\s[0]\n\n[half]I hope we can be good friends,\w6 Neighbor."
+ 	}
+	else
+ 	{
+ 		""
+ 	}
+}
+
+//--timeslot
+
+//This is another unique function to tell what time of day it is. This is used for specialized dialogue related to the day.
+
+timeslot
+{
+	if hour >= 5 && hour <= 8
+		"earlymorning"
+	elseif hour >= 9 && hour <= 11
+		"morning"
+	elseif hour >= 12 && hour <= 14
+		"lunch"
+	elseif hour >= 15 && hour <= 17
+		"afternoon"
+	elseif hour >= 18 && hour <= 20
+		"evening"
+	elseif hour >= 21 && hour <= 24
+		"latenight"
+	else
+		"midnight"
+}
+
+//--dayslot
+
+dayslot
+{
+	"%(month)month %(day)day"
+}
+
+
+//-----------------------Normal Booting----------------------------
+
+
+
+//--OnBoot
+
+OnBoot
+ {
+	lastTalk = "" 
+	passhour = 0
+	passmin = 0
+	passsec = 0
+
+	if hour >= 0 && hour <= 4	{
+		_spooktime
+
+		_spooktime = RAND(20)
+		if _spooktime == 0	{
+			""
+			""
+			""
+			--
+			"\-"
+		}
+	}
+	else	{
+		"\0\s[0](@)Hello, neighbor...!"
+		"\0\s[0](@)It's good to see you again."
+	}
+}
+
+//--OnClose
+
+//OnClose runs when you close your ghost. Like OnBoot, this can be customized for times and days if you like, as you saw above. It can also be easily simplified down to. Although do note, close dialogue must end with a \- instead of \e. \- will close the program.
+//Note though that each bit here ends with \w8 instead of \e. That's because the actual end statement to close the ghost is at the very end, one of the very very rare times you won't have to end a line with \e. Instead, end it with \w8 so there's a little bit of a pause for the user before your ghost closes so they can read the last message.
+
+OnClose
+{
+	"\0\s[0](@)See you soon..."
+	"\0\s[0](@)Until we meet again..."
+	"\0\s[0](@)Goodbye..."
+	"\0\s[0](@)I'll be seeing you..."
+	"\0\s[0](@)I'm sure we will meet again soon..."
+ 	--
+	"\-" //this bit of code actually closes and ends the ghost. Because \e is here, you don't have to end each line above with it.
+}
+
+
+ //-------------------------State Changing--------------------
+ //From here on, most of the dialogue will have to do with changing shells, ghosts, or states in some way.
+
+
+//--OnGhostChanging
+
+OnGhostChanging
+ {
+	if reference0 == "Girl" //Replace this with the name of your Sakura character as you put in install.txt or descript.txt.
+	{
+		""
+	}
+ 	else //If you're switching to another Ghost.
+	{
+		"(replace dialogue later)"		
+	}
+}
+
+
+//--OnGhostChanged
+
+//A sister to the above, this runs after the ghost has either reloaded itself, or when you switch from another ghost to this ghost.
+
+OnGhostChanged
+{
+	"\0\s[0]\1\s[10]" //this sets up their default poses
+	/*
+	--
+	if reference0 == "Girl" //As above, this should be the name of your ghost as in install.txt or descript.txt.
+	{
+		""
+	}
+	else
+	{
+		"(replace dialogue later)"
+	}
+	*/
+}

@@ -1,0 +1,217 @@
+﻿///////// 빒?긕?긚긣긡깛긵깒?긣
+///////// 빒럻쀱깏??긚렖룕
+///////// written by umeici.
+
+
+//---------------------------Strings--------------------------
+
+
+//---- Username -----------------------------------------------------------------------
+//Don't touch this.
+
+On_username
+{
+	username
+}
+
+//---- Network Update URL ----------------------------------------------
+
+On_homeurl
+{
+	""
+}
+
+
+//---- Top Menu Option Caption -----------------------------------------
+
+On_recommendrootbutton.caption
+{
+	"Reference Sites"
+}
+
+
+//---- Top Menu Option Websites -----------------------------------------------------
+//These are the websites listed under that button we just named up there.
+
+On_sakura.recommendsites
+{
+	"Ghost Template Walkthrough"
+	--
+	//This first line is the name that will display in the menu for your site. In this case, it would display "Ghost Template Walkthrough".
+	"%ASC(1)http://www.ashido.com/ukagaka/%ASC(2)"
+	--
+	//And this is the site that it would link to. Note that a website address begins with %ASC(1) and ends with %ASC(2). Don't forget these!
+	"SSP"
+	--
+	"%ASC(1)http://ssp.shillest.net/%ASC(2)"
+	--
+	
+	"Crow + SSP Reference (J)"
+	--
+	"%ASC(1)http://crow.aqrs.jp/reference/all/index.html%ASC(2)"
+	--
+	
+	"Ghost Documentation (J)"
+	--
+	"%ASC(1)http://usada.sakura.vg/contents/specification.html%ASC(2)"
+	--
+	
+	"Disc-2 (J)"
+	--
+	"%ASC(1)http://disc2.s56.xrea.com/%ASC(2)"
+	
+	"UKADOC Project Wiki (J)"
+	--
+	"%ASC(1)http://ssp.shillest.net/ukadoc/manual/index.html/%ASC(2)"
+}
+ 
+//---- The second option from the top's caption -----------------------------------------
+//This is the name of the second option in that list.
+
+On_portalrootbutton.caption
+{
+
+}
+
+ //---- Websites in the Second Option --------------------------------------------------
+ //These are the websites listed under that second button we just named up there.
+ 
+On_sakura.portalsites
+{
+
+}
+
+//---- Dress-up Menu Caption ----------------------------------------------------------
+//What it will say on the menu for Dress-Up.
+
+On_dressuprootbutton.caption
+{
+	"Dress-Up"
+}
+
+//---- Headlines and RSS Feeds ---------------------------------------------------------
+//You'll see this below uninstall. This is where all the headlines/RSS feeds the user may have subscribed to will be listed, and this is the caption it'll have on the menu.
+
+On_headlinesenserootbutton.caption
+{
+	"Headlines + RSS Feeds"
+}
+
+ //---- Readme Caption -------------------------------------------------------
+ //What the menu displays for the readme file link under Information.
+ 
+On_readmebutton.caption
+ {
+	"READ ME"
+	"readme.txt"
+	"Manual"
+ }
+
+ //---- Uninstall Caption -----------------------------------------------------
+ //This is the caption for the option to uninstall them.
+ 
+On_vanishbutton.caption
+ {
+	"Uninstall"
+}
+
+//---- Shell Caption -----------------------------------------------------
+ //This is the caption for the option to change shells.
+ 
+On_shellrootbutton.caption
+ {
+	"Change Shell"
+}
+
+//---- Change Ghost Caption -----------------------------------------------------
+ //This is the caption for the option to change ghosts.
+ 
+On_ghostrootbutton.caption
+ {
+	"Change Ghost"
+}
+
+//---- Call Ghosts Caption -----------------------------------------------------
+ //This is the caption for the option to call another ghost.
+ 
+On_callghostrootbutton.caption
+ {
+	"Call Ghost"
+}
+
+//---- Quit Caption -----------------------------------------------------
+ //This is the caption for the option to quit.
+ 
+On_quitbutton.caption
+ {
+	"Quit"
+}
+
+
+//----------------------------------Stop!------------------------------------
+
+//Don't mess with anything after this point! It's all stuff you don't need to worry about. Just save and move on to the next .dic file.
+
+
+
+
+
+ //---- 소멸 지시 버튼 표시 교체 -------------------------------------------------------
+On_vanishbutton.visible
+ {
+	"1"
+}
+
+//---- 딳벍뭷궻뫜궻긕?긚긣뼹롦벦 -------------------------------------------------------
+On_otherghostname
+{
+	ghostexlist = ""
+	_i = 0
+	while _i >= 0 {
+		_ghostname = NAMETOVALUE("reference%_i")
+		if _ghostname != "" {
+			if _i > 0; ghostexlist += ","
+			ghostexlist += _ghostname[0]
+			_i++
+		}
+		else; _i = -1
+	}
+	ghostexcount = ARRAYSIZE(ghostexlist)
+}
+
+//---- SHIORI 듫쁀륃뺪 ------------------------------------------------------------------
+On_version
+{
+	GETSETTING(AYAINFO_VERSION)
+}
+
+On_craftman
+{
+	"umeici"
+}
+
+On_craftmanw
+{
+	"?럖"
+}
+
+On_name
+{
+	"AYA"
+}
+
+//---- Owned SSTP 뾭 uniqueid 롦벦 ------------------------------------------------------
+On_uniqueid
+{
+	uniqueid = reference0
+}
+
+//---- hwnd 롦벦 ------------------------------------------------------------------------
+On_hwnd
+{
+	sakurahwnd    = reference0[0]
+	kerohwnd      = reference0[1]
+	sakurablnhwnd = reference1[0]
+	keroblnhwnd   = reference1[1]
+}
+

@@ -1,0 +1,24 @@
+﻿charset,UTF-8
+
+
+name,Welcome Home
+type,ghost
+
+
+sakura.name,Wally Darling
+sakura.name2,Wally
+kero.name,
+
+
+craftman,idk & thebubble-mancer
+craftmanurl,
+
+
+sstp.allowunspecifiedsend,0
+shiori,yaya.dll
+
+
+icon,wh_icon.ico
+
+
+balloon,Letters (WH)

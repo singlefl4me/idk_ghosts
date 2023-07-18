@@ -1,0 +1,8 @@
+
+charset,UTF-8
+type,ghost
+name,Welcome Home
+directory,wh_ghostjam_23
+
+
+balloon.directory,wh_letters

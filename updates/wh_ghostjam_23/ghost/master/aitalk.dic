@@ -1,0 +1,210 @@
+﻿//---------------------------AI Talk--------------------------
+
+
+//--OnAiTalk
+
+OnAiTalk
+{
+	if RAND(100) < communicateratio
+	{
+		StartCommunicate
+	}
+	else
+	{
+		if mikireflag == 0
+		{
+			if CHAIN.IDName == "" {
+				lastTalk = RandomTalk
+			}
+			else {
+				lastTalk = ChainTalk
+			}
+			lastTalk
+		}
+		else
+		{ 
+		MikireTalk
+		}
+	}
+}
+
+
+//--RandomTalk 
+
+RandomTalk: nonoverlap_pool
+{	
+	//add some dialogue here eventually
+	"\0\s[0](@)You look wonderful today,\w5 Neighbor."
+	"\0\s[0](@)I hope the day has treated you well."
+	"\0\s[0](@)Do you have any special plans today?"
+	"\0\s[8]"
+	"\0\s[5](@)\f[italic,1]ha\w4 ha,\w6 ha\w4 ha\w4 ha!\f[italic,0]\w8\n\s[0]\w8\nOh,\w5 sorry.\s[8]\w8Just thinking about something..."
+	"\0\s[0](@)Are you doing alright?"
+	"\0\s[8](@)Where are my friends?\w8 Where did they go.\w8.\w8.\w8"
+	"\0\s[0](@)How was your day,\w6 Neighbor?"
+	"\0\s[0](@)What do you like to do for fun?"
+}
+
+spookme: nonoverlap_pool
+{
+	//here too
+	"\0\s[0]\i[3000]\i[12]"
+	"\0\s[3001]"
+	--
+	"(#)"
+	--
+	"no one knows i'm here.\_w[800].\_w[800].\_w[800]\n.\_w[900]\n.\_w[900]\n.\_w[900]\n righ\w5t\w8?"
+	"i see you.\_w[4000]\_l[-65,110]hello"
+	"do\w8\w9 you\w8\w9\n\_l[,@20%] remember?\_l[@-275%,@20%] remember?\_l[@-275%,@20%] remember?\_l[@-275%,@20%] remember?\_l[@-275%,@20%] remember?\_l[@-275%,@20%] remember?\_l[@-275%,@20%] remember\n\n\n me\w9?"
+	"\![set,balloonwait,350%]\f[color,220,213,213]I WAS ALWAYS HERE"
+}
+
+
+//--Chains
+//Here is where you will put your bits of chain dialogue.
+//Each chain function will go through each part of the chain in order even if it's in one function, until it goes to \e:chain=end which will end the chain. So you can put the entire chain dialogue into one place.
+
+/*
+achain
+{{CHAIN
+	//this will happen the first time the chain is called
+	"\0\s[0]Here is the second part of the chain.\w8\1\s[10]Will there be more?\e"
+	
+	//they will then go to this dialogue next
+	"\0\s[0]This is the third part of chained dialogue.\1\w8\s[10]This will lead to a fourth part.\e"
+	
+	//this will be the last piece of dialogue in the chain, then they will go back to their normal dialogue
+	"\0\s[0]This is the fourth piece of chained dialogue.\1\w8\s[10]This is the end.\e:chain=end"
+}}CHAIN
+*/
+
+//Pay careful attention to the CHAIN text and double brackets for these.
+//Note also it ends with \e:chain=end, basically ending the chain.
+
+
+//-OnMinuteChange
+//These are time-related bits of dialogue for your ghost to say. If you're uninterested, you can delete it all except for a line for MikireTalk. 
+
+//Keeps track of if an hour has passed. Just ignore this.
+HourCheck
+{
+if passmin >= 59
+	{
+		passmin = 0
+		passhour = passhour + 1
+	}
+}
+
+
+OnMinuteChange //This is what will trigger time-based dialogue for your Ghost.
+{
+	HourCheck //checks to see if an hour has passed, ignore it
+	--
+ 	if minute == 0 //These ifs will check what time it is. 
+	{
+		if spookmode == "on"	{
+			if hour >= 0 && hour <= 4	{
+				_spooktime
+
+				_spooktime = RAND(30)
+				if _spooktime == 0	
+					"%(spookme)"
+				else
+					""
+		}
+		elseif spookmode == "off"
+			""
+		}
+	}
+
+	//Don't touch this part.
+	elseif mikireflag == 1
+ 	{
+ 		MikireTalk
+	}
+}
+
+//--OnSecondChange
+
+OnSecondChange
+{
+	if passsec == 59
+ 		{
+	 	passsec = 0
+ 		passmin = passmin + 1
+		}
+ 	else
+ 		{
+	 	passsec = passsec + 1
+		}
+	if mikireflag == 0 && reference1 == 1 //Dialogue for putting them off the screen. You could make this a unique line if you wanted (Like "Hey! What are you doing?"), and have MikireTalk below be for if they continue to be offscreen ("Why are you leaving me out here? Help!" for example). I'll add an example bit of dialogue and comment it out, you can uncomment it and use it if you like, or just leave it out and use MikireTalk below.
+	{
+		//"\0\s[0]You've moved me off screen."
+		
+		MikireTalk
+	}
+	if mikireflag == 1 && reference1 == 0 //Dialogue for coming back on the screen
+	{
+		EndMikireTalk
+	}
+	mikireflag = reference1 //reference1 is if the ghost is offscreen or not
+	if reference2 == 1
+	{
+		""
+	}
+}
+
+ //---- MikireTalk ---------------------------------------------------------------------
+ //MikireTalk is dialogue for when your main character is off-screen. Like if you dragged Girl over to the side of your monitor until she was partially concealed by it.
+ 
+MikireTalk//may delete later
+{
+	""
+}
+
+ //----EndMikireTalk--------------------------------------------------------------------
+ 
+EndMikireTalk//may delete later
+{
+	""
+}
+
+
+//**** OnSurfaceRestore *****************************************************************
+//What this does is that after a short period of time, the ghost will go back to its default pose, so you won't have a ghost stuck in one expression for too long.
+
+OnSurfaceRestore
+{
+ 	//if reference0 == 4 || reference0 == 6 //This is checking what poses they are in. This looks to see if Girl is in pose 4 or pose 6, since she is reference0.
+ 	//{
+ 	//"\1\s[10]You're in a sad pose.\w8\0\s[0]I'll go back to normal then.\e"
+ 	//}
+ 	//elseif reference1 == 14 || reference1 == 16 //This is doing the same but for Triangle, since he's reference1. It looks to see if he's in pose 14 or post 16.
+ 	//{
+ 	//"\0\s[0]You look sad.\w8\1\s[10]I'll go back to normal.\e"
+ 	//}
+ 	//else
+ 	//{
+	"\0\s[0]\e"
+	//}
+}
+
+ 
+ //--OnKeyPress
+ //This defines the hotkeys your ghost will use.
+ 
+OnKeyPress
+{
+	if reference0 == "t"
+	{
+	OnAiTalk
+	}
+	elseif reference0 == "r"
+	{
+	OnLastTalk
+	}
+	elseif reference0 == "f1"
+	{
+	"\![open,readme]"
+	}
+}
