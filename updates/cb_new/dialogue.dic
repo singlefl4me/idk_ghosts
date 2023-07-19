@@ -1,0 +1,624 @@
+//Everything in this file is commented out on purpose. Only uncomment functions that you're planning to use! FLUX checks for the EXISTENCE of a function, and if the function exists, it executes it rather than doing the default behavior. It does not check if there's actually anything IN the function. So if you're not using one of these functions, comment it out or erase it!
+
+//Also, I will reiterate again: Try not to use the base SHIORI functions found on Ukadoc here! I may update FLUX in the future to have that same function, and then your shell's custom code wouldn't work anymore until you update it! If you really need one, ask me about it and I can consider adding the function to FLUX so you can use it. And if you're doing really complex stuff, you might just want to make your own ghost lol
+
+//For the same reason, if you're adding new custom functions, try to give them fairly unique names! Same with variables, especially. More notes about this in the documentation file.
+
+
+
+//Write the current version of your shell here, and it'll be noted on the main menu. Try it out!
+//shellver
+//{
+	//"1.0.0"
+//}
+
+//Set up the path to your tray icon here, and it'll automatically change to it whenever your shell is loaded. Note that you'll need to keep the /../../shell/ part as it is, just edit the path after that
+//OnCustom_trayicon
+//{
+	//"\![set,tasktrayicon,/../../shell/your_shell/your_shells_icon.ico]"
+//}
+
+//Custom dialogue for when FLUX is booted. If you want, you can use the _timesince bit I've commented out for the number of days since FLUX was last loaded. Note that a notify command and trayicon command will always happen before any dialogue. Uses the same references as OnBoot.
+//OnCustom_OnBoot
+//{
+	//_timesince = FUNCTIONEX("time_check.dll","how_many_days",lastclosed[0],lastclosed[1],lastclosed[2],0,0,0) * -1
+//}
+
+//Custom dialogue for when FLUX is closed. Note that the command to stop sound and a notifyother command will always happen first. Also, don't end dialogues here with a \e, FLUX automatically appends \w8\w8\-\e at the end of any dialogues here. Uses the same references as OnClose.
+//OnCustom_OnClose
+//{
+	
+//}
+
+//Custom dialogue when FLUX is swapping to another ghost. Same notes as above. Uses the same references as OnGhostChanging.
+//OnCustom_OnGhostChanging
+//{
+	
+//}
+
+//Custom dialogue when FLUX was switched to from another ghost. If you want, you can use the _timesince bit I've commented out for the number of days since FLUX was last closed. Note that a notify command will always happen before any dialogue. Uses the same references as OnGhostChanged.
+//OnCustom_OnGhostChanged
+//{
+	//_timesince = FUNCTIONEX("time_check.dll","how_many_days",lastclosed[0],lastclosed[1],lastclosed[2],0,0,0) * -1
+//}
+
+//Custom dialogue when changing away from a shell. Uses the same references as OnShellChanging.
+//OnCustom_OnShellChanging
+//{
+	
+//}
+
+//Custom dialogue after changing to a new shell. If you have any issues with this function not being called properly, please let me know! The whole shell change system is a little slow/janky because it has to copy over all of the information in this file, and then reload itself, before it can run this dialogue. Reference values here should be the same as OnShellChanged.
+//OnCustom_OnShellChanged
+//{
+	
+//}
+
+//Custom dialogue for the randomtalk function. Having this function in your file will enable the 'say something' option on the main menu! I included an example if/else for splitting up your dialogue into singing vs idle dialogue, but you can ignore that if you want. If you want to use it, you'll need to create the Custom_SingingDialogue and Custom_IdleDialogue functions!
+//Note, the Singing function returns 1 if FLUX is playing music, and 0 if it's not.
+//OnCustom_RandomTalk
+//{
+	//if Singing; Custom_SingingDialogue //This will be called if FLUX is playing music
+	//else; Custom_IdleDialogue //This will be called if FLUX is NOT playing music
+//}
+
+//This is inserted into the main menu, between the Shell/Dressup options and the Config option. This is really just for if you want to add a couple simple questions or something the user could ask your character, but if you want to add something else, go for it. Just don't break stuff haha. Note that the menu options before and after it automatically have linebreaks for it.
+OnCustom_Menu
+{
+	"\![*]\q[Add/Remove Cookies,OnCookieAdd_cb]"
+}
+
+//Custom dialogue pool for being pet! This function is specifically called when the player moves their mouse over the "stroke_p" hitbox for a short while, which is usually the head. FLUX uses the variable totalpets to track the total number of times FLUX has been pet; if you want to track this for your shell specifically you'll need to add a custom variable! Make sure the name is very definitely unique, though. sanspets would be too generic, but zichqec_sanspets would be unique enough that it should never overlap with anyone else's. Uses the same references as OnMouseMove.
+//OnCustom_Petting
+//{
+	
+//}
+
+
+//If you want to get a little more detailed with your stroking dialogues, you can set them up in this function. Note that this one is specifically for the Sakura character! If the user has their cursor over any hitboxes other than "stroke_p", this function will be called instead. Uses the same references as OnMouseMove.
+//OnCustom_MouseMoveSakura
+//{
+	
+//}
+
+//This is the same as the above function, but it will happen for any characters other than the Sakura! You only need this if you have more than one character. Uses the same references as OnMouseMove.
+//OnCustom_MouseMoveExtra
+//{
+	
+//}
+
+//If the user double clicks on an area of the Sakura with a hitbox it doesn't recognize for anything else (like the hotspots for the music player, or the menu), this function will be called instead. Note that if the user clicks on an area with no hitbox, it'll open the main menu! This uses the same references as OnMouseDoubleClick.
+//OnCustom_MouseDoubleClickSakura
+//{
+	
+//}
+
+//If the user double clicks on a character other than the Sakura, this function will be called instead. Uses the same references as OnMouseDoubleClick.
+//OnCustom_MouseDoubleClickExtra
+//{
+	//"Switch to an instrument?\n\n[half]/
+	//\![*]\q[Yes,inst1]\n/
+	//\![*]\q[No,OnCancel]\n/"
+//}
+
+//intrument 
+//Select.inst1
+//{
+	//"\p[2]\i[28]"
+//}
+
+//If the Sakura and Kero start overlapping. Uses the same references as OnOverlap, but will ONLY be called if the Sakura and Kero started overlapping.
+//OnCustom_Overlap
+//{
+	
+//}
+
+//If the Sakura and Kero stop overlapping, or any other characters start/stop overlapping. Uses the same references as OnOverlap. Sorry if this is a little confusing, but I wanted to offer a simple overlap pool while also offering the full possibilities of OnOverlap. Make sure you check out Ukadoc's information about OnOverlap if you're not sure how to use this!
+//OnCustom_OverlapExtra
+//{
+	
+//}
+
+//Called from OnSurfaceRestore if FLUX is NOT playing music. If this function does not exist, FLUX will set the Sakura to surface0 and the Kero to surface -1 by default. If you want to have a Kero character, or you want multiple/different idle frames, fill them in here! Note that this function is called in several places, so it does not have a consistent set of reference values. Instead, you can use one of YAYA's built-in arrays to determine which surfaces your shell is in. SHIORI3FW.LastSurface[0] would be the current surface number of the Sakura, SHIORI3FW.LastSurface[1] would be the current surface number of the Kero, etc. Note that these are stored as integers.
+
+OnCustom_IdleSurfaces
+{
+	if Flag ("cb_shining glitter mini") == 1	
+		"\0\s[7]"
+	else
+		"\0\s[0]"
+	--
+	if Flag ("cb_popping candy toggle") == 1	
+		"\1\s[10]"
+	else	
+		"\1\s[-1]"
+	--
+	if Flag ("cb_parfait toggle") == 1	
+		"\p[2]\s[20]"
+	else	
+		"\p[2]\s[-1]"
+	--
+	if Flag ("cb_rockstar toggle") == 1	
+		"\p[3]\s[30]"
+	else	
+		"\p[3]\s[-1]"
+	--
+	if Flag ("cb_macaron toggle") == 1	
+		"\p[4]\s[40]"
+	else	
+		"\p[4]\s[-1]"
+	--
+	if Flag ("cb_marshmallow toggle") == 1	
+		"\p[5]\s[50]"
+	else	
+		"\p[5]\s[-1]"
+	--
+	if Flag ("cb_clover toggle") == 1	
+		"\p[6]\s[60]"
+	else	
+		"\p[6]\s[-1]"
+	--
+	if Flag ("cb_carol toggle") == 1	
+		"\p[7]\s[70]"
+	else	
+		"\p[7]\s[-1]"
+	--
+	if Flag ("cb_bellflower toggle") == 1	
+		"\p[8]\s[80]"
+	else	
+		"\p[8]\s[-1]"
+	--
+	if Flag ("cb_pudding toggle") == 1	
+		"\p[9]\s[90]"
+	else	
+		"\p[9]\s[-1]"
+	--
+	if Flag ("cb_deejay toggle") == 1	
+		"\p[10]\s[15000]"
+	else	
+		"\p[10]\s[-1]"
+	--
+	if Flag ("cb_mint choco toggle") == 1	
+		"\p[11]\s[15010]"
+	else	
+		"\p[11]\s[-1]"
+}
+
+//Sister to the above, but this is for if FLUX is currently playing music. If this function does not exist, FLUX will set the Sakura to surface25, and the Kero to surface -1 by default. You need to keep at least one singing animation on surface25! Otherwise, go wild and add any additional surfaces you want here! Note that this function is called in several places, so it does not have a consistent set of reference values. Instead, you can use one of YAYA's built-in arrays to determine which surfaces your shell is in. SHIORI3FW.LastSurface[0] would be the current surface number of the Sakura, SHIORI3FW.LastSurface[1] would be the current surface number of the Kero, etc. Note that these are stored as integers.
+OnCustom_SingingSurfaces
+{
+	if SHIORI3FW.LastSurface[0] != 25 || SHIORI3FW.Eventid == "OnWindowStateRestore" || SHIORI3FW.Eventid == "OnShellChanged" || SHIORI3FW.Eventid == "OnGetCoords2" //You can erase this if you want. If you set it up like this, your ghost won't change surfaces if it's already in the singing pose, and that way it won't be interrupted. You can also add more surface numbers here if you have multiple singing poses! The event ids here are to cover edge cases, don't get rid of those.
+	{
+		if Flag ("cb_shining glitter mini") == 1	
+			"\0\s[7]\i[1004]"
+		else
+			"\0\s[25]"
+		--
+		if Flag ("cb_popping candy toggle") == 1	
+			"\1\s[19]"
+		else	
+			"\1\s[-1]"
+		--
+			if Flag ("cb_parfait toggle") == 1	
+			"\p[2]\s[29]"
+		else	
+			"\p[2]\s[-1]"
+		--
+		if Flag ("cb_parfait instrument") == 1	
+			"\p[2]\s[28]"
+		--
+		if Flag ("cb_rockstar toggle") == 1	
+			"\p[3]\s[39]"
+		else	
+			"\p[3]\s[-1]"
+		--
+		if Flag ("cb_rockstar instrument") == 1	
+			"\p[3]\s[38]"
+		--
+		if Flag ("cb_macaron toggle") == 1	
+			"\p[4]\s[49]"
+		else	
+			"\p[4]\s[-1]"
+		--
+		if Flag ("cb_macaron instrument") == 1	
+			"\p[4]\s[48]"
+		--
+		if Flag ("cb_marshmallow toggle") == 1	
+			"\p[5]\s[59]"
+		else	
+			"\p[5]\s[-1]"
+		--
+		if Flag ("cb_marshmallow instrument") == 1	
+			"\p[5]\s[58]"
+		--
+		if Flag ("cb_clover toggle") == 1	
+			"\p[6]\s[69]"
+		else	
+			"\p[6]\s[-1]"
+		--
+		if Flag ("cb_clover instrument") == 1	
+			"\p[6]\s[68]"
+		--
+		if Flag ("cb_carol toggle") == 1	
+			"\p[7]\s[79]"
+		else	
+			"\p[7]\s[-1]"
+		--
+		if Flag ("cb_carol instrument") == 1	
+			"\p[7]\s[78]"
+		--
+		if Flag ("cb_bellflower toggle") == 1	
+			"\p[8]\s[89]"
+		else	
+			"\p[8]\s[-1]"
+		--
+		if Flag ("cb_bellflower instrument") == 1	
+			"\p[8]\s[88]"
+		--
+		if Flag ("cb_pudding toggle") == 1	
+			"\p[9]\s[99]"
+		else	
+			"\p[9]\s[-1]"
+		--
+		if Flag ("cb_pudding instrument") == 1	
+			"\p[9]\s[98]"
+		--
+		if Flag ("cb_deejay toggle") == 1	
+			"\p[10]\s[15009]"
+		else	
+			"\p[10]\s[-1]"
+		--
+		if Flag ("cb_deejay instrument") == 1	
+			"\p[10]\s[15008]"
+		--
+		if Flag ("cb_mint choco toggle") == 1	
+			"\p[11]\s[15019]"
+		else	
+			"\p[11]\s[-1]"
+		--
+		if Flag ("cb_mint choco instrument") == 1	
+			"\p[11]\s[15018]"
+	}
+}
+
+
+//These surfaces are the ones for when the user uses etc functions. They're called through an embed tag; reference0 will be "Error" if the function ends in an error, "Refuse" if it ends in something minor (like trying to add songs of an incompatible type), and "Action" if it's a normal action. You can skip this if check and just make it a single surface if you want! It's just so you can have your shell frown if something goes wrong, etc.
+//OnCustom_ActionSurfaces
+//{
+	//if reference0 == "Error"
+	//{
+		
+	//}
+	//elseif reference0 == "Refuse"
+	//{
+		
+	//}
+	//else
+	//{
+		
+	//}
+//}
+
+//Custom responses to Commu dialogues! Please be careful with this haha. Note that FLUX will always send its current stats after every commu. FLUX is also set up so that it won't respond unless no balloon is open. If it receives a message while the balloon is open, it will store it and respond later. You can use the ConvoTag variable here to send information back and forth that the user can't see, if you're not sure how this system works then ask me about it and I'll show you. My other ghosts make extensive use of it, and I'm planning to write a guide eventually. References are the same as OnCommunicate.
+//OnCustom_Commu
+//{
+	
+//}
+
+//Want to send some custom stats when your shell is pinged via commu? You can do that here if you like! DO NOT INCLUDE COMMAS IN THIS. IT WILL BREAK THE SIMPLE ARRAY THAT SENDS THE STATS. Try using | or something similar as a delimiter instead, and have the other ghost break it down on their side with SPLIT!
+//OnCustom_CommuStats
+//{
+	//"%(somestat1)|%(somestat2)|%(somestat3)"
+//}
+
+//This is for when the user sets their birthday, and it just so happens to be the current day. The 'birthday' array contains all the information about their birthday. If you want to say the birthday in this format: 'May 8th', you can use bitrhday[0]. For other formats, or to get just the month or day, please refer to the reference in fx_nameteach.dic, above the OnUserBornMonth function.
+//Note, a couple linebreaks and then buttons to go back to config menu are automatically placed after this dialogue. Don't end it with a \e!
+//OnCustom_BirthdaySet
+//{
+	
+//}
+
+//Custom dialogue for when the year rolls over at midnight! References are the same as OnSecondChange.
+//OnCustom_NewYear
+//{
+	
+//}
+
+//Custom dialogue for if another ghost has been uninstalled. This will be called if FLUX is switched to when another ghost was running alone and was uninstalled, or if FLUX is open when another ghost is uninstalled. Uses the same references as OnVanished.
+//There is a possible additional argument here. If the other ghost that was uninstalled was open alone, and it switched to FLUX after it finished, _argv[0] will contain 'boot'. Otherwise, it will be empty. You can use this to determine if FLUX just booted or not.
+//OnCustom_OnVanished
+//{
+	
+//}
+
+OnCookieAdd_cb : all
+{
+	"\0%(bbb)\_q"
+	--
+	"Select a character to add or remove.\n\n[half]"
+
+	"\![*]\q[Shining Glitter Cookie,OnCookieSelect_cb,shining]\n"
+	"\![*]\q[Popping Candy Cookie,OnCookieSelect_cb,popping]\n"
+	"\![*]\q[Parfait Cookie,OnCookieSelect_cb,parfait]\n"
+	"\![*]\q[Rockstar Cookie,OnCookieSelect_cb,rockstar]\n"
+	"\![*]\q[Macaron Cookie,OnCookieSelect_cb,macaron]\n"
+	"\![*]\q[Marshmallow Cookie,OnCookieSelect_cb,marshmallow]\n"
+	"\![*]\q[Clover Cookie,OnCookieSelect_cb,clover]\n"
+	"\![*]\q[Carol Cookie,OnCookieSelect_cb,carol]\n"
+	"\![*]\q[Bellflower Cookie,OnCookieSelect_cb,bellflower]\n"
+	"\![*]\q[Pudding Cookie,OnCookieSelect_cb,pudding]\n"
+	"\![*]\q[DJ Cookie,OnCookieSelect_cb,deejay]\n"
+	"\![*]\q[Mint Choco Cookie,OnCookieSelect_cb,mint]\n\n[half]"
+
+	"Select a character to add an instrument.\n\n[half]"
+
+	if Flag ("cb_parfait toggle") == 1	
+		"\![*]\q[Parfait Cookie,OnInstAdd_cb,inst1]\n"
+	if Flag ("cb_rockstar toggle") == 1
+		"\![*]\q[Rockstar Cookie,OnInstAdd_cb,inst2]\n"
+	if Flag ("cb_macaron toggle") == 1
+		"\![*]\q[Macaron Cookie,OnInstAdd_cb,inst3]\n"
+	if Flag ("cb_marshmallow toggle") == 1
+		"\![*]\q[Marshmallow Cookie,OnInstAdd_cb,inst4]\n"
+	if Flag ("cb_clover toggle") == 1
+		"\![*]\q[Clover Cookie,OnInstAdd_cb,inst5]\n"
+	if Flag ("cb_carol toggle") == 1
+		"\![*]\q[Carol Cookie,OnInstAdd_cb,inst6]\n"
+	if Flag ("cb_bellflower toggle") == 1
+		"\![*]\q[Bellflower Cookie,OnInstAdd_cb,inst7]\n"
+	if Flag ("cb_pudding toggle") == 1
+		"\![*]\q[Pudding Cookie,OnInstAdd_cb,inst8]\n"
+	if Flag ("cb_deejay toggle") == 1
+		"\![*]\q[DJ Cookie,OnInstAdd_cb,inst9]\n"
+	if Flag ("cb_mint choco toggle") == 1
+		"\![*]\q[Mint Choco Cookie,OnInstAdd_cb,inst10]\n"
+
+	"\n\n[half]"
+
+	"\![*]\q[Go Back,OnMenuRun]\n\e"
+}
+
+//Select.option for character toggle.
+OnCookieSelect_cb
+{
+	if reference0 == "shining"	{
+		if Flag ("cb_shining glitter mini") == 1	{
+			RemoveFlag("cb_shining glitter mini")
+			"\0\s[0]"
+		}
+		else	{
+			MiscFlags ,= "cb_shining glitter mini"
+			"\0\s[7]"
+		}
+	}
+	if reference0 == "popping"	{
+		if Flag ("cb_popping candy toggle") == 1	{
+			RemoveFlag("cb_popping candy toggle")
+			"\1\s[-1]"
+		}
+		else	{
+			MiscFlags ,= "cb_popping candy toggle"
+			"\1\s[10]"
+		}	
+	}
+	if reference0 == "parfait"	{
+		if Flag ("cb_parfait toggle") == 1	{
+			RemoveFlag("cb_parfait toggle")
+			RemoveFlag("cb_parfait instrument")
+			"\p[2]\s[-1]"
+		}
+		else	{
+			MiscFlags ,= "cb_parfait toggle"
+			"\p[2]\s[20]"
+		}
+	}
+	if reference0 == "rockstar"	{
+		if Flag ("cb_rockstar toggle") == 1	{
+			RemoveFlag("cb_rockstar toggle")
+			RemoveFlag("cb_rockstar instrument")
+			"\p[3]\s[-1]"
+		}
+		else	{
+			MiscFlags ,= "cb_rockstar toggle"
+			"\p[3]\s[30]"
+		}
+	}
+	if reference0 == "macaron"	{
+		if Flag ("cb_macaron toggle") == 1	{
+			RemoveFlag("cb_macaron toggle")
+			RemoveFlag("cb_macaron instrument")
+			"\p[4]\s[-1]"
+		}
+		else	{
+			MiscFlags ,= "cb_macaron toggle"
+			"\p[4]\s[40]"
+		}
+	}
+	if reference0 == "marshmallow"	{
+		if Flag ("cb_marshmallow toggle") == 1	{
+			RemoveFlag("cb_marshmallow toggle")
+			RemoveFlag("cb_marshmallow instrument")
+			"\p[5]\s[-1]"
+		}
+		else	{
+			MiscFlags ,= "cb_marshmallow toggle"
+			"\p[5]\s[50]"
+		}
+	}
+	if reference0 == "clover"	{
+		if Flag ("cb_clover toggle") == 1	{
+			RemoveFlag("cb_clover toggle")
+			RemoveFlag("cb_clover instrument")
+			"\p[6]\s[-1]"
+		}
+		else	{
+			MiscFlags ,= "cb_clover toggle"
+			"\p[6]\s[60]"
+		}
+	}
+	if reference0 == "carol"	{
+		if Flag ("cb_carol toggle") == 1	{
+			RemoveFlag("cb_carol toggle")
+			RemoveFlag("cb_carol instrument")
+			"\p[7]\s[-1]"
+		}
+		else	{
+			MiscFlags ,= "cb_carol toggle"
+			"\p[7]\s[70]"
+		}
+	}
+	if reference0 == "bellflower"	{
+		if Flag ("cb_bellflower toggle") == 1	{
+			RemoveFlag("cb_bellflower toggle")
+			RemoveFlag("cb_bellflower instrument")
+			"\p[8]\s[-1]"
+		}
+		else	{
+			MiscFlags ,= "cb_bellflower toggle"
+			"\p[8]\s[80]"
+		}
+	}
+	if reference0 == "pudding"	{
+		if Flag ("cb_pudding toggle") == 1	{
+			RemoveFlag("cb_pudding toggle")
+			RemoveFlag("cb_pudding instrument")
+			"\p[9]\s[-1]"
+		}
+		else	{
+			MiscFlags ,= "cb_pudding toggle"
+			"\p[9]\s[90]"
+		}
+	}
+	if reference0 == "deejay"	{
+		if Flag ("cb_deejay toggle") == 1	{
+			RemoveFlag("cb_deejay toggle")
+			RemoveFlag("cb_deejay instrument")
+			"\p[10]\s[-1]"
+		}
+		else	{
+			MiscFlags ,= "cb_deejay toggle"
+			"\p[10]\s[15000]"
+		}
+	}
+	if reference0 == "mint"	{
+		if Flag ("cb_mint choco toggle") == 1	{
+			RemoveFlag("cb_mint choco toggle")
+			RemoveFlag("cb_mint choco instrument")
+			"\p[11]\s[-1]"
+		}
+		else	{
+			MiscFlags ,= "cb_mint choco toggle"
+			"\p[11]\s[15010]"
+		}
+	}
+	--
+	"\![raise,OnCookieAdd_cb]"
+}
+
+//instruments
+
+OnInstAdd_cb
+{
+	if reference0 == "inst1"	{ //intrument 1 (Parfait Cookie's guitar)
+		if Flag ("cb_parfait instrument") == 1	{
+			RemoveFlag("cb_parfait instrument")
+			"\p[2]\s[29]"
+		}
+		else	{
+			MiscFlags ,= "cb_parfait instrument"
+			"\p[2]\s[28]"
+		}
+	}	
+	if reference0 == "inst2"	{ //instrument 2 (Rockstar Cookie's guitar)
+		if Flag ("cb_rockstar instrument") == 1	{
+			RemoveFlag("cb_rockstar instrument")
+			"\p[3]\s[39]"
+		}
+		else	{
+			MiscFlags ,= "cb_rockstar instrument"
+			"\p[3]\s[38]"
+		}
+	}
+	if reference0 == "inst3"	{ //instrument 3 (Macaron Cookie's drums)
+		if Flag ("cb_macaron instrument") == 1	{
+			RemoveFlag("cb_macaron instrument")
+			"\p[4]\s[49]"
+		}
+		else	{
+			MiscFlags ,= "cb_macaron instrument"
+			"\p[4]\s[48]"
+		}
+	}
+	if reference0 == "inst4"	{ //instrument 4 (Marshmallow Cookie's trumpet)
+		if Flag ("cb_marshmallow instrument") == 1	{
+			RemoveFlag("cb_marshmallow instrument")
+			"\p[5]\s[59]"
+		}
+		else	{
+			MiscFlags ,= "cb_marshmallow instrument"
+			"\p[5]\s[58]"
+		}
+	}
+	if reference0 == "inst5"	{ //instrument 5 (Clover Cookie's lute)
+		if Flag ("cb_clover instrument") == 1	{
+			RemoveFlag("cb_clover instrument")
+			"\p[6]\s[69]"
+		}
+		else	{
+			MiscFlags ,= "cb_clover instrument"
+			"\p[6]\s[68]"
+		}
+	}
+	if reference0 == "inst6"	{ //instrument 6 (Carol Cookie's harp)
+		if Flag ("cb_carol instrument") == 1	{
+			RemoveFlag("cb_carol instrument")
+			"\p[7]\s[79]"
+		}
+		else	{
+			MiscFlags ,= "cb_carol instrument"
+			"\p[7]\s[78]"
+		}
+	}
+	if reference0 == "inst7"	{ //instrument 7 (CBellflower Cookie's lyre)
+		if Flag ("cb_bellflower instrument") == 1	{
+			RemoveFlag("cb_bellflower instrument")
+			"\p[8]\s[89]"
+		}
+		else	{
+			MiscFlags ,= "cb_bellflower instrument"
+			"\p[8]\s[88]"
+		}
+	}
+	if reference0 == "inst8"	{ //instrument 8 (Pudding Cookie's Bells)
+		if Flag ("cb_pudding instrument") == 1	{
+			RemoveFlag("cb_pudding instrument")
+			"\p[9]\s[99]"
+		}
+		else	{
+			MiscFlags ,= "cb_pudding instrument"
+			"\p[9]\s[98]"
+		}
+	}
+	if reference0 == "inst9"	{ //instrument 9 (DJ Cookie's turntable)
+		if Flag ("cb_deejay instrument") == 1	{
+			RemoveFlag("cb_deejay instrument")
+			"\p[10]\s[15009]"
+		}
+		else	{
+			MiscFlags ,= "cb_deejay instrument"
+			"\p[10]\s[15008]"
+		}
+	}
+	if reference0 == "inst10"	{ //instrument 10 (Mint Choco Cookie's violin)
+		if Flag ("cb_mint choco instrument") == 1	{
+			RemoveFlag("cb_mint choco instrument")
+			"\p[11]\s[15019]"
+		}
+		else	{
+			MiscFlags ,= "cb_mint choco instrument"
+			"\p[11]\s[15018]"
+		}
+	}
+	--
+	"\![raise,OnCookieAdd_cb]"
+}

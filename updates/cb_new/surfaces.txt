@@ -1,0 +1,2092 @@
+version,1
+//This is using the new seriko definition. If you want to use the old one, change the version to 0
+//As a note, comments in seriko should all be on their own lines. Otherwise, you might get weird errors in your shell.
+animation-sort,ascend
+
+//Idle
+surface0
+{
+	//body
+	element0,overlay,surface0.png,0,0
+	//As a note, you can put your images in subfolders! I'd be careful doing it, but it could be very helpful! It would look something like this
+	//element0,overlay,yourfolder/surface0.png,0,0
+	//Any images in subfolders HAVE to be defined in a surface before you can use them in animations, though.
+
+	//eyes
+	animation0.interval,runonce
+	animation0.pattern0,overlay,103,0,0,0
+
+	//mouth
+	animation1000.interval,runonce
+	animation1000.pattern0,overlay,2,0,0,0
+
+	//arm l
+	animation1001.interval,runonce
+	animation1001.pattern0,overlay,3,0,0,0
+	//arm r
+	animation1002.interval,runonce
+	animation1002.pattern0,overlay,4,0,0,0
+
+	//sparkle
+	animation20.interval,always
+	animation20.pattern0,overlay,1000,100,0,0
+	animation20.pattern1,overlay,1001,170,0,0
+	animation20.pattern2,overlay,1000,200,0,0
+	animation20.pattern3,overlay,-1,150,0,0
+
+	//Blink
+	animation5.interval,random,4
+	animation5.pattern0,stop,0
+	animation5.pattern1,overlay,100,0,0,0
+	animation5.pattern2,overlay,103,85,0,0
+
+	//menu collision
+	collisionex2,menu,polygon,113,64,128,49,140,47,144,57,144,75,128,65
+}
+
+//Petting
+surface1
+{
+	//body
+	element0,overlay,surface0.png,0,0
+	//eyes
+	element1,overlay,surface100.png,0,0
+	//mouth
+	element2,overlay,surface200.png,0,0
+	//arm l
+	element3,overlay,surface3.png,0,0
+	//arm r
+	element4,overlay,surface4.png,0,0
+
+	//sparkle
+	animation20.interval,always
+	animation20.pattern0,overlay,1000,100,0,0
+	animation20.pattern1,overlay,1001,170,0,0
+	animation20.pattern2,overlay,1000,200,0,0
+	animation20.pattern3,overlay,-1,150,0,0
+
+	//menu collision
+	collisionex2,menu,polygon,113,64,128,49,140,47,144,57,144,75,128,65
+}
+
+//Action
+surface6
+{
+	//body
+	element0,overlay,surface0.png,0,0
+	//eyes
+	element1,overlay,surface101.png,0,0
+	//mouth
+	element2,overlay,surface2.png,0,0
+	//arm l
+	element3,overlay,surface3.png,0,0
+	//arm r
+	element4,overlay,surface4.png,0,0
+
+	//sparkle
+	animation20.interval,always
+	animation20.pattern0,overlay,1000,100,0,0
+	animation20.pattern1,overlay,1001,170,0,0
+	animation20.pattern2,overlay,1000,200,0,0
+	animation20.pattern3,overlay,-1,150,0,0
+
+	//menu collision
+	collisionex2,menu,polygon,113,64,128,49,140,47,144,57,144,75,128,65
+}
+
+//hide
+surface7
+{
+	animation1003.interval,runonce
+	animation1003.pattern0,overlay,1357,0,0,0
+	animation1003.collision1,113,51,134,73,next_button
+	animation1003.collision2,113,73,134,92,clear_button
+	animation1003.collision3,113,92,134,115,menu
+	animation1003.collision4,113,115,134,135,play_button
+	animation1003.collision5,113,135,134,157,stop_button1
+	animation1003.collision6,113,157,134,179,pause_button
+	animation1003.collision7,113,179,134,201,previous_button
+	animation1003.option,exclusive
+
+	//sing
+	animation1004.interval,never
+	animation1004.pattern0,overlay,1357,0,0,0
+	animation1004.collision1,113,51,134,73,next_button
+	animation1004.collision2,113,73,134,92,clear_button
+	animation1004.collision3,113,92,134,115,k_window
+	animation1004.collision4,113,115,134,135,play_button
+	animation1004.collision5,113,135,134,157,stop_button1
+	animation1004.collision6,113,157,134,179,pause_button
+	animation1004.collision7,113,179,134,201,previous_button
+	animation1004.option,exclusive
+}
+
+//Singing
+surface25
+{
+	//body
+	element0,overlay,surface0.png,0,0
+
+	//sparkle
+	animation20.interval,always
+	animation20.pattern0,overlay,1000,100,0,0
+	animation20.pattern1,overlay,1001,170,0,0
+	animation20.pattern2,overlay,1000,200,0,0
+	animation20.pattern3,overlay,-1,150,0,0
+
+
+	//eye animation
+	animation4.interval,runonce
+	animation4.pattern0,parallelstop,(0,5,6,7)
+	animation4.pattern1,alternativestart,(0,5,6,7)
+
+	//open
+	animation0.interval,never
+	animation0.pattern0,overlay,103,0,0,0
+	animation0.pattern1,overlay,103,1000-8000,0,0
+	animation0.pattern2,alternativestart,(0,4)
+	//blink
+	animation5.interval,never
+	animation5.pattern0,overlay,100,0,0,0
+	animation5.pattern1,overlay,103,85,0,0
+	animation5.pattern2,alternativestart,(0,4,5)
+	//eyes closed
+	animation6.interval,never
+	animation6.pattern0,overlay,100,0,0,0
+	animation6.pattern1,overlay,100,5000,0,0
+	animation6.pattern2,start,4
+	//grin
+	animation7.interval,never
+	animation7.pattern0,overlay,101,0,0,0
+	animation7.pattern1,overlay,101,5000,0,0
+	animation7.pattern2,start,4
+
+
+	//mouth animation
+	animation8.interval,runonce
+	animation8.pattern0,parallelstop,(1,9,10,11,12,13)
+	animation8.pattern1,alternativestart,(1,9,10,11,12,13)
+
+	//close
+	animation1.interval,never
+	animation1.pattern0,overlay,2,0,0,0
+	animation1.pattern1,overlay,2,240,0,0
+	animation1.pattern2,start,8
+	//a
+	animation9.interval,never
+	animation9.pattern0,overlay,200,0,0,0
+	animation9.pattern1,overlay,200,180,0,0
+	animation9.pattern2,start,8
+	//e, ii
+	animation10.interval,never
+	animation10.pattern0,overlay,201,0,0,0
+	animation10.pattern1,overlay,201,160,0,0
+	animation10.pattern2,start,8
+	//i
+	animation11.interval,never
+	animation11.pattern0,overlay,202,0,0,0
+	animation11.pattern1,overlay,202,220,0,0
+	animation11.pattern2,start,8
+	//o
+	animation12.interval,never
+	animation12.pattern0,overlay,204,0,0,0
+	animation12.pattern1,overlay,204,320,0,0
+	animation12.pattern2,start,8
+	//oo, u
+	animation13.interval,never
+	animation13.pattern0,overlay,203,0,0,0
+	animation13.pattern1,overlay,203,360,0,0
+	animation13.pattern2,start,8
+	
+	//clear
+	//animation100.interval,never
+	//animation100.pattern0,parallelstop,(1,9,10,11,12,13)
+
+	//arm animation (l)
+	animation18.interval,runonce
+	animation18.pattern0,parallelstop,(2,14,16)
+	animation18.pattern1,alternativestart,(2,14,16)
+
+	//arm-animation0
+	animation2.interval,never
+	animation2.pattern0,overlay,3,0,0,0
+	animation2.pattern1,overlay,3,6000,0,0
+	animation2.pattern2,start,18
+	//arm-animation1
+	animation14.interval,never
+	animation14.pattern0,overlay,300,0,0,0
+	animation14.pattern1,overlay,300,6000,0,0
+	animation14.pattern2,start,18
+	//arm-animation2
+	animation16.interval,never
+	animation16.pattern0,overlay,302,0,0,0
+	animation16.pattern1,overlay,302,6000,0,0
+	animation16.pattern2,start,18
+
+	//arm animation (r)
+	animation19.interval,runonce
+	animation19.pattern0,parallelstop,(3.15,17)
+	animation19.pattern1,alternativestart,(3,15,17)
+
+	//arm-animation0
+	animation3.interval,never
+	animation3.pattern0,overlay,4,0,0,0
+	animation3.pattern1,overlay,4,6000,0,0
+	animation3.pattern2,start,19
+	//arm-animation1
+	animation15.interval,never
+	animation15.pattern0,overlay,301,0,0,0
+	animation15.pattern1,overlay,301,6000,0,0
+	animation15.pattern2,start,19
+	//arm-animation2
+	animation17.interval,never
+	animation17.pattern0,overlay,303,0,0,0
+	animation17.pattern1,overlay,303,6000,0,0
+	animation17.pattern2,start,19
+
+	//These collisions only show up on the singing surface, since for this shell the buttons to stop only appear while it is singing. They're also polygon collisions because I didn't want them to be square, but you don't need to do that if you don't want to. You could make these use the same format as the rest of the collisions below and that would work fine.
+	collisionex2,k_window,polygon,113,64,128,49,140,47,144,57,144,75,128,65
+	collision5,100,120,124,143,pause_button
+	collisionex6,next_button,polygon,92,60,96,42,109,29,119,34,130,65
+	collisionex7,previous_button,polygon,133,67,145,59,160,55,174,57,168,78,156,93
+}
+
+
+
+//kero
+
+//Idle
+surface10
+{
+	//body
+	element0,overlay,surface10.png,0,0
+
+
+	//eyes
+	animation0.interval,runonce
+	animation0.pattern0,overlay,11,0,0,0
+
+	//mouth
+	animation1000.interval,runonce
+	animation1000.pattern0,overlay,12,0,0,0
+
+	//arm l
+	animation1001.interval,runonce
+	animation1001.pattern0,overlay,13,0,0,0
+	//arm r
+	animation1002.interval,runonce
+	animation1002.pattern0,interpolate,14,0,0,0
+
+	//Blink
+	animation5.interval,random,4
+	animation5.pattern0,stop,0
+	animation5.pattern1,overlay,110,0,0,0
+	animation5.pattern2,overlay,11,85,0,0
+}
+
+//Petting
+surface1111
+{
+	//body
+	element0,overlay,surface10.png,0,0
+	//eyes
+	element1,overlay,surface111.png,0,0
+	//mouth
+	element2,overlay,surface210.png,0,0
+	//arm l
+	element3,overlay,surface312.png,0,0
+	//arm r
+	element4,overlay,surface313.png,0,0
+}
+
+//singing
+surface19
+{
+	//body
+	element0,overlay,surface10.png,0,0
+
+
+	//eye animation
+	animation4.interval,runonce
+	animation4.pattern0,parallelstop,(0,5,6,7)
+	animation4.pattern1,alternativestart,(0,5,6,7)
+
+	//open
+	animation0.interval,never
+	animation0.pattern0,overlay,11,0,0,0
+	animation0.pattern1,overlay,11,1000-8000,0,0
+	animation0.pattern2,start,4
+	//blink
+	animation5.interval,never
+	animation5.pattern0,overlay,110,0,0,0
+	animation5.pattern1,overlay,11,85,0,0
+	animation5.pattern2,start,4
+	//eyes closed
+	animation6.interval,never
+	animation6.pattern0,overlay,110,0,0,0
+	animation6.pattern1,overlay,110,5000,0,0
+	animation6.pattern2,overlay,11,50,0,0
+	animation6.pattern3,start,4
+	//grin
+	animation7.interval,never
+	animation7.pattern0,overlay,111,0,0,0
+	animation7.pattern1,overlay,111,5000,0,0
+	animation7.pattern2,overlay,11,50,0,0
+	animation7.pattern3,start,4
+
+
+	//mouth animation
+	animation8.interval,runonce
+	animation8.pattern0,parallelstop,(1,9,10,11,12,13)
+	animation8.pattern1,alternativestart,(1,9,10,11,12,13)
+
+	//close
+	animation1.interval,never
+	animation1.pattern0,overlay,12,0,0,0
+	animation1.pattern1,overlay,12,240,0,0
+	animation1.pattern2,start,8
+	//a
+	animation9.interval,never
+	animation9.pattern0,overlay,210,0,0,0
+	animation9.pattern1,overlay,210,180,0,0
+	animation9.pattern2,start,8
+	//e, ii
+	animation10.interval,never
+	animation10.pattern0,overlay,211,0,0,0
+	animation10.pattern1,overlay,211,160,0,0
+	animation10.pattern2,start,8
+	//i
+	animation11.interval,never
+	animation11.pattern0,overlay,212,0,0,0
+	animation11.pattern1,overlay,212,220,0,0
+	animation11.pattern2,start,8
+	//o
+	animation12.interval,never
+	animation12.pattern0,overlay,214,0,0,0
+	animation12.pattern1,overlay,214,320,0,0
+	animation12.pattern2,start,8
+	//oo, u
+	animation13.interval,never
+	animation13.pattern0,overlay,213,0,0,0
+	animation13.pattern1,overlay,213,360,0,0
+	animation13.pattern2,start,8
+	
+	//clear
+	//animation100.interval,never
+	//animation100.pattern0,parallelstop,(1,9,10,11,12,13)
+
+	//arm animation (l)
+	animation18.interval,runonce
+	animation18.pattern0,parallelstop,(2,14,16)
+	animation18.pattern1,alternativestart,(2,14,16)
+
+	//arm-animation0
+	animation2.interval,never
+	animation2.pattern0,overlay,13,0,0,0
+	animation2.pattern1,overlay,13,6000,0,0
+	animation2.pattern2,start,18
+	//arm-animation1
+	animation14.interval,never
+	animation14.pattern0,overlay,310,0,0,0
+	animation14.pattern1,overlay,310,6000,0,0
+	animation14.pattern2,start,18
+	//arm-animation2
+	animation16.interval,never
+	animation16.pattern0,overlay,312,0,0,0
+	animation16.pattern1,overlay,312,6000,0,0
+	animation16.pattern2,start,18
+
+	//arm animation (r)
+	animation19.interval,runonce
+	animation19.pattern0,parallelstop,(3.15,17)
+	animation19.pattern1,alternativestart,(3,15,17)
+
+	//arm-animation0
+	animation3.interval,never
+	animation3.pattern0,interpolate,14,0,0,0
+	animation3.pattern1,interpolate,14,6000,0,0
+	animation3.pattern2,start,19
+	//arm-animation1
+	animation15.interval,never
+	animation15.pattern0,interpolate,311,0,0,0
+	animation15.pattern1,interpolate,311,6000,0,0
+	animation15.pattern2,start,19
+	//arm-animation2
+	animation17.interval,never
+	animation17.pattern0,overlay,313,0,0,0
+	animation17.pattern1,overlay,313,6000,0,0
+	animation17.pattern2,start,19
+}
+
+
+
+//p1
+
+//Idle
+surface20
+{
+	//body
+	element0,overlay,surface20.png,0,0
+	
+	//eyes
+	animation0.interval,runonce
+	animation0.pattern0,overlay,21,0,0,0
+
+	//mouth
+	animation1000.interval,runonce
+	animation1000.pattern0,overlay,22,0,0,0
+
+	//arm l
+	animation1001.interval,runonce
+	animation1001.pattern0,overlay,23,0,0,0
+	//arm r
+	animation1002.interval,runonce
+	animation1002.pattern0,overlay,24,0,0,0
+
+	//Blink
+	animation5.interval,random,4
+	animation5.pattern0,stop,0
+	animation5.pattern1,overlay,120,0,0,0
+	animation5.pattern2,overlay,21,85,0,0
+}
+
+//Petting
+surface1120
+{
+	//body
+	element0,overlay,surface20.png,0,0
+	//eyes
+	element1,overlay,surface121.png,0,0
+	//mouth
+	element2,overlay,surface22.png,0,0
+	//arm l
+	element3,overlay,surface322.png,0,0
+	//arm r
+	element4,overlay,surface323.png,0,0
+}
+
+
+//guitar
+surface28
+{
+	//body
+	element0,overlay,surface20.png,0,0
+	//mouth
+	element1,overlay,surface22.png,0,0
+
+
+	//eye animation
+	animation4.interval,runonce
+	animation4.pattern0,parallelstop,(6,7)
+	animation4.pattern1,alternativestart,(6,7)
+
+	//eyes closed
+	animation6.interval,never
+	animation6.pattern0,overlay,120,0,0,0
+	animation6.pattern1,overlay,120,5000,0,0
+	animation6.pattern2,start,4
+	//grin
+	animation7.interval,never
+	animation7.pattern0,overlay,121,0,0,0
+	animation7.pattern1,overlay,121,5000,0,0
+	animation7.pattern2,start,4
+	
+
+	//guitar-animations
+
+	animation30.interval,runonce
+	animation30.pattern0,overlay,1004,0,0,0
+	animation30.pattern1,start,23
+	animation30.pattern2,parallelstop,(21,22)
+	animation30.pattern3,alternativestart,(21,22)
+
+	//arm-1: chord
+	animation21.interval,never
+	animation21.pattern0,overlay,324,0,0,0
+	animation21.pattern1,overlay,324,2000,0,0
+	animation21.pattern2,start,30
+
+	animation22.interval,never
+	animation22.pattern0,overlay,325,0,0,0
+	animation22.pattern1,overlay,325,2000,0,0
+	animation22.pattern2,start,30
+
+	//arm-2: strum
+	animation23.interval,never
+	animation23.pattern0,overlay,327,0,0,0
+	animation23.pattern1,overlay,326,1000,0,0
+	animation23.pattern2,overlay,327,1000,0,0
+
+
+	//pose2
+	animation29.interval,periodic,12
+	animation29.pattern0,parallelstop,(4,6,7,21,22,23,30)
+	animation29.pattern1,parallelstart,(24,25,26)
+	animation29.pattern2,overlay,1005,0,0,0
+	animation29.pattern3,overlay,-1,8000,0,0
+	animation29.pattern4,parallelstart,(4,30)
+	animation29.pattern5,parallelstop,(24,25,26)
+
+	//arm-1: chord
+	animation24.interval,never
+	animation24.pattern0,overlay,328,0,0,0
+	animation24.pattern1,overlay,328,2000,0,0
+
+	//arm-2: strum
+	animation25.interval,never
+	animation25.pattern0,overlay,330,0,0,0
+	animation25.pattern1,overlay,329,1000,0,0
+	animation25.pattern2,overlay,330,1000,0,0
+	animation25.pattern3,start,25
+
+	//head+body
+	animation26.interval,never
+	animation26.pattern0,base,27,0,0,0
+	animation26.pattern1,base,-1,8000,0,0
+}
+
+//Singing
+surface29
+{
+	//body
+	element0,overlay,surface20.png,0,0
+	//inst
+	element1,overlay,surface1003.png,0,0
+
+
+	//eye animation
+	animation4.interval,runonce
+	animation4.pattern0,parallelstop,(0,5,6,7)
+	animation4.pattern1,alternativestart,(0,5,6,7)
+
+	//open
+	animation0.interval,never
+	animation0.pattern0,overlay,21,0,0,0
+	animation0.pattern1,overlay,21,1000-8000,0,0
+	animation0.pattern2,start,4
+	//blink
+	animation5.interval,never
+	animation5.pattern0,overlay,120,0,0,0
+	animation5.pattern1,overlay,21,85,0,0
+	animation5.pattern2,start,4
+	//eyes closed
+	animation6.interval,never
+	animation6.pattern0,overlay,120,0,0,0
+	animation6.pattern1,overlay,120,5000,0,0
+	animation6.pattern2,start,4
+	//grin
+	animation7.interval,never
+	animation7.pattern0,overlay,121,0,0,0
+	animation7.pattern1,overlay,121,5000,0,0
+	animation7.pattern2,start,4
+
+
+	//mouth animation
+	animation8.interval,runonce
+	animation8.pattern0,parallelstop,(1,9,10,11,12,13)
+	animation8.pattern1,alternativestart,(1,9,10,11,12,13)
+
+	//close
+	animation1.interval,never
+	animation1.pattern0,overlay,22,0,0,0
+	animation1.pattern1,overlay,22,240,0,0
+	animation1.pattern2,start,8
+	//a
+	animation9.interval,never
+	animation9.pattern0,overlay,220,0,0,0
+	animation9.pattern1,overlay,220,180,0,0
+	animation9.pattern2,start,8
+	//e, ii
+	animation10.interval,never
+	animation10.pattern0,overlay,221,0,0,0
+	animation10.pattern1,overlay,221,160,0,0
+	animation10.pattern2,start,8
+	//i
+	animation11.interval,never
+	animation11.pattern0,overlay,222,0,0,0
+	animation11.pattern1,overlay,222,220,0,0
+	animation11.pattern2,start,8
+	//o
+	animation12.interval,never
+	animation12.pattern0,overlay,223,0,0,0
+	animation12.pattern1,overlay,223,320,0,0
+	animation12.pattern2,start,8
+	//oo, u
+	animation13.interval,never
+	animation13.pattern0,overlay,224,0,0,0
+	animation13.pattern1,overlay,224,360,0,0
+	animation13.pattern2,start,8
+	
+	//clear
+	//animation100.interval,never
+	//animation100.pattern0,parallelstop,(1,9,10,11,12,13)
+
+	//arm animation (l)
+	animation18.interval,runonce
+	animation18.pattern0,parallelstop,(2,14,16)
+	animation18.pattern1,alternativestart,(2,14,16)
+
+	//arm-animation0
+	animation2.interval,never
+	animation2.pattern0,overlay,23,0,0,0
+	animation2.pattern1,overlay,23,6000,0,0
+	animation2.pattern2,start,18
+	//arm-animation1
+	animation14.interval,never
+	animation14.pattern0,overlay,320,0,0,0
+	animation14.pattern1,overlay,320,6000,0,0
+	animation14.pattern2,start,18
+	//arm-animation2
+	animation16.interval,never
+	animation16.pattern0,overlay,322,0,0,0
+	animation16.pattern1,overlay,322,6000,0,0
+	animation16.pattern2,start,18
+
+	//arm animation (r)
+	animation19.interval,runonce
+	animation19.pattern0,parallelstop,(3.15,17)
+	animation19.pattern1,alternativestart,(3,15,17)
+
+	//arm-animation0
+	animation3.interval,never
+	animation3.pattern0,overlay,24,0,0,0
+	animation3.pattern1,overlay,24,6000,0,0
+	animation3.pattern2,start,19
+	//arm-animation1
+	animation15.interval,never
+	animation15.pattern0,overlay,321,0,0,0
+	animation15.pattern1,overlay,321,6000,0,0
+	animation15.pattern2,start,19
+	//arm-animation2
+	animation17.interval,never
+	animation17.pattern0,overlay,323,0,0,0
+	animation17.pattern1,overlay,323,6000,0,0
+	animation17.pattern2,start,19
+}
+
+
+
+//p2
+
+//Idle
+surface30
+{
+	//body
+	element0,overlay,surface30.png,0,0
+
+	//eyes
+	animation0.interval,runonce
+	animation0.pattern0,overlay,31,0,0,0
+
+	//mouth
+	animation1000.interval,runonce
+	animation1000.pattern0,overlay,32,0,0,0
+
+	//arm l
+	animation1001.interval,runonce
+	animation1001.pattern0,overlay,33,0,0,0
+	//arm r
+	animation1002.interval,runonce
+	animation1002.pattern0,overlay,34,0,0,0
+
+	//Blink
+	animation5.interval,random,4
+	animation5.pattern0,stop,0
+	animation5.pattern1,overlay,130,0,0,0
+	animation5.pattern2,overlay,31,85,0,0
+}
+
+//Petting
+surface1130
+{
+	//body
+	element0,overlay,surface30.png,0,0
+	//eyes
+	element1,overlay,surface130.png,0,0
+	//mouth
+	element2,overlay,surface230.png,0,0
+	//arm l
+	element3,overlay,surface33.png,0,0
+	//arm r
+	element4,overlay,surface34.png,0,0
+}
+
+
+//guitar
+surface38
+{
+	//body
+	element0,overlay,surface30.png,0,0
+	//mouth
+	element1,overlay,surface32.png,0,0
+
+
+	//eye animation
+	animation4.interval,runonce
+	animation4.pattern0,overlay,130,0,0,0
+	
+
+	//guitar-animations
+
+	animation30.interval,runonce
+	animation30.pattern0,overlay,1007,0,0,0
+	animation30.pattern1,start,23
+	animation30.pattern2,parallelstop,(21,22)
+	animation30.pattern3,alternativestart,(21,22)
+
+	//arm-1: chord
+	animation21.interval,never
+	animation21.pattern0,overlay,333,0,0,0
+	animation21.pattern1,overlay,333,2000,0,0
+	animation21.pattern2,start,30
+
+	animation22.interval,never
+	animation22.pattern0,overlay,334,0,0,0
+	animation22.pattern1,overlay,334,2000,0,0
+	animation22.pattern2,start,30
+
+	//arm-2: strum
+	animation23.interval,never
+	animation23.pattern0,overlay,335,0,0,0
+	animation23.pattern1,overlay,336,1000,0,0
+	animation23.pattern2,overlay,335,1000,0,0
+
+
+	//pose2
+	animation29.interval,periodic,12
+	animation29.pattern0,parallelstop,(4,21,22,23,30)
+	animation29.pattern1,parallelstart,(24,25)
+	animation29.pattern2,alternativestart,(26,27)
+	animation29.pattern3,overlay,1008,0,0,0
+	animation29.pattern4,overlay,-1,8000,0,0
+	animation29.pattern5,parallelstart,(4,30)
+	animation29.pattern6,parallelstop,(24,25,26)
+
+	//arm-1: chord
+	animation24.interval,never
+	animation24.pattern0,overlay,337,0,0,0
+	animation24.pattern1,overlay,337,2000,0,0
+
+	//arm-2: strum
+	animation25.interval,never
+	animation25.pattern0,overlay,339,0,0,0
+	animation25.pattern1,overlay,340,1000,0,0
+	animation25.pattern2,overlay,339,1000,0,0
+	animation25.pattern3,start,25
+
+	//head+body alt
+	animation26.interval,never
+	animation26.pattern0,start,31
+	animation26.pattern1,base,35,0,0,0
+	animation26.pattern2,base,-1,8000,0,0
+
+	animation27.interval,never
+	animation27.pattern0,start,32
+	animation27.pattern1,base,36,0,0,0
+	animation27.pattern2,base,-1,8000,0,0
+
+	//arm-1: chord 2
+	animation28.interval,never
+	animation28.pattern0,overlay,338,0,0,0
+	animation28.pattern1,overlay,338,2000,0,0
+
+	//mouth
+	animation31.interval,never
+	animation31.pattern0,overlay,236,0,0,0
+	animation31.pattern1,overlay,-1,8000,0,0
+
+	animation32.interval,never
+	animation32.pattern0,overlay,238,0,0,0
+	animation32.pattern1,overlay,-1,8000,0,0
+}
+
+//Singing
+surface39
+{
+	//body
+	element0,overlay,surface30.png,0,0
+	//inst
+	element1,overlay,surface1006.png,0,0
+
+
+	//eye animation
+	animation4.interval,runonce
+	animation4.pattern0,parallelstop,(0,5,6)
+	animation4.pattern1,alternativestart,(0,5,6)
+
+	//open
+	animation0.interval,never
+	animation0.pattern0,overlay,31,0,0,0
+	animation0.pattern1,overlay,31,1000-8000,0,0
+	animation0.pattern2,start,4
+	//blink
+	animation5.interval,never
+	animation5.pattern0,overlay,130,0,0,0
+	animation5.pattern1,overlay,31,85,0,0
+	animation5.pattern2,start,4
+	//eyes closed
+	animation6.interval,never
+	animation6.pattern0,overlay,130,0,0,0
+	animation6.pattern1,overlay,130,5000,0,0
+	animation6.pattern2,start,4
+
+
+	//mouth animation
+	animation8.interval,runonce
+	animation8.pattern0,parallelstop,(1,9,10,11,12,13)
+	animation8.pattern1,alternativestart,(1,9,10,11,12,13)
+
+	//close
+	animation1.interval,never
+	animation1.pattern0,overlay,32,0,0,0
+	animation1.pattern1,overlay,32,240,0,0
+	animation1.pattern2,start,8
+	//a
+	animation9.interval,never
+	animation9.pattern0,overlay,230,0,0,0
+	animation9.pattern1,overlay,230,180,0,0
+	animation9.pattern2,start,8
+	//e, ii
+	animation10.interval,never
+	animation10.pattern0,overlay,231,0,0,0
+	animation10.pattern1,overlay,231,160,0,0
+	animation10.pattern2,start,8
+	//i
+	animation11.interval,never
+	animation11.pattern0,overlay,232,0,0,0
+	animation11.pattern1,overlay,232,220,0,0
+	animation11.pattern2,start,8
+	//o
+	animation12.interval,never
+	animation12.pattern0,overlay,233,0,0,0
+	animation12.pattern1,overlay,233,320,0,0
+	animation12.pattern2,start,8
+	//oo, u
+	animation13.interval,never
+	animation13.pattern0,overlay,234,0,0,0
+	animation13.pattern1,overlay,234,360,0,0
+	animation13.pattern2,start,8
+	
+	//clear
+	//animation100.interval,never
+	//animation100.pattern0,parallelstop,(1,9,10,11,12,13)
+
+	//arm animation (l)
+	animation18.interval,runonce
+	animation18.pattern0,parallelstop,(2,14)
+	animation18.pattern1,alternativestart,(2,14)
+
+	//arm-animation0
+	animation2.interval,never
+	animation2.pattern0,overlay,33,0,0,0
+	animation2.pattern1,overlay,33,6000,0,0
+	animation2.pattern2,start,18
+	//arm-animation1
+	animation14.interval,never
+	animation14.pattern0,overlay,331,0,0,0
+	animation14.pattern1,overlay,331,6000,0,0
+	animation14.pattern2,start,18
+
+
+	//arm animation (r)
+	animation19.interval,runonce
+	animation19.pattern0,parallelstop,(3.15)
+	animation19.pattern1,alternativestart,(3,15)
+
+	//arm-animation0
+	animation3.interval,never
+	animation3.pattern0,overlay,34,0,0,0
+	animation3.pattern1,overlay,34,6000,0,0
+	animation3.pattern2,start,19
+	//arm-animation1
+	animation15.interval,never
+	animation15.pattern0,overlay,332,0,0,0
+	animation15.pattern1,overlay,332,6000,0,0
+	animation15.pattern2,start,19
+}
+
+
+
+//p3
+
+//Idle
+surface40
+{
+	//arms
+	element0,overlay,surface43.png,0,0
+	//body
+	element1,overlay,surface40.png,0,0
+
+	//eyes
+	animation0.interval,runonce
+	animation0.pattern0,overlay,41,0,0,0
+
+	//mouth
+	animation1000.interval,runonce
+	animation1000.pattern0,overlay,42,0,0,0
+
+	//inst
+	animation1002.interval,runonce
+	animation1002.pattern0,overlay,1009,0,0,0
+
+	//Blink
+	animation5.interval,random,4
+	animation5.pattern0,stop,0
+	animation5.pattern1,overlay,140,0,0,0
+	animation5.pattern2,overlay,41,85,0,0
+}
+
+//Petting
+surface1140
+{
+	//body
+	element0,overlay,surface40.png,0,0
+	//eyes
+	element1,overlay,surface140.png,0,0
+	//mouth
+	element2,overlay,surface240.png,0,0
+	//inst
+	element3,overlay,surface1009.png,0,0
+}
+
+
+//drums
+surface48
+{
+	//body
+	element0,overlay,surface40.png,0,0
+	//arms
+	element1,overlay,surface342.png,0,0
+	//inst
+	element2,overlay,surface1009.png,0,0
+	//eyes
+	element3,overlay,surface140.png,0,0
+	//mouth
+	element4,overlay,surface240.png,0,0
+
+
+	//arm motion
+	animation23.interval,always
+	animation23.pattern0,overlay,346,0,0,0
+	animation23.pattern1,overlay,347,1000,0,0
+	animation23.pattern2,overlay,346,1000,0,0
+}
+
+//Singing
+surface49
+{
+	//body
+	element0,overlay,surface40.png,0,0
+	//arms
+	element1,overlay,surface341.png,0,0
+	//inst
+	element2,overlay,surface1009.png,0,0
+	//mouth
+	element3,overlay,surface240.png,0,0
+
+
+	//eyes
+	animation0.interval,runonce
+	animation0.pattern0,overlay,41,0,0,0
+
+	//Blink
+	animation5.interval,random,4
+	animation5.pattern0,stop,0
+	animation5.pattern1,overlay,140,0,0,0
+	animation5.pattern2,overlay,41,85,0,0
+}
+
+
+
+//p4
+
+//Idle
+surface50
+{
+	//body
+	element0,overlay,surface50.png,0,0
+
+	//eyes
+	animation0.interval,runonce
+	animation0.pattern0,overlay,51,0,0,0
+
+	//mouth
+	animation1000.interval,runonce
+	animation1000.pattern0,overlay,52,0,0,0
+
+	//arms
+	animation1001.interval,runonce
+	animation1001.pattern0,overlay,53,0,0,0
+
+	//Blink
+	animation5.interval,random,4
+	animation5.pattern0,stop,0
+	animation5.pattern1,overlay,150,0,0,0
+	animation5.pattern2,overlay,51,85,0,0
+}
+
+//trumpet
+surface58
+{
+	//body
+	//element0,overlay,surface50.png,0,0
+
+
+	//eyes
+	animation1000.interval,never
+	animation1000.pattern0,stop,1001
+	animation1000.pattern1,overlay,152,0,10,0
+
+	animation1001.interval,never
+	animation1001.pattern0,stop,1000
+	animation1001.pattern1,overlay,154,0,10,0
+	
+
+	//Blink
+	//animation5.interval,random,4
+	//animation5.pattern0,stop,0
+	//animation5.pattern1,overlay,150,0,10,0
+	//animation5.pattern2,overlay,51,85,0,0
+
+	//start
+	animation40.interval,runonce,exclusive
+	animation40.pattern0,replace,1010,0,10,0
+	animation40.pattern1,overlay,-1,1000,10,0
+	animation40.pattern2,alternativestart,(2000,2001)
+	//animation40.pattern4,alternativestart,(48,49,50,58,59,60)
+
+	//body
+	animation2000.interval,never
+	animation2000.pattern0,stop,2001
+	animation2000.pattern1,overlay,50,0,10,0
+	animation2000.pattern2,alternativestart,(1000,1001)
+	animation2000.pattern3,alternativestart,(48,49,50)
+	
+
+	//arms(main loop)
+
+	//alt_1
+	//main_arm
+	animation48.interval,never
+	animation48.pattern0,overlay,55,0,10,0
+	animation48.pattern1,alternativestart,(32,34)
+	animation48.pattern2,start,42
+	animation48.pattern3,overlay,54,1500-2500,10,0
+	animation48.pattern4,parallelstop,(42,32,34)
+	animation48.pattern5,alternativestart,(33,35)
+	animation48.pattern6,start,43
+	animation48.pattern7,overlay,-1,1000,10,0
+	animation48.pattern8,parallelstop,(43,33,35)
+	animation48.pattern9,alternativestart,(40,48,49,50)
+
+	//alt_2
+	//main_arm
+	animation49.interval,never
+	animation49.pattern0,overlay,55,0,10,0
+	animation49.pattern1,alternativestart,(32,34)
+	animation49.pattern2,start,44
+	animation49.pattern3,overlay,54,1500-2500,10,0
+	animation49.pattern4,parallelstop,(44,32,34)
+	animation49.pattern5,alternativestart,(33,35)
+	animation49.pattern6,start,45
+	animation49.pattern7,overlay,-1,1000,10,0
+	animation49.pattern8,parallelstop,(45,33,35)
+	animation49.pattern9,alternativestart,(40,48,49,50)
+
+	//alt_3
+	//main_arm
+	animation50.interval,never
+	animation50.pattern0,overlay,55,0,10,0
+	animation50.pattern1,alternativestart,(32,34)
+	animation50.pattern2,start,46
+	animation50.pattern3,overlay,54,1500-2500,10,0
+	animation50.pattern4,parallelstop,(46,32,34)
+	animation50.pattern5,alternativestart,(33,35)
+	animation50.pattern6,start,47
+	animation50.pattern7,overlay,-1,1000,10,0
+	animation50.pattern8,parallelstop,(47,33,35)
+	animation50.pattern9,alternativestart,(40,48,49,50)
+
+
+	//hands(fixed/follow)
+
+	//hand_1
+	animation42.interval,never
+	animation42.pattern0,overlay,351,0,10,0
+	//hand_1*
+	animation43.interval,never
+	animation43.pattern0,overlay,352,0,10,0
+
+	//hand_2
+	animation44.interval,never
+	animation44.pattern0,overlay,353,0,10,0
+	//hand_2*
+	animation45.interval,never
+	animation45.pattern0,overlay,354,0,10,0
+
+	//hand_3
+	animation46.interval,never
+	animation46.pattern0,overlay,355,0,10,0
+	//hand_3*
+	animation47.interval,never
+	animation47.pattern0,overlay,356,0,10,0
+
+	//mouth_1
+	animation32.interval,never
+	animation32.pattern0,overlay,253,0,10,0
+	//mouth_1*
+	animation33.interval,never
+	animation33.pattern0,overlay,252,0,10,0
+
+	//mouth_2
+	animation34.interval,never
+	animation34.pattern0,overlay,255,0,10,0
+	//mouth_2*
+	animation35.interval,never
+	animation35.pattern0,overlay,254,0,10,0
+
+
+	//-----
+
+
+	//alt_body
+	animation2001.interval,never
+	animation2001.pattern0,parallelstop,(1000,1001,2000)
+	animation2001.pattern1,overlay,1011,0,10,0
+	animation2001.pattern2,alternativestart,(68,69,70)
+
+	animation2002.interval,never
+	animation2002.pattern0,overlay,1012,0,10,0
+
+
+	//alt_arms(main loop)
+
+	//alt_1
+	//main_arm
+	animation68.interval,never
+	animation68.pattern0,overlay,57,0,10,0
+	animation68.pattern1,alternativestart,(62,64)
+	animation68.pattern2,start,52
+	animation68.pattern3,overlay,56,1500-2500,10,0
+	animation68.pattern4,parallelstop,(52,62,64,2001)
+	animation68.pattern5,alternativestart,(63,65)
+	animation68.pattern6,parallelstart,(53,2002)
+	animation68.pattern7,overlay,-1,1000,10,0
+	animation68.pattern8,parallelstop,(53,63,65,2002)
+	animation68.pattern9,alternativestart,(40,2001)
+
+	//alt_2
+	//main_arm
+	animation69.interval,never
+	animation69.pattern0,overlay,57,0,10,0
+	animation69.pattern1,alternativestart,(62,64)
+	animation69.pattern2,start,54
+	animation69.pattern3,overlay,56,1500-2500,10,0
+	animation69.pattern4,parallelstop,(54,62,64,2001)
+	animation69.pattern5,alternativestart,(63,65)
+	animation69.pattern6,parallelstart,(55,2002)
+	animation69.pattern7,overlay,-1,1000,10,0
+	animation69.pattern8,parallelstop,(55,63,65,2002)
+	animation69.pattern9,alternativestart,(40,2001)
+
+	//alt_3
+	//main_arm
+	animation70.interval,never
+	animation70.pattern0,overlay,57,0,10,0
+	animation70.pattern1,alternativestart,(62,64)
+	animation70.pattern2,start,56
+	animation70.pattern3,overlay,56,1500-2500,10,0
+	animation70.pattern4,parallelstop,(56,62,64,2001)
+	animation70.pattern5,alternativestart,(63,65)
+	animation70.pattern6,parallelstart,(57,2002)
+	animation70.pattern7,overlay,-1,1000,10,0
+	animation70.pattern8,parallelstop,(57,63,65,2002)
+	animation70.pattern9,alternativestart,(40,2001)
+
+
+	//hands(fixed/follow)
+
+	//hand_1
+	animation52.interval,never
+	animation52.pattern0,overlay,1351,0,10,0
+	//hand_1*
+	animation53.interval,never
+	animation53.pattern0,overlay,1352,0,10,0
+
+	//hand_2
+	animation54.interval,never
+	animation54.pattern0,overlay,1353,0,10,0
+	//hand_2*
+	animation55.interval,never
+	animation55.pattern0,overlay,1354,0,10,0
+
+	//hand_3
+	animation56.interval,never
+	animation56.pattern0,overlay,1355,0,10,0
+	//hand_3*
+	animation57.interval,never
+	animation57.pattern0,overlay,1356,0,10,0
+
+	//mouth_1
+	animation62.interval,never
+	animation62.pattern0,overlay,257,0,10,0
+	//mouth_1*
+	animation63.interval,never
+	animation63.pattern0,overlay,256,0,10,0
+
+	//mouth_2
+	animation64.interval,never
+	animation64.pattern0,overlay,259,0,10,0
+	//mouth_2*
+	animation65.interval,never
+	animation65.pattern0,overlay,258,0,10,0
+
+}
+
+//Singing
+surface59
+{
+	//body
+	element0,overlay,surface50.png,0,0
+	//arms
+	element1,overlay,surface350.png,0,0
+	//mouth
+	element2,overlay,surface250.png,0,0
+
+
+	//eyes
+	animation0.interval,runonce
+	animation0.pattern0,overlay,51,0,0,0
+
+	//Blink
+	animation5.interval,random,4
+	animation5.pattern0,stop,0
+	animation5.pattern1,overlay,150,0,0,0
+	animation5.pattern2,overlay,51,85,0,0
+}
+
+
+
+//p5
+
+//Idle
+surface60
+{
+	//body
+	element0,overlay,surface60.png,0,0
+	//arms
+	element1,overlay,surface63.png,0,0
+
+	//eyes
+	animation0.interval,runonce
+	animation0.pattern0,overlay,61,0,0,0
+
+	//mouth
+	animation1000.interval,runonce
+	animation1000.pattern0,overlay,62,0,0,0
+
+	//Blink
+	animation5.interval,random,4
+	animation5.pattern0,stop,0
+	animation5.pattern1,overlay,160,0,0,0
+	animation5.pattern2,overlay,61,85,0,0
+}
+
+//lute
+surface68
+{
+	//body
+	element0,overlay,surface60.png,0,0
+
+
+	//eye animation
+	animation4.interval,runonce
+	animation4.pattern0,parallelstop,(6,7)
+	animation4.pattern1,alternativestart,(6,7)
+
+	//eyes closed
+	animation6.interval,never
+	animation6.pattern0,overlay,160,0,0,0
+	animation6.pattern1,overlay,160,5000,0,0
+	animation6.pattern2,start,4
+	//grin
+	animation7.interval,never
+	animation7.pattern0,overlay,161,0,0,0
+	animation7.pattern1,overlay,161,5000,0,0
+	animation7.pattern2,start,4
+	
+
+	//guitar-animations
+
+	animation30.interval,runonce
+	animation30.pattern0,overlay,1013,0,0,0
+	animation30.pattern1,start,23
+	animation30.pattern2,parallelstop,(21,22)
+	animation30.pattern3,alternativestart,(21,22)
+
+	//arm-1: chord
+	animation21.interval,never
+	animation21.pattern0,overlay,362,0,0,0
+	animation21.pattern1,overlay,362,2000,0,0
+	animation21.pattern2,start,30
+
+	animation22.interval,never
+	animation22.pattern0,overlay,363,0,0,0
+	animation22.pattern1,overlay,363,2000,0,0
+	animation22.pattern2,start,30
+
+	//arm-2: strum
+	animation23.interval,never
+	animation23.pattern0,overlay,360,0,0,0
+	animation23.pattern1,overlay,361,1000,0,0
+	animation23.pattern2,overlay,360,1000,0,0
+	
+
+	//mouth animation
+	animation8.interval,runonce
+	animation8.pattern0,parallelstop,(1,9,10,11,12,13)
+	animation8.pattern1,alternativestart,(1,9,10,11,12,13)
+
+	//close
+	animation1.interval,never
+	animation1.pattern0,overlay,62,0,0,0
+	animation1.pattern1,overlay,62,240,0,0
+	animation1.pattern2,start,8
+	//a
+	animation9.interval,never
+	animation9.pattern0,overlay,260,0,0,0
+	animation9.pattern1,overlay,260,180,0,0
+	animation9.pattern2,start,8
+	//e, ii
+	animation10.interval,never
+	animation10.pattern0,overlay,261,0,0,0
+	animation10.pattern1,overlay,261,160,0,0
+	animation10.pattern2,start,8
+	//i
+	animation11.interval,never
+	animation11.pattern0,overlay,262,0,0,0
+	animation11.pattern1,overlay,262,220,0,0
+	animation11.pattern2,start,8
+	//o
+	animation12.interval,never
+	animation12.pattern0,overlay,263,0,0,0
+	animation12.pattern1,overlay,263,320,0,0
+	animation12.pattern2,start,8
+	//oo, u
+	animation13.interval,never
+	animation13.pattern0,overlay,264,0,0,0
+	animation13.pattern1,overlay,264,360,0,0
+	animation13.pattern2,start,8
+}
+
+//Singing
+surface69
+{
+	//body
+	element0,overlay,surface60.png,0,0
+	//arms
+	element1,overlay,surface63.png,0,0
+
+
+	//eye animation
+	animation4.interval,runonce
+	animation4.pattern0,parallelstop,(0,5,6,7)
+	animation4.pattern1,alternativestart,(0,5,6,7)
+
+	//open
+	animation0.interval,never
+	animation0.pattern0,overlay,61,0,0,0
+	animation0.pattern1,overlay,61,1000-8000,0,0
+	animation0.pattern2,alternativestart,(0,4)
+	//blink
+	animation5.interval,never
+	animation5.pattern0,overlay,160,0,0,0
+	animation5.pattern1,overlay,61,85,0,0
+	animation5.pattern2,alternativestart,(0,4,5)
+	//eyes closed
+	animation6.interval,never
+	animation6.pattern0,overlay,160,0,0,0
+	animation6.pattern1,overlay,160,5000,0,0
+	animation6.pattern2,start,4
+	//grin
+	animation7.interval,never
+	animation7.pattern0,overlay,161,0,0,0
+	animation7.pattern1,overlay,161,5000,0,0
+	animation7.pattern2,start,4
+
+
+	//mouth animation
+	animation8.interval,runonce
+	animation8.pattern0,parallelstop,(1,9,10,11,12,13)
+	animation8.pattern1,alternativestart,(1,9,10,11,12,13)
+
+	//close
+	animation1.interval,never
+	animation1.pattern0,overlay,62,0,0,0
+	animation1.pattern1,overlay,62,240,0,0
+	animation1.pattern2,start,8
+	//a
+	animation9.interval,never
+	animation9.pattern0,overlay,260,0,0,0
+	animation9.pattern1,overlay,260,180,0,0
+	animation9.pattern2,start,8
+	//e, ii
+	animation10.interval,never
+	animation10.pattern0,overlay,261,0,0,0
+	animation10.pattern1,overlay,261,160,0,0
+	animation10.pattern2,start,8
+	//i
+	animation11.interval,never
+	animation11.pattern0,overlay,262,0,0,0
+	animation11.pattern1,overlay,262,220,0,0
+	animation11.pattern2,start,8
+	//o
+	animation12.interval,never
+	animation12.pattern0,overlay,263,0,0,0
+	animation12.pattern1,overlay,263,320,0,0
+	animation12.pattern2,start,8
+	//oo, u
+	animation13.interval,never
+	animation13.pattern0,overlay,264,0,0,0
+	animation13.pattern1,overlay,264,360,0,0
+	animation13.pattern2,start,8
+	
+	//clear
+	//animation100.interval,never
+	//animation100.pattern0,parallelstop,(1,9,10,11,12,13)
+}
+
+
+
+//p6
+
+//Idle
+surface70
+{
+	//body
+	element0,overlay,surface70.png,0,0
+
+
+	//eyes
+	animation0.interval,runonce
+	animation0.pattern0,overlay,71,0,0,0
+
+	//mouth
+	animation1000.interval,runonce
+	animation1000.pattern0,overlay,72,0,0,0
+
+	//arms
+	animation1001.interval,runonce
+	animation1001.pattern0,overlay,73,0,0,0
+
+	//Blink
+	animation5.interval,random,4
+	animation5.pattern0,stop,0
+	animation5.pattern1,overlay,170,0,0,0
+	animation5.pattern2,overlay,71,85,0,0
+}
+
+//harp
+surface78
+{
+	//body
+	element0,overlay,surface70.png,0,0
+
+	//eye animation
+	animation4.interval,runonce
+	animation4.pattern0,overlay,172,0,0,0
+
+	//mouth
+	animation1000.interval,runonce
+	animation1000.pattern0,overlay,274,0,0,0
+	
+
+	//guitar-animations
+
+	animation30.interval,runonce
+	animation30.pattern0,overlay,1014,0,0,0
+
+	//arm-2: strum
+	animation23.interval,always
+	animation23.pattern0,overlay,1015,0,0,0
+	animation23.pattern1,overlay,1016,1000,0,0
+	animation23.pattern2,start,25
+	animation23.pattern3,overlay,1015,1000,0,0
+
+	//strings
+	animation25.interval,never
+	animation25.pattern0,stop,30
+	animation25.pattern1,overlay,1014,0,0,0
+	animation25.pattern2,overlay,1017,75,0,0
+	animation25.pattern3,overlay,1018,75,0,0
+	animation25.pattern4,overlay,1017,75,0,0
+	animation25.pattern5,overlay,1018,75,0,0
+	animation25.pattern6,overlay,1014,75,0,0
+}
+
+//Singing
+surface79
+{
+	//body
+	element0,overlay,surface70.png,0,0
+
+
+	//eye animation
+	animation4.interval,runonce
+	animation4.pattern0,parallelstop,(0,5,6,7)
+	animation4.pattern1,alternativestart,(0,5,6,7)
+
+	//open
+	animation0.interval,never
+	animation0.pattern0,overlay,71,0,0,0
+	animation0.pattern1,overlay,103,1000-8000,0,0
+	animation0.pattern2,alternativestart,(0,4)
+	//blink
+	animation5.interval,never
+	animation5.pattern0,overlay,170,0,0,0
+	animation5.pattern1,overlay,71,85,0,0
+	animation5.pattern2,alternativestart,(0,4,5)
+	//eyes closed
+	animation6.interval,never
+	animation6.pattern0,overlay,170,0,0,0
+	animation6.pattern1,overlay,170,5000,0,0
+	animation6.pattern2,start,4
+	//grin
+	animation7.interval,never
+	animation7.pattern0,overlay,171,0,0,0
+	animation7.pattern1,overlay,171,5000,0,0
+	animation7.pattern2,start,4
+
+
+	//mouth animation
+	animation8.interval,runonce
+	animation8.pattern0,parallelstop,(1,9,10,11,12,13)
+	animation8.pattern1,alternativestart,(1,9,10,11,12,13)
+
+	//close
+	animation1.interval,never
+	animation1.pattern0,overlay,72,0,0,0
+	animation1.pattern1,overlay,72,240,0,0
+	animation1.pattern2,start,8
+	//a
+	animation9.interval,never
+	animation9.pattern0,overlay,270,0,0,0
+	animation9.pattern1,overlay,270,180,0,0
+	animation9.pattern2,start,8
+	//e, ii
+	animation10.interval,never
+	animation10.pattern0,overlay,271,0,0,0
+	animation10.pattern1,overlay,271,160,0,0
+	animation10.pattern2,start,8
+	//i
+	animation11.interval,never
+	animation11.pattern0,overlay,272,0,0,0
+	animation11.pattern1,overlay,272,220,0,0
+	animation11.pattern2,start,8
+	//o
+	animation12.interval,never
+	animation12.pattern0,overlay,273,0,0,0
+	animation12.pattern1,overlay,273,320,0,0
+	animation12.pattern2,start,8
+	//oo, u
+	animation13.interval,never
+	animation13.pattern0,overlay,274,0,0,0
+	animation13.pattern1,overlay,274,360,0,0
+	animation13.pattern2,start,8
+	
+	//clear
+	//animation100.interval,never
+	//animation100.pattern0,parallelstop,(1,9,10,11,12,13)
+
+	//arm animation (all)
+	animation19.interval,runonce
+	animation19.pattern0,parallelstop,(2,3,14,15,16,17)
+	animation19.pattern1,alternativestart,(2,3,14,15,16,17)
+
+	//arm-animation1
+	animation2.interval,never
+	animation2.pattern0,overlay,370,0,0,0
+	animation2.pattern1,overlay,370,6000,0,0
+	animation2.pattern2,start,19
+	//arm-animation2
+	animation3.interval,never
+	animation3.pattern0,overlay,371,0,0,0
+	animation3.pattern1,overlay,371,6000,0,0
+	animation3.pattern2,start,19
+	//arm-animation3
+	animation14.interval,never
+	animation14.pattern0,overlay,372,0,0,0
+	animation14.pattern1,overlay,372,6000,0,0
+	animation14.pattern2,start,19
+	//arm-animation4
+	animation15.interval,never
+	animation15.pattern0,overlay,373,0,0,0
+	animation15.pattern1,overlay,373,6000,0,0
+	animation15.pattern2,start,19
+	//arm-animation5
+	animation16.interval,never
+	animation16.pattern0,overlay,374,0,0,0
+	animation16.pattern1,overlay,374,6000,0,0
+	animation16.pattern2,start,19
+	//arm-animation6
+	animation17.interval,never
+	animation17.pattern0,overlay,375,0,0,0
+	animation17.pattern1,overlay,375,6000,0,0
+	animation17.pattern2,start,19
+}
+
+
+
+//p7
+
+//Idle
+surface80
+{
+	//body
+	element0,overlay,surface80.png,0,0
+
+
+	//eyes
+	animation0.interval,runonce
+	animation0.pattern0,overlay,81,0,0,0
+
+	//mouth
+	animation1000.interval,runonce
+	animation1000.pattern0,overlay,82,0,0,0
+
+	//Blink
+	animation5.interval,random,4
+	animation5.pattern0,stop,0
+	animation5.pattern1,overlay,180,0,0,0
+	animation5.pattern2,overlay,81,85,0,0
+}
+
+//lyre
+surface88
+{
+	//body
+	element0,overlay,surface85.png,0,0
+
+	//mouth
+	animation1000.interval,runonce
+	animation1000.pattern0,overlay,280,0,0,0
+	
+
+	//guitar-animations
+
+	animation30.interval,runonce
+	animation30.pattern0,overlay,382,0,0,0
+
+	//arm-2: strum
+	animation23.interval,always
+	animation23.pattern0,overlay,381,0,0,0
+	animation23.pattern1,overlay,380,1000,0,0
+	animation23.pattern2,start,25
+	animation23.pattern3,overlay,381,1000,0,0
+
+	//strings
+	animation25.interval,never
+	animation25.pattern0,stop,30
+	animation25.pattern1,overlay,382,0,0,0
+	animation25.pattern2,overlay,1019,75,0,0
+	animation25.pattern3,overlay,1020,75,0,0
+	animation25.pattern4,overlay,1019,75,0,0
+	animation25.pattern5,overlay,1020,75,0,0
+	animation25.pattern6,overlay,382,75,0,0
+}
+
+//Singing
+surface89
+{
+	//body
+	element0,overlay,surface85.png,0,0
+	//inst
+	element1,overlay,surface382.png,0,0
+	//arms
+	element2,overlay,surface380.png,0,0
+	//mouth
+	element3,overlay,surface82.png,0,0
+
+
+	//eyes
+	animation0.interval,runonce
+	animation0.pattern0,overlay,181,0,0,0
+
+	//Blink
+	animation5.interval,random,4
+	animation5.pattern0,stop,0
+	animation5.pattern1,overlay,180,0,0,0
+	animation5.pattern2,overlay,181,85,0,0
+}
+
+
+
+//p8
+
+//Idle
+surface90
+{
+	//body
+	element0,overlay,surface90.png,0,0
+
+
+	//eyes
+	animation0.interval,runonce
+	animation0.pattern0,overlay,91,0,0,0
+
+	//mouth
+	animation1000.interval,runonce
+	animation1000.pattern0,overlay,92,0,0,0
+
+	//arm l
+	animation1001.interval,runonce
+	animation1001.pattern0,overlay,93,0,0,0
+	//arm r
+	animation1002.interval,runonce
+	animation1002.pattern0,interpolate,94,0,0,0
+
+	//Blink
+	animation5.interval,random,4
+	animation5.pattern0,stop,0
+	animation5.pattern1,overlay,190,0,0,0
+	animation5.pattern2,overlay,91,85,0,0
+}
+
+//bells
+surface98
+{
+	//body
+	element0,overlay,surface90.png,0,0
+
+	//mouth
+	element1,overlay,surface290.png,0,0
+	
+
+	//arm-animations
+
+	//start
+	animation75.interval,runonce
+	animation75.pattern0,overlay,390,0,0,0
+	animation75.pattern1,overlay,390,1000,0,0
+	animation75.pattern2,parallelstart,(71,72)
+	animation75.pattern3,stop,75
+
+	//arm-1: lead
+	animation71.interval,never
+	animation71.pattern0,overlay,391,0,0,0
+	animation71.pattern1,overlay,392,1000,0,0
+	animation71.pattern2,overlay,391,1000,0,0
+	animation71.pattern3,start,71
+
+	//arm-2: follow
+	animation72.interval,never
+	animation72.pattern0,interpolate,394,0,0,0
+	animation72.pattern1,interpolate,393,1000,0,0
+	animation72.pattern2,interpolate,394,1000,0,0
+	animation72.pattern3,start,72
+}
+
+//Singing
+surface99
+{
+	//body
+	element0,overlay,surface90.png,0,0
+	//arms
+	element1,overlay,surface390.png,0,0
+	//mouth
+	element2,overlay,surface291.png,0,0
+
+
+	//eyes
+	animation0.interval,runonce
+	animation0.pattern0,overlay,191,0,0,0
+
+	//Blink
+	animation5.interval,random,4
+	animation5.pattern0,stop,0
+	animation5.pattern1,overlay,190,0,0,0
+	animation5.pattern2,overlay,191,85,0,0
+}
+
+
+
+//p9
+
+//Idle
+surface15000
+{
+	//body
+	element0,overlay,surface15000.png,0,0
+	
+	//eyes
+	animation0.interval,runonce
+	animation0.pattern0,overlay,15001,0,0,0
+
+	//mouth
+	animation1000.interval,runonce
+	animation1000.pattern0,overlay,15002,0,0,0
+
+	//arm l
+	animation1001.interval,runonce
+	animation1001.pattern0,overlay,15003,0,0,0
+	//arm r
+	animation1002.interval,runonce
+	animation1002.pattern0,overlay,15004,0,0,0
+
+	//Blink
+	animation5.interval,random,4
+	animation5.pattern0,stop,0
+	animation5.pattern1,overlay,15100,0,0,0
+	animation5.pattern2,overlay,15101,150,0,0
+	animation5.pattern3,overlay,15102,150,0,0
+	animation5.pattern4,overlay,15001,150,0,0
+	animation5.pattern5,overlay,15100,150,0,0
+	animation5.pattern6,overlay,15101,150,0,0
+	animation5.pattern7,overlay,15102,150,0,0
+	animation5.pattern8,overlay,15001,150,0,0
+}
+
+//turntable
+surface15008
+{
+	//body
+	element0,overlay,surface15005.png,0,0
+
+
+	//guitar-animations
+
+	animation30.interval,runonce
+	animation30.pattern1,parallelstop,(21,22)
+	animation30.pattern2,parallelstop,(23,24)
+	animation30.pattern3,alternativestart,(21,22)
+	animation30.pattern4,alternativestart,(23,24)
+
+	//arm-1
+	animation21.interval,never
+	animation21.pattern0,overlay,15303,0,0,0
+	animation21.pattern1,overlay,15303,2000,0,0
+	animation21.pattern2,start,30
+
+	animation22.interval,never
+	animation22.pattern0,overlay,15304,0,0,0
+	animation22.pattern1,overlay,15304,1600,0,0
+	animation22.pattern2,start,30
+
+	//arm-2
+	animation23.interval,never
+	animation23.pattern0,overlay,15305,0,0,0
+	animation23.pattern1,overlay,15305,1700,0,0
+	animation23.pattern2,start,30
+
+	animation24.interval,never
+	animation24.pattern0,overlay,15306,0,0,0
+	animation24.pattern1,overlay,15306,2000,0,0
+	animation24.pattern2,start,30
+
+	//inst
+	animation1000.interval,runonce
+	animation1000.pattern0,overlay,16010,0,0,41
+
+	animation25.interval,always
+	animation25.pattern0,overlay,16011,150,0,41
+	animation25.pattern1,overlay,16012,50,0,41
+	animation25.pattern2,overlay,16013,100,0,41
+	animation25.pattern3,overlay,16014,250,0,41
+	animation25.pattern4,overlay,16015,150,0,41
+	animation25.pattern5,overlay,16016,150,0,41
+	animation25.pattern6,overlay,16011,150,0,41
+
+	//head-animation
+	animation1002.interval,always
+	animation1002.pattern0,overlay,16004,0,0,0
+	animation1002.pattern1,overlay,16005,50,0,0
+	animation1002.pattern2,overlay,16006,50,0,0
+	animation1002.pattern3,overlay,16007,50,0,0
+	animation1002.pattern4,overlay,16004,50,0,0
+	animation1002.pattern5,overlay,16004,800,0,0
+
+
+	//pose2
+	animation29.interval,periodic,12
+	animation29.pattern0,parallelstop,(21,22,23,24,1002)
+	animation29.pattern1,parallelstart,(26,27,1003)
+	animation29.pattern3,overlay,-1,8000,0,0
+	animation29.pattern4,parallelstart,(30,1002)
+	animation29.pattern5,parallelstop,(26,27,1003)
+
+	//arm-1: chord
+	animation26.interval,never
+	animation26.pattern0,interpolate,15301,0,0,0
+	animation26.pattern1,interpolate,15301,2000,0,0
+
+	//arm-2: strum
+	animation27.interval,never
+	animation27.pattern0,overlay,15306,0,0,0
+	animation27.pattern1,overlay,15305,1000,0,0
+	animation27.pattern2,overlay,15306,1000,0,0
+	animation27.pattern3,start,27
+
+	//head-animation 2
+	animation1003.interval,never
+	animation1003.pattern0,overlay,16020,0,0,0
+	animation1003.pattern1,overlay,16021,50,0,0
+	animation1003.pattern2,overlay,16022,50,0,0
+	animation1003.pattern3,overlay,16023,50,0,0
+	animation1003.pattern4,overlay,16020,50,0,0
+	animation1003.pattern5,overlay,16020,800,0,0
+	animation1003.pattern6,start,1003
+}
+
+//Singing
+surface15009
+{
+	//body
+	element0,overlay,surface15005.png,0,0
+	//arm L
+	element1,overlay,surface15003.png,0,0
+
+
+	//head-animation
+	animation1002.interval,always
+	animation1002.pattern0,overlay,16000,0,0,0
+	animation1002.pattern1,overlay,16001,50,0,0
+	animation1002.pattern2,overlay,16002,50,0,0
+	animation1002.pattern3,overlay,16003,50,0,0
+	animation1002.pattern4,overlay,16000,50,0,0
+	animation1002.pattern5,overlay,16000,800,0,0
+
+
+	//arm R
+	animation101.interval,runonce
+	animation101.pattern0,overlay,15302,0,0,0
+}
+
+
+
+//p10
+
+//Idle
+surface15010
+{
+	//body
+	element0,overlay,surface15010.png,0,0
+
+	//eyes
+	animation0.interval,runonce
+	animation0.pattern0,overlay,15011,0,0,0
+
+	//mouth
+	animation1000.interval,runonce
+	animation1000.pattern0,overlay,15012,0,0,0
+
+	//arm l
+	animation1001.interval,runonce
+	animation1001.pattern0,overlay,15013,0,0,0
+	//arm r
+	animation1002.interval,runonce
+	animation1002.pattern0,interpolate,15014,0,0,0
+
+	//Blink
+	animation5.interval,random,4
+	animation5.pattern0,stop,0
+	animation5.pattern1,overlay,15110,0,0,0
+	animation5.pattern2,overlay,15011,85,0,0
+}
+
+//violin
+surface15018
+{
+	//body
+	element0,overlay,surface15015.png,0,0
+	
+
+	//violin-animations
+
+	//inst-1
+	animation1000.interval,runonce
+	animation1000.pattern0,overlay,15310,0,0,0
+
+	//arm-2: strum
+	animation81.interval,always
+	animation81.pattern0,overlay,15311,0,0,0
+	animation81.pattern1,overlay,15312,1000,0,0
+	animation81.pattern2,overlay,15311,1000,0,0
+
+
+	//pose2
+	
+	animation80.interval,periodic,12
+	animation80.pattern0,parallelstop,(81,1000)
+	animation80.pattern1,parallelstart,(82,1001,1002)
+	animation80.pattern2,overlay,-1,8000,0,0
+	animation80.pattern3,parallelstop,(82,1002)
+	animation80.pattern4,parallelstart,(81,1000)
+
+	//base
+	animation1001.interval,never
+	animation1001.pattern0,base,15016,0,0,0
+	animation1001.pattern1,base,-1,8000,0,0
+	
+	//inst-2
+	animation1002.interval,never
+	animation1002.pattern0,overlay,15313,0,0,0
+
+	//arm-2: strum
+	animation82.interval,never
+	animation82.pattern0,overlay,15314,0,0,0
+	animation82.pattern1,overlay,15315,1000,0,0
+	animation82.pattern2,overlay,15314,1000,0,0
+	animation82.pattern3,start,82
+}
+
+//Singing
+surface15019
+{
+	//body
+	element0,overlay,surface15010.png,0,0
+	//arms
+	element1,overlay,surface15310.png,0,0
+	element2,overlay,surface15013.png,0,0
+	//mouth
+	element3,overlay,surface15012.png,0,0
+
+
+	//eyes
+	animation0.interval,runonce
+	animation0.pattern0,overlay,15011,0,0,0
+
+	//Blink
+	animation5.interval,random,4
+	animation5.pattern0,stop,0
+	animation5.pattern1,overlay,15110,0,0,0
+	animation5.pattern2,overlay,15011,85,0,0
+}
+//These collisions are appended to surfaces 0 through 25, except surface10 because that's the default Kero surface (which this shell isn't using)
+surface.append0-25,!10-24
+{
+	//The only collision that is strictly mandatory for FLELE compatibility is the one labelled 'menu'. All the others are optional, but you can add them if you like.
+	//menu == main menu (Any areas of the shell that do NOT have a hotspot will also act as the main menu in FLUX. In FLELE, ONLY this hotspot will let the user access the main menu.)
+	
+	//These ones are standard for most FLELE shells:
+	//stroke_p == pettable area
+	//play_button == play song, next song if already playing music, resume if a song is paused
+	//stop_button1 or stop_button2 == stop song
+	//k_window == music panel (music bar in FLELE)
+	//clear_button == Clear the playlist
+	
+	//These are additional ones that you can use if you like:
+	//minimize == minimizes the ghost
+	//end_sect == closes the ghost
+	
+	//And these four you can use if you want, but they will not work with FLELE!
+	//next_button == next song
+	//previous_button == previous song
+	//pause_button == pause/resume button
+	//stop_after_current == sets the music to stop after the current song finishes playing
+
+	collisionex0,stroke_p,polygon,68,102,64,95,63,86,72,75,92,64,124,64,141,72,152,84,163,102
+	collision1,100,120,124,143,play_button
+	collision3,70,139,102,168,clear_button
+	collision4,125,139,157,168,clear_button
+	//collision5,100,143,124,168,menu
+}

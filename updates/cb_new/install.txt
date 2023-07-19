@@ -1,0 +1,4 @@
+charset,UTF-8
+type,shell
+name,Cookie Band
+directory,cb_new
