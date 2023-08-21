@@ -1,0 +1,42 @@
+﻿seriko.alignmenttodesktop,free
+seriko.use_self_alpha,1
+
+charset,UTF-8
+type,shell
+name,Hydrate Enhancer
+craftman,idk
+craftmanurl,
+homeurl,https://raw.githubusercontent.com/singlefl4me/idk_ghosts/main/updates/hydrate_enhancer/
+
+
+sakura.bindgroup50.name,Bottle, Open Cap
+
+sakura.bindgroup200.name,Flavor,Fruit Punch
+sakura.bindgroup210.name,Flavor,Mandarin
+sakura.bindgroup220.name,Flavor,Lemonade
+sakura.bindgroup230.name,Flavor,Green Grape
+sakura.bindgroup240.name,Flavor,Limeade
+sakura.bindgroup250.name,Flavor,Blueberry
+sakura.bindgroup260.name,Flavor,Blackberry
+sakura.bindgroup270.name,Flavor,Black Cherry
+sakura.bindgroup280.name,Flavor,Raspberry
+sakura.bindgroup290.name,Flavor,Strawberry
+sakura.bindgroup300.name,Flavor,Coffee
+sakura.bindgroup310.name,Flavor,Sweet Tea
+sakura.bindgroup320.name,Flavor,Water
+
+
+sakura.menuitem0,50
+sakura.menuitem1,-
+sakura.menuitem2,200
+sakura.menuitem3,210
+sakura.menuitem4,220
+sakura.menuitem5,230
+sakura.menuitem6,240
+sakura.menuitem7,250
+sakura.menuitem8,260
+sakura.menuitem9,270
+sakura.menuitem10,280
+sakura.menuitem11,290
+sakura.menuitem12,310
+sakura.menuitem13,320

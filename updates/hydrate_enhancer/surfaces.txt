@@ -1,0 +1,72 @@
+descript
+{
+	version,1
+}
+
+surface0
+{
+	animation0.interval,always
+	animation0.pattern0,overlay,100,0,0,0
+	animation0.pattern1,overlay,100,500,0,2
+	animation0.pattern2,overlay,100,500,0,4
+	animation0.pattern3,overlay,100,500,0,2
+	animation0.pattern4,overlay,100,500,0,0
+	animation0.pattern5,overlay,100,500,0,-2
+	animation0.pattern6,overlay,100,500,0,0
+
+	animation1.interval,talk,100
+	animation1.pattern0,stop,0
+	animation1.pattern1,overlay,321,0,0,0
+	animation1.pattern2,overlay,322,250,0,0
+	animation1.pattern3,overlay,323,250,0,0
+	animation1.pattern4,overlay,324,250,0,0
+	animation1.pattern5,overlay,325,250,0,0
+	animation1.pattern6,overlay,324,250,0,0
+	animation1.pattern7,overlay,323,250,0,0
+	animation1.pattern8,overlay,322,250,0,0
+	animation1.pattern9,overlay,321,250,0,0
+	animation1.pattern10,start,1
+
+	animation50.interval,bind
+	animation50.pattern0,replace,50,0,0,0
+
+	animation200.interval,bind
+	animation200.pattern0,add,200,0,0,0
+
+	animation210.interval,bind
+	animation210.pattern0,add,210,0,0,0
+
+	animation220.interval,bind
+	animation220.pattern0,add,220,0,0,0
+
+	animation230.interval,bind
+	animation230.pattern0,add,230,0,0,0
+
+	animation240.interval,bind
+	animation240.pattern0,add,240,0,0,0
+
+	animation250.interval,bind
+	animation250.pattern0,add,250,0,0,0
+
+	animation260.interval,bind
+	animation260.pattern0,add,260,0,0,0
+
+	animation270.interval,bind
+	animation270.pattern0,add,270,0,0,0
+
+	animation280.interval,bind
+	animation280.pattern0,add,280,0,0,0
+
+	animation290.interval,bind
+	animation290.pattern0,add,290,0,0,0
+
+	animation300.interval,bind
+	animation300.pattern0,add,300,0,0,0
+
+	animation310.interval,bind
+	animation310.pattern0,add,310,0,0,0
+
+	animation320.interval,bind
+	animation320.pattern0,add,320,0,0,0
+
+}
