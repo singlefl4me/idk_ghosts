@@ -1,0 +1,5 @@
+shell\master\surface3000.png
+shell\master\surface3001.png
+shell\master\surface3002.png
+shell\master\surface3003.png
+ghost\master\anchor.dic

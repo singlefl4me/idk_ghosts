@@ -1,0 +1,29 @@
+---------------------------Changelog--------------------------
+
+/8-28/
+- file organization
+    renamed anchor.dic to funct.dic
+    spookmode surfaces have moved to a subfolder
+- fixed craftman display bug
+- added more spookmode dialogue
+- added secret event to spookmode
+- menu improvements
+    the menu now indicates whether spookmode is on/off
+- removed unnecessary right-click menu options
+- updated readme
+- changelog added
+
+
+/7-18/
+- spookmode function overhaul
+    changed from timeslot-based activation to duration-based
+- added more idle dialogue
+- added more onboot dialogue
+- fixed 10 min talkrate option
+- removed unused onboot functions
+    hopefully fixed an unnoticed bug where ghost would close on startup
+- updated yaya_base files
+- filehosting moved from catbox to github
+
+/5-18/
+- ghost jam release

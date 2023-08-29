@@ -1,0 +1,127 @@
+//---------------------------Anchors and OnTranslate--------------------------
+
+
+//--OnTranslate
+
+OnTranslate
+	{
+	_talk = reference0
+	_talk = REPLACE(_talk, "(@)", "\b[0]\![set,balloonwait,150%]")
+	_talk = REPLACE(_talk, "(#)", "\b[0]\![set,balloonwait,110%]\f[color,85,0,0]\f[bold,1]\w[2000]")
+
+ 	//_talk = REPLACE(_talk, "Anchor 1", "\_a[anchor1]Anchor 1\_a")
+ 	//_talk = REPLACE(_talk, "Anchor 2", "\_a[anchor2]Anchor 2\_a")
+ 	//_talk = REPLACE(_talk, "Anchor 3", "\_a[anchor3]Anchor 3\_a")
+	
+		if reference1 == "" && reference2 == "" { //send input box : no event (ref2) , no special flag (ref1)
+            EVAL('"' + REPLACE(_talk,'"','" + CHR(0x22) + "') + '"')
+        }
+        else { //event result from ghost
+            TOSTR(_talk)
+        }
+	}
+	
+//This bit of code is what makes menu options that don't start with On direct to Select.options instead. Remove or comment it if you prefer!
+OnChoiceSelect
+{
+	EVAL("Select.%(reference0)")
+}
+
+
+//dont got anywhere else to put these...
+
+
+//Written by Zichqec https://zichqec.github.io/s-the-skeleton/
+
+//Usage: This is intended to take the place of single-use variables that only contain 0 or 1, used as flags for certain events and such. With these functions, you can store all those flags as a single array, meaning you can make as many flags as you want without having to really worry about save bloat. It can also make your code a bit more readable!
+
+Flag //Checks to see if a flag exists. Returns 1 if yes, returns 0 if no
+{
+	if ASEARCH(_argv[0],MiscFlags) != -1; 1
+	else; 0
+}
+
+RemoveFlag //Removes all instances of a flag in the array.
+{
+	_elements = ASEARCHEX(_argv[0],MiscFlags)
+	if ARRAYSIZE(_elements) > 0
+	{
+		for _i = ARRAYSIZE(_elements) - 1; _i >= 0; _i-- //Goes from the end of the list to the start, so the elements stay in the same positions while we erase
+		{
+			_current = _elements[_i]
+			MiscFlags[_current] = IARRAY
+		}
+	}
+}
+
+//---
+
+//by smokycinnamonroll if it matters to u
+//for zi's flag system. to use just do AddFlag("urflag") and this will handle it
+AddFlag {
+    if Flag(_argv[0]) == 0; MiscFlags ,= _argv[0]
+    //_argv[0] is the string passed to it (so "urflag"). all it's doing is checking if the flag exists, and if it doesnt, adding it
+}
+
+//using for an effect
+
+//gotta edit this
+//Written by Zichqec https://zichqec.github.io/s-the-skeleton/
+
+//To call the function, you can either call the function in your code like this:
+//CreepyText("Your dialogue here!")
+//Or in dialogue like this:
+//"%(CreepyText('Your dialogue here!'))"
+//If you want to change the max \w tag value, put the number you want as the second argument. If you want to change the max x and y values, put them as the third and fourth argument, respectively. You can set defaults in the function below.
+
+CreepyText
+{
+	_argv[0] = REPLACE(_argv[0],"##","'") //Replaces ## with an apostrophe, change it if you like
+    _display = ""
+    for _i = 0; _i < STRLEN(_argv[0]); _i++
+    {
+		_w = 0
+		_x = 0
+		_y = 0
+		if _argv[1] != ""; _w = RAND(_argv[1]); else; _w = RAND(10)  //Set this to the maximum pause time you want, or comment it out if you don't want random pauses (Don't put it higher than 10 or you'll call invalid \w commands)
+        if _argv[2] != ""; _x = RAND(_argv[2]); else; _x = RAND(250) //Set this to the maximum X coordinate you want
+        if _argv[3] != ""; _y = RAND(_argv[3]); else; _y = RAND(100) //Set this to the maximum Y coordinate you want
+        
+        _display += ("\_l[%(_x),%(_y)]" + SUBSTR(_argv[0],_i,1) + "\w%(_w)")
+    }
+    _display
+}
+
+OnDisplayChange 
+{
+  resolutionWidth = reference1
+  resolutionHeight = reference2
+}
+
+center_x
+{
+	resolutionWidth / 2
+}
+center_y
+{
+	resolutionHeight / 2
+}
+
+StoreInterval
+{
+	if ISVAR("temptalkinterval")	{
+		aitalkinterval = temptalkinterval
+		ERASEVAR("temptalkinterval")
+	}
+	else	{
+		temptalkinterval = aitalkinterval
+	}
+
+}
+
+
+
+//for later
+//"\p[2]\s[3500]\![anim,offset,1,0,0]"
+//"\p[2]\![set,alpha,100]"
+//"\p[2]\![move,--X=%(center_x),--Y=%(center_y),--base=primaryscreen,--move-offset=base.base]"
