@@ -8,30 +8,30 @@ OpenSakuraMenu: all
 	wd = GetWeekDay
  	ap = GetAP
 	//These four statements basically get the day of the week, whether it's AM or PM, the hour, and the time. It's putting together the information to display the time at the bottom of the balloon.
-	"\n\n\_q\b2" 
+	"\b[2]\n\n\_q" 
 	if lastTalk != ""
 	  "\![*]\q[Repeat Last Dialogue,OnLastTalk]\n\n[half]"
 
  	"\![*]\q[Say something,OnAiTalk]\n"
 
-	"\f[bold,1]Talk Rate:\f[bold,0] - %(talktime) \f[sup,1](\q[Change,talkinter])\f[sup,0]\n\n[half]"
+	"\f[bold,1]Talk Rate:\f[bold,0] - %(talktime) \f[sup,1](\q[Change,talkinter])\f[sup,0]\n\n\n[half]"
+
+	"Horror content is currently \f[bold,1]%(spookmode)\f[bold,0].\n"
 	if spookmode == "on"	
-		"\![*]\q[Disable Horror Content,spookoff]\n\n[half]\n"
+		"\f[italic,1]\![*]\q[Disable Horror Content,spookoff]\n\n\n[half]"
 	elseif spookmode == "off"
-		"\![*]\q[Enable Horror Content,spookon]\n\n[half]\n"
+		"\f[italic,1]\![*]\q[Enable Horror Content,spookon]\n\n\n[half]"
 
 	//"\![*]\q[Test Variable,testvariable]\n"
 
- 	"\![*]\q[Close,OnMenuClose]\n\n\n[half]%(wd) %(nowhour):%(nowmin) %(ap), %(month)/%(day)/%(year)"
+ 	"\f[italic,0]\![*]\q[Close,script:\e]\n\n\n[half]%(wd) %(nowhour):%(nowmin) %(ap), %(month)/%(day)/%(year)"
 }
 
-//Leave this alone
 OnLastTalk 
 {
 "%(lastTalk)"
 }
 
-//This is figuring out what day of the week it is. Leave it alone.
 GetWeekDay
 {
 	if weekday == 0;	"Sun"
@@ -146,12 +146,6 @@ Select.CANCEL
 	OpenSakuraMenu
 }
 
-
-OnMenuClose
-{
-	""
-}
-
 Select.spookon
 {
 	spookmode = "on"
@@ -166,5 +160,22 @@ Select.spookoff
 
 Select.testvariable
 {
-	spookmode = "off"
+	"\![*]\q[Enable spookscene on,OnFlagReset,ON]\n/
+	\![*]\q[Enable scene_a,OnFlagReset,SCENE]\n/
+	\![*]\q[Enable scene in progress,OnFlagReset,PROG]\n/
+	\![*]\q[Enable scene_a complete,OnFlagReset,COM]\n/
+	\![*]\q[Reset Flags,OnFlagReset,RESET]\n/
+	\![*]\q[Delete Variable,OnFlagReset,VAR]/
+	\n\n[half]/
+	\![*]\q[Back,BACKTOMENU]"
+}
+
+OnFlagReset
+{
+	if reference0 == "ON";	AddFlag("spookscene on")
+	elseif reference0 == "SCENE";	AddFlag("scene_a")
+	elseif reference0 == "PROG";	AddFlag("scene in progress")
+	elseif reference0 == "COM";		AddFlag("scene_a complete")
+	elseif reference0 == "RESET";	MiscFlags = IARRAY
+	elseif reference0 == "VAR";	ERASEVAR("temptalkinterval")
 }

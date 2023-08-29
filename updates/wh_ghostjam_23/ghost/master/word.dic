@@ -1,11 +1,56 @@
 ﻿//---------------------------Envelopes--------------------------
 
-//might use later, leaving for now
-
- //**** Don't touch this ***************************************************************
- //This is code stuff and nothing for you to worry about, just save the .dic and move on! You're done!
- 
- On_\person
+homesounds
 {
- 	person
+    "\![sound,play,spoiler/door_1.mp3,--volume=35]"
+    "\![sound,play,spoiler/door_1.mp3,--volume=40]"
+    "\![sound,play,spoiler/door_2.mp3,--volume=15]"
+    "\![sound,play,spoiler/door_3.mp3,--volume=30]"
+    "\![sound,play,spoiler/door_4.mp3,--volume=30]"
+    "\![sound,play,spoiler/door_4.mp3,--volume=40]"
+    "\![sound,play,spoiler/door_5.mp3,--volume=35]"
+    "\![sound,play,spoiler/door_5.mp3,--volume=30]"
+    "\![sound,play,spoiler/floor_1.mp3,--volume=30]"
+    "\![sound,play,spoiler/floor_1.mp3,--volume=35]"
+    "\![sound,play,spoiler/floor_1.mp3,--volume=20]"
+    "\![sound,play,spoiler/window_1.mp3,--volume=35]"
+}
+
+homeappear : sequential
+{
+    "\p[2]\s[3510]\![set,alpha,0]\![move,--x=%(center_x),--y=%(center_y),--base=primaryscreen,--move-offset=base.base]\![move,--x=%(center_x),--y=%(center_y),--base=primaryscreen,--move-offset=base.base]\![set,alpha,5]"
+    "\p[2]\![set,alpha,10]"
+    "\p[2]\![set,alpha,30]"
+    "\p[2]\![set,alpha,60]"
+    "\p[2]\![set,alpha,100]"
+    "\p[2]\s[3511]\_w[1000]\s[3500]"
+}
+
+eye_c
+{
+    "\p[2]\b[-1]\![anim,offset,1,0,0]"
+}
+eye_r
+{
+    "\p[2]\b[-1]\![anim,offset,1,35,25]"
+}
+eye_l
+{
+    "\p[2]\b[-1]\![anim,offset,1,-35,25]"
+}
+eye_d
+{
+    "\p[2]\b[-1]\![anim,offset,1,0,94]"
+}
+eye_u
+{
+    "\p[2]\b[-1]\![anim,offset,1,0,-30]"
+}
+eye_u.l
+{
+    "\p[2]\b[-1]\![anim,offset,1,-35,-30]"
+}
+eye_d.r
+{
+    "\p[2]\b[-1]\![anim,offset,1,35,75]"
 }

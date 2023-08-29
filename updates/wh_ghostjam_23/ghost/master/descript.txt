@@ -10,8 +10,7 @@ sakura.name2,Wally
 kero.name,
 
 
-craftman,idk & thebubble-mancer
-craftmanurl,
+craftmanw,idk & thebubble-mancer
 
 
 sstp.allowunspecifiedsend,0

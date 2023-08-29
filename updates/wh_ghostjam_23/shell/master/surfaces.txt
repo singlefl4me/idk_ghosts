@@ -27,6 +27,7 @@ animation2.pattern0,interpolate,102,0,0,0
 
 //--Blinking---------------------------------------------------------------------------
 
+//tweak random interval
 animation10.interval,random,4
 animation10.pattern0,overlay,-1,0,0,0
 animation10.pattern1,overlay,1000,0,0,0
@@ -52,7 +53,7 @@ animation12.pattern0,stop,11
 //secret
 
 animation3000.interval,never
-animation3000.pattern0,interpolate,3000,0,0,0
+animation3000.pattern0,interpolate,10000,0,0,0
 }
 
 //Main Character Embarrassed pose
@@ -144,20 +145,104 @@ element0,overlay,surface2001.png,0,0
 
 surface3001
 {
-element0,overlay,surface3001.png,0,0
+element0,overlay,spoiler/surface3001.png,0,0
 
 
 animation0.interval,runonce
 animation0.pattern0,alternativestart,(1,2,3)
 
 animation1.interval,never
-animation1.pattern0,overlay,3002,0,0,0
+animation1.pattern0,overlay,10002,0,0,0
 
 animation2.interval,never
-animation2.pattern0,overlay,3003,0,0,0
+animation2.pattern0,overlay,10003,0,0,0
 
 animation3.interval,never
-animation3.pattern0,interpolate,3000,0,0,0
+animation3.pattern0,interpolate,10000,0,0,0
+}
+
+surface3500
+{
+//base
+animation0.interval,runonce
+animation0.pattern0,base,20001,0,0,0
+
+//pupils
+animation1.interval,runonce
+animation1.pattern0,overlayfast,20002,0,0,0
+
+animation2.interval,never
+animation2.pattern0,overlayfast,20003,0,0,0
+
+//frame
+animation3.interval,runonce
+animation3.pattern0,overlay,20000,0,0,0
+}
+
+surface3510
+{
+animation3.interval,runonce
+animation3.pattern0,overlay,20000,0,0,0
+}
+
+surface3511
+{
+//base
+animation0.interval,runonce
+animation0.pattern0,base,20004,0,0,0
+animation0.pattern1,base,20005,40,0,0
+animation0.pattern2,base,20001,20,0,0
+
+//pupils
+animation1.interval,runonce
+animation1.pattern0,overlayfast,20002,0,0,0
+
+//frame
+animation3.interval,runonce
+animation3.pattern0,overlay,20000,0,0,0
+}
+
+
+//parts-----
+surface10000
+{
+element0,overlay,spoiler/surface3000.png,0,0
+}
+surface10001
+{
+element0,overlay,spoiler/surface3001.png,0,0
+}
+surface10002
+{
+element0,overlay,spoiler/surface3002.png,0,0
+}
+surface10003
+{
+element0,overlay,spoiler/surface3003.png,0,0
+}
+surface20000
+{
+element0,overlay,spoiler/surface3500.png,0,0
+}
+surface20001
+{
+element0,overlay,spoiler/surface3501.png,0,0
+}
+surface20002
+{
+element0,overlay,spoiler/surface3502.png,0,0
+}
+surface20003
+{
+element0,overlay,spoiler/surface3503.png,0,0
+}
+surface20004
+{
+element0,overlay,spoiler/surface3504.png,0,0
+}
+surface20005
+{
+element0,overlay,spoiler/surface3505.png,0,0
 }
 //--surface.append-------------------------------------------------------------------
 //Surface.append basically applies the coding within the brackets to the poses specified in the number range. Specifically in this case it applies to collisions. If the collision areas for your ghost don't change very much from pose to pose, then you can set them here for multiple surfaces at once and save yourself some time.
@@ -169,7 +254,10 @@ collision0,113,45,189,103,Hair
 collision1,120,104,181,149,Face
 
 }
-
+surface.append3500-3511
+{
+point.basepos.y,168
+}
 
 //--Unique Collision cursors------------------
 

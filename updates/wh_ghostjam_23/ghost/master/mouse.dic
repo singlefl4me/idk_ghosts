@@ -22,7 +22,7 @@ MouseMoveSakura
 	if reference4 != "" //ignore
  	{
  		stroke++ //if you move the mouse over the right areas, the stroke count will go up.
- 		if stroke >= 40 //if the stroke count is above a certain number, the petting dialogue will kick in. You can change this number to make the petting take longer or shorter if you want. FLELEs have it set to 50 for some reason, which makes it take longer than this.
+ 		if stroke >= 45 //if the stroke count is above a certain number, the petting dialogue will kick in. You can change this number to make the petting take longer or shorter if you want. FLELEs have it set to 50 for some reason, which makes it take longer than this.
 		{
  			stroke = 0 //resetting the stroke count
 			if reference4 == "Hair"

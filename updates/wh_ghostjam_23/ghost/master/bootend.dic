@@ -3,26 +3,31 @@
 
 //--OnFirstBoot--
 
-
 OnFirstBoot
 {
- 	lastTalk = "" //This is part of how chained conversations work (see aitalk.dic).
+ 	lastTalk = ""	//This is part of how chained conversations work (see aitalk.dic).
+
 	passhour = 0
 	passmin = 0 
-	passsec = 0 // These keep track of the time.
+	passsec = 0		//These keep track of the time.
+	
 	stroke           = 0	// Sets their being-pet state to zero.
 	mikireflag       = 0	// Determines behavior at certain points.
- 	aitalkinterval = 600 //Their default talk rate.
+ 	aitalkinterval = 600	//Their default talk rate.
 	talktime = "every 10 minutes" //How the value aitalkinterval will display in the config menu.
 	
 	spookmode = "off"
 	spookchance = 0
-	//visitcount = 0 // count how many times the ghost has been opened. using for special (not spooky) onboot dialogue
+	spookcount = 0
+	MiscFlags = IARRAY
+	//visitcount = 0	//count how many times the ghost has been opened. using for special (not spooky) onboot dialogue
 
 	if reference0 == 0 
  	{
 		//might replace later, might not
-		"\0\s[0](@)\_w[1000]Oh.\w8 Hello.\w8 Didn't see you there.\n\w8\n[half]\w8I don't believe we met.\w8 I'm Wally.\w8\w8 It's always nice to meet a new neighbor,\w6 \s[5]\f[italic,1]ha\w5 ha\w5 ha...\f[italic,0]\w8\s[0]\n\n[half]I hope we can be good friends,\w6 Neighbor."
+		"\1\s[-1]\p[2]\s[-1]"
+		--
+		"\![enter,nouserbreakmode]\0\s[0](@)Oh.\w8 Hello.\w8 Didn't see you there.\n\w8\n[half]\w8I don't believe we met.\w8 I'm Wally.\w8\w8 It's always nice to meet a new neighbor,\w6 \s[5]\f[italic,1]ha\w5 ha\w5 ha...\f[italic,0]\w8\s[0]\n\n[half]I hope we can be good friends,\w6 Neighbor.\![leave,nouserbreakmode]"
  	}
 	else
  	{
@@ -31,8 +36,6 @@ OnFirstBoot
 }
 
 //--timeslot
-
-//This is another unique function to tell what time of day it is. This is used for specialized dialogue related to the day.
 
 timeslot
 {
@@ -85,28 +88,26 @@ OnBoot
 	passmin = 0
 	passsec = 0
 
-	/* hopefully implementing later...
-	if spookmode == "on"	{
+	spookcount = 0
+	--
+	if spookmode == "on" && Flag("spookscene on") == 0	{
 		_spooktime
 
-		_spooktime = RAND(20)
-		if _spooktime == 0	{
-			""
-			""
-			""
-			--
-			"\-"
+		if Flag("scene in progress") == 0	{
+			if Flag("scene_a complete") == 0	{//replace with case/when
+				_spooktime = RAND(8)
+				if _spooktime == 0	{
+					AddFlag("spookscene on")
+					AddFlag("scene_a")
+				}
+			}
+		
 		}
+		//when adding more scenes, use case/when to decide between them
 	}
-	else	{
-		""
-	}
-
-	if visitcount == 20	{
-		"\0\s[0](@)I've been seeing you a lot...\n Why is that?"
-	}
-	*/
-
+	--
+	"\1\s[-1]\p[2]\s[-1]"
+	--
 	"\0\s[0](@)Hello,\w5 neighbor...!"
 	"\0\s[0](@)Did you miss me,\w5 Neighbor?"
 	"\0\s[0](@)It's good to see you again."
@@ -124,50 +125,5 @@ OnClose
 	"\0\s[0](@)I'm sure we will meet again soon..."
 	"\0\s[0](@)That was fun. I hope to see you again."
  	--
-	"\-" //this bit of code actually closes and ends the ghost. Because \e is here, you don't have to end each line above with it.
+	"\w8\w8\-" //this bit of code actually closes and ends the ghost. Because \e is here, you don't have to end each line above with it.
 }
-
-
- //-------------------------State Changing--------------------
- //From here on, most of the dialogue will have to do with changing shells, ghosts, or states in some way.
-
-
-//--OnGhostChanging
-
-/*
-//might not use
-OnGhostChanging
- {
-	if reference0 == "Girl" //Replace this with the name of your Sakura character as you put in install.txt or descript.txt.
-	{
-		""
-	}
- 	else //If you're switching to another Ghost.
-	{
-		//"(replace dialogue later)"		
-	}
-}
-*/
-
-//--OnGhostChanged
-
-//A sister to the above, this runs after the ghost has either reloaded itself, or when you switch from another ghost to this ghost.
-
-/*
-//also might not use
-OnGhostChanged
-{
-	"\0\s[0]\1\s[10]" //this sets up their default poses
-	/*
-	--
-	if reference0 == "Girl" //As above, this should be the name of your ghost as in install.txt or descript.txt.
-	{
-		""
-	}
-	else
-	{
-		"(replace dialogue later)"
-	}
-	
-}
-*/

@@ -11,9 +11,9 @@ charset.extension, UTF-8
 
 dicdir, yaya_base
 
-dic, anchor.dic
 dic, aitalk.dic
 dic, bootend.dic
+dic, funct.dic
 dic, menu.dic
 dic, mouse.dic
 dic, string.dic

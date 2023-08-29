@@ -1,6 +1,6 @@
 ﻿
-seriko.alignmenttodesktop,bottom
-
+seriko.alignmenttodesktop,free
+sakura.seriko.alignmenttodesktop,bottom
 
 seriko.use_self_alpha,1
 
@@ -8,8 +8,7 @@ seriko.use_self_alpha,1
 charset,UTF-8
 type,shell
 name,default
-craftman,replacelater
-craftmanurl,http://www.ashido.com/ukagaka/walkthrough.html
+craftmanw,idk & thebubble-mancer
 
 
 

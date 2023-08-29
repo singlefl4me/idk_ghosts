@@ -6,7 +6,9 @@
 OnAiTalk
 {
 	if CHAIN.IDName == "" {
-		if spookmode == "on"
+		if Flag("spookscene on") == 1 || Flag("scene in progress") == 1
+			OnSpookTimeEx
+		elseif spookmode == "on"
 			OnSpookTime
 		else
 			lastTalk = RandomTalk
@@ -27,11 +29,13 @@ RandomTalk: nonoverlap_pool
 	"\0\s[0](@)I hope the day has treated you well."
 	"\0\s[0](@)Do you have any special plans today?"
 	"\0\s[8]"//possible chain?\![embed,OnChainEnding]
-	"\0\s[5](@)\f[italic,1]ha\w4 ha,\w6 ha\w4 ha\w4 ha!\f[italic,0]\w8\n\s[0]\w8\nOh,\w5 sorry.\s[8]\w8Just thinking about something..."
+	"\0\s[5](@)\f[italic,1]ha\w4 ha,\w6 ha\w4 ha\w4 ha!\f[italic,0]\w8\n\s[0]\w8\nOh,\w5 sorry. \s[8]\w8Just thinking about something..."
 	"\0\s[0](@)Are you doing alright?"
 	"\0\s[8](@)Where are my friends?\w8 Where did they go.\w8.\w8.\w8"
 	"\0\s[0](@)How was your day,\w6 Neighbor?"
 	"\0\s[0](@)What do you like to do for fun?"
+	//"\0\s[0](@)...?"
+	//"\0\s[0](@)"
 	//jokes/random obtuse pranks
 	"\0\s[0](@)Did you know...\w6 you have something on your face.\n\w8\w8.\w8.\w8.\w8\f[italic,1]\s[5]ha\w4 ha\w4 ha\w4!\f[italic,0]\w8\s[0] I'm only kidding.\w8 Was that a good joke?"
 	//"\0\s[0](@)..."
@@ -51,81 +55,131 @@ RandomTalk: nonoverlap_pool
 	{//here too
 		"\0\s[0](@)Can I tell you something?\n .\w8.\w8.\w8\n"
 		--
-		"oh,\w6 nevermind.\w8 Nothing to worry about..."
+		"oh,\w6 nevermind.\w8\s[8] Nothing to worry about..."
 		"I'm glad you came to see me."
 	}
 }
 
-spooktalk: nonoverlap_pool
+
+//--spooktalk
+
+spookTalk: nonoverlap_pool
 {
 	//here too
 	"\0\s[0]\i[3000]\i[12]"
 	"\0\s[3001]"
 	--
+	"(#)no one knows i'm here.\_w[800].\_w[800].\_w[800]\n.\_w[900]\n.\_w[900]\n.\_w[900]\n righ\w5t\w8?"
+	"(#)i see you.\_w[4000]\_l[-65,110]hello"
+	"(#)do\w8\w9 you\w8\w9\n\_l[,@20%] remember?\_l[@-275%,@20%] remember?\_l[@-275%,@20%] remember?\_l[@-275%,@20%] remember?\_l[@-275%,@20%] remember?\_l[@-275%,@20%] remember?\_l[@-275%,@20%] remember\n\n\n me\w9?"
+	//"\![set,balloonwait,350%]\f[color,220,213,213]I WAS ALWAYS HERE"/edit l8r
+	"(#)why won't you respond?"//edit l8r
+	"(#)are you\w5 still\w8\w8 he\w2re\w8\w8?\![set,autoscroll,disable]\_w[5000]\n[1500]\![set,autoscroll,enable]\f[align,center]answer me\_l[@-5,@-2]answer me\_l[@4,@]answer me\_l[@-117,@3]answer me\_l[@,@5]answer me\_l[@-3,@-5]answer me\_l[@-134,@4]answer me\_l[@15,@-2]answer me\_l[@-75,@-2]answer me"
+	"(#)do you feel it?"
+	"(#)are\w8 you\w8 there\w8?"
 	"(#)"
-	--
-	"no one knows i'm here.\_w[800].\_w[800].\_w[800]\n.\_w[900]\n.\_w[900]\n.\_w[900]\n righ\w5t\w8?"
-	"i see you.\_w[4000]\_l[-65,110]hello"
-	"do\w8\w9 you\w8\w9\n\_l[,@20%] remember?\_l[@-275%,@20%] remember?\_l[@-275%,@20%] remember?\_l[@-275%,@20%] remember?\_l[@-275%,@20%] remember?\_l[@-275%,@20%] remember?\_l[@-275%,@20%] remember\n\n\n me\w9?"
-	"\![set,balloonwait,350%]\f[color,220,213,213]I WAS ALWAYS HERE"
 
+	{
+		"\s[0](@)Can you do me a favor?\n .\w8.\w8.\w8\n"
+		--
+		".\w8.\w8.\w8\n.\w8.\w8.\w8\n.\w8.\w8.\w8\n.\w8.\w8.\w8\n.\w8.\w8.\w8\n.\w8.\w8.\w8\n\c\w[1000]"//edit l8r
+		"let me in. please"//edit l8r
+	}
+
+	{
+		"\0\s[0](@)Can I tell you something?\n .\w8.\w8.\w8\n"
+		--
+		"please help me"
+		"are you still there?"
+		//"what is it like? to feel... hurt"
+	}
+	
 	/*
 	//for inspo. may add in l8r
 	"don't move"
 	"where are you""i cant"
 	"i know who you are"
 	"are you out there? can you see me?"
+
+	
 	*/
 }
 
-/*OnChainEnding
+
+//--extras
+
+spook_scenario: nonoverlap_pool
 {
-	temptalkinterval = aitalkinterval
-	aitalkinterval = 60
-	--
-	"\e:chain=chain_a"
-	"\e:chain=chain_b"
-	"\e:chain=chain_c"
+	if Flag("scene in progress") == 1	{
+		if Flag("scene_a") == 1	{
+			//base : "\0\s[0](@).\w8.\w8.\w8\w8\n\n[half]"
+			"\0\s[0](@).\w8\w8.\w8\w8.\w8\w8\n\n[half]\w8Well,\w6 I don't know about \f[italic,1]that\f[italic,0]..."
+			"\0\s[0](@).\w8\w8.\w8\w8.\w8\w8\n\n[half]\w8Oh,\w6 really?\w8\n\n[half].\w8\w8.\w8\w8.\w8\w8"
+			"\0\s[0](@).\w8\w8.\w8\w8.\w8\w8\n\n[half]\w8Well, \w6what do you think?\w8\n\n[half].\w8\w8.\w8\w8.\w8\w8"
+			"\0\s[0](@).\w8\w8.\w8\w8.\w8\w8\n\n[half]\w8Oh,\w5 of course!\w8\n\n[half].\w8\w8.\w8\w8.\w8\w8"
+			"\0\s[0](@).\w8\w8.\w8\w8.\w8\w8\n\n[half]\w8Do you think so?\w8\n\n[half].\w8\w8.\w8\w8.\w8\w8\n\n[half]\w8Alright,\w5 then."
+			"\0\s[0](@).\w8\w8.\w8\w8.\w8\w8\n\n[half]\w8That does sound nice..."
+			"\0\s[0](@).\w8\w8.\w8\w8.\w8\w8\n\n[half]\w8"
+			//".\w8.\w8.\w8\e:chain=scenario_a"
+		}
+
+	}
+}
+
+
+//--Chains
+
+scenario_a
+{{CHAIN
+	"%(homesounds)"
+	"%(homesounds)"
+	"%(homesounds)"
+	"%(homesounds)"
+	"%(homesounds)\![raise,OnChainInt,30]"
+	"%(homeappear)"
+	"%(homeappear)"
+	"%(homeappear)"
+	"%(homeappear)"
+	"%(homeappear)"
+	"%(homeappear)\_w[2500]%(eye_l)\_w[2500]%(eye_r)\_w[2500]%(eye_l)\_w[2500]%(eye_c)\_w[1000]\0\s[0]Oh,\w5 hello Home. \w8It's nice of you to join us.\xNeighbor,\w6 this is Home.\x[noclear]\p[2]%(eye_d.r)\0\w8 Home is my friend!\xHome seemed \f[italic,1]very\f[italic,0] excited to meet you. \w8It's always nice to meet a new friend.\x\p[2]%(eye_c)\_w[1500]\0I hope you two can be \f[italic,1]great\f[italic,0] friends someday...\w8\n\w8\n[half]Wouldn't that be nice,\w6 Neighbor?\![raise,OnChainReset]\e:chain=end"
+}}CHAIN
+
+
+//--Chain Functions
+
+OnChainInt
+{
+	if !ISVAR("temptalkinterval")
+		StoreInterval
+
+	aitalkinterval = reference0
 }
 
 OnChainReset
 {
-	aitalkinterval = temptalkinterval
+	StoreInterval
+	RemoveFlag("scene in progress")
+	RemoveFlag("scene_a")
+	AddFlag("scene_a complete")
+	--
+	"\w8\w8\-"
 }
 
-*/
 
-//--Chains
-//Here is where you will put your bits of chain dialogue.
-//Each chain function will go through each part of the chain in order even if it's in one function, until it goes to \e:chain=end which will end the chain. So you can put the entire chain dialogue into one place.
-
-/*
-scenario_a
-//gonna do something special with this next update
-//cant wait
-//@;)
-{{CHAIN
-	"\0\s[0]Here is the second part of the chain.\w8\1\s[10]Will there be more?\![embed,OnChainReset]\e:chain=end"
-}}CHAIN
-
-/*
-OnFakeChain
-{
-	"\0\s[8](@).\w4.\w4.\w4\w8\w8!\n\w8\s[0]"
-}
-*/
-
-//Pay careful attention to the CHAIN text and double brackets for these.
-//Note also it ends with \e:chain=end, basically ending the chain.
+//--OnSpookTime
 
 OnSpookTime
 {
 	_spooktime
 
+	if Flag("scene in progress") == 1	{
+		lastTalk = spook_scenario
+	}
+
 	if ghostupmin >= 60 && ghostupmin < 120	{
 		_spooktime = RAND(6)
 		if _spooktime == 0	
-			lastTalk = spooktalk
+			lastTalk = spookTalk
 		else
 			lastTalk = RandomTalk
 	}
@@ -133,7 +187,7 @@ OnSpookTime
 		if spookchance == 1	{
 			_spooktime = RAND(4)
 			if _spooktime == 0	
-				lastTalk = spooktalk
+				lastTalk = spookTalk
 			else
 				lastTalk = RandomTalk
 		}
@@ -144,7 +198,7 @@ OnSpookTime
 		if spookchance == 1	{
 			_spooktime = RAND(3)
 			if _spooktime == 0	
-				lastTalk = spooktalk
+				lastTalk = spookTalk
 			else
 				lastTalk = RandomTalk
 		}
@@ -155,10 +209,46 @@ OnSpookTime
 		lastTalk = RandomTalk
 }
 
+OnSpookTimeEx
+{
+	_spooktime
+
+
+	if Flag("scene in progress") == 1	{
+		spookcount++
+		
+		if spookcount >= 4
+			lastTalk = ".\w8.\w8.\w8\![raise,OnChainInt,180]\e:chain=scenario_a"
+		
+		else
+			lastTalk = spook_scenario
+	}
+
+	elseif ghostupmin > 10 && Flag("scene in progress") == 0	{
+		if ghostupmin < 60 	{
+			_spooktime = RAND(6)
+
+			if _spooktime == 0	{
+				RemoveFlag("spookscene on")
+				AddFlag("scene in progress")
+				lastTalk = spook_scenario
+			}
+			else
+				lastTalk = RandomTalk
+		}
+		elseif ghostupmin >= 60	{
+			RemoveFlag("spookscene on")
+			AddFlag("scene in progress")
+			lastTalk = spook_scenario
+		}
+	}
+	else
+		lastTalk = RandomTalk
+}
+
 
 //-OnMinuteChange
 
-//Keeps track of if an hour has passed. Just ignore this.
 HourCheck
 {
 if passmin >= 59
@@ -166,21 +256,16 @@ if passmin >= 59
 		passmin = 0
 		passhour = passhour + 1
 		
-		spookchance = RAND(1)
+		spookchance = RAND(2)
 	}
 }
 
 
-OnMinuteChange //This is what will trigger time-based dialogue for your Ghost.
+OnMinuteChange
 {
 	HourCheck //checks to see if an hour has passed, ignore it
-	--
-	//Don't touch this part.
-	if mikireflag == 1
- 	{
- 		MikireTalk
-	}
 }
+
 
 //--OnSecondChange
 
@@ -195,56 +280,21 @@ OnSecondChange
  		{
 	 	passsec = passsec + 1
 		}
-	/*
-	if mikireflag == 0 && reference1 == 1 //Dialogue for putting them off the screen. You could make this a unique line if you wanted (Like "Hey! What are you doing?"), and have MikireTalk below be for if they continue to be offscreen ("Why are you leaving me out here? Help!" for example). I'll add an example bit of dialogue and comment it out, you can uncomment it and use it if you like, or just leave it out and use MikireTalk below.
-	{
-		//"\0\s[0]You've moved me off screen."
-		
-		MikireTalk
-	}
-	if mikireflag == 1 && reference1 == 0 //Dialogue for coming back on the screen
-	{
-		EndMikireTalk
-	}
-	mikireflag = reference1 //reference1 is if the ghost is offscreen or not
-	if reference2 == 1
-	{
-		""
-	}
-	*/
 }
-
- //---- MikireTalk ---------------------------------------------------------------------
- //MikireTalk is dialogue for when your main character is off-screen. Like if you dragged Girl over to the side of your monitor until she was partially concealed by it.
- 
-MikireTalk//may delete later
-{
-	""
-}
-
- //----EndMikireTalk--------------------------------------------------------------------
- 
-EndMikireTalk//may delete later
-{
-	""
-}
-
 
 //**** OnSurfaceRestore *****************************************************************
-//What this does is that after a short period of time, the ghost will go back to its default pose, so you won't have a ghost stuck in one expression for too long.
 
 OnSurfaceRestore
 {
  	//if lastTalk == "\0\s[8]"
  		//OnFakeChain
  	//else	
-	"\0\s[0]\e"
+	"\0\s[0]\1\s[-1]\e"
 	//
 }
 
  
- //--OnKeyPress
- //This defines the hotkeys your ghost will use.
+//--OnKeyPress
  
 OnKeyPress
 {
