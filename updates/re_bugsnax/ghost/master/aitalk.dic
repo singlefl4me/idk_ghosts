@@ -1,0 +1,29 @@
+OnAiTalk
+{
+	if friendlevel == -20
+		""
+	else
+	{
+		if nowstate == ""
+			LastTalk = EVAL("RandomTalk.%(shellname)")
+
+		else
+			LastTalk = EVAL("RandomState.%(shellname)")
+
+
+		if CHAIN.IDName == ""
+			LastTalk = EVAL("RandomTalk.%(shellname)")
+
+		else
+			LastTalk = ChainTalk
+
+
+		LastTalk
+	}
+	
+}
+
+OnStateReset
+{
+	nowstate = ""
+}

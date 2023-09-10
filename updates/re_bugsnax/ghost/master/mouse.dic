@@ -1,0 +1,99 @@
+//Separate from the menus because you could put other interactions here, like poking or booping or punching or asking about various hotspots
+
+
+//idea: hitting lowers relationship level. Hitting too much while low-level will cause ghost to disintergrate, the user would need to uninstall and start over.
+//addon: double-click to hit, single-click to poke?
+OnMouseDoubleClick
+{
+	if reference5 == 0 //reference5 is the mouse button being clicked, in this case a left click
+	{
+		if reference4 == "sauce1"	{
+			"\p[1]\s[-1]"
+			--
+			ketchupsauce++
+			--
+			"\0\_q\![set,balloontimeout,5000]You have collected: Ketchup."
+		}
+		if reference4 == "sauce2"	{
+			"\p[2]\s[-1]"
+			--
+			ranchsauce++
+			--
+			"\0\_q\![set,balloontimeout,5000]You have collected: Ranch Dressing.\_q"
+		}
+		if reference4 == "sauce3"	{
+			"\p[3]\s[-1]"
+			--
+			chocosauce++
+			--
+			"\0\_q\![set,balloontimeout,5000]You have collected: Chocolate.\_q"
+		}
+		if reference4 == "sauce4"	{
+			"\p[4]\s[-1]"
+			--
+			spicysauce++
+			--
+			"\0\_q\![set,balloontimeout,5000]You have collected: Hot Sauce.\_q"
+		}
+		if reference4 == "sauce5"	{
+			"\p[5]\s[-1]"
+			--
+			peanutsauce++
+			--
+			"\0\_q\![set,balloontimeout,5000]You have collected: Peanut Butter.\_q"
+		}
+		if reference4 == "sauce6"	{
+			"\p[6]\s[-1]"
+			--
+			cheesesauce++
+			--
+			"\0\_q\![set,balloontimeout,5000]You have collected: Che\0ese\![set,balloontimeout,5000].\_q"
+		}
+
+		if reference3 == 0
+		{
+			EVAL("OnMouseDoubleClick.%(shellname)")
+		}
+	}
+}
+
+OnMouseClick
+{
+	if reference5 == 0
+	{
+		EVAL("OnMouseClick.%(shellname)")
+	}
+}
+
+OnMouseMove
+{
+	if reference4 != ""
+	{
+		stroke++
+		
+		if stroke % 40 == 0
+		{
+			if reference3 == 0; OnMouseMove.Sakura
+			else; OnMouseMove.Kero
+		}
+	}
+}
+
+//idea: if the user has a low relationship with the ghost, it should run away when pet. Mid-level petting raises relationship value. High-level stays the same.
+OnMouseMove.Sakura
+{
+	EVAL("OnMouseMove.%(shellname)")
+}
+
+OnMouseMove.Kero
+{
+	if reference4 == "head"
+	{
+		""
+	}
+}
+
+OnMouseLeaveAll
+{
+	stroke = 0
+}

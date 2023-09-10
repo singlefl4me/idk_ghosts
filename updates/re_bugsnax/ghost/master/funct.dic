@@ -1,0 +1,374 @@
+//a separste file for functions so the other files wont get as crowded
+
+
+//___________________________________________________________________
+
+//OnWander
+
+//Written by Zichqec https://zichqec.github.io/s-the-skeleton/
+//This function will make the ghost wander randomly on the current screen. If set properly, they should never go off either edge of the screen, even if it is not your primary monitor. Please note that I only have two monitors to test this with, it might break with 3 or more!
+//I recommend making a hotkey for your test variable if you want to try this out, it's kinda fun tbh
+//Please note; there is a bug where if you boot a ghost on a secondary monitor, they will move to the primary monitor if you ask them to wander without dragging them onto a different monitor. I can't think of a way to fix this, but if you think of something please tell me.
+//To call this function, you can write %(OnWander('#')) in a line of dialogue, where # is the number of the ghost you want to move (0 for Sakura, 1 for Kero, 2 and up for extra chars). Alternatively, you can write OnWander("#") in code, the way you would write any other function.
+//Dont forget to adjust the settings at the top of OnWanderCalc! You can set up individual settings for different characters by adding if checks for wanderChar, where 0 is Sakura, 1 is Kero, etc.
+OnWander
+{
+	wanderChar = TOINT(_argv)
+	if wanderLeft[wanderChar] == ""; wanderLeft[wanderChar] = 0 //If somehow these are undefined, define them so the ghost doesn't go to the moon
+	if wanderRight[wanderChar] == ""; wanderRight[wanderChar] = 500
+	"\![get,property,OnWanderCalc,currentghost.scope(%(_argv)).rect]"
+}
+
+OnWanderCalc
+{
+	//Walk speed. The higher you make _walkRate, the slower the ghost will walk.
+	_walkRate = 1500
+	
+	//Ghost width. You need to adjust this so the ghost does not walk off the side of the screen. Set it to the width of your ghost's images. If your images are not the same width, this might behave strangely
+	_walkWidth = 240
+	
+	//Minimum amount of pixels to move, so that the ghost doesn't move tiny, jarring amounts. Adjust as you like.
+	_walkMinimum = 100
+
+	getxcords = IARRAY //initializing my array...
+	
+	
+	//---Don't touch the rest of this, aside from the surfaces near the bottom!---
+	//{ If you're using notepad++, you can collapse this bracket so you don't have to see all that messy code
+	
+	
+	_XCoord = TOINT(reference0[0])
+	_char = wanderChar
+	_debug = "Started from %(_XCoord), left edge is %(wanderLeft[_char]), right edge is %(wanderRight[_char])\n"
+	
+	_debug += "Char is %(_char)\n"
+	_adjustedWidth = 0
+	if nowscale != ""
+	{
+		_adjustedWidth = _walkWidth * (nowscale * 0.01)
+		_debug += "adjusted width from %(_walkWidth) to %(_adjustedWidth)\n"
+	}
+	else
+	{
+		_adjustedWidth = _walkWidth
+	}
+	
+	_Left = TOINT(wanderLeft[_char])
+	_Right = TOINT(wanderRight[_char])
+	_Left -= wanderLeft[_char]
+	_Right -= wanderLeft[_char]
+	_debug += "wanderLeft[_char]: %(wanderLeft[_char])\n"
+	if _Right < 0
+	{
+		_Right *= -1
+		_debug += "_Right less than 0, inverted\n"
+	}
+	_RightRand = _Right
+	_RightRand -= _adjustedWidth
+	_RandX = RAND(_RightRand)
+	_RandX += TOINT(wanderLeft[_char])
+	_debug += "Moving to %(_RandX)\n"
+	
+	_adjust = "None"
+	_side = ""
+	if _RandX > _XCoord //If moving Right
+	{
+		_debug += "Moving right\n"
+		if _RandX - _XCoord < _walkMinimum //If it isn't moving at least the minimum distance to the right
+		{
+			_RandX = _XCoord + _walkMinimum
+			_adjust = "Right"
+			_debug += "Adjusted to the right\n"
+			
+			if _RandX > (wanderRight[_char] - _adjustedWidth) //If it's past the right edge
+			{
+				_debug += "Stopped on the right edge\n"
+				_RandX = wanderRight[_char] - _adjustedWidth
+			}
+		}
+	}
+	elseif _RandX < _XCoord //If moving left
+	{
+		_debug += "Moving left\n"
+		_RandXN = _RandX
+		_XCoordN = _XCoord
+		if wanderLeft[_char] < 0
+		{
+			_RandXN = (_RandX * -1) //Inverting the negative numbers so we can math properly
+			_XCoordN = (_XCoord * -1)
+			_debug += "Inverted _XCoord and _RandX\n"
+		}
+		
+		if _RandXN - _XCoordN < _walkMinimum //If it isn't moving at least the minimum distance to the left
+		{
+			_RandX = _XCoord - _walkMinimum
+			_adjust = "Left"
+			_debug += "Adjusted to the left, new destination %(_RandX)\n"
+			
+			if _RandX <= TOINT(wanderLeft[_char]) //If it's past the left edge
+			{
+				_debug += "Stopped on the left edge\n"
+				_RandX = wanderLeft[_char]
+			}
+		}
+	}
+	
+	if _RandX == _XCoord //If it fails to move at all
+	{
+		if _RandX == wanderLeft[_char] //If it's on the left edge
+		{
+			_debug += "Didn't move, stepped right\n"
+			_RandX += _walkMinimum
+		}
+		else //If it's on the right edge, or I guess if it happened to draw the exact same random coordinate as where it's standing
+		{
+			_RandX -= _walkMinimum
+			_debug += "Didn't move, stepped left\n"
+		}
+	}
+	_debug += "Stopped at %(_RandX)\n"
+	
+	_walkTime = (_XCoord - _RandX) //Subtract the X we're moving to from the X we're starting at.
+	if _walkTime < 0; {_walkTime *= -1} //If this ends up being a negative number, make it into a positive one.
+	_walkTime /= 100 //Divide it by 100 so we're dealing with a small number.
+	_walkTime *= _walkRate //Multiply it by whatever the dev wants the walk rate to be.
+	if _walkTime == 0; {_walkTime = _walkRate} //If the walk time ends up being 0, make it at least the base _walkRate.
+	
+	--
+	//}
+	
+	//These ifs handle which direction the character is moving, and which char is moving. You can rearrange them if you like! 
+	if _char == 0 //Moving the Sakura
+	{
+		if _RandX > _XCoord //Moving right
+		{
+			"\0\s[50]\i[2]" //Surface for walking to the right, adjust as needed.
+		}
+		else //Moving left
+		{
+			"\0\s[50]\i[1]" //Surface for walking to the left, adjust as needed.
+		}
+	}/*
+	elseif _char == 1 //Moving the Kero
+	{
+		if _RandX > _XCoord //Moving right
+		{
+			"\1\s[10]" //Surface for walking to the right, adjust as needed.
+		}
+		else //Moving left
+		{
+			"\1\s[10]" //Surface for walking to the left, adjust as needed.
+		}
+	}
+	else
+	{
+		"\p[%(_char)]" //Catch all for moving extra chars. If you want to move an extra char, you'll want to copy the if checks from the sakura/kero into here
+	}*/
+	
+	--
+	"\![move,--X=%(_RandX),--time=%(_walkTime),--base=primaryscreen]" //This is the actual move command.
+	--
+	//This is whatever surface you want them to return to after they stop walking. If you want dialogue after they stop moving, it'll have to go here.
+	if _char == 0
+	{
+		"\0\s[0]\e" 
+	}/*
+	elseif _char == 1
+	{
+		"\1\s[0]\e" 
+	}
+	else
+	{
+		"\p[%(_char)]\s[0]\e" 
+	}*/
+	--
+	"\_q _RandX: %(_RandX),  _XCoord: %(_XCoord), Adjust: %(_adjust)  \n%(_debug)" //Debugging stuff that'll show up in the script log. You can comment it out or remove it, but the user will never see it anyways.
+	//note:this info is a godsend
+
+	//putting the function's values in variables so I can add them to my array...
+	_owrandx = (_RandX)
+	_owxcord = (_XCoord)
+	_owawidth = TOINT(_adjustedWidth)//gotta convert the a. width into an interger or it won't work for some raisin
+	_owleft = (wanderLeft[_char])
+	_owright = (wanderRight[_char])
+
+	//adding...
+	getxcords ,= _owrandx
+	getxcords ,= _owxcord
+	getxcords ,= _owawidth
+	getxcords ,= _owleft
+	getxcords ,= _owright
+}
+
+OnDisplayHandover //This sets the variables for if your ghost is moved between monitors. Gotta account for cases where people have different size monitors. I'd put this in etc.dic next to OnDisplayChange
+{
+	wanderLeft[reference1] = reference3[0] //Tracks the left boundary of the current monitor for each char
+	wanderRight[reference1] = reference3[2] //Tracks the right boundary of the current monitor for each char
+}
+
+//Please also add this line to your OnShellScaling, so that it can properly adjust itself if the user changes the ghost's size. Don't forget to define it as 100 in OnFirstBoot, too!
+OnShellScaling
+{
+	nowscale = reference0
+}
+
+OnDisplayChange
+{
+	displaybpp    = reference0
+ 	displaywidth  = reference1
+	displayheight = reference2
+}
+
+
+//other walking
+/*
+OnFlee
+{
+	_owrandx = getxcords[0]
+	_owxcord = getxcords[1]
+	_owawidth = getxcords[2]
+	_owleft = getxcords[3]
+	_owright = getxcords[4]
+	//copy values from OnWander and calculate the amount the ghost should then move to get to the opposite edge of the screen. Formula;
+	//(whalfpoint) = (owright) / 2
+	//if (owrandx) >= (whalfpoint); move[owleft] - (owawidth)
+	//if (owrandx) <= (whalfpoint); move[owright] + (owawidth)
+	//getxcords = (owrandx,owright,owawidth,owleft,owawidth)
+
+	_whalfpoint = _owright / 2 //width halfpoint
+	_owleft -= _owawidth // accommodating the ghost's current width to fully hide offscreen
+
+	"\0\s[51]"//initializing the running surface
+	--
+
+	if _owrandx >= _whalfpoint; "\i[1]\![move,--X=%(_owleft),--time=1500,--base=primaryscreen]"//moves to the left edge of the screen
+	elseif _owrandx <= _whalfpoint; "\i[2]\![move,--X=%(_owright),--time=1500,--base=primaryscreen]"//moves to the right edge of the screen
+	--
+	"\0\s[0]\![timerraise,25000,1,OnPeek]"
+}
+*/
+/*
+OnPeek
+{
+	//grabbing values from the array again
+	_owrandx = getxcords[0]
+	_owxcord = getxcords[1]
+	_owawidth = getxcords[2]
+	_owleft = getxcords[3]
+	_owright = getxcords[4]
+
+	_whalfpoint = _owright / 2 //width halfpoint
+	_owright -= _owawidth // doing the opposite of the first function; using the ghost's width to go back on screen.
+
+	"\0\s[50]"
+	--
+	if _owrandx >= _whalfpoint; "\i[2]\![move,--X=%(_owleft),--time=2500,--base=primaryscreen]"//moves to the left edge of the screen
+	elseif _owrandx <= _whalfpoint; "\i[1]\![move,--X=%(_owright),--time=2500,--base=primaryscreen]"//moves to the right edge of the screen
+	--
+	"\0\s[0]\![timerraise,0,0,OnPeek]\e"
+}
+//save these for later...
+*/
+//_________________________________sauce functions__________________________________
+//sauce rng
+OnSauceAppear
+{
+    _saucechoice = RAND(6)
+
+    case _saucechoice {
+        when 0 ;	OnSetSaucePos1
+        when 1 ;	OnSetSaucePos2
+        when 2 ;	OnSetSaucePos3
+        when 3 ;	OnSetSaucePos4
+        when 4 ;	OnSetSaucePos5
+        when 5 ;	OnSetSaucePos6
+    }
+}
+
+//sauce positioning
+OnSetSaucePos1	{"\p[1]\s[500]\![move,--X=%(saucerand),--time=0,--base=primaryscreen]"}
+OnSetSaucePos2	{"\p[2]\s[501]\![move,--X=%(saucerand),--time=0,--base=primaryscreen]"}
+OnSetSaucePos3	{"\p[3]\s[502]\![move,--X=%(saucerand),--time=0,--base=primaryscreen]"}
+OnSetSaucePos4	{"\p[4]\s[503]\![move,--X=%(saucerand),--time=0,--base=primaryscreen]"}
+OnSetSaucePos5	{"\p[5]\s[504]\![move,--X=%(saucerand),--time=0,--base=primaryscreen]"}
+OnSetSaucePos6	{"\p[6]\s[505]\![move,--X=%(saucerand),--time=0,--base=primaryscreen]"}
+
+//_________________________________relationship system__________________________________
+friend_lvl_up
+{
+	if friendlevel == 50	
+		friendlevel = 50
+	else
+		friendlevel++
+}
+friend_lvl_down
+{
+	if friendlevel == -20	
+		friendlevel = -20	
+	elseif friendlevel > 30
+		friendlevel -= 5
+	else
+		friendlevel--
+}
+//dead
+
+OnDeath
+{
+	"\0\s[100]"
+}
+
+
+//insert function
+//________________________________time keeping___________________________________
+
+HourCheck
+{
+if passmin >= 59	{
+		passmin = 0
+		passhour = passhour + 1
+	}
+}
+
+OnMinuteChange
+{
+	HourCheck
+	if friendlevel > -20
+	{
+		if friendlevel < 50	{
+			if passmin == 0 || passmin == 30
+				friend_lvl_up
+		}
+
+		if Flag("make sauce") == 1	{
+			_saucevent = RAND(5)
+			if _saucevent == 4	{
+				saucerand = RAND(displaywidth)
+				OnSauceAppear
+			}
+			else
+				""
+		}
+		elseif Flag("make sauce") == 0
+			""
+		
+
+		_walkevent = RAND(2)
+		if _walkevent == 1
+			OnWander("0")
+	}
+	else
+	{
+		""
+	}
+}
+
+OnSecondChange
+{
+	if passsec == 59	{
+	 	passsec = 1
+ 		passmin = passmin + 1
+	}
+ 	else	{
+	 	passsec = passsec + 1
+	}
+}

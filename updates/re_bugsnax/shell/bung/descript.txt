@@ -1,0 +1,9 @@
+charset,UTF-8
+type,shell
+
+name,Bunger
+craftman,
+craftmanurl,
+
+seriko.use_self_alpha,1
+seriko.alignmenttodesktop,bottom

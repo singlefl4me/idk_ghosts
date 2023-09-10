@@ -1,0 +1,87 @@
+OnFirstBoot
+{
+	//If you add variables, make sure to initialize them here!
+	//Note - I haven't added anything about username or pronouns here because it's all handled by the SSP prefs
+	stroke = 0
+	LastTalk = ""
+
+	passhour = 0
+	passmin = 0 
+	passsec = 0 //These keep track of the time. Progression is based on how long the user keeps the ghost open.
+
+	nowscale = 100
+	nowstate = ""//mood state variable. Progression:"wary","shy","friendly","pleased"
+	//tempstates: "inactive","active","spooked","sad"
+	friendlevel = 0 //main progression system. maxes out at 70.
+
+	MiscFlags = IARRAY//initiate the flag array...
+	AddFlag("make sauce")//adding a flag to have sauces appear by default
+	
+	shellname = "Strabby"
+
+	//tracks how much of a sauce the user has. sauces: Ketchup, Ranch Dressing, Chocolate, Hot Sauce, Peanut Butter, Cheese.
+	ketchupsauce = 0
+	ranchsauce = 0
+	chocosauce = 0
+	spicysauce = 0
+	peanutsauce = 0
+	cheesesauce = 0
+	
+	"\0\s[0]%(st_col)strabby\w1!\w1!\w1!%(st_col_re)"
+}
+
+OnInitialize
+{
+	//If you want some variables to reset on boot, put them here. This event will happen even if you add other events like OnGhostChanged
+
+
+	nowstate = ""
+	
+	if reference0 != "reload" //For things you want to reset EXCEPT when just reloading; a convenience for you the dev, basically
+	{	
+		passhour = 0
+		passmin = 0
+		passsec = 0
+		
+		LastTalk = ""
+	}
+}
+
+OnBoot
+{
+	_temp = SHIORI3FW.UserBirthday
+	_user_birthday = "%(_temp[1])/%(_temp[2])" //M/D, if you want it D/M you can switch it around
+	_today = "%(month)/%(day)" //Again, switch this around if using D/M
+	
+	shellname = reference0
+
+	"\1\s[10]\0\s[0]"
+	--
+	if _today == _user_birthday
+	{
+		//will replace later
+		//"\0\s[0]It is %(username)'s birthday today.\w8 Happy birthday, %(username).\w8 Developer,\w4 you can add an interesting message here.\w8 It can be as long as you like.\w8 Or, you can remove it entirely."
+	}
+	elseif _today == "1/1" //You can add whatever cool dates you want with more elseifs here
+	{
+		//"\0\s[0]It's new year's day.\w8 Happy %(year),\w4 %(username)."
+	}
+	else //Normal boot
+	{
+		""
+	}
+}
+
+OnClose
+{
+	""
+	--
+	"\w8\w8\-" //This is what makes the ghost close (after a short pause), do not remove the \- , and MAKE SURE you don't use a \e before this point or it won't work
+}
+
+
+//Using the shellname variable to keep track of the current shell for custom dialogue
+OnShellChanged
+{
+	shellname = reference0
+}

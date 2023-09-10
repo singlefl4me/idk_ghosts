@@ -1,0 +1,125 @@
+//Some quick notes:
+//1: SERIKO does NOT support same line comments. If you want to write a comment, ALWAYS PUT IT ON ITS OWN LINE. If you put comments after other bits of code in the same line, it may seem to work at first, but it can cause cryptic errors down the line. Save yourself the trouble. Always put comments on their own lines in here. Additionally, it doesn't do block comments with /* and */
+//2: The example blink code is set up with the new definition, which I recommend you use. Here is my guide to what that means: https://zichqec.github.io/s-the-skeleton/olddef_vs_newdef
+//If you want to use old definition, make sure to erase that 'version,1' bit.
+//3: It is very common for people to feel stuck on how to start, because they don't know what expressions to make without having dialogue, but they don't know what dialogue to write without having expressions. If you're feeling that way, I highly suggest using emoji as substitutes just to get you started! That may sound weird if you're not fond of emoji, but seriously, just give it a try. I've found that just writing a few messages in Discord and using the emoji to signify surface changes is a great help to get me past that initial hump where it feels impossible.
+
+
+descript
+{
+	version,1
+}
+
+//—————————————————————————————— Sakura surfaces ——————————————————————————————
+
+surface0
+{
+	collisionex0,head,polygon,51,167,68,144,98,135,185,135,194,138,204,148,204,154,216,167
+	collision1,51,167,173,231,face
+	
+	//Example code for blink animation - uncomment if you want it
+	//animation0.interval,random,4
+	//animation0.pattern1,overlay,101,0,0,0
+	//animation0.pattern2,overlay,102,100,0,0
+	//animation0.pattern3,overlay,-1,50,0,0
+}
+
+
+surface50
+{
+	//walking left
+	animation1.interval,never
+	animation1.pattern0,replace,200,0,0,0
+	animation1.pattern1,replace,201,125,0,0
+	animation1.pattern2,replace,202,125,0,0
+	animation1.pattern3,replace,203,125,0,0
+	animation1.pattern4,replace,204,125,0,0
+	animation1.pattern5,replace,205,125,0,0
+	animation1.pattern6,replace,200,125,0,0
+	animation1.pattern7,start,1
+
+	//walking right
+	animation2.interval,never
+	animation2.pattern0,replace,250,0,0,0
+	animation2.pattern1,replace,251,125,0,0
+	animation2.pattern2,replace,252,125,0,0
+	animation2.pattern3,replace,253,125,0,0
+	animation2.pattern4,replace,254,125,0,0
+	animation2.pattern5,replace,255,125,0,0
+	animation2.pattern6,replace,250,125,0,0
+	animation2.pattern7,start,2
+}
+
+surface51
+{
+	//walking left
+	animation1.interval,never
+	animation1.pattern0,replace,200,0,0,0
+	animation1.pattern1,replace,201,75,0,0
+	animation1.pattern2,replace,202,75,0,0
+	animation1.pattern3,replace,203,75,0,0
+	animation1.pattern4,replace,204,75,0,0
+	animation1.pattern5,replace,205,75,0,0
+	animation1.pattern6,replace,200,75,0,0
+	animation1.pattern7,start,1
+
+	//walking right
+	animation2.interval,never
+	animation2.pattern0,replace,250,0,0,0
+	animation2.pattern1,replace,251,75,0,0
+	animation2.pattern2,replace,252,75,0,0
+	animation2.pattern3,replace,253,75,0,0
+	animation2.pattern4,replace,254,75,0,0
+	animation2.pattern5,replace,255,75,0,0
+	animation2.pattern6,replace,250,75,0,0
+	animation2.pattern7,start,2
+}
+
+surface100
+{
+	element0,overlay,surface300.png,0,0
+	collisionex8,matter,region,surface300.png,201,141,141
+}
+
+//_______________________________________________
+
+//sauces
+surface500
+{
+	collisionex2,sauce1,region,surface500.png,142,24,25
+}
+surface501
+{
+	collisionex3,sauce2,region,surface501.png,213,203,182
+}
+surface502
+{
+	collisionex4,sauce3,region,surface502.png,60,29,19
+}
+surface503
+{
+	collisionex5,sauce4,region,surface503.png,196,59,19
+}
+surface504
+{
+	collisionex6,sauce5,region,surface504.png,120,77,35
+}
+surface505
+{
+	collisionex7,sauce6,region,surface505.png,243,168,27
+}
+
+//—————————————————————————————— Kero surfaces ——————————————————————————————
+
+surface10
+{
+	//collision,0,0,130,65,head
+}
+
+//—————————————————————————————— Tooltips ——————————————————————————————
+
+sakura.tooltips
+{
+face,boop
+matter,Snakmatter
+}

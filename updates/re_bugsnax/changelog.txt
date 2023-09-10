@@ -1,0 +1,26 @@
+---------------------------Changelog--------------------------
+
+/9-09/
+- added a lot
+    meta.dic
+    new shell: bunger
+    template fixes from simplicity
+    new thumbnail
+- adjusted a lot
+    friendship progression is faster
+    nowstate dialogues show immediately in aitalk
+    menu pages are more cohesive
+    icon change
+    negative friendship route no longer uses inductionmode
+- fixed petting bug
+- package now public on github
+
+
+
+/3-01/
+- fixed an issue with cheese sauce not appearing in stats
+- adjusted how moodstates work in aitalk.dic
+- balloon bundled with ghost
+
+/2-24/
+- discord-only release

@@ -1,0 +1,150 @@
+//dialogue/functions for shells
+
+//dialogue_________________________
+RandomTalk.Bunger : nonoverlap_pool
+{
+	if friendlevel == 50	{
+		"\0\s[0]%(bu_col)bunger:D%(bu_col_re)"
+		"%(joy)"
+	}
+	elseif friendlevel >= 20	{
+		"%(ha)"
+	}
+	else	{
+		"\0\s[0]%(bu_col)bun\w4ger?%(bu_col_re)"
+		"%(neu_1)"
+	}
+	"\0\s[0]%(bu_col)bunger!%(bu_col_re)"
+	"\0\s[0]%(bu_col)bunger!!%(bu_col_re)"
+	"\0\s[0]%(bu_col)bun\w4ger!!!!%(bu_col_re)"
+	"\0\s[0]%(bu_col)bun\w2gerbun\w2gerbun\w2gerbun\w2gerbun\w2gerbun\w2ger...%(bu_col_re)"
+	"\0\s[0]%(bu_col)bungerbungerbungerbungerbungerbungerbungerbunger...%(bu_col_re)"
+	"\0\s[0]\f[italic,1]%(bu_col)bungerbungerbungerbungerbungerbungerbunger...%(bu_col_re)\f[italic,0]"
+}
+RandomState.Bunger
+{
+	if nowstate == "spooked"	{
+		"\0\s[0]%(bu_col)bunger?!%(bu_col_re)"
+		"%(ner_3)"
+		--
+		"\![raise,OnStateReset]"
+	}
+
+	if nowstate == "wary"	{
+		"%(ner_1)"
+		--
+		"\![raise,OnStateReset]"
+	}
+
+	if nowstate == "pleased"	{
+		"\0\s[0]%(bu_col)\![set,balloonwait,140%]bun\w6ger~%(bu_col_re)"
+		"%(lo)"
+		--
+		"\![raise,OnStateReset]"
+	}
+}
+
+bu_col //color-coding for dialogue
+{
+	"\f[color,#a5601f]"
+}
+
+bu_col_re //color reset
+{
+	"\f[color,default]"
+}
+
+
+//mouse__________________________
+OnMouseDoubleClick.Bunger
+{
+    if reference4 == "head"	{
+        if friendlevel >= 10	{
+            nowstate = "spook"
+            --
+            friend_lvl_down
+            --
+            "%(sc)"
+            "%(da)"
+        }
+		elseif friendlevel < 10	{
+            nowstate = "wary"
+            --
+            friend_lvl_down
+            --
+            "%(sc)"
+            "%(da)"
+        }
+		elseif friendlevel == -20	
+            OnDeath
+
+	}
+
+	elseif reference4 == "matter" 
+		""
+
+	else
+		OnSakuraMenu("start")
+}
+
+OnMouseClick.Bunger
+{
+    if reference4 == "face"	{
+        "\0\s[0]%(tau)"
+    }
+}
+
+OnMouseMove.Bunger
+{
+    if reference4 == "head"	{
+        if friendlevel == 50	{
+            "%(lo)"
+            nowstate = "pleased"
+        }
+        elseif friendlevel >= 30 && friendlevel < 50	{
+            friend_lvl_up
+            "%(joy)"
+        }
+        elseif friendlevel >= 10 && friendlevel < 30	{
+			friend_lvl_up
+            "%(ha)"
+		}
+        else	{
+            "%(neu_1)"
+        }
+    }
+	
+}
+
+//menu___________________________
+OnSauceComplete.Bunger
+{
+    if reference0 == "ketchup"	{
+		ketchupsauce--
+		friend_lvl_up
+		nowstate = "pleased"
+		"%(lo)"
+	}
+	elseif reference0 == "ranch"	{
+		ranchsauce--
+		"%(neu_1)"
+	}
+	elseif reference0 == "choco"	{
+		chocosauce--
+		"%(neu_1)"
+	}	
+	elseif reference0 == "spicy"	{
+		spicysauce--
+		"%(neu_1)"
+	}	
+	elseif reference0 == "peanut"	{
+		peanutsauce--
+		"%(neu_1)"
+	}	
+	elseif reference0 == "cheese"	{
+		cheesesauce--
+		friend_lvl_up
+		nowstate = "pleased"
+		"%(tas)"
+	}
+}

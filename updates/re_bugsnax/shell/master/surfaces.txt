@@ -1,0 +1,111 @@
+
+descript
+{
+	version,1
+}
+
+//—————————————————————————————— Sakura surfaces ——————————————————————————————
+
+surface0
+{
+	collisionex0,head,polygon,66,116,77,89,87,79,104,69,131,69,150,78,163,93,174,116
+	collision1,60,142,183,210,face
+	
+	//Example code for blink animation - uncomment if you want it
+	//animation0.interval,random,4
+	//animation0.pattern1,overlay,101,0,0,0
+	//animation0.pattern2,overlay,102,100,0,0
+	//animation0.pattern3,overlay,-1,50,0,0
+}
+
+
+surface50
+{
+	//walking left
+	animation1.interval,never
+	animation1.pattern0,replace,200,0,0,0
+	animation1.pattern1,replace,201,125,0,0
+	animation1.pattern2,replace,202,125,0,0
+	animation1.pattern3,replace,203,125,0,0
+	animation1.pattern4,replace,200,125,0,0
+	animation1.pattern5,start,1
+
+	//walking right
+	animation2.interval,never
+	animation2.pattern0,replace,250,0,0,0
+	animation2.pattern1,replace,251,125,0,0
+	animation2.pattern2,replace,252,125,0,0
+	animation2.pattern3,replace,253,125,0,0
+	animation2.pattern4,replace,250,125,0,0
+	animation2.pattern5,start,2
+}
+
+surface51
+{
+	//walking left
+	animation1.interval,never
+	animation1.pattern0,replace,200,0,0,0
+	animation1.pattern1,replace,201,75,0,0
+	animation1.pattern2,replace,202,75,0,0
+	animation1.pattern3,replace,203,75,0,0
+	animation1.pattern4,replace,200,75,0,0
+	animation1.pattern5,start,1
+
+	//walking right
+	animation2.interval,never
+	animation2.pattern0,replace,250,0,0,0
+	animation2.pattern1,replace,251,75,0,0
+	animation2.pattern2,replace,252,75,0,0
+	animation2.pattern3,replace,253,75,0,0
+	animation2.pattern4,replace,250,75,0,0
+	animation2.pattern5,start,2
+}
+
+surface100
+{
+	element0,overlay,surface300.png,0,0
+	collisionex8,matter,region,surface300.png,201,141,141
+}
+
+//_______________________________________________
+
+//sauces
+surface500
+{
+	collisionex2,sauce1,region,surface500.png,142,24,25
+}
+surface501
+{
+	collisionex3,sauce2,region,surface501.png,213,203,182
+}
+surface502
+{
+	collisionex4,sauce3,region,surface502.png,60,29,19
+}
+surface503
+{
+	collisionex5,sauce4,region,surface503.png,196,59,19
+}
+surface504
+{
+	collisionex6,sauce5,region,surface504.png,120,77,35
+}
+surface505
+{
+	collisionex7,sauce6,region,surface505.png,243,168,27
+}
+
+//—————————————————————————————— Kero surfaces ——————————————————————————————
+
+surface10
+{
+	//collision,0,0,130,65,head
+}
+
+//—————————————————————————————— Tooltips ——————————————————————————————
+
+sakura.tooltips
+{
+face,boop
+matter,Snakmatter
+}

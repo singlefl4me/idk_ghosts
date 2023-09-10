@@ -1,0 +1,133 @@
+//Because there is an all modifier here, you don't need to write -- between menu options
+OnSakuraMenu : all
+{
+	"\0\s[0]\b2\![set,autoscroll,disable]\f[color,default]"
+	
+	"\n\n\_q"
+	
+	"\![*]\q[Talk to me,OnAiTalk]"
+	if LastTalk != ""; "  \![*]\q[Say that again,OnLastTalk]"
+	"\n\n"
+	
+	"\![*]\q[Change talk rate,OnTalkRateMenu]\n\n"
+
+	"\![*]\q[Give Sauce,OnSauceMenu]"
+	if Flag("make sauce") == 0	; "  \![*]\q[Want sauces?,OnSauceStartStop,start]\n\n"
+	if Flag("make sauce") == 1	; "  \![*]\q[Don't want sauces?,OnSauceStartStop,stop]\n\n"
+
+	"\![*]\q[Nevermind,script:\e]"	
+}
+
+OnLastTalk
+{
+	LastTalk
+}
+
+OnTalkRateMenu : all
+{	
+	//This is just setting up a label, you may need to add to it or tweak it if you change what rates are available
+	_talkrate = "Off"
+	if aitalkinterval == 30; _talkrate = "30 seconds"
+	elseif aitalkinterval == 60; _talkrate = "1 minute"
+	elseif aitalkinterval == 180; _talkrate = "3 minutes"
+	elseif aitalkinterval == 300; _talkrate = "5 minutes"
+	elseif aitalkinterval == 600; _talkrate = "10 minutes"
+	
+	"\0\s[0]\b2\![set,autoscroll,disable]\_q"
+	"\f[bold,1]Current interval:\f[bold,0] %(_talkrate)\n\n"
+	
+	"\![*]\q[Off,OnTalkRateChange,0]\n"
+	"\![*]\q[30 seconds,OnTalkRateChange,30]\n"
+	"\![*]\q[1 minute,OnTalkRateChange,60]\n"
+	"\![*]\q[3 minutes,OnTalkRateChange,180]\n"
+	"\![*]\q[5 minutes,OnTalkRateChange,300]\n"
+	"\![*]\q[10 minutes,OnTalkRateChange,600]\n"
+	"\n"
+	"\![*]\q[Back,OnSakuraMenu]  \![*]\q[Nevermind,script:\e]"
+}
+
+OnTalkRateChange
+{
+	aitalkinterval = TOINT(reference0)
+}
+
+
+OnSauceStartStop
+{
+	if reference0 == "start" ; AddFlag("make sauce")
+	if reference0 == "stop" ; RemoveFlag("make sauce")
+	--
+	OnSakuraMenu
+}
+
+OnSauceMenu : all
+{
+	"\0\s[0]\b2\![set,autoscroll,disable]\_q"
+	"\f[bold,1]Sauces:\f[bold,0]"
+	"\n\n"
+	if ketchupsauce >= 1
+		"\![*]\q[Ketchup,OnSauceComplete,ketchup]\n"
+	else
+		""
+	if 	ranchsauce >= 1
+		"\![*]\q[Ranch,OnSauceComplete,ranch]\n"
+	else
+		""
+	if chocosauce >= 1
+		"\![*]\q[Chocolate,OnSauceComplete,choco]\n"
+	else
+		""
+	if spicysauce >= 1
+		"\![*]\q[Hot Sauce,OnSauceComplete,spicy]\n"
+	else
+		""
+	if peanutsauce >= 1
+		"\![*]\q[Peanut Butter,OnSauceComplete,peanut]\n"
+	else
+		""
+	if cheesesauce >= 1
+		"\![*]\q[Cheese,OnSauceComplete,cheese]\n"
+	else
+		""
+	"\n"
+	"\![*]\q[Stats,OnSauceStats]  \![*]\q[Cancel,OnSakuraMenu]"
+}
+
+//using any sauce leads to the same function. this handles item manegement using reference0 from the previous menu.
+OnSauceComplete
+{
+	EVAL("OnSauceComplete.%(shellname)")	
+}
+
+
+//resets all variables
+OnSauceStats : all
+{
+	"\0\s[0]\b2\![set,autoscroll,disable]\_q"
+	"\f[bold,1]Stats:\f[bold,0]"
+	"\n\n"
+	"Ketchup: %(ketchupsauce)\n"
+	"Ranch: %(ranchsauce)\n"
+	"Chocolate: %(chocosauce)\n"
+	"Hot Sauce: %(spicysauce)\n"
+	"Peanut Butter: %(peanutsauce)\n"
+	"Cheese: %(cheesesauce)\n\n"
+	"\![*]\q[Back,OnSauceMenu]"
+}
+
+OnTestVariable: all
+{
+	"\![*]\q[RESET,OnSetVariable,0]\n"
+	"\![*]\q[10,OnSetVariable,10]\n"
+	"\![*]\q[30,OnSetVariable,30]\n"
+	"\![*]\q[50,OnSetVariable,50]\n"
+	"\![*]\q[60,OnSetVariable,60]\n"
+	"\![*]\q[MAX,OnSetVariable,70]\n"
+	"\n"
+	"\![*]\q[Nevermind,OnSakuraMenu]"
+}
+
+OnSetVariable
+{
+	friendlevel = TOINT(reference0)
+}

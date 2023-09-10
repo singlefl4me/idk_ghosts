@@ -1,0 +1,62 @@
+an
+{
+	"\b[4]\_b[img\b_angry.png,34,25,--option=use_self_alpha,--option=foreground]"
+}
+da
+{
+	"\b[4]\_b[img\b_dazed.png,34,25,--option=use_self_alpha,--option=foreground]"
+}
+ha
+{
+	"\b[4]\_b[img\b_happy.png,34,25,--option=use_self_alpha,--option=foreground]"
+}
+joy
+{
+	"\b[4]\_b[img\b_joy.png,34,25,--option=use_self_alpha,--option=foreground]"
+}
+lo
+{
+	"\b[4]\_b[img\b_love.png,34,25,--option=use_self_alpha,--option=foreground]"
+}
+ner_1
+{
+	"\b[4]\_b[img\b_nervous1.png,34,25,--option=use_self_alpha,--option=foreground]"
+}
+ner_2
+{
+	"\b[4]\_b[img\b_nervous2.png,34,25,--option=use_self_alpha,--option=foreground]"
+}
+ner_3
+{
+	"\b[4]\_b[img\b_nervous3.png,34,25,--option=use_self_alpha,--option=foreground]"
+}
+neu_1
+{
+	"\b[4]\_b[img\b_neutral1.png,34,25,--option=use_self_alpha,--option=foreground]"
+}
+neu_2
+{
+	"\b[4]\_b[img\b_neutral2.png,34,25,--option=use_self_alpha,--option=foreground]"
+}
+sc
+{
+	"\b[4]\_b[img\b_scared.png,34,25,--option=use_self_alpha,--option=foreground]"
+}
+sl
+{
+	"\b[4]\_b[img\b_sleepy.png,34,25,--option=use_self_alpha,--option=foreground]"
+}
+tas
+{
+	"\b[4]\_b[img\b_tasty.png,34,25,--option=use_self_alpha,--option=foreground]"
+}
+tau
+{
+	"\b[4]\_b[img\b_taunt.png,34,25,--option=use_self_alpha,--option=foreground]"
+}
+ti
+{
+	"\b[4]\_b[img\b_tired.png,34,25,--option=use_self_alpha,--option=foreground]"
+}
+
+//And if you're not interested in making word lists like this at all, you can just remove this whole file! Or use it for something else, you do you

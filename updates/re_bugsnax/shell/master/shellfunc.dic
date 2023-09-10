@@ -1,0 +1,156 @@
+//dialogue/functions for shells
+
+//dialogue_________________________
+RandomTalk.Strabby : nonoverlap_pool
+{
+	if friendlevel == 50	{
+		"\0\s[0]%(st_col)stra\w4bby~%(st_col_re)"
+		"\0\s[0]%(st_col)strabby^^%(st_col_re)"
+		"%(joy)"
+	}
+	elseif friendlevel >= 30	{
+		"\0\s[0]%(st_col)stra\w2bby♪\w6\n\nstra\w2bby♪\w6\n\nstra\w2bby♪\w6\n\nstra\w2bby♪\w6\n\n%(st_col_re)"
+		"%(ha)"
+	}
+	elseif friendlevel >= 10	{
+		"%(neu_1)"
+	}
+	else	{
+		"\0\s[0]%(st_col)strabby??%(st_col_re)"
+		"\0\s[0]%(st_col)st-\w4strabby?%(st_col_re)"
+		"\0\s[0]%(st_col)strabby...%(st_col_re)"
+		"%(ner_1)"
+	}
+
+	"\0\s[0]%(st_col)strabby%(st_col_re)"
+	"\0\s[0]%(st_col)strabby?%(st_col_re)"
+	"\0\s[0]%(st_col)strabby!%(st_col_re)"
+	"\0\s[0]%(st_col)strabby\w4strabby!%(st_col_re)"
+	"\0\s[0]%(st_col)strabby\w2strabby\w2strabby%(st_col_re)"
+	"\0\s[0]%(st_col)strabbystrabbystrabbystrabbystrabby...%(st_col_re)"
+}
+RandomState.Strabby
+{
+	if nowstate == "spooked"	{
+		"%(ner_3)"
+		--
+		"\![raise,OnStateReset]"
+	}
+
+	if nowstate == "wary"	{
+		"%(ner_1)"
+		--
+		"\![raise,OnStateReset]"
+	}
+
+	if nowstate == "pleased"	{
+		"%(lo)"
+		"\0\s[0]%(st_col)stra\w2bby♪\w6\n\nstra\w2bby♪~\w6\n\n%(st_col_re)"
+		--
+		"\![raise,OnStateReset]"
+	}
+}
+
+st_col //color-coding for dialogue
+{
+	"\f[color,#d82121]"
+}
+
+st_col_re //color reset
+{
+	"\f[color,default]"
+}
+
+//mouse__________________________
+OnMouseDoubleClick.Strabby
+{
+    if reference4 == "head"	{
+        if friendlevel >= 10	{
+            nowstate = "spook"
+            --
+            friend_lvl_down
+            --
+            "%(sc)"
+            "%(da)"
+        }
+		elseif friendlevel < 10 && friendlevel > -20	{
+            nowstate = "wary"
+            --
+            friend_lvl_down
+            --
+            "%(sc)"
+            "%(da)"
+        }
+		elseif friendlevel == -20	
+            OnDeath
+
+	}
+
+	elseif reference4 == "matter" 
+		""
+
+	else
+		OnSakuraMenu("start")
+}
+
+OnMouseClick.Strabby
+{
+    if reference4 == "face"	{
+        "\0\s[0]"
+        --
+        "%(ner_1)"
+        "%(ner_2)"
+    }
+}
+
+OnMouseMove.Strabby
+{
+    if reference4 == "head" {
+        if friendlevel == 50	{
+            "%(lo)"
+            nowstate = "pleased"
+        }
+        elseif friendlevel >= 30 && friendlevel < 50	{
+            friend_lvl_up
+            "%(joy)"
+        }
+        elseif friendlevel >= 10 && friendlevel < 30
+            "%(ner_2)"
+        else	{
+            "%(sc)\w9%(OnWander(0))"
+            nowstate = "wary"
+        }
+    }
+	
+}
+
+//menu___________________________
+OnSauceComplete.Strabby
+{
+    if reference0 == "ketchup"  	{
+		ketchupsauce--
+		"%(neu_1)"
+	}		
+	elseif reference0 == "ranch"	{
+		ranchsauce--
+		"%(neu_1)"
+	}
+	elseif reference0 == "choco"	{
+		chocosauce--
+		friend_lvl_up
+		nowstate = "pleased"
+		"%(lo)"
+	}	
+	elseif reference0 == "spicy"	{
+		spicysauce--
+		"%(neu_1)"
+	}	
+	elseif reference0 == "peanut"	{
+		peanutsauce--
+		"%(neu_1)"
+	}	
+	elseif reference0 == "cheese"	{
+		cheesesauce--
+		"%(neu_1)"
+	}
+}
