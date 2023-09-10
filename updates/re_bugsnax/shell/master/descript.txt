@@ -5,5 +5,7 @@ name,Strabby
 craftman,
 craftmanurl,
 
+sakura.name,Strabby
+
 seriko.use_self_alpha,1
 seriko.alignmenttodesktop,bottom

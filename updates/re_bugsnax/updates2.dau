@@ -34,7 +34,7 @@ ghost/master/yaya_base/optional.dicff4da728a656a8aa6a38939e654c51f2size=9953d
 ghost/master/yaya_base/shiori3.dic18b395e9ffcd3fb772ded9046ed4b57csize=54846date=2023-06-01T05:32:24
 install.txt0949c0ba03cfd2cbfee2726e459e9b05size=90date=2023-02-18T15:51:42
 readme.txt71eea404cb0e349eb8a87c7c1a14e0besize=1152date=2023-09-08T23:41:30
-shell/bung/descript.txt7a54e0369cb8e2a035efda59b9b240cdsize=126date=2023-06-06T23:11:12
+shell/bung/descript.txte47448a5b59d2e009be312821b7e307asize=148date=2023-09-09T23:25:14
 shell/bung/shellfunc.dic3ff2c0819167ca9e8580c736035791d1size=2881date=2023-09-09T21:54:37
 shell/bung/surface0.png3ffa282a01f590826d8b13ba0ca6e4f8size=3539date=2023-03-22T17:36:32
 shell/bung/surface10.png8a5d854566095a6511f4c05467d2ba30size=237date=2023-02-13T00:27:38
@@ -59,7 +59,7 @@ shell/bung/surface504.png866f90b1e4a514e506d702aa2994c92bsize=1434date=2023-0
 shell/bung/surface505.png100fa8dcd8a7dffbf79093dbc8734fc7size=950date=2023-02-21T02:30:40
 shell/bung/surfaces.txtae179d8b89cdfc523a6283c6ea7383d3size=4460date=2023-09-08T21:48:34
 shell/bung/surfacetable.txtf31ea38869aa9486dafd55bfd5438599size=250date=2023-09-04T19:41:52
-shell/master/descript.txt3ff722c4db37d6ddad84aaf2a7a46c06size=127date=2023-02-23T02:57:52
+shell/master/descript.txt82f1fa44924049590c771c363f0ecb4fsize=150date=2023-09-09T23:24:53
 shell/master/shellfunc.dicedba2dde6f3974b95284e08313f620d2size=3106date=2023-09-09T22:21:11
 shell/master/surface0.pngf3f21c20c54ba57336fae2b1d01cce24size=11155date=2023-02-19T13:09:32
 shell/master/surface10.png8a5d854566095a6511f4c05467d2ba30size=237date=2023-02-13T00:27:38

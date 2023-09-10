@@ -5,5 +5,7 @@ name,Bunger
 craftman,
 craftmanurl,
 
+sakura.name,Bunger
+
 seriko.use_self_alpha,1
 seriko.alignmenttodesktop,bottom
