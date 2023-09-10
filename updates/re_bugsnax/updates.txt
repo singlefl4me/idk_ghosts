@@ -2,7 +2,7 @@ charset,OSNative
 file,changelog.txtb86dafcd5b164224d84a8d1f3c6a0a0fsize=633date=2023-09-09T22:05:41
 file,ghost/master/aitalk.dic2a9d1b30bde4f4919dee2c311da19ec1size=353date=2023-09-08T23:41:12
 file,ghost/master/boot.dic27d726696f0d21b8326cc976a70bdb82size=2470date=2023-09-09T22:16:41
-file,ghost/master/descript.txtf0a1952f9ebbc0243ea76554a0261c86size=191date=2023-09-05T17:09:34
+file,ghost/master/descript.txtd3afe0916b85cfc9dedc4eec29b23098size=198date=2023-09-10T09:53:58
 file,ghost/master/funct.dic107c31953b1e9a49c45f7e7c09ceeca9size=11966date=2023-09-09T00:12:50
 file,ghost/master/icon.icoc1c7997a44d1e6bc2f70a3b157d5435dsize=67646date=2023-09-06T21:10:37
 file,ghost/master/img/b_angry.png7d2b70ea6eb2a5d5b7e379e3b5e5150asize=778date=2023-02-18T14:21:21

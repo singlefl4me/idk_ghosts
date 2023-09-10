@@ -10,7 +10,7 @@ shiori,yaya.dll
 craftman,idk
 craftmanurl,
 
-sakura.name,
+sakura.name,Bugsnax
 kero.name,
 
 icon,icon.ico
