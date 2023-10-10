@@ -45,11 +45,13 @@ RandomTalk: nonoverlap_pool
 	{
 		"\0\s[0](@)Have you ever "
 		--
+		"read a book"
+		"told jokes"
 		"sang a song"
 		"played a game"
 		"spent time"
 		--
-		" with someone special?\n\w8 I think thats the most!"
+		" with someone special?\n\w8I think thats the most!"
 	}
 	
 	{//here too
@@ -57,6 +59,15 @@ RandomTalk: nonoverlap_pool
 		--
 		"oh,\w6 nevermind.\w8\s[8] Nothing to worry about..."
 		"I'm glad you came to see me."
+	}
+
+	
+	if dayslot == "10month 11day"	{
+		"\0\s[0](@).\w8.\w8.\w8\w8\n\n[half]I don't know what it is...\n\n[half]\s[8]\w8Could it be...?"
+		"\0\s[8](@)Do you know what today is, \w6Neighbor?\n\n[half]\w8Could you tell me?"
+		"\0\s[8](@)Did I forget about something?"
+		"\0\s[8](@)What could it be.\w8.\w8.\w8?"
+		"\0\s[8](@)\f[italic,1]\s[5]ha\w4 ha\w4 ha\w4!\f[italic,0]\w8\s[0] What a funny feeling."
 	}
 }
 
@@ -113,7 +124,7 @@ spook_scenario: nonoverlap_pool
 	if Flag("scene in progress") == 1	{
 		if Flag("scene_a") == 1	{
 			//base : "\0\s[0](@).\w8.\w8.\w8\w8\n\n[half]"
-			"\0\s[0](@).\w8\w8.\w8\w8.\w8\w8\n\n[half]\w8Well,\w6 I don't know about \f[italic,1]that\f[italic,0]..."
+			"\0\s[0](@).\w8\w8.\w8\w8.\w8\w8\n\n[half]\w8Well,\w6 I don't know about \w3\f[italic,1]that\f[italic,0]\w3..."
 			"\0\s[0](@).\w8\w8.\w8\w8.\w8\w8\n\n[half]\w8Oh,\w6 really?\w8\n\n[half].\w8\w8.\w8\w8.\w8\w8"
 			"\0\s[0](@).\w8\w8.\w8\w8.\w8\w8\n\n[half]\w8Well, \w6what do you think?\w8\n\n[half].\w8\w8.\w8\w8.\w8\w8"
 			"\0\s[0](@).\w8\w8.\w8\w8.\w8\w8\n\n[half]\w8Oh,\w5 of course!\w8\n\n[half].\w8\w8.\w8\w8.\w8\w8"
@@ -141,7 +152,7 @@ scenario_a
 	"%(homeappear)"
 	"%(homeappear)"
 	"%(homeappear)"
-	"%(homeappear)\_w[2500]%(eye_l)\_w[2500]%(eye_r)\_w[2500]%(eye_l)\_w[2500]%(eye_c)\_w[1000]\0\s[0]Oh,\w5 hello Home. \w8It's nice of you to join us.\xNeighbor,\w6 this is Home.\x[noclear]\p[2]%(eye_d.r)\0\w8 Home is my friend!\xHome seemed \f[italic,1]very\f[italic,0] excited to meet you. \w8It's always nice to meet a new friend.\x\p[2]%(eye_c)\_w[1500]\0I hope you two can be \f[italic,1]great\f[italic,0] friends someday...\w8\n\w8\n[half]Wouldn't that be nice,\w6 Neighbor?\![raise,OnChainReset]\e:chain=end"
+	"%(homeappear)\_w[2500]%(eye_l)\_w[2500]%(eye_r)\_w[2500]%(eye_l)\_w[2500]%(eye_c)\_w[1000]\0\s[0]Oh,\w5 hello Home. \w8It's nice of you to join us.\xNeighbor,\w6 this is Home.\x[noclear]\p[2]%(eye_d.r)\0\w8 Home is my friend!\xHome seemed \w3\f[italic,1]very\f[italic,0]\w3 excited to meet you. \w8It's always nice to meet a new friend.\x\p[2]%(eye_c)\_w[1500]\0I hope you two can be \w3\f[italic,1]great\f[italic,0]\w3 friends someday...\w8\n\w8\n[half]Wouldn't that be nice,\w6 Neighbor?\![raise,OnChainReset]\e:chain=end"
 }}CHAIN
 
 

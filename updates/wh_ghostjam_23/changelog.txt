@@ -1,4 +1,8 @@
 ---------------------------Changelog--------------------------
+/10-09/
+- added more idle dialogue
+- added special dialogue for oct 11 (in-universe anniversary)
+- adjusted boot rate of secret event
 
 /8-28/
 - file organization

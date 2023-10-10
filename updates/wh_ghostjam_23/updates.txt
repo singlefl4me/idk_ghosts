@@ -1,8 +1,8 @@
 charset,OSNative
-file,changelog.txt18a2f9c7036a1ec78c94b70efe7fceb7size=846date=2023-08-28T20:43:23
+file,changelog.txt83dd5153cc810ef3881def76a15d2180size=984date=2023-10-09T23:09:08
 file,delete.txt2836a3717a31593e7f51324be6b0848bsize=143date=2023-08-28T21:25:56
-file,ghost/master/aitalk.dice6e2b0ee907cc1a3e32371f73ccf2013size=7357date=2023-08-28T20:38:25
-file,ghost/master/bootend.dic09a03fcbb6358e1da99115088aed4d79size=3004date=2023-08-28T20:15:57
+file,ghost/master/aitalk.dic079a5d00e7c937a9282e336d6af4c1d8size=7819date=2023-10-09T23:25:45
+file,ghost/master/bootend.dic530a64633b254180bb728689523272ddsize=3634date=2023-10-09T23:23:30
 file,ghost/master/descript.txte373203fc9ed6262d041fdd266ba5d69size=250date=2023-07-23T20:15:51
 file,ghost/master/funct.dic3166afbacade758a0625d7f0a95fa231size=4159date=2023-08-28T16:56:11
 file,ghost/master/menu.dic7df9f67347572b2e19565d6baab6d654size=4029date=2023-08-28T20:33:18

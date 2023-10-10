@@ -90,12 +90,48 @@ OnBoot
 
 	spookcount = 0
 	--
+	OnSpecialBoot
+	--
+	"\1\s[-1]\p[2]\s[-1]"
+	--
+	"\0\s[0](@)Hello,\w5 neighbor...!"
+	"\0\s[0](@)Did you miss me,\w5 Neighbor?"
+	"\0\s[0](@)It's good to see you again."
+	"\0\s[0](@)What brings you here today?"
+	--
+	if dayslot == "10month 11day"	{
+		"\_w[3000]\n\n[half].\w8.\w8.\w8\w8\n\n[half]\s[8]Something feels... \w6\f[italic,1]\w2different\w2\f[italic,0] about today. \w8It almost feels like... \w6something \f[italic,1]\w2special\w2\f[italic,0] happened today. \_w[1500]\n\n[half]\f[italic,1]\s[5]ha\w4 ha\w4 ha\w4!\f[italic,0], \w6\s[0]oh well."
+	}
+}
+
+//--OnClose
+
+OnClose
+{
+	if dayslot == "10month 11day"	{
+		"\0\s[0](@)Oh well, \w5I'll leave it alone. \w8Whatever it was, \w6today must have been a \f[italic,1]\w2very\w2\f[italic,0] special day. \w8\w8Until next time, \w6Neighbor..."
+	}
+	else	{
+		"\0\s[0](@)See you soon..."
+		"\0\s[0](@)Until we meet again..."
+		"\0\s[0](@)Goodbye..."
+		"\0\s[0](@)I'll be seeing you..."
+		"\0\s[0](@)I'm sure we will meet again soon..."
+		"\0\s[0](@)That was fun. I hope to see you again."
+	}
+	
+ 	--
+	"\w8\w8\-" //this bit of code actually closes and ends the ghost. Because \e is here, you don't have to end each line above with it.
+}
+
+OnSpecialBoot
+{
 	if spookmode == "on" && Flag("spookscene on") == 0	{
 		_spooktime
 
 		if Flag("scene in progress") == 0	{
 			if Flag("scene_a complete") == 0	{//replace with case/when
-				_spooktime = RAND(8)
+				_spooktime = RAND(4)
 				if _spooktime == 0	{
 					AddFlag("spookscene on")
 					AddFlag("scene_a")
@@ -105,25 +141,4 @@ OnBoot
 		}
 		//when adding more scenes, use case/when to decide between them
 	}
-	--
-	"\1\s[-1]\p[2]\s[-1]"
-	--
-	"\0\s[0](@)Hello,\w5 neighbor...!"
-	"\0\s[0](@)Did you miss me,\w5 Neighbor?"
-	"\0\s[0](@)It's good to see you again."
-	"\0\s[0](@)What brings you here today?"
-}
-
-//--OnClose
-
-OnClose
-{
-	"\0\s[0](@)See you soon..."
-	"\0\s[0](@)Until we meet again..."
-	"\0\s[0](@)Goodbye..."
-	"\0\s[0](@)I'll be seeing you..."
-	"\0\s[0](@)I'm sure we will meet again soon..."
-	"\0\s[0](@)That was fun. I hope to see you again."
- 	--
-	"\w8\w8\-" //this bit of code actually closes and ends the ghost. Because \e is here, you don't have to end each line above with it.
 }
