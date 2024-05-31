@@ -1,1 +1,0 @@
-Supplement for Ghost Jam 2024. Will be updated in the future.
