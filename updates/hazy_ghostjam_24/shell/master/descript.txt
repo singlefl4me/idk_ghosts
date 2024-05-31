@@ -1,0 +1,11 @@
+charset,UTF-8
+type,shell
+
+name,default
+craftman,SmokyCinnamonRoll
+craftmanw,SmokyCinnamonRoll
+craftmanurl,https://smokycinnamon.github.io/indifferentsorrel/
+
+seriko.alignmenttodesktop,bottom
+seriko.use_self_alpha,1
+seriko.sticky-window,1,0

@@ -1,0 +1,159 @@
+//dress-ups
+descript
+{
+	version,1
+}
+
+surface.append0-3,300-302
+{
+    collision0,151,133,206,164,head
+    collision1,159,165,195,193,face
+
+    animation1000.interval,bind
+    animation1000.pattern0,add,1000,0,0,0
+
+    animation1010.interval,bind
+    animation1010.pattern0,add,1010,0,0,0
+
+    animation1020.interval,bind
+    animation1020.pattern0,add,1020,0,0,0
+
+    animation1030.interval,bind
+    animation1030.pattern0,add,1030,0,0,0
+
+    animation1040.interval,bind
+    animation1040.pattern0,add,1040,0,0,0
+
+    animation1050.interval,bind
+    animation1050.pattern0,add,1050,0,0,0
+
+    animation1060.interval,bind
+    animation1060.pattern0,add,1060,0,0,0
+
+    animation1070.interval,bind
+    animation1070.pattern0,add,1070,0,0,0
+
+    animation1080.interval,bind
+    animation1080.pattern0,add,1080,0,0,0
+}
+surface.append9
+{
+    animation1000.interval,bind
+    animation1000.pattern0,add,1001,0,0,0
+
+    animation1010.interval,bind
+    animation1010.pattern0,add,1011,0,0,0
+
+    animation1020.interval,bind
+    animation1020.pattern0,add,1021,0,0,0
+
+    animation1030.interval,bind
+    animation1030.pattern0,add,1031,0,0,0
+
+    animation1040.interval,bind
+    animation1040.pattern0,add,1042,0,0,0
+
+    animation1050.interval,bind
+    animation1050.pattern0,add,1051,0,0,0
+
+    animation1060.interval,bind
+    animation1060.pattern0,add,1061,0,0,0
+
+    animation1070.interval,bind
+    animation1070.pattern0,add,1071,0,0,0
+
+    animation1080.interval,bind
+    animation1080.pattern0,add,1081,0,0,0
+}
+surface.append50,51
+{
+    animation1000.interval,bind
+    animation1000.pattern0,add,1002,0,0,0
+
+    animation1010.interval,bind
+    animation1010.pattern0,add,1012,0,0,0
+
+    animation1020.interval,bind
+    animation1020.pattern0,add,1022,0,0,0
+
+    animation1030.interval,bind
+    animation1030.pattern0,add,1032,0,0,0
+
+    animation1040.interval,bind
+    animation1040.pattern0,add,1043,0,0,0
+
+    animation1050.interval,bind
+    animation1050.pattern0,add,1052,0,0,0
+
+    animation1060.interval,bind
+    animation1060.pattern0,add,1062,0,0,0
+
+    animation1070.interval,bind
+    animation1070.pattern0,add,1072,0,0,0
+
+    animation1080.interval,bind
+    animation1080.pattern0,add,1082,0,0,0
+}
+
+surface.append52,53
+{
+    animation1003.interval,bind
+    animation1003.pattern0,add,1003,0,0,0
+
+    animation1013.interval,bind
+    animation1013.pattern0,add,1013,0,0,0
+
+    animation1023.interval,bind
+    animation1023.pattern0,add,1023,0,0,0
+
+    animation1033.interval,bind
+    animation1033.pattern0,add,1033,0,0,0
+
+    animation1044.interval,bind
+    animation1044.pattern0,add,1044,0,0,0
+
+    animation1053.interval,bind
+    animation1053.pattern0,add,1053,0,0,0
+
+    animation1063.interval,bind
+    animation1063.pattern0,add,1063,0,0,0
+
+    animation1073.interval,bind
+    animation1073.pattern0,add,1073,0,0,0
+
+    animation1083.interval,bind
+    animation1083.pattern0,add,1083,0,0,0
+}
+
+surface.append4-7,303-305
+{
+    collision0,151,133,206,164,head
+    collision1,159,165,195,193,face
+
+    animation1000.interval,bind
+    animation1000.pattern0,add,1000,0,0,0
+
+    animation1010.interval,bind
+    animation1010.pattern0,add,1010,0,0,0
+
+    animation1020.interval,bind
+    animation1020.pattern0,add,1020,0,0,0
+
+    animation1030.interval,bind
+    animation1030.pattern0,add,1030,0,0,0
+    
+    animation1040.interval,bind
+    animation1040.pattern0,add,1041,0,0,0
+
+    animation1050.interval,bind
+    animation1050.pattern0,add,1050,0,0,0
+
+    animation1060.interval,bind
+    animation1060.pattern0,add,1060,0,0,0
+
+    animation1070.interval,bind
+    animation1070.pattern0,add,1070,0,0,0
+
+    animation1080.interval,bind
+    animation1080.pattern0,add,1080,0,0,0
+}

@@ -1,0 +1,58 @@
+OnFirstBoot
+{
+	//If you add variables, make sure to initialize them here!
+	//Note - I haven't added anything about username or pronouns here because it's all handled by the SSP prefs
+	stroke = 0
+	LastTalk = ""
+	
+	//"\1\s[10]\0\s[0]Hello, and welcome to the Simplicity Template, %(username).\w8 As the name implies, this template is very simple.\w8 You will notice there is not much here.\w8 That's on purpose!\w8 This template's primary goal is to make ghost creation less intimidating.\w8 You really need almost nothing to make a ghost;\w4 a basic shell with some interesting randomtalk can be an incredible and fun experience.\w8 So all those boring functions to do with email checking and such?\w8 Not here, unless you decide you want to add them.\w8 Don't let tedious functions tire you out before you can finish your ghost!\w8 Make something simple and fun, or start small and expand upon it later!\w8 Embrace the freedom of simplicity!"
+	"%(setpos)\0\s[9]z\w8\w8z\w8\w8z\w8\w8z\w8\w8z\w8\w8z\w8\w8...\x[noclear]\n\n[half].\w8.\w8.\w8\w8?\_w[1000]wh... huh? \w8whahappe... \_w[500]\s[0]oh. \w8\w8dozed off again.\x\s[3]yeah, \w6\w6sorry. \w8\w8\s[0]didn't know you were coming over. \w8\w8\s[1]don't even know why you'd want to, \w6\w6\w6on account of the heatwave. \w8\w8\x\s[9]feels too hot to do anything... \x[noclear]\s[3]unless... \_w[1000]\s[302]you wanna hear me rant about it."
+}
+
+OnInitialize
+{
+	//If you want some variables to reset on boot, put them here. This event will happen even if you add other events like OnGhostChanged
+	//OnInitialize is a NOTIFY event! That means it cannot return scripts. This event is only meant for things like variable changes. See this page on Ukadoc for more info: https://ukagakadreamteam.github.io/ukadoc/manual/spec_shiori3.html
+	
+	//If you add new variables in updates, I recommend initializing them like so:
+	//if !ISVAR("NewVariable"); NewVariable = 0
+	//This means that it will only set the new variable if the user doesn't already have it, so that their variables don't get overwritten
+	
+	if reference0 != "reload" //For things you want to reset EXCEPT when just reloading; a convenience for you the dev, basically
+	{
+		LastTalk = ""
+	}
+}
+
+OnBoot
+{
+	_temp = SHIORI3FW.UserBirthday
+	_user_birthday = "%(_temp[1])/%(_temp[2])" //M/D, if you want it D/M you can switch it around
+	_today = "%(month)/%(day)" //Again, switch this around if using D/M
+	
+	setpos
+	--
+	if _today == _user_birthday
+	{
+		""
+	}
+	elseif _today == "1/1" //You can add whatever cool dates you want with more elseifs here
+	{
+		""
+	}
+	else //Normal boot
+	{
+		"\s[9]...\w[3000]"
+		--
+		"huh? \w8\w8\s[0]oh, \w6i'm up. \w8i'm up"
+		"mm. \w8\w8\s[300]okay, i'm up."
+	}
+}
+
+OnClose
+{
+	"i think i'm gonna pass out for a bit."
+	"gotta go take another cold shower."
+	--
+	"\w8\w8\-" //This is what makes the ghost close (after a short pause), do not remove the \- , and MAKE SURE you don't use a \e before this point or it won't work
+}

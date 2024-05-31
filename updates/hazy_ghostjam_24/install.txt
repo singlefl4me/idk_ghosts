@@ -1,0 +1,5 @@
+charset,UTF-8
+type,ghost
+
+name,hazy days
+directory,hazy_ghostjam_24

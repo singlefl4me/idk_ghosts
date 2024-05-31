@@ -1,0 +1,47 @@
+charset,UTF-8
+
+name,hazy days
+type,ghost
+
+shiori,yaya.dll
+
+craftman,idk & SmokyCinnamonRoll
+craftmanw,idk & SmokyCinnamonRoll
+craftmanurl,https://github.com/singlefl4me
+
+sakura.name,Haezy
+kero.name,Daisy
+
+icon,icon.ico
+
+//sakura.bindgroup*.name,(category name),(part name),(thumbnail name)
+sakura.bindgroup1000.name,shirt,chocoheart
+sakura.bindgroup1010.name,bracelet,mintchoco
+sakura.bindgroup1020.name,head,halo
+sakura.bindgroup1030.name,extra,wings
+sakura.bindgroup1040.name,bracelet,wafer left
+sakura.bindgroup1050.name,bracelet,wafer right
+sakura.bindgroup1060.name,extra,necklace
+sakura.bindgroup1070.name,head,wafer
+sakura.bindgroup1080.name,head,cone hat
+
+//sakura.bindoption*.group,(category name),(option)
+sakura.bindoption0.group,bracelet,multiple
+sakura.bindoption0.group,extra,multiple
+
+//sakura.menuitem*,ID
+//sakura.menuitemex*,(menu name),(ID)
+sakura.menuitem0,1000
+sakura.menuitem1,-
+sakura.menuitem2,1010
+sakura.menuitem3,1040
+sakura.menuitem4,1050
+sakura.menuitem5,-
+sakura.menuitem6,1020
+sakura.menuitem7,1070
+sakura.menuitem8,1080
+sakura.menuitem9,-
+sakura.menuitem10,1030
+sakura.menuitem11,1060
+
+sstp.allowunspecifiedsend,0
