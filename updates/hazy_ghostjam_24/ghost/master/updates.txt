@@ -1,7 +1,7 @@
 charset,OSNative
 file,ghost/master/aitalk.dicddf825a6449a05ee46e9f7f18aac258dsize=12254date=2024-05-30T18:21:21
 file,ghost/master/boot.dicdd8a909b43d336de3b2ae217b563749dsize=3007date=2024-05-30T18:21:21
-file,ghost/master/descript.txt8807feaaa6d3b0df61aa0307ad9079bcsize=1191date=2024-05-30T18:26:48
+file,ghost/master/descript.txtc280025cf1511aa63a8b3d7d640682f0size=1217date=2024-05-30T19:01:45
 file,ghost/master/emerg.dicc7cb6eacd3262003fef909c382a6fefesize=351date=2023-04-14T12:45:50
 file,ghost/master/icon.ico79879ddbfa5138b083b19c7ed1a298d9size=96214date=2024-05-30T12:31:25
 file,ghost/master/meta.dic2b5b74ccc7d3808709475f1570d927b9size=6010date=2024-03-05T19:42:27

@@ -14,6 +14,8 @@ kero.name,Daisy
 
 icon,icon.ico
 
+balloon,Ice Cream Cone
+
 //sakura.bindgroup*.name,(category name),(part name),(thumbnail name)
 sakura.bindgroup1000.name,shirt,chocoheart
 sakura.bindgroup1010.name,bracelet,mintchoco
