@@ -1,0 +1,4 @@
+charset,UTF-8
+type,balloon
+name,Ice Cream Cone
+directory,icey_idk
