@@ -1,4 +1,5 @@
 changelog.txte7d8218e0f74071f42b4b24f0dfe650esize=330date=2024-07-02T03:19:50charset=OSNative
+delete.txt9fdbbcef1fff50e32fd9d33681bea514size=590date=2024-07-02T04:02:44
 ghost/master/aitalk.dic5b0be20f77ad71354affa69ecc2c873asize=21278date=2024-07-02T03:11:28
 ghost/master/boot.dic3c12f5e4f18d8b3bd1778da154ee9615size=2864date=2024-07-02T03:13:43
 ghost/master/descript.txtddc7a8d6677f68f0366a6b9a28c4c252size=1593date=2024-07-02T00:38:29
@@ -19,7 +20,6 @@ ghost/master/yaya_base/shiori3.dicac4750d7081a6607ac1c26184677020asize=55020d
 ghost/master/yaya_emerg.txt9e43b4696366a536ecc69e45d80e392csize=607date=2023-04-14T12:44:19
 install.txte70c79bdc7e62c769d64c7d4fef015c6size=71date=2024-05-27T19:35:46
 readme.txt838879b19cb3f7ed8214c6447dbfabd6size=791date=2024-07-02T03:16:21
-shell/master/delete.txtc99c523957cd43975ae76608afcc995asize=330date=2024-07-02T03:35:21
 shell/master/descript.txtda99bcfb6d76352e8835c2435f76a59dsize=249date=2024-05-30T13:34:35
 shell/master/main_body0.pngef5d0c64fc77ff8a344464ecbdda7491size=27215date=2024-05-29T19:27:17
 shell/master/main_body1.png4efe0b8926e23af56229871e94b4e8f9size=32260date=2024-05-29T19:27:51
