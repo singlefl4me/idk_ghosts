@@ -32,27 +32,17 @@ OnBoot
 	
 	setpos
 	--
-	if _today == _user_birthday
-	{
-		""
-	}
-	elseif _today == "1/1" //You can add whatever cool dates you want with more elseifs here
-	{
-		""
-	}
-	else //Normal boot
-	{
-		"\s[9]...\w[3000]"
-		--
-		"huh? \w8\w8\s[0]oh, \w6i'm up. \w8i'm up"
-		"mm. \w8\w8\s[300]okay, i'm up."
-	}
+	"\s[9]...\w[3000]"
+	--
+	"huh? \w8\w8\s[0]oh, \w6i'm up. \w8i'm up"
+	"mm. \w8\w8\s[300]okay, i'm up."
 }
 
 OnClose
 {
 	"i think i'm gonna pass out for a bit."
 	"gotta go take another cold shower."
+	//"bring back some ice cream later."
 	--
 	"\w8\w8\-" //This is what makes the ghost close (after a short pause), do not remove the \- , and MAKE SURE you don't use a \e before this point or it won't work
 }

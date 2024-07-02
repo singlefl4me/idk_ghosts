@@ -11,19 +11,29 @@ OnMouseDoubleClick
 		}
 		else
 		{
-			if reference4 == "switch"	{
-				"\1\s[11]\_w[10000]\0\s[1]\_w[5000]\1\s[-1]\0\s[50]\__w[animation,2001]\1\s[10]\0\s[1]"
-				"\1\s[11]\_w[10000]\0\s[1]\_w[5000]\1\s[-1]\0\s[51]\__w[animation,2001]\1\s[10]\0\s[1]"
+			if reference4 == "box_switch"	{
+				"\1\![anim,pause,2001]\_w[10000]\0\s[1]\_w[5000]\1\s[-1]\0\s[54]\__w[animation,3000]\1\s[10]\![anim,resume,2001]\0\s[1]"
+				"\1\![anim,pause,2001]\_w[10000]\0\s[1]\_w[5000]\1\s[-1]\0\s[55]\__w[animation,3000]\1\s[10]\![anim,resume,2001]\0\s[1]"
 				--
-				"please don't do that."
-				"don't touch my fan."
-				"i need that."
-				"stop it please."
-				"nope."
+				doubleclickresponse
 			}
-				
+			elseif reference4 == "switch"	{
+				"\1\![anim,pause,2000]\_w[10000]\0\s[1]\_w[5000]\1\s[-1]\0\s[50]\__w[animation,3000]\1\s[10]\![anim,resume,2000]\0\s[1]"
+				"\1\![anim,pause,2000]\_w[10000]\0\s[1]\_w[5000]\1\s[-1]\0\s[51]\__w[animation,3000]\1\s[10]\![anim,resume,2000]\0\s[1]"
+				--
+				doubleclickresponse
+			}
 		}
 	}
+}
+
+doubleclickresponse
+{
+	"please don't do that."
+	"don't touch my fan."
+	"i need that."
+	"stop it please."
+	"nope."
 }
 
 OnMouseMove

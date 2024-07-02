@@ -16,6 +16,8 @@ icon,icon.ico
 
 balloon,Ice Cream Cone
 
+
+
 //sakura.bindgroup*.name,(category name),(part name),(thumbnail name)
 sakura.bindgroup1000.name,shirt,chocoheart
 sakura.bindgroup1010.name,bracelet,mintchoco
@@ -45,5 +47,23 @@ sakura.menuitem8,1080
 sakura.menuitem9,-
 sakura.menuitem10,1030
 sakura.menuitem11,1060
+
+
+
+//kero.bindgroup*.name,(category name),(part name),(thumbnail name)
+kero.bindgroup2000.name,fan,tower
+kero.bindgroup2001.name,fan,box
+
+//kero.bindoption*.group,(category name),(option)
+kero.bindoption1.group,fan,mustselect
+
+//kero.bindgroup*.default,(number)
+kero.bindgroup2000.default,1
+
+//kero.menuitem*,ID
+kero.menuitem0,2000
+kero.menuitem1,2001
+
+
 
 sstp.allowunspecifiedsend,0
