@@ -95,34 +95,34 @@ surface.append50,51
     animation1080.pattern0,add,1082,0,0,0
 }
 
-surface.append52,53
+surface.append54,55
 {
-    animation1003.interval,bind
-    animation1003.pattern0,add,1003,0,0,0
+    animation1000.interval,bind
+    animation1000.pattern0,add,1003,0,0,0
 
-    animation1013.interval,bind
-    animation1013.pattern0,add,1013,0,0,0
+    animation1010.interval,bind
+    animation1010.pattern0,add,1013,0,0,0
 
-    animation1023.interval,bind
-    animation1023.pattern0,add,1023,0,0,0
+    animation1020.interval,bind
+    animation1020.pattern0,add,1023,0,0,0
 
-    animation1033.interval,bind
-    animation1033.pattern0,add,1033,0,0,0
+    animation1030.interval,bind
+    animation1030.pattern0,add,1033,0,0,0
 
-    animation1044.interval,bind
-    animation1044.pattern0,add,1044,0,0,0
+    animation1040.interval,bind
+    animation1040.pattern0,add,1044,0,0,0
 
-    animation1053.interval,bind
-    animation1053.pattern0,add,1053,0,0,0
+    animation1050.interval,bind
+    animation1050.pattern0,add,1053,0,0,0
 
-    animation1063.interval,bind
-    animation1063.pattern0,add,1063,0,0,0
+    animation1060.interval,bind
+    animation1060.pattern0,add,1063,0,0,0
 
-    animation1073.interval,bind
-    animation1073.pattern0,add,1073,0,0,0
+    animation1070.interval,bind
+    animation1070.pattern0,add,1073,0,0,0
 
-    animation1083.interval,bind
-    animation1083.pattern0,add,1083,0,0,0
+    animation1080.interval,bind
+    animation1080.pattern0,add,1083,0,0,0
 }
 
 surface.append4-7,303-305
@@ -156,4 +156,32 @@ surface.append4-7,303-305
 
     animation1080.interval,bind
     animation1080.pattern0,add,1080,0,0,0
+}
+
+//speen
+surface10
+{
+    //tower
+	animation2000.interval,bind+always
+	animation2000.pattern0,replace,11,0,0,0
+	animation2000.pattern1,replace,12,250,0,0
+	animation2000.pattern2,replace,10,250,0,0
+	animation2000.pattern3,replace,11,250,0,0
+
+	//off
+	animation2000.collision0,10,33,29,64,switch
+
+	animation2000.option,shared-index
+
+    //box
+	animation2001.interval,bind+always
+	animation2001.pattern0,replace,14,0,0,0
+	animation2001.pattern1,replace,15,250,0,0
+	animation2001.pattern2,replace,13,250,0,0
+	animation2001.pattern3,replace,14,250,0,0
+
+	//off
+	animation2001.collision1,12,28,35,44,box_switch
+
+	animation2001.option,shared-index
 }

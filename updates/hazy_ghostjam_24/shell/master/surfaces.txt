@@ -16,20 +16,16 @@ descript
 
 surface0
 {
-	//collision0,0,0,130,65,head
-	
-	element0,base,surface0.png,0,0
-	element1,overlay,surface100.png,0,0
-	element2,overlay,surface200.png,0,0
+	element0,base,main_body0.png,0,0
+	element1,overlay,main_eye0.png,0,0
+	element2,overlay,main_mouth0.png,0,0
 
-	//Example code for blink animation - uncomment if you want it
 	animation0.interval,random,4
 	animation0.pattern0,overlay,101,0,0,0
 	animation0.pattern1,overlay,102,100,0,0
 	animation0.pattern2,overlay,-1,50,0,0
 	
 	
-	//Example code for a talk animation - uncomment if you want it
 	animation1.interval,talk,4
 	animation1.pattern0,alternativestart,(2,3,4)
 	
@@ -49,11 +45,9 @@ surface0
 }
 surface1
 {
-	element0,base,surface0.png,0,0
-	element1,overlay,surface103.png,0,0
-	element2,overlay,surface200.png,0,0
-
-	//collision0,0,0,130,65,head
+	element0,base,main_body0.png,0,0
+	element1,overlay,main_eye1.png,0,0
+	element2,overlay,main_mouth0.png,0,0
 
 	//blink
 	animation0.interval,random,4
@@ -81,11 +75,9 @@ surface1
 }
 surface2
 {
-	element0,base,surface0.png,0,0
-	element1,overlay,surface106.png,0,0
-	element2,overlay,surface200.png,0,0
-
-	//collision0,0,0,130,65,head
+	element0,base,main_body0.png,0,0
+	element1,overlay,main_eye2.png,0,0
+	element2,overlay,main_mouth0.png,0,0
 
 	//blink
 	animation0.interval,random,4
@@ -113,11 +105,9 @@ surface2
 }
 surface3
 {
-	element0,base,surface0.png,0,0
-	element1,overlay,surface109.png,0,0
-	element2,overlay,surface200.png,0,0
-
-	//collision0,0,0,130,65,head
+	element0,base,main_body0.png,0,0
+	element1,overlay,main_eye3.png,0,0
+	element2,overlay,main_mouth0.png,0,0
 
 	//talk
 	animation1.interval,talk,4
@@ -139,20 +129,16 @@ surface3
 }
 surface4
 {
-	//collision0,0,0,130,65,head
-	
-	element0,base,surface4.png,0,0
-	element1,overlay,surface110.png,0,0
-	element2,overlay,surface203.png,0,0
+	element0,base,main_body1.png,0,0
+	element1,overlay,main_eye4.png,0,0
+	element2,overlay,main_mouth1.png,0,0
 
-	//Example code for blink animation - uncomment if you want it
 	animation0.interval,random,4
 	animation0.pattern0,overlay,111,0,0,0
 	animation0.pattern1,overlay,112,100,0,0
 	animation0.pattern2,overlay,-1,50,0,0
 	
 	
-	//Example code for a talk animation - uncomment if you want it
 	animation1.interval,talk,4
 	animation1.pattern0,alternativestart,(2,3,4)
 	
@@ -172,20 +158,16 @@ surface4
 }
 surface5
 {
-	//collision0,0,0,130,65,head
-	
-	element0,base,surface4.png,0,0
-	element1,overlay,surface113.png,0,0
-	element2,overlay,surface203.png,0,0
+	element0,base,main_body1.png,0,0
+	element1,overlay,main_eye5.png,0,0
+	element2,overlay,main_mouth1.png,0,0
 
-	//Example code for blink animation - uncomment if you want it
 	animation0.interval,random,4
 	animation0.pattern0,overlay,114,0,0,0
 	animation0.pattern1,overlay,115,100,0,0
 	animation0.pattern2,overlay,-1,50,0,0
 	
 	
-	//Example code for a talk animation - uncomment if you want it
 	animation1.interval,talk,4
 	animation1.pattern0,alternativestart,(2,3,4)
 	
@@ -205,20 +187,16 @@ surface5
 }
 surface6
 {
-	//collision0,0,0,130,65,head
-	
-	element0,base,surface4.png,0,0
-	element1,overlay,surface116.png,0,0
-	element2,overlay,surface203.png,0,0
+	element0,base,main_body1.png,0,0
+	element1,overlay,main_eye6.png,0,0
+	element2,overlay,main_mouth1.png,0,0
 
-	//Example code for blink animation - uncomment if you want it
 	animation0.interval,random,4
 	animation0.pattern0,overlay,117,0,0,0
 	animation0.pattern1,overlay,118,100,0,0
 	animation0.pattern2,overlay,-1,50,0,0
 	
 	
-	//Example code for a talk animation - uncomment if you want it
 	animation1.interval,talk,4
 	animation1.pattern0,alternativestart,(2,3,4)
 	
@@ -238,11 +216,9 @@ surface6
 }
 surface7
 {
-	element0,base,surface4.png,0,0
-	element1,overlay,surface119.png,0,0
-	element2,overlay,surface203.png,0,0
-
-	//collision0,0,0,130,65,head
+	element0,base,main_body1.png,0,0
+	element1,overlay,main_eye7.png,0,0
+	element2,overlay,main_mouth1.png,0,0
 
 	//talk
 	animation1.interval,talk,4
@@ -266,88 +242,104 @@ surface7
 //fan surfaces
 surface50
 {
-	element0,base,surface50.png,0,0
+	element0,base,main_body2.png,0,0
+
+	animation3000.interval,always
+	animation3000.pattern0,overlay,53,0,0,0
+	animation3000.pattern1,overlay,52,600,0,0
+	animation3000.pattern2,overlay,53,600,0,0
 
 	animation2000.interval,runonce
 	animation2000.pattern0,overlay,10,0,0,128
-
-	animation2001.interval,always
-	animation2001.pattern0,overlay,53,0,0,0
-	animation2001.pattern1,overlay,52,600,0,0
-	animation2001.pattern2,overlay,53,600,0,0
 
 	animation11.interval,runonce
 	animation11.pattern0,overlay,306,0,0,0
 }
 surface51
 {
-	element0,base,surface50.png,0,0
+	element0,base,main_body2.png,0,0
+
+	animation3000.interval,always
+	animation3000.pattern0,overlay,52,0,0,0
+	animation3000.pattern1,overlay,53,600,0,0
+	animation3000.pattern2,overlay,52,600,0,0
 
 	animation2000.interval,runonce
 	animation2000.pattern0,overlay,10,0,0,128
 
-	animation2001.interval,always
-	animation2001.pattern0,overlay,52,0,0,0
-	animation2001.pattern1,overlay,53,600,0,0
-	animation2001.pattern2,overlay,52,600,0,0
-
 	animation11.interval,runonce
 	animation11.pattern0,overlay,307,0,0,0
 }
-//surface52
-//{
-	//element0,base,surface52.png,0,0
-	//element1,overlay,surface10.png,0,0
-	//element2,overlay,surface52.pnd,0,0
-	//element3,overlay,surface306.png,0,0
-//}
-//surface53
-//{
-	//element0,base,surface52.png,0,0
-	//element1,overlay,surface10.png,0,0
-	//element2,overlay,surface52.pnd,0,0
-	//element3,overlay,surface307.png,0,0
-//}
+surface54
+{
+	element0,base,main_body3.png,0,0
+
+	animation3000.interval,always
+	animation3000.pattern0,overlay,53,0,0,0
+	animation3000.pattern1,overlay,52,600,0,0
+	animation3000.pattern2,overlay,53,600,0,0
+
+	animation2001.interval,runonce
+	animation2001.pattern0,overlay,13,0,0,128
+
+	animation11.interval,runonce
+	animation11.pattern0,overlay,308,0,0,0
+}
+surface55
+{
+	element0,base,main_body3.png,0,0
+
+	animation3000.interval,always
+	animation3000.pattern0,overlay,52,0,0,0
+	animation3000.pattern1,overlay,53,600,0,0
+	animation3000.pattern2,overlay,52,600,0,0
+
+	animation2001.interval,runonce
+	animation2001.pattern0,overlay,13,0,0,128
+
+	animation11.interval,runonce
+	animation11.pattern0,overlay,309,0,0,0
+}
 
 surface300
 {
-	element0,base,surface0.png,0,0
-	element1,overlay,surface300.png,0,0
+	element0,base,main_body0.png,0,0
+	element1,overlay,main_face0.png,0,0
 
 	//collision0,0,0,130,65,head
 }
 surface301
 {
-	element0,base,surface0.png,0,0
-	element1,overlay,surface301.png,0,0
+	element0,base,main_body0.png,0,0
+	element1,overlay,main_face1.png,0,0
 
 	//collision0,0,0,130,65,head
 }
 surface302
 {
-	element0,base,surface0.png,0,0
-	element1,overlay,surface302.png,0,0
+	element0,base,main_body0.png,0,0
+	element1,overlay,main_face2.png,0,0
 
 	//collision0,0,0,130,65,head
 }
 surface303
 {
-	element0,base,surface4.png,0,0
-	element1,overlay,surface303.png,0,0
+	element0,base,main_body1.png,0,0
+	element1,overlay,main_face3.png,0,0
 
 	//collision0,0,0,130,65,head
 }
 surface304
 {
-	element0,base,surface4.png,0,0
-	element1,overlay,surface304.png,0,0
+	element0,base,main_body1.png,0,0
+	element1,overlay,main_face4.png,0,0
 
 	//collision0,0,0,130,65,head
 }
 surface305
 {
-	element0,base,surface4.png,0,0
-	element1,overlay,surface305.png,0,0
+	element0,base,main_body1.png,0,0
+	element1,overlay,main_face5.png,0,0
 
 	//collision0,0,0,130,65,head
 }
@@ -361,23 +353,19 @@ surface9
 //speen
 surface10
 {
-	collision0,10,33,29,64,switch
 	animation100.interval,always
-	animation100.pattern0,replace,11,0,0,0
-	animation100.pattern1,replace,12,250,0,0
-	animation100.pattern2,replace,10,250,0,0
-	animation100.pattern3,replace,11,250,0,0
-}
+	animation100.pattern0,replace,16,0,0,0
+	animation100.pattern1,replace,16,250,0,0
+	animation100.pattern2,replace,16,250,0,0
+	animation100.pattern3,replace,16,250,0,0
 
-//off
-surface11
-{
-	collision0,10,33,29,64,switch
+	animation100.option,shared-index
 }
 
 kero.cursor
 {
 	mouseup0,switch,system:hand
+	mouseup1,box_switch,system:hand
 }
 
 kero.tooltips
