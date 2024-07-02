@@ -13,8 +13,8 @@ Hotspots (side character): On / Off switch: head of fan
 
 ------------------------------------------------------------------------
 
-Code, concept, writing: idk (me)
-Art, character: SmokyCinnamonRoll
+Code, concept, writing: idk (me) https://github.com/singlefl4me/
+Art, character: SmokyCinnamonRoll https://smokycinnamon.github.io/indifferentsorrel/
 
 ------------------------------------------------------------------------
 

@@ -1,0 +1,12 @@
+---------------------------Changelog--------------------------
+/7-2/
+- added 101 new idle dialogues
+- added one new fan dressup
+ - adjusted kero shell coding
+- optimized general shell coding
+- fixed a bug that prevented booting on january 1st (thanks zi!)
+- edited readme
+- changelog added
+
+/5-18/
+- ghost jam release
