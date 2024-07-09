@@ -18,9 +18,9 @@ origin.x,0
 origin.y,0
 
 validrect.left,70
-validrect.top,80
-validrect.right,-74
-validrect.bottom,-84
+validrect.top,88
+validrect.right,-70
+validrect.bottom,-72
 
 wordwrappoint.x,-82
 
@@ -50,29 +50,29 @@ disable.font.color.b,185
 
 //——— Arrows ———
 arrow0.x,144
-arrow0.y,62
+arrow0.y,68
 
 arrow1.x,144
-arrow1.y,-80
+arrow1.y,-70
 
 
 //——— Online marker ———
-onlinemarker.x,142
-onlinemarker.y,-48
+onlinemarker.x,144
+onlinemarker.y,-38
 
 onlinemarker.interval,95
 
 
 //——— SSTP ———
-sstpmarker.x,18
-sstpmarker.y,-18
+sstpmarker.x,55
+sstpmarker.y,-70
 
 sstpmessage.font.name,Tahoma
 sstpmessage.font.height,11
 
-sstpmessage.x,30
+sstpmessage.x,70
 sstpmessage.xr,-20
-sstpmessage.y,-17
+sstpmessage.y,-70
 
 sstpmessage.font.color.r,30
 sstpmessage.font.color.g,5
@@ -83,8 +83,8 @@ sstpmessage.font.color.b,12
 number.font.name,Tahoma
 number.font.height,11
 
-number.xr,-20
-number.y,-17
+number.xr,-80
+number.y,-70
 
 number.font.color.r,30
 number.font.color.g,5
@@ -92,8 +92,8 @@ number.font.color.b,12
 
 
 //——— Input box ———
-communicatebox.x,8
-communicatebox.y,8
+communicatebox.x,50
+communicatebox.y,23
 
-communicatebox.width,283
+communicatebox.width,370
 communicatebox.height,20
