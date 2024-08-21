@@ -1,0 +1,4 @@
+Charset,UTF-8
+type,shell
+name,yours and mine
+directory,yours_mine_idk

@@ -1,0 +1,12 @@
+descript
+{
+	version,1
+}
+
+surface0
+{
+	animation0.interval,talk,4
+	animation0.pattern0,overlay,1,0,0,0
+	animation0.pattern1,overlay,2,500,0,0
+	animation0.pattern2,overlay,1,500,0,0
+}

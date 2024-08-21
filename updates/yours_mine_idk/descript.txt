@@ -1,0 +1,10 @@
+﻿seriko.alignmenttodesktop,free
+seriko.use_self_alpha,1
+
+charset,UTF-8
+type,shell
+name,yours and mine
+craftman,idk
+craftmanw,idk
+craftmanurl,https://github.com/singlefl4me
+homeurl,https://raw.githubusercontent.com/singlefl4me/idk_ghosts/main/updates/yours_mine_idk/
