@@ -5,8 +5,56 @@ descript
 
 surface0
 {
-	animation0.interval,talk,4
-	animation0.pattern0,overlay,1,0,0,0
-	animation0.pattern1,overlay,2,500,0,0
-	animation0.pattern2,overlay,1,500,0,0
+	//dressups
+
+	animation100.interval,bind
+	animation100.pattern0,base,100,0,0,0
+	
+	animation101.interval,bind
+	animation101.pattern0,base,101,0,0,0
+	
+	animation102.interval,bind
+	animation102.pattern0,base,102,0,0,0
+
+
+	animation200.interval,bind
+	animation200.pattern0,overlayfast,200,0,0,0
+	
+	animation201.interval,bind
+	animation201.pattern0,overlay,201,0,0,0
+	
+	animation202.interval,bind
+	animation202.pattern0,overlay,202,0,0,0
+	
+	animation203.interval,bind
+	animation203.pattern0,overlay,203,0,0,0
+	
+	animation204.interval,bind
+	animation204.pattern0,overlay,204,0,0,0
+	
+	animation205.interval,bind
+	animation205.pattern0,overlay,205,0,0,0
+	
+	animation206.interval,bind
+	animation206.pattern0,overlayfast,206,0,0,0
+
+	//talk
+	
+	animation300.interval,talk,4
+	animation300.pattern0,overlay,1,0,0,0
+	animation300.pattern1,overlay,2,500,0,0
+	animation300.pattern2,overlay,1,500,0,0
+}
+
+surface100
+{
+	element0,base,bowl_green.png,0,0
+}
+surface101
+{
+	element0,base,bowl_blue.png,0,0
+}
+surface102
+{
+	element0,base,bowl_white.png,0,0
 }
