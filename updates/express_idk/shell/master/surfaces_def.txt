@@ -1,0 +1,346 @@
+//surface definitions/dressups
+
+descript
+{
+    version,1
+}
+
+surface0
+{
+    element0,base,aframe0.png,0,0
+
+    //dress-up 1
+    animation20.interval,bind+always
+    animation20.pattern0,overlay,2000,0,0,0
+    animation20.pattern1,overlay,2001,90,0,0
+    animation20.pattern2,overlay,2000,90,0,0
+
+    //dress-up 2
+    animation21.interval,bind+always
+    animation21.pattern0,overlay,2002,0,0,0
+    animation21.pattern1,overlay,2003,90,0,0
+    animation21.pattern2,overlay,2002,90,0,0
+    
+    //dress-up 3
+    animation22.interval,bind+always
+    animation22.pattern0,overlay,2004,0,0,0
+    animation22.pattern1,overlay,2005,90,0,0
+    animation22.pattern2,overlay,2004,90,0,0
+    
+    //dress-up 4
+    animation23.interval,bind+always
+    animation23.pattern0,overlay,2006,0,0,0
+    animation23.pattern1,overlay,2007,90,0,0
+    animation23.pattern2,overlay,2006,90,0,0
+    
+    //dress-up 5
+    animation24.interval,bind+always
+    animation24.pattern0,overlay,2008,0,0,0
+    animation24.pattern1,overlay,2009,90,0,0
+    animation24.pattern2,overlay,2008,90,0,0
+    
+    //dress-up 6
+    animation25.interval,bind+always
+    animation25.pattern0,overlay,2010,0,0,0
+    animation25.pattern1,overlay,2011,90,0,0
+    animation25.pattern2,overlay,2010,90,0,0
+
+    //dress-up 7
+    animation26.interval,bind+always
+    animation26.pattern0,overlay,2012,0,0,0
+    animation26.pattern1,overlay,2013,90,0,0
+    animation26.pattern2,overlay,2012,90,0,0
+    
+    //dress-up 8
+    animation27.interval,bind+always
+    animation27.pattern0,overlay,2014,0,0,0
+    animation27.pattern1,overlay,2015,90,0,0
+    animation27.pattern2,overlay,2014,90,0,0
+    
+    //dress-up 9
+    animation28.interval,bind+always
+    animation28.pattern0,overlay,2016,0,0,0
+    animation28.pattern1,overlay,2017,90,0,0
+    animation28.pattern2,overlay,2016,90,0,0
+    
+    //dress-up 10
+    animation29.interval,bind+always
+    animation29.pattern0,overlay,2018,0,0,0
+    animation29.pattern1,overlay,2019,90,0,0
+    animation29.pattern2,overlay,2018,90,0,0
+}
+surface1
+{
+    element0,base,bframe0.png,0,0
+
+    //dress-up 1
+    animation20.interval,bind+always
+    animation20.pattern0,overlay,2100,0,0,0
+    animation20.pattern1,overlay,2101,90,0,0
+    animation20.pattern2,overlay,2100,90,0,0
+
+    //dress-up 2
+    animation21.interval,bind+always
+    animation21.pattern0,overlay,2102,0,0,0
+    animation21.pattern1,overlay,2103,90,0,0
+    animation21.pattern2,overlay,2102,90,0,0
+    
+    //dress-up 3
+    animation22.interval,bind+always
+    animation22.pattern0,overlay,2104,0,0,0
+    animation22.pattern1,overlay,2105,90,0,0
+    animation22.pattern2,overlay,2104,90,0,0
+    
+    //dress-up 4
+    animation23.interval,bind+always
+    animation23.pattern0,overlay,2106,0,0,0
+    animation23.pattern1,overlay,2107,90,0,0
+    animation23.pattern2,overlay,2106,90,0,0
+    
+    //dress-up 5
+    animation24.interval,bind+always
+    animation24.pattern0,overlay,2108,0,0,0
+    animation24.pattern1,overlay,2109,90,0,0
+    animation24.pattern2,overlay,2108,90,0,0
+    
+    //dress-up 6
+    animation25.interval,bind+always
+    animation25.pattern0,overlay,2110,0,0,0
+    animation25.pattern1,overlay,2111,90,0,0
+    animation25.pattern2,overlay,2110,90,0,0
+
+    //dress-up 7
+    animation26.interval,bind+always
+    animation26.pattern0,overlay,2112,0,0,0
+    animation26.pattern1,overlay,2113,90,0,0
+    animation26.pattern2,overlay,2112,90,0,0
+    
+    //dress-up 8
+    animation27.interval,bind+always
+    animation27.pattern0,overlay,2114,0,0,0
+    animation27.pattern1,overlay,2115,90,0,0
+    animation27.pattern2,overlay,2114,90,0,0
+    
+    //dress-up 9
+    animation28.interval,bind+always
+    animation28.pattern0,overlay,2116,0,0,0
+    animation28.pattern1,overlay,2117,90,0,0
+    animation28.pattern2,overlay,2116,90,0,0
+    
+    //dress-up 10
+    animation29.interval,bind+always
+    animation29.pattern0,overlay,2118,0,0,0
+    animation29.pattern1,overlay,2119,90,0,0
+    animation29.pattern2,overlay,2118,90,0,0
+}
+surface2
+{
+    element0,base,cframe0.png,0,0
+
+    //dress-up 1
+    animation20.interval,bind+always
+    animation20.pattern0,overlay,2200,0,0,0
+    animation20.pattern1,overlay,2201,90,0,0
+    animation20.pattern2,overlay,2200,90,0,0
+
+    //dress-up 2
+    animation21.interval,bind+always
+    animation21.pattern0,overlay,2202,0,0,0
+    animation21.pattern1,overlay,2203,90,0,0
+    animation21.pattern2,overlay,2202,90,0,0
+    
+    //dress-up 3
+    animation22.interval,bind+always
+    animation22.pattern0,overlay,2204,0,0,0
+    animation22.pattern1,overlay,2205,90,0,0
+    animation22.pattern2,overlay,2204,90,0,0
+    
+    //dress-up 4
+    animation23.interval,bind+always
+    animation23.pattern0,overlay,2206,0,0,0
+    animation23.pattern1,overlay,2207,90,0,0
+    animation23.pattern2,overlay,2206,90,0,0
+    
+    //dress-up 5
+    animation24.interval,bind+always
+    animation24.pattern0,overlay,2208,0,0,0
+    animation24.pattern1,overlay,2209,90,0,0
+    animation24.pattern2,overlay,2208,90,0,0
+    
+    //dress-up 6
+    animation25.interval,bind+always
+    animation25.pattern0,overlay,2210,0,0,0
+    animation25.pattern1,overlay,2211,90,0,0
+    animation25.pattern2,overlay,2210,90,0,0
+
+    //dress-up 7
+    animation26.interval,bind+always
+    animation26.pattern0,overlay,2212,0,0,0
+    animation26.pattern1,overlay,2213,90,0,0
+    animation26.pattern2,overlay,2212,90,0,0
+    
+    //dress-up 8
+    animation27.interval,bind+always
+    animation27.pattern0,overlay,2214,0,0,0
+    animation27.pattern1,overlay,2215,90,0,0
+    animation27.pattern2,overlay,2214,90,0,0
+    
+    //dress-up 9
+    animation28.interval,bind+always
+    animation28.pattern0,overlay,2216,0,0,0
+    animation28.pattern1,overlay,2217,90,0,0
+    animation28.pattern2,overlay,2216,90,0,0
+    
+    //dress-up 10
+    animation29.interval,bind+always
+    animation29.pattern0,overlay,2218,0,0,0
+    animation29.pattern1,overlay,2219,90,0,0
+    animation29.pattern2,overlay,2218,90,0,0
+}
+surface3
+{
+    element0,base,dframe0.png,0,0
+
+    //dress-up 1
+    animation20.interval,bind+always
+    animation20.pattern0,overlay,2300,0,0,0
+    animation20.pattern1,overlay,2301,90,0,0
+    animation20.pattern2,overlay,2300,90,0,0
+
+    //dress-up 2
+    animation21.interval,bind+always
+    animation21.pattern0,overlay,2302,0,0,0
+    animation21.pattern1,overlay,2303,90,0,0
+    animation21.pattern2,overlay,2302,90,0,0
+    
+    //dress-up 3
+    animation22.interval,bind+always
+    animation22.pattern0,overlay,2304,0,0,0
+    animation22.pattern1,overlay,2305,90,0,0
+    animation22.pattern2,overlay,2304,90,0,0
+    
+    //dress-up 4
+    animation23.interval,bind+always
+    animation23.pattern0,overlay,2306,0,0,0
+    animation23.pattern1,overlay,2307,90,0,0
+    animation23.pattern2,overlay,2306,90,0,0
+    
+    //dress-up 5
+    animation24.interval,bind+always
+    animation24.pattern0,overlay,2308,0,0,0
+    animation24.pattern1,overlay,2309,90,0,0
+    animation24.pattern2,overlay,2308,90,0,0
+    
+    //dress-up 6
+    animation25.interval,bind+always
+    animation25.pattern0,overlay,2310,0,0,0
+    animation25.pattern1,overlay,2311,90,0,0
+    animation25.pattern2,overlay,2310,90,0,0
+
+    //dress-up 7
+    animation26.interval,bind+always
+    animation26.pattern0,overlay,2312,0,0,0
+    animation26.pattern1,overlay,2313,90,0,0
+    animation26.pattern2,overlay,2312,90,0,0
+    
+    //dress-up 8
+    animation27.interval,bind+always
+    animation27.pattern0,overlay,2314,0,0,0
+    animation27.pattern1,overlay,2315,90,0,0
+    animation27.pattern2,overlay,2314,90,0,0
+    
+    //dress-up 9
+    animation28.interval,bind+always
+    animation28.pattern0,overlay,2316,0,0,0
+    animation28.pattern1,overlay,2317,90,0,0
+    animation28.pattern2,overlay,2316,90,0,0
+    
+    //dress-up 10
+    animation29.interval,bind+always
+    animation29.pattern0,overlay,2318,0,0,0
+    animation29.pattern1,overlay,2319,90,0,0
+    animation29.pattern2,overlay,2318,90,0,0
+}
+
+
+surface0-3
+{
+    //color
+    animation40.interval,bind
+    animation40.pattern0,overlayfast,4000,0,0,0
+
+    animation41.interval,bind
+    animation41.pattern0,overlayfast,4001,0,0,0
+
+    animation42.interval,bind
+    animation42.pattern0,overlayfast,4002,0,0,0
+
+    animation43.interval,bind
+    animation43.pattern0,overlayfast,4003,0,0,0
+
+    animation44.interval,bind
+    animation44.pattern0,overlayfast,4004,0,0,0
+}
+
+
+surface1000
+{
+    element0,base,aframe0.png,0,0
+}
+
+surface1001
+{
+    element0,base,aframe1.png,0,0
+}
+
+surface1010
+{
+    element0,base,bframe0.png,0,0
+}
+
+surface1011
+{
+    element0,base,bframe1.png,0,0
+}
+
+surface1020
+{
+    element0,base,cframe0.png,0,0
+}
+
+surface1021
+{
+    element0,base,cframe1.png,0,0
+}
+
+surface1030
+{
+    element0,base,dframe0.png,0,0
+}
+
+surface1031
+{
+    element0,base,dframe1.png,0,0
+}
+
+
+surface4000
+{
+    element0,overlay,color_b.png,0,0
+}
+surface4001
+{
+    element0,overlay,color_g.png,0,0
+}
+surface4002
+{
+    element0,overlay,color_o.png,0,0
+}
+surface4003
+{
+    element0,overlay,color_p.png,0,0
+}
+surface4004
+{
+    element0,overlay,color_r.png,0,0
+}

@@ -1,0 +1,258 @@
+
+descript
+{
+    version,1
+}
+
+surface0
+{
+    //eyes
+    animation0.interval,always
+    animation0.pattern0,base,-1,0,0,0
+    animation0.pattern1,base,1001,90,0,0
+    animation0.pattern2,base,-1,90,0,0
+
+
+    //blink
+    animation1.interval,never
+    animation1.pattern1,base,100,0,0,0
+    animation1.pattern2,base,101,90,0,0
+    animation1.pattern3,base,102,90,0,0
+    animation1.pattern4,base,-1,30,0,0
+    animation1.pattern5,base,1001,60,0,0
+    animation1.pattern6,base,-1,90,0,0
+    animation1.pattern7,start,10
+}
+
+surface1
+{
+    //eyes
+    animation0.interval,always
+    animation0.pattern0,base,-1,0,0,0
+    animation0.pattern1,base,1011,90,0,0
+    animation0.pattern2,base,-1,90,0,0
+
+
+    //blink
+    animation1.interval,never
+    animation1.pattern1,base,110,0,0,0
+    animation1.pattern2,base,111,90,0,0
+    animation1.pattern3,base,112,90,0,0
+    animation1.pattern4,base,-1,60,0,0
+    animation1.pattern5,base,1011,30,0,0
+    animation1.pattern6,base,-1,90,0,0
+    animation1.pattern7,start,10
+}
+surface2
+{
+    //eyes
+    animation0.interval,always
+    animation0.pattern0,base,-1,0,0,0
+    animation0.pattern1,base,1021,90,0,0
+    animation0.pattern2,base,-1,90,0,0
+
+
+    //blink
+    animation1.interval,never
+    animation1.pattern1,base,120,0,0,0
+    animation1.pattern2,base,121,90,0,0
+    animation1.pattern3,base,122,90,0,0
+    animation1.pattern4,base,-1,60,0,0
+    animation1.pattern5,base,1021,30,0,0
+    animation1.pattern6,base,-1,90,0,0
+    animation1.pattern7,start,10
+}
+surface3
+{
+    //eyes
+    animation0.interval,always
+    animation0.pattern0,base,-1,0,0,0
+    animation0.pattern1,base,1031,90,0,0
+    animation0.pattern2,base,-1,90,0,0
+
+
+    //blink
+    animation1.interval,never
+    animation1.pattern1,base,130,0,0,0
+    animation1.pattern2,base,131,90,0,0
+    animation1.pattern3,base,132,90,0,0
+    animation1.pattern4,base,-1,60,0,0
+    animation1.pattern5,base,1031,30,0,0
+    animation1.pattern6,base,-1,90,0,0
+    animation1.pattern7,start,10
+}
+
+surface0-3
+{
+    animation10.interval,always
+    animation10.pattern0,overlay,-1,0,0,0
+    animation10.pattern1,overlay,-1,540,0,0
+    animation10.pattern2,overlay,-1,540,0,0
+    animation10.pattern3,alternativestart,(10,1)
+
+
+    //ex 1
+    animation30.interval,never
+    animation30.pattern0,overlay,300,0,0,0
+    animation30.pattern1,overlay,301,90,0,0
+    animation30.pattern2,overlay,300,90,0,0
+    animation30.pattern3,overlay,300,90,0,0
+    animation30.pattern4,overlay,301,90,0,0
+    animation30.pattern5,overlay,300,90,0,0
+    animation30.pattern6,overlay,300,90,0,0
+    animation30.pattern7,overlay,301,90,0,0
+    animation30.pattern8,overlay,300,90,0,0
+    animation30.pattern9,overlay,300,90,0,0
+    animation30.pattern10,overlay,301,90,0,0
+    animation30.pattern11,overlay,300,90,0,0
+    animation30.pattern12,overlay,300,90,0,0
+    animation30.pattern13,overlay,301,90,0,0
+    animation30.pattern14,overlay,300,90,0,0
+    animation30.pattern15,overlay,300,90,0,0
+    animation30.pattern16,overlay,301,90,0,0
+    animation30.pattern17,overlay,300,90,0,0
+    animation30.pattern18,overlay,300,0,0,0
+    animation30.pattern19,overlay,301,90,0,0
+    animation30.pattern20,overlay,300,90,0,0
+    animation30.pattern21,overlay,300,90,0,0
+    animation30.pattern22,overlay,301,90,0,0
+    animation30.pattern23,overlay,300,90,0,0
+    animation30.pattern24,overlay,300,90,0,0
+    animation30.pattern25,overlay,301,90,0,0
+    animation30.pattern26,overlay,300,90,0,0
+    animation30.pattern27,overlay,300,90,0,0
+    animation30.pattern28,overlay,301,90,0,0
+    animation30.pattern29,overlay,300,90,0,0
+    animation30.pattern30,overlay,300,90,0,0
+    animation30.pattern31,overlay,301,90,0,0
+    animation30.pattern32,overlay,300,90,0,0
+    animation30.pattern33,overlay,300,90,0,0
+    animation30.pattern34,overlay,301,90,0,0
+    animation30.pattern35,overlay,300,90,0,0
+    animation30.pattern36,overlay,-1,0,0,0
+
+
+    //ex 2
+    animation31.interval,never
+    animation31.pattern0,overlay,310,0,0,0
+    animation31.pattern1,overlay,311,90,0,0
+    animation31.pattern2,overlay,310,90,0,0
+    animation31.pattern3,overlay,310,90,0,0
+    animation31.pattern4,overlay,311,90,0,0
+    animation31.pattern5,overlay,310,90,0,0
+    animation31.pattern6,overlay,310,90,0,0
+    animation31.pattern7,overlay,311,90,0,0
+    animation31.pattern8,overlay,310,90,0,0
+    animation31.pattern9,overlay,310,90,0,0
+    animation31.pattern10,overlay,311,90,0,0
+    animation31.pattern11,overlay,310,90,0,0
+    animation31.pattern12,overlay,310,90,0,0
+    animation31.pattern13,overlay,311,90,0,0
+    animation31.pattern14,overlay,310,90,0,0
+    animation31.pattern15,overlay,310,90,0,0
+    animation31.pattern16,overlay,311,90,0,0
+    animation31.pattern17,overlay,310,90,0,0
+    animation31.pattern18,overlay,310,0,0,0
+    animation31.pattern19,overlay,311,90,0,0
+    animation31.pattern20,overlay,310,90,0,0
+    animation31.pattern21,overlay,310,90,0,0
+    animation31.pattern22,overlay,311,90,0,0
+    animation31.pattern23,overlay,310,90,0,0
+    animation31.pattern24,overlay,310,90,0,0
+    animation31.pattern25,overlay,311,90,0,0
+    animation31.pattern26,overlay,310,90,0,0
+    animation31.pattern27,overlay,310,90,0,0
+    animation31.pattern28,overlay,311,90,0,0
+    animation31.pattern29,overlay,310,90,0,0
+    animation31.pattern30,overlay,310,90,0,0
+    animation31.pattern31,overlay,311,90,0,0
+    animation31.pattern32,overlay,310,90,0,0
+    animation31.pattern33,overlay,310,90,0,0
+    animation31.pattern34,overlay,311,90,0,0
+    animation31.pattern35,overlay,310,90,0,0
+    animation31.pattern36,overlay,-1,0,0,0
+
+
+    //ex 3
+    animation32.interval,never
+    animation32.pattern0,overlay,320,0,0,0
+    animation32.pattern1,overlay,321,90,0,0
+    animation32.pattern2,overlay,320,90,0,0
+    animation32.pattern3,overlay,320,90,0,0
+    animation32.pattern4,overlay,321,90,0,0
+    animation32.pattern5,overlay,320,90,0,0
+    animation32.pattern6,overlay,320,90,0,0
+    animation32.pattern7,overlay,321,90,0,0
+    animation32.pattern8,overlay,320,90,0,0
+    animation32.pattern9,overlay,320,0,0,0
+    animation32.pattern10,overlay,321,90,0,0
+    animation32.pattern11,overlay,320,90,0,0
+    animation32.pattern12,overlay,320,90,0,0
+    animation32.pattern13,overlay,321,90,0,0
+    animation32.pattern14,overlay,320,90,0,0
+    animation32.pattern15,overlay,320,90,0,0
+    animation32.pattern16,overlay,321,90,0,0
+    animation32.pattern17,overlay,320,90,0,0
+    animation32.pattern18,overlay,320,0,0,0
+    animation32.pattern19,overlay,321,90,0,0
+    animation32.pattern20,overlay,320,90,0,0
+    animation32.pattern21,overlay,320,90,0,0
+    animation32.pattern22,overlay,321,90,0,0
+    animation32.pattern23,overlay,320,90,0,0
+    animation32.pattern24,overlay,320,90,0,0
+    animation32.pattern25,overlay,321,90,0,0
+    animation32.pattern26,overlay,320,90,0,0
+    animation32.pattern27,overlay,320,0,0,0
+    animation32.pattern28,overlay,321,90,0,0
+    animation32.pattern29,overlay,320,90,0,0
+    animation32.pattern30,overlay,320,90,0,0
+    animation32.pattern31,overlay,321,90,0,0
+    animation32.pattern32,overlay,320,90,0,0
+    animation32.pattern33,overlay,320,90,0,0
+    animation32.pattern34,overlay,321,90,0,0
+    animation32.pattern35,overlay,320,90,0,0
+    animation32.pattern36,overlay,-1,0,0,0
+
+
+    //ex 4
+    animation33.interval,never
+    animation33.pattern0,overlay,330,0,0,0
+    animation33.pattern1,overlay,331,90,0,0
+    animation33.pattern2,overlay,332,90,0,0
+    animation33.pattern3,overlay,333,90,0,0
+    animation33.pattern4,overlay,330,90,0,0
+    animation33.pattern5,overlay,331,90,0,0
+    animation33.pattern6,overlay,332,90,0,0
+    animation33.pattern7,overlay,333,90,0,0
+    animation33.pattern8,overlay,330,90,0,0
+    animation33.pattern9,overlay,330,0,0,0
+    animation33.pattern10,overlay,331,90,0,0
+    animation33.pattern11,overlay,332,90,0,0
+    animation33.pattern12,overlay,333,90,0,0
+    animation33.pattern13,overlay,330,90,0,0
+    animation33.pattern14,overlay,331,90,0,0
+    animation33.pattern15,overlay,332,90,0,0
+    animation33.pattern16,overlay,333,90,0,0
+    animation33.pattern17,overlay,330,90,0,0
+    animation33.pattern18,overlay,330,0,0,0
+    animation33.pattern19,overlay,331,90,0,0
+    animation33.pattern20,overlay,332,90,0,0
+    animation33.pattern21,overlay,333,90,0,0
+    animation33.pattern22,overlay,330,90,0,0
+    animation33.pattern23,overlay,331,90,0,0
+    animation33.pattern24,overlay,332,90,0,0
+    animation33.pattern25,overlay,333,90,0,0
+    animation33.pattern26,overlay,330,90,0,0
+    animation33.pattern27,overlay,330,0,0,0
+    animation33.pattern28,overlay,331,90,0,0
+    animation33.pattern29,overlay,332,90,0,0
+    animation33.pattern30,overlay,333,90,0,0
+    animation33.pattern31,overlay,330,90,0,0
+    animation33.pattern32,overlay,331,90,0,0
+    animation33.pattern33,overlay,332,90,0,0
+    animation33.pattern34,overlay,333,90,0,0
+    animation33.pattern35,overlay,330,90,0,0
+    animation33.pattern36,overlay,-1,0,0,0
+
+}
+

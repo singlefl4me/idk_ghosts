@@ -1,0 +1,44 @@
+OnFirstBoot
+{
+    id = 0
+    "\0\s[0]\![bind,text,1,1]\1\s[10]"
+}
+
+OnBoot
+{
+    _part = RAND(10) + 1
+    "\s[0]\![bind,text,%(_part),1]"
+}
+
+OnMouseClickEx : all
+{
+    if reference5 == "middle"  {
+       _color = ("","blue","green","orange","purple","red")
+       
+        if id > 5   {
+            "\![bind,color,%(_color[id]),0]"
+            id = 0
+        }
+        else
+            "\![bind,color,%(_color[id]),1]"
+
+        id++
+    }
+}
+
+OnMinuteChange
+{
+    _chance = RAND(4) + 1
+    _num = RAND(3) + 1
+    _ani = RAND(4)
+
+    if _chance == 4
+        "\s[%(_num)]"
+    if _chance == 3
+        "\i[3%(_ani)]"
+}
+
+OnClose
+{
+    "\w8\w8\--"
+}
