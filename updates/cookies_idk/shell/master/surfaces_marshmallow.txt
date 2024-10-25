@@ -1,0 +1,164 @@
+//marshmallow cookie
+
+charset,UTF-8
+
+descript
+{
+version,1
+animation-sort,ascend
+}
+
+//Idle
+surface50
+{
+	//body, mouth, arms
+	//surfaces_parts.txt
+
+	//arms
+	animation2.interval,runonce
+	animation2.pattern0,overlay,30500,0,0,0
+
+	//Blink
+	animation4.interval,random,4
+	animation4.pattern0,replace,20501,0,74,115
+	animation4.pattern1,overlay,-1,85,0,0
+}
+
+//trumpet
+surface58
+{
+	//body
+	//surfaces_parts.txt
+
+	//eyes
+	animation450.interval,never
+	animation450.pattern0,stop,451
+	animation450.pattern1,overlay,20502,0,0,0
+
+	animation451.interval,never
+	animation451.pattern0,stop,450
+	animation451.pattern1,overlay,20503,0,0,0
+
+	//start
+	animation350.interval,runonce
+	animation350.pattern0,base,40500,0,0,0
+	animation350.pattern1,base,-1,1000,10,0
+	animation350.pattern2,alternativestart,(450,451)
+	animation350.pattern3,alternativestart,(351,352,353,355)
+	animation350.option,exclusive
+
+	//arms (l,r + mouth)
+
+	//arm_1
+	animation351.interval,never
+	animation351.pattern0,overlay,30504,0,0,0
+	animation351.pattern1,overlay,30505,1500-2500,0,0
+	animation351.pattern2,base,-1,1500-2500,0,0
+	animation351.pattern3,alternativestart,(350,351,352,353)
+
+	//arm_2
+	animation352.interval,never
+	animation352.pattern0,overlay,30506,0,0,0
+	animation352.pattern1,overlay,30507,1500-2500,0,0
+	animation352.pattern2,base,-1,1500-2500,0,0
+	animation352.pattern3,alternativestart,(350,351,352,353)
+
+	//arm_3
+	animation353.interval,never
+	animation353.pattern0,overlay,30508,0,0,0
+	animation353.pattern1,overlay,30509,1500-2500,0,0
+	animation353.pattern2,base,-1,1500-2500,0,0
+	animation353.pattern3,alternativestart,(350,351,352,353)
+
+
+	//-----
+
+
+	//alt_control
+	animation355.interval,never
+	animation355.pattern0,parallelstop,(350,450,451)
+	animation355.pattern2,alternativestart,(356,357,358)
+
+	//alt_arms(anim frames)
+
+	//alt_1
+	animation356.interval,never
+	animation356.pattern0,replace,40501,0,10,0
+	animation356.pattern1,replace,40502,1500-2500,10,0
+	animation356.pattern2,replace,-1,1000,10,0
+	animation356.pattern3,alternativestart,(350,355)
+	animation356.option,exclusive
+
+	//alt_2
+	animation357.interval,never
+	animation357.pattern0,replace,40503,0,10,0
+	animation357.pattern1,replace,40504,1500-2500,10,0
+	animation357.pattern2,replace,-1,1000,10,0
+	animation357.pattern3,alternativestart,(350,355)
+	animation357.option,exclusive
+
+	//alt_3
+	animation358.interval,never
+	animation358.pattern0,replace,40505,0,10,0
+	animation358.pattern1,replace,40506,1500-2500,10,0
+	animation358.pattern2,replace,-1,1000,10,0
+	animation358.pattern3,alternativestart,(350,355)
+	animation358.option,exclusive
+}
+
+//Singing
+surface59
+{
+	//body
+	//surfaces_parts.txt
+
+	//mouth
+	animation1.interval,runonce
+	animation1.pattern0,overlay,10501,0,0,0
+
+	//arms
+	animation2.interval,runonce
+	animation2.pattern0,overlay,30501,0,0,0
+
+	//Blink
+	animation4.interval,random,4
+	animation4.pattern0,replace,20501,0,74,115
+	animation4.pattern1,overlay,-1,85,0,0
+}
+
+//------------------------------
+
+surface50
+{
+    element0,base,5\mar_body.png,0,0
+    element1,overlay,5\mar_eye.png,0,0
+    element2,overlay,5\mar_mouth.png,0,0
+}
+surface51
+{
+    element0,base,5\mar_body.png,0,0
+    element1,overlay,surface10501.png,0,0
+    element2,overlay,5\mar_mouth.png,0,0
+    element3,overlay,5\mar_arms.png,0,0
+}
+surface58
+{
+    element0,base,5\mar_body.png,0,0
+}
+surface59
+{
+    element0,base,5\mar_body.png,0,0
+    element1,overlay,5\mar_eye.png,0,0
+}
+surface10500
+{
+    element0,base,5\mar_mouth.png,0,0
+}
+surface30500
+{
+    element0,overlay,5\mar_arms.png,0,0
+}
+surface40500
+{
+    element0,base,5\mar_body2.png,0,0
+}

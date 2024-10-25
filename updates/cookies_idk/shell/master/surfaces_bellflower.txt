@@ -1,0 +1,109 @@
+//bellflower cookie
+
+charset,UTF-8
+
+descript
+{
+version,1
+animation-sort,ascend
+}
+
+//Idle
+surface80
+{
+	//body
+	//surfaces_parts.txt
+
+	//Blink
+	animation4.interval,random,4
+	animation4.pattern0,replace,20801,0,70,120
+	animation4.pattern1,overlay,-1,85,0,0
+}
+
+//lyre
+surface88
+{
+	//body, face
+	//surfaces_parts.txt
+
+
+	//guitar-animations
+
+	//arm-2: strum
+	animation323.interval,always
+	animation323.pattern0,overlay,30802,0,0,0
+	animation323.pattern1,overlay,30801,1000,0,0
+	animation323.pattern3,overlay,30802,1000,0,0
+
+	//strings
+	animation325.interval,always
+	animation325.pattern0,overlay,50800,0,0,0
+	animation325.pattern1,overlay,50800,1000,0,0
+	animation325.pattern2,overlay,50801,75,0,0
+	animation325.pattern3,overlay,50802,75,0,0
+	animation325.pattern4,overlay,50801,75,0,0
+	animation325.pattern5,overlay,50802,75,0,0
+	animation325.pattern6,overlay,50800,75,0,0
+	animation325.pattern7,overlay,50800,625,0,0
+}
+
+//Singing
+surface89
+{
+	//body, inst, arms
+	//surfaces_parts.txt
+
+	//eyes
+	animation0.interval,runonce
+	animation0.pattern0,replace,20802,0,70,120
+
+	//mouth
+	animation1.interval,runonce
+	animation1.pattern0,overlay,10800,0,0,0
+
+	//arm
+	animation2.interval,runonce
+	animation2.pattern0,overlay,30801,0,0,0
+
+	//Blink
+	animation4.interval,random,4
+	animation4.pattern0,stop,0
+	animation4.pattern1,replace,20801,0,70,120
+	animation4.pattern2,replace,20802,85,70,120
+}
+
+//------------------------------
+
+surface80
+{
+    element0,base,8\bell_body.png,0,0
+    element1,overlay,8\bell_eye.png,0,0
+    element2,overlay,8\bell_mouth.png,0,0
+}
+surface81
+{
+    element0,base,8\bell_body.png,0,0
+    element1,overlay,8\bell_face.png,0,0
+}
+surface88
+{
+    element0,base,8\bell_body2.png,0,0
+    element1,overlay,8\bell_face.png,0,0
+}
+surface89
+{
+    element0,base,8\bell_body2.png,0,0
+    element1,overlay,8\bell_inst.png,0,0
+}
+surface10800
+{
+    element0,base,8\bell_mouth.png,0,0
+}
+surface20800
+{
+    element0,base,8\bell_eye.png,0,0
+}
+surface50800
+{
+    element0,base,8\bell_inst.png,0,0
+}

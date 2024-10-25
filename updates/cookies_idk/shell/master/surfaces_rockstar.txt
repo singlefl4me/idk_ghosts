@@ -1,0 +1,272 @@
+//rockstar cookie
+
+charset,UTF-8
+
+descript
+{
+version,1
+animation-sort,ascend
+}
+
+//Idle
+surface30
+{
+	//body, mouth, arm l, arm r
+	//surfaces_parts.txt
+
+	//Blink
+	animation4.interval,random,4
+	animation4.pattern0,replace,20301,0,65,65
+	animation4.pattern1,replace,-1,85,0,0
+}
+
+//guitar
+surface38
+{
+	//body
+	//surfaces_parts.txt
+
+	//eye animation
+	animation0.interval,runonce
+	animation0.pattern0,replace,20301,0,65,65
+
+	//mouth
+	animation1.interval,runonce
+	animation1.pattern0,overlay,10300,0,0,0
+
+
+	//guitar-animations
+	animation320.interval,runonce
+	animation320.pattern1,parallelstop,(321,322)
+	animation320.pattern2,alternativestart,(321,322)
+
+	//arm-1: chord
+	animation321.interval,never
+	animation321.pattern0,overlay,30304,0,0,0
+	animation321.pattern1,overlay,30304,2000,0,0
+	animation321.pattern2,start,320
+
+	animation322.interval,never
+	animation322.pattern0,overlay,30305,0,0,0
+	animation322.pattern1,overlay,30305,2000,0,0
+	animation322.pattern2,start,320
+
+	//arm-2: strum
+	animation323.interval,always
+	animation323.pattern0,overlay,30307,0,0,0
+	animation323.pattern1,overlay,30306,1000,0,0
+	animation323.pattern2,overlay,30307,1000,0,0
+
+
+	//pose2
+	animation325.interval,periodic,12
+	//animation45.pattern0,parallelstop,(0,1,50,51,52,53)
+	animation325.pattern0,alternativestart,(326,327)
+	animation325.pattern1,alternativestart,(310,311)
+	animation325.pattern2,start,328
+	animation325.pattern3,overlay,-1,8000,0,0
+	animation325.pattern4,parallelstart,(0,1,320)
+	animation325.pattern5,parallelstop,(326,327,328,310,311)
+	animation325.option,exclusive
+
+	//arm-1: chord
+	animation326.interval,never
+	animation326.pattern0,overlay,30308,0,0,0
+	animation326.pattern1,overlay,30308,2000,0,0
+
+	//arm-1: chord 2
+	animation327.interval,never
+	animation327.pattern0,overlay,30309,0,0,0
+	animation327.pattern1,overlay,30309,2000,0,0
+
+	//arm-2: strum
+	animation328.interval,never
+	animation328.pattern0,overlay,30311,0,0,0
+	animation328.pattern1,overlay,30310,1000,0,0
+	animation328.pattern2,overlay,30311,1000,0,0
+	animation328.pattern3,start,328
+
+	//head+body alt
+	animation310.interval,never
+	animation310.pattern0,base,40300,0,0,0
+	animation310.pattern1,base,-1,8000,0,0
+
+	animation311.interval,never
+	animation311.pattern0,base,40301,0,0,0
+	animation311.pattern1,base,-1,8000,0,0
+}
+
+//Singing
+surface39
+{
+	//body, inst
+	//surfaces_parts.txt
+
+
+	//mouth animation
+	animation10.interval,runonce
+	animation10.pattern0,parallelstop,(11,12,13,14,15,16)
+	animation10.pattern1,alternativestart,(11,12,13,14,15,16)
+	animation10.option,shared-index
+
+	//close
+	animation11.interval,never
+	animation11.pattern0,overlay,10300,0,0,0
+	animation11.pattern1,overlay,10300,240,0,0
+	animation11.pattern2,start,10
+	animation11.option,shared-index
+	//a
+	animation12.interval,never
+	animation12.pattern0,overlay,10301,0,0,0
+	animation12.pattern1,overlay,10301,180,0,0
+	animation12.pattern2,start,10
+	animation12.option,shared-index
+	//e, ii
+	animation13.interval,never
+	animation13.pattern0,overlay,10302,0,0,0
+	animation13.pattern1,overlay,10302,160,0,0
+	animation13.pattern2,start,10
+	animation13.option,shared-index
+	//i
+	animation14.interval,never
+	animation14.pattern0,overlay,10303,0,0,0
+	animation14.pattern1,overlay,10303,220,0,0
+	animation14.pattern2,start,10
+	animation14.option,shared-index
+	//o
+	animation15.interval,never
+	animation15.pattern0,overlay,10304,0,0,0
+	animation15.pattern1,overlay,10304,320,0,0
+	animation15.pattern2,start,10
+	animation15.option,shared-index
+	//oo, u
+	animation16.interval,never
+	animation16.pattern0,overlay,10305,0,0,0
+	animation16.pattern1,overlay,10305,360,0,0
+	animation16.pattern2,start,10
+	animation16.option,shared-index
+
+
+	//eye animation
+	animation20.interval,runonce
+	animation20.pattern0,parallelstop,(21,22,23)
+	animation20.pattern1,alternativestart,(21,22,23)
+	animation20.option,shared-index
+
+	//open
+	animation21.interval,never
+	animation21.pattern0,overlay,20300,0,0,0
+	animation21.pattern1,overlay,-1,1000-8000,0,0
+	animation21.pattern2,start,20
+	animation21.option,shared-index
+
+	//blink
+	animation22.interval,never
+	animation22.pattern0,replace,20301,0,65,65
+	animation22.pattern1,overlay,-1,85,0,0
+	animation22.pattern2,start,20
+	animation22.option,shared-index
+
+	//eyes closed
+	animation23.interval,never
+	animation23.pattern0,replace,20301,0,65,65
+	animation23.pattern1,replace,20301,5000,65,65
+	animation23.pattern2,start,20
+	animation23.option,shared-index
+
+
+	//arm animation (l)
+	animation30.interval,runonce
+	animation30.pattern0,parallelstop,(31,32)
+	animation30.pattern1,alternativestart,(31,32)
+	animation30.option,shared-index
+
+	//arm-animation0
+	animation31.interval,never
+	animation31.pattern0,overlay,30300,0,0,0
+	animation31.pattern1,overlay,30300,6000,0,0
+	animation31.pattern2,start,30
+	animation31.option,shared-index
+
+	//arm-animation1
+	animation32.interval,never
+	animation32.pattern0,overlay,30302,0,0,0
+	animation32.pattern1,overlay,30302,6000,0,0
+	animation32.pattern2,start,30
+	animation32.option,shared-index
+
+
+	//arm animation (r)
+	animation35.interval,runonce
+	animation35.pattern0,parallelstop,(36,37)
+	animation35.pattern1,alternativestart,(36,37)
+	animation35.option,shared-index
+
+	//arm-animation0
+	animation36.interval,never
+	animation36.pattern0,overlay,30301,0,0,0
+	animation36.pattern1,overlay,30301,6000,0,0
+	animation36.pattern2,start,35
+	animation36.option,shared-index
+	//arm-animation1
+	animation37.interval,never
+	animation37.pattern0,overlay,30303,0,0,0
+	animation37.pattern1,overlay,30303,6000,0,0
+	animation37.pattern2,start,35
+	animation37.option,shared-index
+}
+
+//------------------------------
+
+surface30
+{
+    element0,base,3\rock_body.png,0,0
+    element1,overlay,3\inst_back.png,0,0
+	element2,overlay,3\rock_eye.png,0,0
+    element3,overlay,3\rock_mouth.png,0,0
+    element4,overlay,3\rock_arm1.png,0,0
+    element5,overlay,3\rock_arm2.png,0,0
+}
+surface31
+{
+    element0,base,3\rock_body.png,0,0
+    element1,overlay,3\inst_back.png,0,0
+    element2,overlay,surface10302.png,0,0
+    element3,overlay,surface20301.png,0,0
+    element4,overlay,surface30302.png,0,0
+    element5,overlay,surface30303.png,0,0
+}
+surface38
+{
+    element0,base,3\rock_body.png,0,0
+    element1,overlay,3\rock_inst.png,0,0
+}
+surface39
+{
+    element0,base,3\rock_body.png,0,0
+    element1,overlay,3\inst_back.png,0,0
+}
+surface10300
+{
+    element0,base,3\rock_mouth.png,0,0
+}
+surface20300
+{
+    element0,base,3\rock_eye.png,0,0
+}
+surface30300
+{
+    element0,base,3\rock_arm1.png,0,0
+}
+surface30301
+{
+    element0,base,3\rock_arm2.png,0,0
+}
+surface40300
+{
+    element0,base,3\rock_body2.png,0,0
+}
+surface40301
+{
+    element0,base,3\rock_body3.png,0,0
+}

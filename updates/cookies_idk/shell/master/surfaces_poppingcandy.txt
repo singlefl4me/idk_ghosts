@@ -1,0 +1,208 @@
+//popping candy cookie
+
+charset,UTF-8
+
+descript
+{
+version,1
+animation-sort,ascend
+}
+
+//Idle
+surface10
+{
+	//body, mouth, arm l, arm r
+	//surfaces_parts.txt
+
+	//mouth
+	animation1.interval,runonce
+	animation1.pattern0,overlay,10100,0,0,0
+
+	//Blink
+	animation4.interval,random,4
+	animation4.pattern0,replace,20101,0,79,95
+	animation4.pattern1,overlay,-1,85,79,95
+}
+
+//Petting
+surface11
+{
+	//body, mouth, arm l, arm r
+	//surfaces_parts.txt
+
+	//eyes
+	animation0.interval,runonce
+	animation0.pattern0,replace,20102,0,79,95
+}
+
+//singing
+surface19
+{
+	//body
+	//surfaces_parts.txt
+
+
+	//mouth animation
+	animation10.interval,runonce
+	animation10.pattern0,parallelstop,(11,12,13,14,15,16)
+	animation10.pattern1,alternativestart,(11,12,13,14,15,16)
+	animation10.option,shared-index
+
+	//close
+	animation11.interval,never
+	animation11.pattern0,overlay,10100,0,0,0
+	animation11.pattern1,overlay,10100,240,0,0
+	animation11.pattern2,start,10
+	animation11.option,shared-index
+	//a
+	animation12.interval,never
+	animation12.pattern0,overlay,10101,0,0,0
+	animation12.pattern1,overlay,10101,180,0,0
+	animation12.pattern2,start,10
+	animation12.option,shared-index
+	//e, ii
+	animation13.interval,never
+	animation13.pattern0,overlay,10102,0,0,0
+	animation13.pattern1,overlay,10102,160,0,0
+	animation13.pattern2,start,10
+	animation13.option,shared-index
+	//i
+	animation14.interval,never
+	animation14.pattern0,overlay,10103,0,0,0
+	animation14.pattern1,overlay,10103,220,0,0
+	animation14.pattern2,start,10
+	animation14.option,shared-index
+	//o
+	animation15.interval,never
+	animation15.pattern0,overlay,10104,0,0,0
+	animation15.pattern1,overlay,10104,320,0,0
+	animation15.pattern2,start,10
+	animation15.option,shared-index
+	//oo, u
+	animation16.interval,never
+	animation16.pattern0,overlay,10105,0,0,0
+	animation16.pattern1,overlay,10105,360,0,0
+	animation16.pattern2,start,10
+	animation16.option,shared-index
+
+
+	//eye animation
+	animation20.interval,runonce
+	animation20.pattern0,parallelstop,(21,22,23,24)
+	animation20.pattern1,alternativestart,(21,22,23,24)
+	animation20.option,shared-index
+
+	//open
+	animation21.interval,never
+	animation21.pattern0,overlay,20100,0,0,0
+	animation21.pattern1,overlay,-1,1000-8000,0,0
+	animation21.pattern2,start,20
+	animation21.option,shared-index
+	//blink
+	animation22.interval,never
+	animation22.pattern0,replace,20101,0,79,95
+	animation22.pattern1,overlay,-1,85,0,0
+	animation22.pattern2,start,20
+	animation22.option,shared-index
+	//eyes closed
+	animation23.interval,never
+	animation23.pattern0,replace,20101,0,79,95
+	animation23.pattern2,replace,20101,5000,79,95
+	animation23.pattern3,start,20
+	animation23.option,shared-index
+	//grin
+	animation24.interval,never
+	animation24.pattern0,replace,20102,0,79,95
+	animation24.pattern2,replace,20102,5000,79,95
+	animation24.pattern3,start,20
+	animation24.option,shared-index
+
+
+	//arm animation (l)
+	animation30.interval,runonce
+	animation30.pattern0,parallelstop,(31,32,33)
+	animation30.pattern1,alternativestart,(31,32,33)
+	animation30.option,shared-index
+
+	//arm-animation0
+	animation31.interval,never
+	animation31.pattern0,overlay,30100,0,0,0
+	animation31.pattern1,overlay,30100,6000,0,0
+	animation31.pattern2,start,30
+	animation31.option,shared-index
+	//arm-animation1
+	animation32.interval,never
+	animation32.pattern0,overlay,30102,0,0,0
+	animation32.pattern1,overlay,30102,6000,0,0
+	animation32.pattern2,start,30
+	animation32.option,shared-index
+	//arm-animation2
+	animation33.interval,never
+	animation33.pattern0,overlay,30104,0,0,0
+	animation33.pattern1,overlay,30104,6000,0,0
+	animation33.pattern2,start,30
+	animation33.option,shared-index
+
+	//arm animation (r)
+	animation35.interval,runonce
+	animation35.pattern0,parallelstop,(36,37,38)
+	animation35.pattern1,alternativestart,(36,37,38)
+	animation35.option,shared-index
+
+	//arm-animation0
+	animation36.interval,never
+	animation36.pattern0,interpolate,30101,0,0,0
+	animation36.pattern1,interpolate,30101,6000,0,0
+	animation36.pattern2,start,35
+	animation36.option,shared-index
+	//arm-animation1
+	animation37.interval,never
+	animation37.pattern0,interpolate,30103,0,0,0
+	animation37.pattern1,interpolate,30103,6000,0,0
+	animation37.pattern2,start,35
+	animation37.option,shared-index
+	//arm-animation2
+	animation38.interval,never
+	animation38.pattern0,overlay,30105,0,0,0
+	animation38.pattern1,overlay,30105,6000,0,0
+	animation38.pattern2,start,35
+	animation38.option,shared-index
+}
+
+//------------------------------
+
+surface10
+{
+    element0,base,1\pop_body.png,0,0
+	element1,overlay,1\pop_eye.png,0,0
+    element3,overlay,1\pop_arm1.png,0,0
+    element4,interpolate,1\pop_arm2.png,0,0
+}
+surface11
+{
+    element0,base,1\pop_body.png,0,0
+    element1,overlay,surface10102.png,0,0
+    element2,overlay,surface20101.png,0,0
+    element3,overlay,surface30104.png,0,0
+    element4,overlay,surface30105.png,0,0
+}
+surface19
+{
+    element0,base,1\pop_body.png,0,0
+}
+surface10100
+{
+    element0,base,1\pop_mouth.png,0,0
+}
+surface20100
+{
+    element0,base,1\pop_eye.png,0,0
+}
+surface30100
+{
+    element0,base,1\pop_arm1.png,0,0
+}
+surface30101
+{
+    element0,base,1\pop_arm2.png,0,0
+}

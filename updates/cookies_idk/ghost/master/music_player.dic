@@ -1,0 +1,2622 @@
+//Written by Zichqec https://ukagaka.zichqec.com/
+//Version 2.0.2
+
+/*
+ABOUT THE MUSIC PLAYER:
+
+This music player is based off of the one in FLUX. It is written for YAYA, and most likely is _not_ compatible with AYA.
+
+It requires YAYATc569-4 or later. You can change some of the syntax to make it compatible with older versions, but you really should upgrade for security reasons anyways. How to upgrade: https://ukagaka.zichqec.com/guide/upgrade_old_versions_of_yaya
+
+The music player allows the user to add songs by dragging and dropping files and folders onto the ghost, and load .m3u playlists the same way. Music can be played through the music menu, which can be called with tags such as q[Music Menu,OnMusicPlayer.Menu], \![raise,OnMusicMenu], etc. It can also be played via hotkeys or hotspots, which you can customize a bit.
+
+The volume, speed, and left/right balance of the music can be customized in the settings menu, and it also comes with a few different play modes. There are several other settings too, some of which are pretty niche.
+
+Playlists can be saved as .m3u files and are compatible with FLUX and FLELE. You can rearrange the order of your current playlist through another menu, although I don't really recommend it because it's clunky.
+
+The ghost will also send out an event every time the music changes, notifying other ghosts of what music it is playing.
+
+Great care has been taken to try and ensure that the menus for the music player update dynamically when the music changes, and also to keep the balloon from flickering at any point. If you find an area where the balloon flickers when you click buttons, please tell me about it so I can fix it.
+
+
+
+IMPLEMENTING THE MUSIC PLAYER:
+
+This music player took me several hours to create and maintain, so if you use it in your ghost please either leave my credit in the Help menu, or add a credit to me for the music player in your readme. I can be credited as Zichqec, with the link https://ukagaka.zichqec.com/
+You are free to study how this music player works if you want to try writing your own implementation, no credit required for that. I will also gladly answer any questions you may have!
+
+This will require some adjustment to slot into your ghost. Specifically, there is a label below for BUILT IN SHIORI EVENTS
+The functions there may already exist in your ghost and therefore cause errors. You will need to go over them carefully and integrate them into your ghost's existing code.
+
+In order for hotkeys to work, you must adjust your OnKeyPress. If you don't have OnKeyPress, you can rename the function MusicPlayer.OnKeyPress to just OnKeyPress
+If you have OnKeyPress, then you'll want to make it so that if a key is pressed while the hotkey changing menu is open, or that isn't one of your chosen hotkeys, it calls the MusicPlayer.OnKeyPress function.
+For example, this is how you would implement it into the setup included in the Simplicity template:
+
+OnKeyPress
+{
+	if MusicPlayer.ChangingHotkeys; MusicPlayer.HotkeyChange
+	elseif reference0 == "f1"; "\![open,readme]"
+	elseif reference0 == "t"; OnAiTalk
+	elseif reference0 == "r"; OnLastTalk
+	else; MusicPlayer.OnKeyPress
+}
+
+Similarly, you will also need to implement the hotspot function. If you don't have OnMouseDoubleClick, you can rename MusicPlayer.OnMouseDoubleClick to OnMouseDoubleClick. If you do have it, then much like the above, you can adjust your OnMouseDoubleClick so that if no recognized hotspots are clicked, it calls the MusicPlayer.OnMouseDoubleClick function.
+For example, here is how it could be implemented into the setup included in the Simplicity template (although you may need to adjust if the sakura is not the music player):
+OnMouseDoubleClick
+{
+	if reference5 == 0 //reference5 is the mouse button being clicked, in this case a left click
+	{
+		//reference3 is which character is being clicked
+		//If you want to add double click interactions, reference4 will be the name of the hitbox the mouse is over
+		if reference3 == 0
+		{
+			if reference4 == ""; OnSakuraMenu
+			else; MusicPlayer.OnMouseDoubleClick
+		}
+		else
+		{
+			OnKeroMenu
+		}
+	}
+}
+
+
+There are also optional Discord functions. These require a good bit of additional setup, I go into more detail in the DISCORD section. You can completely ignore them if you don't want them.
+
+I have left markers in the file for what bits you actually need to mess with. You should have a look at the section markers I have added, and also run searches for the following terms:
+
+//DIALOGUE:
+//CUSTOMIZE:
+
+DIALOGUE is anywhere that you may want to put custom dialogue.
+CUSTOMIZE is anywhere you may want to make small changes to the code to better suit your ghost.
+
+You will also definitely want to go over the functions in the FUNCTIONS THAT SHOULD BE CUSTOMIZED section. This has critical things such as which surfaces will be used while the ghost is singing.
+
+A function you might find helpful is the MusicPlayer.Singing function. It returns a 1 if music is currently playing, and a 0 if not. You can use this to add checks to functions like OnSurfaceRestore, to make sure your ghost stays in the singing poses while playing music.
+
+Another useful function is MusicPlayer.CurrentSongName, which outputs the name of the currently playing song.
+
+To initialize all of the music player's variables, you should call the following function in OnFirstBoot:
+MusicPlayer.SetDefaultSettings
+
+Additionally, I would recommend calling OnMusicPlayer.NotifySongInfo in your OnFirstBoot, OnBoot, and any other events that cause your ghost to open/close. This will ensure that your ghost updates any open ghosts on the status of the music player when it opens or closes.
+
+I will also recommend that you use developer_options.txt in order to prevent your playlists folder from ending up in your update files or nar files.
+
+If you run into any trouble do let me know and I will try to help you. If you find any bugs in the music player itself, please let me know and I will try to get them fixed.
+
+I may release new versions of this from time to time, but you will probably have to update this file piecemeal if you decide to update. Please check the GitHub repository for this file to see what changes have been made.
+https://github.com/Zichqec/music_player
+
+If you have an old version of this music player from before I updated the variable names, please run the function MusicPlayer.ConvertOldVariables before you open the music menu. This should convert all of the old variables over to the new ones.
+If you had already released a ghost with the old music player code in it, you can use this function in OnUpdateComplete to ensure the user's variables get converted.
+This conversion process may not be perfect, and some data may be lost. If there is an issue, please notify me and I will try to fix it. However, I cannot make any guarantees or take responsibility for lost data.
+*/
+
+/*
+Section names, for easy searching with Ctrl F:
+
+CORE FUNCTIONS
+FUNCTIONS THAT SHOULD BE CUSTOMIZED
+BUILT IN SHIORI EVENTS
+TOOLS
+DISCORD
+*/
+
+//—————————— CORE FUNCTIONS ——————————
+//The bulk of the menus and functions used by the music player. Most of this you won't need to touch.
+
+//Main music menu display; this displays the list of songs and the controls
+OnMusicPlayer.Menu : all
+{
+	MusicPlayer.ResetDefaultSettings
+	
+	_g = "\f[color,disable]" //Gray
+	_d = "\f[color,default]" //Default
+	
+	if _argv[0] != "manual" && MusicPlayer.BalloonIsOpen; "\C\![lock,balloonrepaint]\c"
+	
+	_starting_value = 0
+	if MusicPlayer.Pagination == "Paginated"
+	{
+		_starting_value = MusicPlayer.PageIndex * MusicPlayer.SongsPerPage
+	}
+	
+	"%(MusicPlayer.Scope)\c%(MusicPlayer.LargeBalloon)\_q\*\![set,autoscroll,disable]\![no-autopause]\f[anchorvisitedfontcolor,default.anchor]"
+	
+	//CUSTOMIZE: If you're using something other than OnSakuraMenu for your menu, or you're using this music player on a kero, you'll need to edit this button and the one at the bottom of the menu
+	"\![*]\q[Back,OnSakuraMenu]  \![*]\__q[blank]Close window\__q\n"
+	"\![*]\__q[OnMusicPlayer.Settings,Basic]Settings\__q  \![*]\__q[OnMusicPlayer.Info]Help\__q\n\n[half]"
+	
+	if MusicPlayer.PlayState == 0 //This is if no song is loaded in. The text will be grayed out until a song is chosen.
+	{
+		//The playbutton reference here is for if no song is loaded
+		//CUSTOMIZE: I've used align commands here to make the buttons jump around less, but this is not suitable for all balloons. If these buttons overlap on your balloon, you can use this commented out version instead, which just uses normal spaces.
+		//"%(_g)<<<   \![*]Pause       %(_d)\![*]\q[Play,OnMusicPlayer.PlaySong,,OnMusicPlayer.Menu]    %(_g)>>>%(_d)\n\n[half]"
+		
+		"%(_g)<<<   \![*]Pause%(_d)%(MusicPlayer.newline)\f[align,right]\![*]\q[Play,OnMusicPlayer.PlaySong,,OnMusicPlayer.Menu]    %(_g)>>>%(_d)\n\n[half]\f[align,left]"
+	}
+	else //If a song is loaded. The pause button will change to say resume if a song is currently paused.
+	{
+		/*
+		//CUSTOMIZE: As above, if you need to use regular spaces instead of align commands for your balloon, you can use this commented version instead
+		"\q[<<<,OnMusicPlayer.PrevSong]   "
+		
+		if MusicPlayer.PlayState == 2; "\![*]\q[Resume,OnMusicPlayer.PauseSong,OnMusicPlayer.Menu,resume]"
+		else; "\![*]\q[Pause,OnMusicPlayer.PauseSong,OnMusicPlayer.Menu,pause]   "
+		
+		"    \![*]\q[Stop,OnMusicPlayer.StopSong,OnMusicPlayer.Menu]    \q[>>>,OnMusicPlayer.NextSong]\n\n[half]"
+		*/
+		
+		"\q[<<<,OnMusicPlayer.PrevSong]   "
+		
+		if MusicPlayer.PlayState == 2; "\![*]\q[Resume,OnMusicPlayer.PauseSong,OnMusicPlayer.Menu,resume]"
+		else; "\![*]\q[Pause,OnMusicPlayer.PauseSong,OnMusicPlayer.Menu,pause]"
+		
+		"%(MusicPlayer.newline)\f[align,right]\![*]\q[Stop,OnMusicPlayer.StopSong,OnMusicPlayer.Menu]    \q[>>>,OnMusicPlayer.NextSong]\n\n[half]\f[align,left]"
+	}
+	
+	"Now playing: "
+	
+	if MusicPlayer.PlayState != 0
+	{
+		if MusicPlayer.CurrentSongIndex == -1; "\_a[OnMusicPlayer.SongLocation,""%(MusicPlayer.LastRemovedSong)""](Removed from playlist)\_a"
+		else; "\_a[OnMusicPlayer.SongLocation,""%(MusicPlayer.CurrentSongPath)""]%(MusicPlayer.CurrentSongName)\_a"
+	}
+	
+	if MusicPlayer.Pagination == "Paginated"
+	{
+		//Font tags to ensure no tofus or other weirdness
+		_up = "\f[name,calibri]▲\f[name,default]"
+		_down = "\f[name,calibri]▼\f[name,default]"
+		"\n\n[half]"
+		"\f[align,left]    "
+		switch MusicPlayer.PageIndex == 0
+		{
+			"\__q[OnMusicPlayer.PlaylistPage,previous]%(_up)%(_up)\__q"
+			"\f[color,disable]%(_up)%(_up)\f[color,default]"
+		}
+		"\_l[]\f[align,right]"
+		switch MusicPlayer.PageIndex == MusicPlayer.MaxPages
+		{
+			"\__q[OnMusicPlayer.PlaylistPage,next]%(_down)%(_down)\__q"
+			"\f[color,disable]%(_down)%(_down)\f[color,default]"
+		}
+		"    "
+		"\n \n[-100]\f[align,center]\__q[OnMusicPlayer.JumpToPlaylistPage]Page %(MusicPlayer.PageIndex + 1)/%(MusicPlayer.MaxPages + 1)\__q"
+		"\_l[]\f[align,left]"
+	}
+	
+	"\n\n[half]"
+	
+	_currentsong = IARRAY
+	for _i = 0; _i < ARRAYSIZE(MusicPlayer.CurrentPlaylist); _i++
+	{
+		_song = MusicPlayer.CurrentPlaylist[_i]
+		_song = SPLITPATH(_song)[2] //Picks out just the name of the file, no extension
+		_path = MusicPlayer.CurrentPlaylist[_i]
+		
+		if _i == MusicPlayer.CurrentSongIndex //If this is the song that's playing right now
+		{
+			_currentsong[0] = _song //Song name
+			_currentsong[1] = MusicPlayer.CurrentPlaylist[_i] //Song path
+		}
+		if MusicPlayer.Pagination == "Paginated" 
+		{
+			if _i < _starting_value; continue
+			if _i > _starting_value + (MusicPlayer.SongsPerPage - 1)
+			{
+				if _currentsong[0] == ""; continue
+				else; break
+			}
+		}
+
+		"\q[(x),OnMusicPlayer.RemoveSong,%(_i)] " //(x) button
+
+		if _i == MusicPlayer.CurrentSongIndex //If this is the song that's playing right now
+		{
+			"\f[bold,1]\f[italic,1]"
+		}
+		"\_a[OnMusicPlayer.PlaySong,%(_i),OnMusicPlayer.Menu,frommenu]%(_song)\_a\n"
+		if _i == MusicPlayer.CurrentSongIndex; "\f[bold,default]\f[italic,default]" //Reset the bold/italic if it was applied
+	}
+	
+	"\n"
+	
+	"\![*]\q[Back,OnSakuraMenu]  \![*]\__q[blank]Close window\__q"
+	
+	"\![unlock,balloonrepaint]\e __MUSIC_PLAYER_MAIN_MENU__" //Do not remove this, it's here so the menu can update dynamically
+}
+
+//Function that actually plays the songs
+OnMusicPlayer.PlaySong : all
+{
+	//reference0 - Index number of the song to play
+	//reference1 - What event to return to, if any (music menu, etc)
+	//reference2 - Special flags "justadded" or "frommenu" (frommenu makes the playlist reshuffle if the user clicks a new song from the song list)
+	
+	MusicPlayer.ResetDefaultSettings
+	
+	if MusicPlayer.IsMinimized //If it's minimized, the info will be coming from arguments rather than references
+	{
+		reference0 = _argv[1]
+	}
+	if ARRAYSIZE(MusicPlayer.CurrentPlaylist) > 0 //If there are more songs to play
+	{
+		_start_point = -1
+		if reference2 == "justadded" //Played after dragging and dropping
+		{
+			_start_point = ARRAYSIZE(MusicPlayer.CurrentPlaylist) - 1
+		}
+		elseif reference2 == "frommenu" //Picked direct from the menu
+		{
+			_start_point = reference0
+		}
+		elseif MusicPlayer.CurrentSongIndex == -1 //No song playing
+		{
+			_start_point = 0
+		}
+		//Otherwise, just play the current index that we were stopped at
+		
+		if _start_point != -1
+		{
+			MusicPlayer.CurrentSongIndex = _start_point
+			MusicPlayer.ShuffledPlaylist = MusicPlayer.ShufflePlaylist(MusicPlayer.CurrentSongIndex,MusicPlayer.CurrentPlaylist)
+			MusicPlayer.ShuffledIndex = 0
+		}
+		
+		if MusicPlayer.BalloonIsOpen && reference2 != "justadded"; "\C" //If the balloon is currently open other than when a song was just added, keep it open
+		
+		"%(MusicPlayer.Scope)%(MusicPlayer.SingingSurfaces)" //Start the singing animations if they weren't already started
+		
+		_send = ""
+		_send += "\![sound,stop]\![no-autopause]"
+		
+		_window = "False"
+		if MusicPlayer.SongBar == "On"; _window = "True"
+		
+		MusicPlayer.SongStartTime = GETSECCOUNT
+		MusicPlayer.PlayState = 1
+		
+		_send += "\![sound,play,""%(MusicPlayer.CurrentSongPath)"",--volume=%(MusicPlayer.Volume),--rate=%(MusicPlayer.Speed),--balance=%(MusicPlayer.Balance),--window=%(_window),--sound-only=true]"
+		_send += "%(OnMusicPlayer.NotifySongInfo)"
+		
+		if MusicPlayer.IsMinimized
+		{
+			MusicPlayer.MakeValueNotify(_send)
+		}
+		else
+		{
+			_send
+			
+			if reference1 != ""; "\![raise,%(reference1)]" //If music menu is already open, reopen it so that it highlights the correct song properly
+			elseif !MusicPlayer.MenuIsOpen
+			{
+				if MusicPlayer.SongAnnouncement == "If not in menu" || !SHIORI3FW.IsTalking && MusicPlayer.SongAnnouncement == "If not talking"
+				{
+					"%(MusicPlayer.Scope)%(MusicPlayer.SmallBalloon)\_q\![lock,balloonrepaint]\c"
+					
+					//DIALOGUE: Song announcement
+					"Now playing:\n%(MusicPlayer.CurrentSongName)"
+					"\![unlock,balloonrepaint]"
+				}
+			}
+		}
+	}
+	else //If there are no songs available to play
+	{
+		_from = MusicPlayer.CheckWhichMenu
+		
+		"\![raise,OnMusicPlayer.StopSong,""%(_from)""]"
+	}
+}
+
+//Stopping a song
+OnMusicPlayer.StopSong : all
+{
+	//reference0 is which menu this is coming from
+	
+	MusicPlayer.PlayState = 0 //Clearing paused song
+	MusicPlayer.StopAfterCurrent = "" //Reset the stop after current/playlist option
+	
+	if MusicPlayer.MenuIsOpen; "\C"
+	"\![no-autopause]"
+	
+	"\![sound,stop]"
+	
+	"%(MusicPlayer.NonSingingSurfaces)%(OnMusicPlayer.NotifySongInfo)" //Stop the singing animations
+	
+	if reference0 != ""; "\![raise,%(reference0)]" //If music menu is already open, reopen it so that it highlights the correct song properly
+}
+
+//Pausing or unpausing a song
+OnMusicPlayer.PauseSong : all
+{
+	//reference0 is which menu this is coming from
+	//reference1 is if we're pausing or resuming
+	_window = "False"
+	if MusicPlayer.SongBar == "On"; _window = "True"
+	
+	if MusicPlayer.MenuIsOpen; "\C" //If the balloon is open, keep it open
+	"\![no-autopause]"
+	"\![sound,option,""%(MusicPlayer.CurrentSongPath)"",--volume=%(MusicPlayer.Volume),--rate=%(MusicPlayer.Speed),--balance=%(MusicPlayer.Balance),--window=%(_window)]"
+	
+	if reference1 == "resume" //Unpausing
+	{
+		MusicPlayer.PlayState = 1
+		"%(MusicPlayer.SingingSurfaces)\![sound,resume]"
+	}
+	else //Pausing
+	{
+		MusicPlayer.PlayState = 2
+		"%(MusicPlayer.NonSingingSurfaces)\![sound,pause]"
+	}
+	
+	"%(OnMusicPlayer.NotifySongInfo)"
+	
+	if reference0 != ""; "\![raise,%(reference0)]" //If music menu is already open, reopen it so that it highlights the correct song properly
+}
+
+//The user pressed a hotkey or menu option to go to the next song
+OnMusicPlayer.NextSong : all
+{
+	//reference0 is which menu this is coming from
+
+	MusicPlayer.PlayState = 1
+	
+	_from = reference0
+	if _from == ""; _from = MusicPlayer.CheckWhichMenu //Sent to OnMusicPlayer.PlaySong
+	_next = 0
+	
+	if MusicPlayer.MenuIsOpen; "\C"
+	"\![no-autopause]"
+	
+	"\![sound,stop]"
+	
+	if ARRAYSIZE(MusicPlayer.CurrentPlaylist) > 0 //Songs available to play
+	{
+		if MusicPlayer.PlayMode == 4 //Random
+		{
+			_next = RAND(ARRAYSIZE(MusicPlayer.CurrentPlaylist))
+		}
+		elseif MusicPlayer.PlayMode == 1 //Shuffle and loop
+		{
+			if MusicPlayer.ShuffledIndex >= (ARRAYSIZE(MusicPlayer.CurrentPlaylist) - 1) //If this was the last song on the list
+			{
+				MusicPlayer.ShuffledIndex = 0
+			}
+			else //If there are more songs to go
+			{
+				MusicPlayer.ShuffledIndex++
+			}
+			_next = MusicPlayer.ShuffledPlaylist[MusicPlayer.ShuffledIndex]
+		}
+		else //Looping the list normally
+		{
+			if MusicPlayer.CurrentSongIndex >= (ARRAYSIZE(MusicPlayer.CurrentPlaylist) - 1) //If this was the last song on the list
+			{
+				_next = 0
+			}
+			else //If there are more songs to go
+			{
+				_next = MusicPlayer.CurrentSongIndex + 1
+			}
+		}
+		
+		MusicPlayer.CurrentSongIndex = _next //song position
+		
+		"\![raise,OnMusicPlayer.PlaySong,%(MusicPlayer.CurrentSongIndex),""%(_from)""]"
+	}
+	else //No more songs to play
+	{
+		"\![raise,OnMusicPlayer.StopSong,""%(_from)""]"
+	}
+}
+
+//The user pressed a hotkey or menu option to go to the previous song
+OnMusicPlayer.PrevSong : all
+{
+	//reference0 is which menu this is coming from
+
+	MusicPlayer.PlayState = 1
+	
+	_from = reference0
+	if _from == ""; _from = MusicPlayer.CheckWhichMenu //Sent to OnMusicPlayer.PlaySong
+	
+	_next = 0
+	
+	if MusicPlayer.MenuIsOpen; "\C"
+	"\![no-autopause]"
+	
+	"\![sound,stop]"
+	
+	if ARRAYSIZE(MusicPlayer.CurrentPlaylist) > 0 //Songs available to play
+	{
+		_diff = GETSECCOUNT - MusicPlayer.SongStartTime
+		
+		if MusicPlayer.PreviousButton == "Restarts song" && _diff > 3
+		{
+			_next = MusicPlayer.CurrentSongIndex
+		}
+		else
+		{
+			if MusicPlayer.PlayMode == 4 //Random
+			{
+				_next = RAND(ARRAYSIZE(MusicPlayer.CurrentPlaylist))
+			}
+			elseif MusicPlayer.PlayMode == 1 //Shuffle and loop
+			{
+				if MusicPlayer.ShuffledIndex <= 0 //If this was the last song on the list
+				{
+					MusicPlayer.ShuffledIndex = ARRAYSIZE(MusicPlayer.CurrentPlaylist) - 1
+				}
+				else //If there are more songs to go
+				{
+					MusicPlayer.ShuffledIndex--
+				}
+				_next = MusicPlayer.ShuffledPlaylist[MusicPlayer.ShuffledIndex]
+			}
+			else //Looping the list normally
+			{
+				if MusicPlayer.CurrentSongIndex <= 0 //If this was the last song on the list
+				{
+					_next = ARRAYSIZE(MusicPlayer.CurrentPlaylist) - 1
+				}
+				else //If there are more songs to go
+				{
+					_next = MusicPlayer.CurrentSongIndex - 1
+				}
+			}
+		}
+		
+		MusicPlayer.CurrentSongIndex = _next //song position
+		
+		"\![raise,OnMusicPlayer.PlaySong,%(MusicPlayer.CurrentSongIndex),""%(_from)""]"
+	}
+	else //No songs available to play
+	{
+		"\![raise,OnMusicPlayer.StopSong,""%(_from)""]"
+	}
+}
+
+//Removing a song from the current playlist
+OnMusicPlayer.RemoveSong : all
+{
+	_origmax = MusicPlayer.MaxPages
+	MusicPlayer.LastRemovedSong = MusicPlayer.CurrentSongPath
+	
+	if MusicPlayer.PlayState == 2 && reference0 == MusicPlayer.CurrentSongIndex; MusicPlayer.PlayState = 0 //If the song being removed was the paused song, clear it
+	MusicPlayer.CurrentPlaylist[reference0] = IARRAY //Clear the song that we want to remove
+	
+	if reference0 < MusicPlayer.CurrentSongIndex; MusicPlayer.CurrentSongIndex = MusicPlayer.CurrentSongIndex - 1
+	elseif reference0 == MusicPlayer.CurrentSongIndex; MusicPlayer.CurrentSongIndex = -1
+	
+	if MusicPlayer.CurrentSongPath == MusicPlayer.CurrentPlaylist[reference0] //If the song being removed is being played, remove it from the shuffle list
+	{
+		MusicPlayer.ShuffledPlaylist = MusicPlayer.ShufflePlaylist('|removed|',MusicPlayer.CurrentPlaylist) //Send a placeholder for the song that was already removed, and shuffle the playlist
+	}
+	else //If another song is playing
+	{
+		MusicPlayer.ShuffledPlaylist = MusicPlayer.ShufflePlaylist(MusicPlayer.CurrentSongIndex,MusicPlayer.CurrentPlaylist) //Shuffle with the current song as 1
+	}
+	
+	if _origmax > MusicPlayer.MaxPages && MusicPlayer.PageIndex == _origmax
+	{
+		if _origmax > 0; MusicPlayer.PageIndex--
+	}
+	
+	"\C\![no-autopause]%(OnMusicPlayer.NotifySongInfo)\![raise,OnMusicPlayer.Menu]"
+}
+
+OnMusicPlayer.PlaylistPage
+{
+	if reference0 == "next"; MusicPlayer.PageIndex++
+	else; MusicPlayer.PageIndex--
+	
+	if MusicPlayer.PageIndex > MusicPlayer.MaxPages; MusicPlayer.PageIndex = MusicPlayer.MaxPages
+	if MusicPlayer.PageIndex < 0; MusicPlayer.PageIndex = 0
+	
+	OnMusicPlayer.Menu
+}
+
+OnMusicPlayer.JumpToPlaylistPage : all
+{
+	"\C\![lock,balloonrepaint]\c%(MusicPlayer.Scope)%(MusicPlayer.LargeBalloon)\_q\![set,autoscroll,disable]\![no-autopause]"
+	"\![open,inputbox,OnMusicPlayer.JumpIndex,-1]"
+	
+	//DIALOGUE: Typing in a page number to jump to manually in the playlist
+	"Write a page number to jump to, from 1 to %(MusicPlayer.MaxPages + 1)"
+	"\n\n"
+	"\![*]\__q[OnMusicPlayer.JumpToCurrent]Jump to location of current song\__q"
+	"\n\n"
+	"\![*]\__q[OnMusicPlayer.JumpBack]Back\__q"
+	
+	"\![unlock,balloonrepaint]"
+}
+
+OnMusicPlayer.JumpIndex : all
+{
+	_num = reference0 - 1
+	if GETTYPE(reference0) == 1 && (_num >= 0 && _num <= MusicPlayer.MaxPages)
+	{
+		MusicPlayer.PageIndex = _num
+		
+		OnMusicPlayer.Menu
+	}
+	else
+	{
+		//DIALOGUE: Putting in an invalid number, or something that isn't a number
+		"%(MusicPlayer.Scope)%(MusicPlayer.LargeBalloon)\_q\![set,autoscroll,disable]\![no-autopause]"
+		"Invalid input.\x\![raise,OnMusicPlayer.JumpToPlaylistPage]"
+	}
+}
+
+OnMusicPlayer.JumpToCurrent
+{
+	MusicPlayer.PageIndex = MusicPlayer.CurrentSongIndex / MusicPlayer.SongsPerPage
+	
+	"\C\![close,inputbox,OnMusicPlayer.JumpIndex]\![raise,OnMusicPlayer.Menu]"
+}
+
+OnMusicPlayer.JumpBack
+{
+	"\C\![close,inputbox,OnMusicPlayer.JumpIndex]\![raise,OnMusicPlayer.Menu]"
+}
+
+//Open the folder of the currently playing song
+OnMusicPlayer.SongLocation
+{
+	_path = SPLITPATH(reference0)[0] + SPLITPATH(reference0)[1]
+	_path = ERASE(_path,STRLEN(_path) - 1,1) //Erases the last backslash
+	
+	"\![open,file,""%(_path)""]\![raise,OnMusicPlayer.Menu]"
+}
+
+//Settings menu
+OnMusicPlayer.Settings : all
+{
+	MusicPlayer.ResetDefaultSettings
+	if reference0 != ""; MusicPlayer.LastMenuTab = reference0
+	else; reference0 = MusicPlayer.LastMenuTab
+	_isbasic = 0
+	if !(reference0 == "Advanced" || reference0 == "Playlists" || reference0 == "Hotkeys"); _isbasic = 1
+	
+	"\C%(MusicPlayer.Scope)\![lock,balloonrepaint]\c\![set,autoscroll,disable]\![no-autopause]\_q\*%(MusicPlayer.LargeBalloon)\f[anchorvisitedfontcolor,default.anchor]"
+	
+	_g = "\f[color,disable]"
+	_d = "\f[color,default]"
+	
+	"\![*]"
+	switch _isbasic
+	{
+		"%(_g)\__q[OnMusicPlayer.Settings,Basic]Basic\__q%(_d)"
+		"\__q[OnMusicPlayer.Settings,Basic]Basic\__q"
+	}
+	"  \![*]"
+	switch reference0 == "Advanced"
+	{
+		"%(_g)\__q[OnMusicPlayer.Settings,Advanced]Advanced\__q%(_d)"
+		"\__q[OnMusicPlayer.Settings,Advanced]Advanced\__q"
+	}
+	"\n\![*]"
+	switch reference0 == "Playlists"
+	{
+		"%(_g)\__q[OnMusicPlayer.Settings,Playlists]Playlists\__q%(_d)"
+		"\__q[OnMusicPlayer.Settings,Playlists]Playlists\__q"
+	}
+	"  \![*]"
+	switch reference0 == "Hotkeys"
+	{
+		"%(_g)\__q[OnMusicPlayer.Settings,Hotkeys]Hotkeys\__q%(_d)"
+		"\__q[OnMusicPlayer.Settings,Hotkeys]Hotkeys\__q"
+	}
+	"\n\n"
+	
+	if reference0 == "Advanced"; MusicPlayer.Settings.Advanced
+	elseif reference0 == "Playlists"; MusicPlayer.Settings.Playlists
+	elseif reference0 == "Hotkeys"; MusicPlayer.Settings.Hotkeys
+	else; MusicPlayer.Settings.Basic
+	
+	"\n\n\![*]\__q[OnMusicPlayer.Menu]Back to music menu\__q  \![*]\__q[OnMusicPlayer.SettingsClose]Close window\__q"
+	"\![unlock,balloonrepaint]"
+	if _isbasic && MusicPlayer.Singing; "\![timerraise,1000,1,OnMusicPlayer.SettingsRecall]"
+	"\e __MUSIC_SETTINGS_MENU__,%(_isbasic)__"
+}
+
+OnMusicPlayer.SettingsRecall
+{
+	if "__MUSIC_SETTINGS_MENU__,1__" _in_ MusicPlayer.LastTalk
+	{
+		OnMusicPlayer.Settings
+	}
+}
+
+OnMusicPlayer.SettingsClose
+{
+	"\b[-1]"
+}
+
+MusicPlayer.Settings.Basic : all
+{
+	_h = "\f[color,default.anchor]"
+	_g = "\f[color,disable]"
+	_d = "\f[color,default]"
+	
+	_mode = MusicPlayer.PlayMode
+	_vol = MusicPlayer.Volume
+	_speed = MusicPlayer.Speed
+	_bal = MusicPlayer.Balance
+	
+	if _mode == 1; _mode = "Shuffle and Loop"
+	elseif _mode == 2; _mode = "Loop One Song"
+	elseif _mode == 3; _mode = "Play One Song"
+	elseif _mode == 4; _mode = "Random"
+	else; _mode = "Loop Playlist"
+	
+	//▲▼⯇⯈ - buttons for ease of copying
+	//Setting fonts so we don't get tofus or anything else weird...
+	_up = "\f[name,calibri]▲\f[name,default]"
+	_down = "\f[name,calibri]▼\f[name,default]"
+	_left = "\f[name,calibri]⯇\f[name,default]"
+	_right = "\f[name,calibri]⯈\f[name,default]"
+	
+	//Doing this here so that the menu bit itself can be cleaner... This is just handling graying out the buttons if clicking them would do nothing.
+	_vol_up_btn = "\__q[OnMusicPlayer.QuickVolume,Up]%(_up)\__q"
+	if MusicPlayer.Volume >= 100; _vol_up_btn = "%(_g)%(_up)%(_d)"
+	_vol_down_btn = "\__q[OnMusicPlayer.QuickVolume,Down]%(_down)\__q"
+	if MusicPlayer.Volume <= 0; _vol_down_btn = "%(_g)%(_down)%(_d)"
+	
+	_speed_up_btn = "\__q[OnMusicPlayer.QuickSpeed,Up]%(_up)\__q"
+	if MusicPlayer.Speed >= MusicPlayer.MaxRate; _speed_up_btn = "%(_g)%(_up)%(_d)"
+	_speed_down_btn = "\__q[OnMusicPlayer.QuickSpeed,Down]%(_down)\__q"
+	if MusicPlayer.Speed <= 0; _speed_down_btn = "%(_g)%(_down)%(_d)"
+	
+	_balance_left_btn = "\__q[OnMusicPlayer.QuickBalance,Left]%(_left)\__q"
+	if MusicPlayer.Balance <= -100; _balance_left_btn = "%(_g)%(_left)%(_d)"
+	_balance_right_btn = "\__q[OnMusicPlayer.QuickBalance,Right]%(_right)\__q"
+	if MusicPlayer.Balance >= 100; _balance_right_btn = "%(_g)%(_right)%(_d)"
+	
+	
+	"Play mode: \![*]%(_h)\_a[OnMusicPlayer.PlaybackType]%(_mode)\_a%(_d)\n\n[half]"
+	"Volume: %(_vol_up_btn)%(_vol_down_btn) \_a[OnMusicPlayer.SetOption,Volume]%(_vol)\_a\n"
+	"Speed: %(_speed_up_btn)%(_speed_down_btn) \_a[OnMusicPlayer.SetOption,Speed]%(_speed)\_a\n"
+	"Left/right balance: %(_balance_left_btn)%(_balance_right_btn) \_a[OnMusicPlayer.SetOption,Balance]%(_bal)\_a\n\n"
+	
+	switch MusicPlayer.PlayMode != 3
+	{
+		"\f[color,disable]Stop after current song\f[color,default]"
+		"\__q[OnMusicPlayer.StopAfterPlayback,song]Stop after current song\__q"
+	}
+	if MusicPlayer.StopAfterCurrent == "stop after playback"; " \![*]"
+	"\n"
+	switch MusicPlayer.PlayMode == 0 || MusicPlayer.PlayMode == 1
+	{
+		"\f[color,disable]Stop after playlist ends\f[color,default]"
+		"\__q[OnMusicPlayer.StopAfterPlayback,playlist]Stop after playlist ends\__q"
+	}
+	if MusicPlayer.StopAfterCurrent == "stop after playlist"; " \![*]"
+	
+	//CUSTOMIZE: You'll want to remove this last part if you don't set up the playtime counter in OnSecondChange.
+	"\n\n"
+	"Total playtime:\n"
+	"%(MusicPlayer.DisplayPlaytime(MusicPlayer.Playtime))"
+}
+
+MusicPlayer.Settings.Advanced : all
+{
+	"Song Bar \![*]\_a[OnMusicPlayer.ToggleSongBar]%(MusicPlayer.SongBar)\_a\n"
+	"Hotspot tooltips \![*]\_a[OnMusicPlayer.ToggleTooltips]%(MusicPlayer.Tooltips)\_a\n"
+	"\n"
+	"Song announcements \![*]\_a[OnMusicPlayer.ToggleSongAnnouncement]%(MusicPlayer.SongAnnouncement)\_a\n"
+	"Prioritize \![*]\_a[OnMusicPlayer.TogglePriority]%(MusicPlayer.Priority)\_a\n"
+	"\n"
+	"Scroll wheel controls \![*]\_a[OnMusicPlayer.ToggleScrollWheel]%(MusicPlayer.Scroll)\_a\n"
+	"Previous button \![*]\_a[OnMusicPlayer.TogglePreviousButton]%(MusicPlayer.PreviousButton)\_a\n"
+	"\n"
+	"Playlist view \![*]\_a[OnMusicPlayer.TogglePagination]%(MusicPlayer.Pagination)\_a\n"
+	"\n"
+	"\![*]\__q[OnMusicPlayer.ScootSongMenuWarn]Move songs in playlist\__q"
+	
+	//CUSTOMIZE: If you want Discord functionality, you'll need to uncomment this
+	/*
+	"\n"
+	"Show current song in Discord? \_a[OnMusicPlayer.ToggleDiscordPlugin]%(MusicPlayer.DiscordDisplay)\_a"
+	*/
+}
+
+
+MusicPlayer.Settings.Playlists : all
+{
+	"\![*]\__q[OnMusicPlayer.SavePlaylist]Save current playlist\__q\n"
+	"\![*]\__q[OnMusicPlayer.LoadPlaylist]Load playlist\__q\n"
+	"\![*]\__q[OnMusicPlayer.ClearPlaylist]Clear current playlist\__q\n"
+	"\n"
+	"Length of current playlist:\n%(ARRAYSIZE(MusicPlayer.CurrentPlaylist)) songs"
+	
+}
+
+
+MusicPlayer.Settings.Hotkeys : all
+{	
+	_msg = "Unbound"
+	
+	if MusicPlayer.Hotkeys[0] == ""; MusicPlayer.Hotkeys[0] = _msg //Play/pause
+	if MusicPlayer.Hotkeys[1] == ""; MusicPlayer.Hotkeys[1] = _msg //Next
+	if MusicPlayer.Hotkeys[2] == ""; MusicPlayer.Hotkeys[2] = _msg //Previous
+	if MusicPlayer.Hotkeys[3] == ""; MusicPlayer.Hotkeys[3] = _msg //Stop
+	if MusicPlayer.Hotkeys[4] == ""; MusicPlayer.Hotkeys[4] = _msg //Menu
+	if MusicPlayer.Hotkeys[5] == ""; MusicPlayer.Hotkeys[5] = _msg //Volume Up
+	if MusicPlayer.Hotkeys[6] == ""; MusicPlayer.Hotkeys[6] = _msg //Volume Down
+	if MusicPlayer.Hotkeys[7] == ""; MusicPlayer.Hotkeys[7] = _msg //Speed Up
+	if MusicPlayer.Hotkeys[8] == ""; MusicPlayer.Hotkeys[8] = _msg //Speed Down
+	if MusicPlayer.Hotkeys[9] == ""; MusicPlayer.Hotkeys[9] = _msg //Balance Left
+	if MusicPlayer.Hotkeys[10] == ""; MusicPlayer.Hotkeys[10] = _msg //Balance Right
+	if MusicPlayer.Hotkeys[11] == ""; MusicPlayer.Hotkeys[11] = _msg //Song Bar
+	
+	
+	_playpause = MusicPlayer.Hotkeys[0]
+	_next = MusicPlayer.Hotkeys[1]
+	_prev = MusicPlayer.Hotkeys[2]
+	_stop = MusicPlayer.Hotkeys[3]
+	_menu = MusicPlayer.Hotkeys[4]
+	_songbar = MusicPlayer.Hotkeys[5]
+	_volup = MusicPlayer.Hotkeys[6]
+	_voldown = MusicPlayer.Hotkeys[7]
+	_speedup = MusicPlayer.Hotkeys[8]
+	_speeddown = MusicPlayer.Hotkeys[9]
+	_balanceleft = MusicPlayer.Hotkeys[10]
+	_balanceright = MusicPlayer.Hotkeys[11]
+
+	_h = "\f[color,default.anchor]" //Highlight color
+	_d = "\f[color,default]" //Default color
+
+	"\q[(x),OnMusicPlayer.UnsetHotkey,0] \__q[OnMusicPlayer.ChangeHotkey,0]Play/Pause: %(_h)%(_playpause)%(_d)\__q\n"
+	"\q[(x),OnMusicPlayer.UnsetHotkey,1] \__q[OnMusicPlayer.ChangeHotkey,1]Next Song: %(_h)%(_next)%(_d)\__q\n"
+	"\q[(x),OnMusicPlayer.UnsetHotkey,2] \__q[OnMusicPlayer.ChangeHotkey,2]Previous Song: %(_h)%(_prev)%(_d)\__q\n"
+	"\q[(x),OnMusicPlayer.UnsetHotkey,3] \__q[OnMusicPlayer.ChangeHotkey,3]Stop Song: %(_h)%(_stop)%(_d)\__q\n"
+	"\q[(x),OnMusicPlayer.UnsetHotkey,4] \__q[OnMusicPlayer.ChangeHotkey,4]Open Music Menu: %(_h)%(_menu)%(_d)\__q\n"
+	"\q[(x),OnMusicPlayer.UnsetHotkey,5] \__q[OnMusicPlayer.ChangeHotkey,5]Toggle Song Bar: %(_h)%(_songbar)%(_d)\__q\n\n"
+	
+	"\q[(x),OnMusicPlayer.UnsetHotkey,6] \__q[OnMusicPlayer.ChangeHotkey,6]Volume Up: %(_h)%(_volup)%(_d)\__q\n"
+	"\q[(x),OnMusicPlayer.UnsetHotkey,7] \__q[OnMusicPlayer.ChangeHotkey,7]Volume Down: %(_h)%(_voldown)%(_d)\__q\n"
+	"\q[(x),OnMusicPlayer.UnsetHotkey,8] \__q[OnMusicPlayer.ChangeHotkey,8]Speed Up: %(_h)%(_speedup)%(_d)\__q\n"
+	"\q[(x),OnMusicPlayer.UnsetHotkey,9] \__q[OnMusicPlayer.ChangeHotkey,9]Speed Down: %(_h)%(_speeddown)%(_d)\__q\n"
+	"\q[(x),OnMusicPlayer.UnsetHotkey,10] \__q[OnMusicPlayer.ChangeHotkey,10]Balance Left: %(_h)%(_balanceleft)%(_d)\__q\n"
+	"\q[(x),OnMusicPlayer.UnsetHotkey,11] \__q[OnMusicPlayer.ChangeHotkey,11]Balance Right: %(_h)%(_balanceright)%(_d)\__q"
+	
+	"\![unlock,balloonrepaint]"
+}
+
+//Changing the playback type
+OnMusicPlayer.PlaybackType : all
+{
+	"%(MusicPlayer.Scope)%(MusicPlayer.LargeBalloon)\_q\![no-autopause]"
+	
+	"\![*]\q[Loop Playlist,OnMusicPlayer.PlaybackTypeChange,0]\n"
+	"\![*]\q[Shuffle and Loop,OnMusicPlayer.PlaybackTypeChange,1]\n"
+	"\![*]\q[Loop One Song,OnMusicPlayer.PlaybackTypeChange,2]\n"
+	"\![*]\q[Play One Song,OnMusicPlayer.PlaybackTypeChange,3]\n"
+	"\![*]\q[Random,OnMusicPlayer.PlaybackTypeChange,4]\n"
+	"\n"
+	"\![*]\q[Back to music settings,OnMusicPlayer.Settings]"
+}
+
+//Actually making the change
+OnMusicPlayer.PlaybackTypeChange
+{
+	reference0 = TOINT(reference0)
+	MusicPlayer.PlayMode = reference0
+	if reference0 == 1 //If the user set it to shuffle, shuffle the playlist
+	{
+		MusicPlayer.ShuffledPlaylist = MusicPlayer.ShufflePlaylist(MusicPlayer.CurrentSongIndex,MusicPlayer.CurrentPlaylist)
+		MusicPlayer.ShuffledIndex = 0
+	}
+	OnMusicPlayer.Settings
+}
+
+//Bringing up input boxes
+OnMusicPlayer.SetOption : all
+{
+	"%(MusicPlayer.Scope)%(MusicPlayer.LargeBalloon)\_q\*\![no-autopause]"
+	
+	if reference0 == "Balance"; "\![open,inputbox,OnMusicPlayer.Balance,-1]"
+	elseif reference0 == "Speed"; "\![open,sliderinput,OnMusicPlayer.Speed,-1,100,1,%(MusicPlayer.MaxRate)]"
+	else; "\![open,sliderinput,OnMusicPlayer.Volume,-1,100,1,100]"
+	
+	//DIALOGUE: Dialogue for when you click the numbers for volume/speed/balance to set them directly.
+	if reference0 == "Balance"
+	{
+		"Type a balance value. 0 is center, -100 is all the way to the left, 100 is all the way to the right."
+	}
+	elseif reference0 == "Speed"
+	{
+		"Pick a speed from 0 to %(MusicPlayer.MaxRate). 100 is the default."
+	}
+	else //volume
+	{
+		"Pick a volume from 0 to 100. 100 is the default."
+	}
+	
+	"\n\n\![*]\q[Cancel,OnMusicPlayer.SetOptionClose,%(reference0)]"
+}
+
+//Setting the balance
+OnMusicPlayer.Balance : all
+{
+	MusicPlayer.Balance = TOINT(reference0)
+	if MusicPlayer.Balance > 100; MusicPlayer.Balance = 100
+	if MusicPlayer.Balance < -100; MusicPlayer.Balance = -100
+	
+	if MusicPlayer.Singing; "\![sound,option,""%(MusicPlayer.CurrentSongPath)"",--balance=%(MusicPlayer.Balance)]"
+	
+	OnMusicPlayer.Settings
+}
+
+//Setting the speed
+OnMusicPlayer.Speed : all
+{
+	MusicPlayer.Speed = reference0
+	
+	if MusicPlayer.Singing; "\![sound,option,""%(MusicPlayer.CurrentSongPath)"",--rate=%(MusicPlayer.Speed)]"
+	
+	OnMusicPlayer.Settings
+}
+
+//Setting the volume
+OnMusicPlayer.Volume : all
+{
+	MusicPlayer.Volume = reference0
+	
+	if MusicPlayer.Singing; "\![sound,option,""%(MusicPlayer.CurrentSongPath)"",--volume=%(MusicPlayer.Volume)]"
+	
+	OnMusicPlayer.Settings
+}
+
+//If the user cancels the changes, this'll close the input boxes
+OnMusicPlayer.SetOptionClose : all
+{
+	"\C\![close,inputbox,OnMusicPlayer.%(reference0)]"
+	
+	OnMusicPlayer.Settings
+}
+
+//Up/Down volume buttons
+OnMusicPlayer.QuickVolume : all
+{
+	_amt = 5
+	if _argv[1] != ""; _amt = _argv[1]
+	
+	if reference0 == "Up" || _argv[0] == "Up"
+	{
+		MusicPlayer.Volume += _amt
+		if MusicPlayer.Volume > 100; MusicPlayer.Volume = 100
+	}
+	else //Down
+	{
+		MusicPlayer.Volume -= _amt
+		if MusicPlayer.Volume < 0; MusicPlayer.Volume = 0
+	}
+	if MusicPlayer.Singing
+	{
+		if MusicPlayer.MenuIsOpen; "\C"
+		
+		"\![sound,option,""%(MusicPlayer.CurrentSongPath)"",--volume=%(MusicPlayer.Volume)]"
+	}
+	
+	
+	if "__MUSIC_SETTINGS_MENU__,1__" _in_ MusicPlayer.LastTalk; OnMusicPlayer.Settings //Only refresh in the music settings menu
+	elseif "changing hotkey: " _in_ MusicPlayer.LastTalk; "\e: changing hotkey: %(MusicPlayer.CheckWhichMenu[1])" //Or if setting hotkeys...
+}
+
+//Up/Down speed buttons
+OnMusicPlayer.QuickSpeed : all
+{
+	_amt = 5
+	if _argv[1] != ""; _amt = _argv[1]
+	
+	if reference0 == "Up" || _argv[0] == "Up"
+	{
+		MusicPlayer.Speed += _amt
+		if MusicPlayer.Speed > MusicPlayer.MaxRate; MusicPlayer.Speed = MusicPlayer.MaxRate
+	}
+	else //Down
+	{
+		MusicPlayer.Speed -= _amt
+		if MusicPlayer.Speed < 0; MusicPlayer.Speed = 0
+	}
+	if MusicPlayer.Singing
+	{
+		if MusicPlayer.MenuIsOpen; "\C"
+		
+		"\![sound,option,""%(MusicPlayer.CurrentSongPath)"",--rate=%(MusicPlayer.Speed)]"
+	}
+	
+	if "__MUSIC_SETTINGS_MENU__,1__" _in_ MusicPlayer.LastTalk; OnMusicPlayer.Settings //Only refresh in the music settings menu
+	elseif "changing hotkey: " _in_ MusicPlayer.LastTalk; "\e: changing hotkey: %(MusicPlayer.CheckWhichMenu[1])" //Or if setting hotkeys...
+}
+
+//Left/Right balance buttons
+OnMusicPlayer.QuickBalance : all
+{
+	_amt = 5
+	if _argv[1] != ""; _amt = _argv[1]
+	
+	if reference0 == "Right" || _argv[0] == "Right"
+	{
+		MusicPlayer.Balance += _amt
+		if MusicPlayer.Balance > 100; MusicPlayer.Balance = 100
+	}
+	else //Left
+	{
+		MusicPlayer.Balance -= _amt
+		if MusicPlayer.Balance < -100; MusicPlayer.Balance = 0
+	}
+	if MusicPlayer.Singing
+	{
+		if MusicPlayer.MenuIsOpen; "\C"
+		
+		"\![sound,option,""%(MusicPlayer.CurrentSongPath)"",--balance=%(MusicPlayer.Balance)]"
+	}
+	
+	if "__MUSIC_SETTINGS_MENU__,1__" _in_ MusicPlayer.LastTalk; OnMusicPlayer.Settings //Only refresh in the music settings menu
+	elseif "changing hotkey: " _in_ MusicPlayer.LastTalk; "\e: changing hotkey: %(MusicPlayer.CheckWhichMenu[1])" //Or if setting hotkeys...
+}
+
+//Toggles the stop after playback function
+OnMusicPlayer.StopAfterPlayback 
+{
+	if reference0 == "playlist" && MusicPlayer.StopAfterCurrent != "stop after playlist"; MusicPlayer.StopAfterCurrent = "stop after playlist"
+	elseif reference0 == "song" && MusicPlayer.StopAfterCurrent != "stop after playback"; MusicPlayer.StopAfterCurrent = "stop after playback"
+	else; MusicPlayer.StopAfterCurrent = ""
+	
+
+	OnMusicPlayer.Settings
+}
+
+OnMusicPlayer.ToggleSongBar : all
+{
+	if MusicPlayer.SongBar != "Off"; MusicPlayer.SongBar = "Off"
+	else; MusicPlayer.SongBar = "On"
+	
+	_onoff = "False"
+	if MusicPlayer.SongBar == "On"; _onoff = "True"
+	
+	if MusicPlayer.MenuIsOpen; "\C"
+	
+	if MusicPlayer.PlayState > 0; "\![sound,option,""%(MusicPlayer.CurrentSongPath)"",--window=%(_onoff)]"
+	
+	if _argc == 0; OnMusicPlayer.Settings //If this was done with the buttons - there will be no args in that case
+	elseif _argv[1] != "" //If a menu is listed to refresh
+	{
+		"\C\![raise,%(_argv[1])]"
+	}
+}
+
+OnMusicPlayer.ToggleTooltips : all
+{
+	if MusicPlayer.Tooltips != "Off"; MusicPlayer.Tooltips = "Off"
+	else; MusicPlayer.Tooltips = "On"
+	
+	OnMusicPlayer.Settings
+}
+
+OnMusicPlayer.ToggleSongAnnouncement : all
+{
+	if MusicPlayer.SongAnnouncement == "Off"; MusicPlayer.SongAnnouncement = "If not talking"
+	elseif MusicPlayer.SongAnnouncement == "If not talking"; MusicPlayer.SongAnnouncement = "If not in menu"
+	else; MusicPlayer.SongAnnouncement = "Off"
+	
+	OnMusicPlayer.Settings
+}
+
+OnMusicPlayer.TogglePriority : all
+{
+	if MusicPlayer.Priority != "Seamless music"; MusicPlayer.Priority = "Seamless music"
+	else; MusicPlayer.Priority = "Dialogue"
+	
+	OnMusicPlayer.Settings
+}
+
+OnMusicPlayer.ToggleScrollWheel : all
+{
+	if MusicPlayer.Scroll == "Volume"; MusicPlayer.Scroll = "Speed"
+	elseif MusicPlayer.Scroll == "Speed"; MusicPlayer.Scroll = "Balance"
+	elseif MusicPlayer.Scroll == "Balance"; MusicPlayer.Scroll = "Off"
+	else; MusicPlayer.Scroll = "Volume"
+	
+	OnMusicPlayer.Settings
+}
+
+OnMusicPlayer.TogglePreviousButton : all
+{
+	if MusicPlayer.PreviousButton != "Goes to previous song"; MusicPlayer.PreviousButton = "Goes to previous song"
+	else; MusicPlayer.PreviousButton = "Restarts song"
+	
+	OnMusicPlayer.Settings
+}
+
+OnMusicPlayer.TogglePagination : all
+{
+	if MusicPlayer.Pagination != "One long list (slower)"; MusicPlayer.Pagination = "One long list (slower)"
+	else; MusicPlayer.Pagination = "Paginated"
+	
+	OnMusicPlayer.Settings
+}
+
+//Menu for moving songs around in the playlist. I'd like to make this better, but alas...
+OnMusicPlayer.ScootSongMenuWarn : all
+{
+	if ARRAYSIZE(MusicPlayer.CurrentPlaylist) > 100
+	{
+		//DIALOGUE: A little warning before opening the move songs menu if you have a lot of songs loaded, since it will run slowly (REALLY slowly if there are a lot...)
+		"%(MusicPlayer.Scope)%(MusicPlayer.LargeBalloon)\_q\*\![set,autoscroll,disable]\![no-autopause]"
+		
+		"Warning: there are currently %(ARRAYSIZE(MusicPlayer.CurrentPlaylist)) songs in the playlist.\n"
+		"This menu is not paginated and will run slowly. Open it anyways?"
+		"\n\n"
+		"(Note: Playlists are saved as .m3u files and can be edited in a text editor such as Notepad++ if you wish to do mass editing or edit a long playlist.)"
+		
+		"\n\n"
+		"\![*]\__q[OnMusicPlayer.ScootSongMenu]Yes, open the menu\__q"
+		"\n\n"
+		"\![*]\__q[OnMusicPlayer.Settings]No, go back to settings\__q"
+	}
+	else
+	{
+		"\C\![raise,OnMusicPlayer.ScootSongMenu]"
+	}
+}
+
+OnMusicPlayer.ScootSongMenu : all
+{
+	//CUSTOMIZE: This is the menu for moving songs in the playlist. The value below determines how much of the file name should be displayed before it shows an ellipsis. Adjust as needed to fit your balloon.
+	_max_name_length = 23 //Max length of names in this menu. After this number of characters it will write an ellipsis
+	
+	_h = "\f[color,default.anchor]"
+	_g = "\f[color,disable]"
+	_d = "\f[color,default]"
+	
+	if reference1 != ""; "\C%(MusicPlayer.Scope)\![lock,balloonrepaint]\c"
+	
+	"%(MusicPlayer.Scope)%(MusicPlayer.LargeBalloon)\_q\*\![no-autopause]"
+	
+	"\![*]\q[Back,OnMusicPlayer.Settings]\n\n"
+	
+	if reference1 == "top"; "\![set,autoscroll,disable]"
+	
+	_currentsong = IARRAY
+	for _i = 0; _i < ARRAYSIZE(MusicPlayer.CurrentPlaylist); _i++
+	{
+		_song = MusicPlayer.CurrentPlaylist[_i]
+		_song = SPLITPATH(_song)[2] //Picks out just the name of the file, no extension
+
+		if _i != 0
+		{
+			"\q[▲▲,OnMusicPlayer.MoveSong,%(_i),top]  "
+			"\f[bold,1]\q[△,OnMusicPlayer.ScootSong,%(_i),-]\f[bold,default] "
+		}
+		else
+		{
+			"%(_g)"
+			"▲▲  "
+			"\f[bold,1]△\f[bold,default] "
+			"%(_d)"
+		}
+		
+		if _i == MusicPlayer.CurrentSongIndex //If this is the song that's playing right now
+		{
+			"\f[bold,1]" //Make it bold
+			_currentsong[0] = _song //Saves the song name into _currentsong[0]
+			_currentsong[1] = MusicPlayer.CurrentPlaylist[_i] //Saves the song path into _currentsong[1]
+		}
+		
+		//Attempt to position the menu such that it's not jumping around *too* badly... as long as you don't click too fast.
+		_lines = MusicPlayer.BalloonLines / 2 - 1
+		if reference1 == "+"; _lines += 1
+		elseif reference1 == "-"; _lines -= 1
+		if (_i - _lines) == reference0 && reference1 != "end"; "\![set,autoscroll,disable]"
+		
+		//Handle which song name to highlight (by unhighlighting)
+		_justmoved = reference0
+		if reference1 == "end"; _justmoved = ARRAYSIZE(MusicPlayer.CurrentPlaylist) - 1
+		elseif reference1 == "top"; _justmoved = 0
+		elseif reference1 == "+"; _justmoved++
+		else; _justmoved--
+		
+		if _i != _justmoved; "%(_h)" //Highlight song if it's not the one that was just moved
+		//NOTE: If you're getting an error about the line below, you probably don't have yaya_optional.txt! You can pick that up here: https://github.com/YAYA-shiori/yaya-dic
+		"\_n%(SHIORI3FW.MakeShortText(_song,_max_name_length)) \_n" //Add song to list
+		if _i != _justmoved; "%(_d)"
+		if _i == MusicPlayer.CurrentSongIndex; "\f[default]" //Reset the bold if it was applied
+		
+		"%(MusicPlayer.newline)\f[align,right]\f[bold,1]"
+		if _i != (ARRAYSIZE(MusicPlayer.CurrentPlaylist) - 1)
+		{
+			"\q[▽,OnMusicPlayer.ScootSong,%(_i),+]\f[bold,default]  "
+			"\q[▼▼,OnMusicPlayer.MoveSong,%(_i),end]"
+		}
+		else
+		{
+			"%(_g)"
+			"▽\f[bold,default]  "
+			"▼▼"
+		}
+		"\n\f[align,left]%(MusicPlayer.newline)%(_d)" //Align commands... so useful but so tricky. Idk why this works but it does. It was putting extra spaces before which are really obvious on some balloons with fonts that have wide spaces
+	}
+	
+	"%(_display)\n\n"
+	
+	"\![*]\q[Back,OnMusicPlayer.Settings]\![unlock,balloonrepaint]"
+}
+
+//Move song to top or bottom of playlist
+OnMusicPlayer.MoveSong : all
+{
+	_temp = MusicPlayer.CurrentPlaylist[reference0]
+	if reference1 == "top"
+	{
+		_temparray = MusicPlayer.CurrentPlaylist
+		_temparray[reference0] = IARRAY
+		MusicPlayer.CurrentPlaylist = IARRAY
+		MusicPlayer.CurrentPlaylist ,= _temp
+		foreach _temparray; _song
+		{
+			MusicPlayer.CurrentPlaylist ,= _song
+		}
+		if reference0 == MusicPlayer.CurrentSongIndex //If it's the current song, the index will now be 0
+		{
+			MusicPlayer.CurrentSongIndex = 0
+		}
+		elseif reference0 > MusicPlayer.CurrentSongIndex //If not, and the song _used_ to be below this one on the list, increase the index number since now the current song is lower in the list
+		{
+			MusicPlayer.CurrentSongIndex = MusicPlayer.CurrentSongIndex + 1
+		}
+	}
+	else //End
+	{
+		MusicPlayer.CurrentPlaylist[reference0] = IARRAY
+		MusicPlayer.CurrentPlaylist ,= _temp
+		if reference0 == MusicPlayer.CurrentSongIndex //If it's the current song, the index will now be the last in the array
+		{
+			MusicPlayer.CurrentSongIndex = ARRAYSIZE(MusicPlayer.CurrentPlaylist) - 1
+		}
+		elseif reference0 < MusicPlayer.CurrentSongIndex //If not, and the song _used_ to be above this one in the list, decrease the index number since now the current song is higher in the list 
+		{
+			MusicPlayer.CurrentSongIndex = MusicPlayer.CurrentSongIndex - 1
+		}
+	}
+	MusicPlayer.ShuffledPlaylist = MusicPlayer.ShufflePlaylist(MusicPlayer.CurrentSongIndex,MusicPlayer.CurrentPlaylist)
+	MusicPlayer.ShuffledIndex = 0
+	
+	"\C\![raise,OnMusicPlayer.ScootSongMenu,%(reference0),%(reference1)]"
+}
+
+//Moving a song in the playlist by one space
+OnMusicPlayer.ScootSong : all
+{
+	MusicPlayer.CurrentPlaylist = MusicPlayer.ArrayScootEx(TOINT(reference0),reference1,MusicPlayer.CurrentPlaylist)
+	if reference0 == MusicPlayer.CurrentSongIndex
+	{
+		if reference1 == "+"
+		{
+			MusicPlayer.CurrentSongIndex = MusicPlayer.CurrentSongIndex + 1
+		}
+		else //-
+		{
+			MusicPlayer.CurrentSongIndex = MusicPlayer.CurrentSongIndex - 1
+		}
+	}
+	elseif (reference0 + 1) == MusicPlayer.CurrentSongIndex && reference1 == "+"
+	{
+		MusicPlayer.CurrentSongIndex = MusicPlayer.CurrentSongIndex - 1
+	}
+	elseif (reference0 - 1) == MusicPlayer.CurrentSongIndex && reference1 == "-"
+	{
+		MusicPlayer.CurrentSongIndex = MusicPlayer.CurrentSongIndex + 1
+	}
+	
+	MusicPlayer.ShuffledPlaylist = MusicPlayer.ShufflePlaylist(MusicPlayer.CurrentSongIndex,MusicPlayer.CurrentPlaylist)
+	MusicPlayer.ShuffledIndex = 0
+	
+	"\C\![raise,OnMusicPlayer.ScootSongMenu,%(reference0),%(reference1)]"
+}
+
+//Waiting for user input to change the hotkey
+OnMusicPlayer.ChangeHotkey : all
+{
+	reference0 = TOINT(reference0)
+	_temp = MusicPlayer.Hotkeys[reference0]
+	
+	_option = ""
+	if reference0 == 1; _option = "next song"
+	elseif reference0 == 2; _option = "previous song"
+	elseif reference0 == 3; _option = "stop song"
+	elseif reference0 == 4; _option = "open menu"
+	elseif reference0 == 5; _option = "toggle song bar"
+	elseif reference0 == 6; _option = "volume up"
+	elseif reference0 == 7; _option = "volume down"
+	elseif reference0 == 8; _option = "speed up"
+	elseif reference0 == 9; _option = "speed down"
+	elseif reference0 == 10; _option = "balance left"
+	elseif reference0 == 11; _option = "balance right"
+	else; _option =  "play/pause"
+	
+	"\C%(MusicPlayer.Scope)\![lock,balloonrepaint]\c%(MusicPlayer.LargeBalloon)\*\_q\![no-autopause]"
+	
+	//DIALOGUE: Changing a hotkey
+	"Press a key for %(_option)."
+	
+	"\n\n\![*]\q[Cancel,OnMusicPlayer.Settings,Hotkeys,%(reference0),%(_temp)]"
+	
+	"\![unlock,balloonrepaint]\e changing hotkey: %(reference0)" //DO NOT TOUCH THIS. It will not work if you erase or change this.
+}
+
+//Unbinding the hotkey
+OnMusicPlayer.UnsetHotkey
+{
+	reference0 = TOINT(reference0)
+	MusicPlayer.Hotkeys[reference0] = "Unbound"
+	reference0 = "Hotkeys" //Setting this so that it goes back to the right menu tab after
+	
+	OnMusicPlayer.Settings
+}
+
+
+OnMusicPlayer.Info : all
+{
+	"\C%(MusicPlayer.Scope)\![lock,balloonrepaint]\c%(MusicPlayer.LargeBalloon)\_q\![no-autopause]"
+	
+	"\![*]\__q[OnMusicPlayer.MusicInfo,addsong]How do I add a song?\__q\n"
+	"\![*]\__q[OnMusicPlayer.MusicInfo,compatiblefiles]What file types are compatible?\__q\n"
+	"\![*]\__q[OnMusicPlayer.MusicInfo,error]Why do some songs give an error?\__q\n"
+	"\n"
+	"\![*]\__q[OnMusicPlayer.Menu]Back to music menu\__q  \![*]\__q[OnBlank]Close window\__q"
+	
+	//Would appreciate if you leave this here, I have poured many many hours of work into this player :)
+	"\_l[0,0]\n[%((MusicPlayer.BalloonLines - 1) * 100)]"
+	"\f[height,-2]\f[color,disable]Music Player code by \f[color,default.anchor]\__q[https://ukagaka.zichqec.com/]Zichqec\__q"
+}
+
+//Information that the user can ask about
+OnMusicPlayer.MusicInfo : all
+{
+	_h = "\f[color,default.anchor]" //highlight
+	_d = "\f[color,default]" //default
+	
+	"\C%(MusicPlayer.Scope)\![lock,balloonrepaint]\c%(MusicPlayer.LargeBalloon)\_q\![no-autopause]\![set,autoscroll,disable]"
+	
+	//DIALOGUE: Answers for the help section, you can just leave these as is unless you really want to change them for some reason
+	if reference0 == "addsong" //Asking how to add songs
+	{
+		"To add songs, drag and drop them onto the ghost. Folders can also be dragged and dropped, and multiple files may be dropped at a time.\n\n"
+		"You can also use the ""Open File"" option built into SSP to select a file through File Explorer. This can be done using the Ctrl + O shortcut, or by right clicking the ghost, going to the Utilities tab, and clicking ""Open File (I)"".\n\n"
+		".m3u playlists can be loaded through the settings menu, or by using the same methods described above for songs."
+	}
+	elseif reference0 == "compatiblefiles" //What file types are compatible
+	{
+		"By default, the following file types are compatible with this music player:\n"
+		"%(_h).mp3  .wav  .wma  .mid%(_d).\n\n"
+		"With \_a[https://github.com/Nevcairiel/LAVFilters/releases]LAV Filters\_a installed, the following file types are compatible with this music player:"
+		"\n"
+		
+		_i = 0
+		foreach MusicPlayer.CompatibleMusicFileTypes; _type
+		{
+			if _i >= 3; _i = 0
+			
+			//CUSTOMIZE: If you're using a particularly small balloon and the file types are not displaying properly, you may want to use this commented version instead of the code below it
+			/*
+			if _i != 0; "    "
+			else; "\n"
+			*/
+			
+			if _i == 1; "\_l[0]\_l[4em]"
+			elseif _i == 2; "\_l[0]\_l[8em]"
+			else; "\n"
+			
+			_i++
+			"%(_h)%(_type)%(_d)"
+		}
+	}
+	elseif reference0 == "error" //Asking why some songs give errors
+	{
+		"Some songs will not play despite being the correct type. This is an SSP limitation. You can install \_a[https://github.com/Nevcairiel/LAVFilters/releases]LAV Filters\_a, an open source program, to fix most of these errors.\n\n"
+		"If you don't want to do that, you can import a song into an audio editing program like \_a[https://www.audacityteam.org/]Audacity\_a and export it again, or convert it to another compatible type with something like \_a[https://www.onlineconverter.com/]Online Converter\_a."
+	}
+	
+	"\n\n\![*]\q[Back,OnMusicPlayer.Info]  \![*]\q[Close window,OnBlank]"
+	"\![unlock,balloonrepaint]"
+}
+
+OnMusicPlayer.SavePlaylist : all
+{
+	"\C\![lock,balloonrepaint]\c%(MusicPlayer.Scope)%(MusicPlayer.LargeBalloon)\_q\![set,autoscroll,disable]\![no-autopause]"
+	"\![open,dialog,save,--id=OnMusicPlayer.PlaylistSaved,--ext=m3u,--filter=Playlist file|*.m3u,--dir=""%(MusicPlayer.PlaylistPath)""]"
+	
+	//DIALOGUE: Saving a playlist
+	"Choose a file name and location for the playlist."
+	"\n\n"
+	"\![*]\__q[OnPlaylist.Back,Saved]Back\__q"
+	
+	"\![unlock,balloonrepaint]"
+}
+
+OnMusicPlayer.PlaylistSaved : all
+{
+	_path = reference2
+	_o = FOPEN(_path,"w") //Create a new file
+	
+	for _i = 0; _i < ARRAYSIZE(MusicPlayer.CurrentPlaylist); _i++
+	{
+		void FWRITE(_path,"%(MusicPlayer.CurrentPlaylist[_i])")
+	}
+	
+	void FCLOSE(_path)
+	
+	_split = SPLITPATH(reference2)
+	_name = _split[2]
+	MusicPlayer.PlaylistPath = _split[0] + _split[1]
+	
+	
+	"\C%(MusicPlayer.Scope)\![lock,balloonrepaint]\c%(MusicPlayer.LargeBalloon)\_q\![no-autopause]"
+	
+	//DIALOGUE: a playlist saving correctly, or failing to save
+	if _o == 1 //If it saves successfully
+	{
+		"Playlist saved successfully as ""\_?%(_name).m3u\_?""."
+	}
+	else //If saving fails
+	{
+		"Failed to save playlist."
+	}
+	
+	"\![unlock,balloonrepaint]\x[noclear]\![raise,OnMusicPlayer.Settings]"
+}
+
+OnPlaylist.Back
+{
+	"\C\![close,dialog,OnMusicPlayer.Playlist%(reference0)]\![raise,OnMusicPlayer.Settings]"
+}
+
+OnMusicPlayer.LoadPlaylist : all
+{
+	"\C\![lock,balloonrepaint]\c%(MusicPlayer.Scope)%(MusicPlayer.LargeBalloon)\_q\![set,autoscroll,disable]\![no-autopause]"
+	"\![open,dialog,open,--id=OnMusicPlayer.PlaylistLoaded,--filter=Playlist file|*.m3u;*.m3u8,--dir=""%(MusicPlayer.PlaylistPath)""]"
+	
+	//DIALOGUE: Loading a playlist
+	"Select a playlist to load.\n\n"
+	"The current playlist will be lost unless it is already saved."
+	"\n\n"
+	"\![*]\__q[OnPlaylist.Back,Loaded]Back\__q"
+	
+	"\![unlock,balloonrepaint]"
+}
+
+//Loading the playlist
+OnMusicPlayer.PlaylistLoaded : all
+{
+    MusicPlayer.CurrentSongIndex = -1
+    MusicPlayer.PlayState = 0
+    MusicPlayer.CurrentPlaylist = IARRAY
+    _path = reference2
+    MusicPlayer.PageIndex = 0
+    
+    _split = SPLITPATH(reference2)
+    MusicPlayer.PlaylistPath = _split[0] + _split[1]
+    
+    
+    _isrelative = -1
+    
+    void FOPEN(_path,"r")
+    for _buff = FREAD(_path); _buff != -1; _buff = FREAD(_path)
+    {
+		if "#EXT" !_in_ _buff 
+		{
+			if _isrelative == -1
+        	{
+        	    if SPLITPATH(_buff)[0] == "" && SUBSTR(_buff,0,1) != "/"; _isrelative = 1
+        	    else; _isrelative = 0
+        	}
+        	_to_add = ""
+        	if _isrelative; _to_add += MusicPlayer.PlaylistPath
+        	_to_add += _buff
+        
+        	MusicPlayer.CurrentPlaylist ,= _to_add
+		}
+    }
+    void FCLOSE(_path)
+    
+    MusicPlayer.ShuffledPlaylist = MusicPlayer.ShufflePlaylist(MusicPlayer.CurrentSongIndex,MusicPlayer.CurrentPlaylist)
+    MusicPlayer.ShuffledIndex = 0
+    
+    "%(MusicPlayer.Scope)%(MusicPlayer.NonSingingSurfaces)\![no-autopause]"
+    
+    "\![sound,stop]\![no-autopause]%(OnMusicPlayer.NotifySongInfo)"
+    
+    OnMusicPlayer.Menu
+}
+
+//Confirmation before clearing the current playlist
+OnMusicPlayer.ClearPlaylist : all
+{
+	_num = ARRAYSIZE(MusicPlayer.CurrentPlaylist)
+	
+	_are = "are"; _s = "s"
+	if _num == 1; {_are = "is"; _s = ""}
+	
+	"%(MusicPlayer.Scope)%(MusicPlayer.LargeBalloon)\_q\![no-autopause]"
+	
+	//DIALOGUE: Asking for confirmation before clearing the current playlist. %(_are) and %(_s) can be used for plurals.
+	"There %(_are) %(_num) song%(_s) in the current playlist. Are you sure you want to clear it? It cannot be brought back unless you have saved it."
+	
+	"\n\n"
+	"\![*]\q[Clear it,OnMusicPlayer.PlaylistCleared]  \![*]\q[Don't,OnMusicPlayer.Settings]"
+}
+
+//Actually clearing the current playlist
+OnMusicPlayer.PlaylistCleared : all
+{
+	MusicPlayer.CurrentPlaylist = IARRAY
+	MusicPlayer.CurrentSongIndex = -1 //song position
+	MusicPlayer.PlayState = 0 //Paused song
+	MusicPlayer.PageIndex = 0
+	
+	"\![sound,stop]\![no-autopause]%(OnMusicPlayer.NotifySongInfo)"
+	
+	"%(MusicPlayer.NonSingingSurfaces)%(MusicPlayer.LargeBalloon)\_q\![no-autopause]"
+	
+	//DIALOGUE: After clearing the playlist
+	"The playlist has been cleared."
+	
+	"\x\![raise,OnMusicPlayer.Menu]"
+}
+
+//Sending information about the current song to other open ghosts. Also sends information to Discord, if you set that up.
+OnMusicPlayer.NotifySongInfo : all
+{
+	//CUSTOMIZE: If you set up the Discord stuff, uncomment this bit:
+	/*
+	if MusicPlayer.DiscordDisplayFlag == 1
+	{
+		_song = " "
+		if MusicPlayer.Singing
+		{
+			_song = "♫ ""%(MusicPlayer.CurrentSongName)"" ♫"
+		}
+		
+		if MusicPlayer.DiscordDisplay == "On"; "\![raiseplugin,Discord Rich Presence,OnDiscordPluginCustomDetail,%(_song)]"
+		else; "\![raiseplugin,Discord Rich Presence,OnDiscordPluginCustomDetail, ]"
+	}
+	*/
+	
+	"\![notifyother,__SYSTEM_ALL_GHOST__,OnMusicPlayer.SongInfo,""%(selfname)"",""%(MusicPlayer.CurrentSongPath)"",%(MusicPlayer.CurrentSongIndex),%(MusicPlayer.PlayState),%(MusicPlayer.Volume),%(MusicPlayer.Speed),%(MusicPlayer.Balance),%(MusicPlayer.PlayMode),%(MusicPlayer.StopAfterCurrent),%(ARRAYSIZE(MusicPlayer.CurrentPlaylist))]"
+	
+	//References:
+	//0 - The sakura name of this ghost, since this event may come from multiple ghosts
+	//1 - The file path of the currently playing song. If empty, no song is loaded. THIS IS NOT ESCAPED.
+	//2 - The index number of the currently playing song. If the song is paused, the index number is still tracked. This probably isn't that useful but I feel like I'll regret it later if I don't add it.
+	//3 - 0 if stopped, 1 if playing music, 2 if paused
+	//4 - Current volume from 0 - 100
+	//5 - Current speed, from 0 - 400 (see MusicPlayer.MaxRate function for more info). 100 is normal speed
+	//6 - Current balance. 0 is normal, -100 is all the way left, 100 is all the way right
+	//7 - The play mode. 0 for loop playlist, 1 for shuffle playlist, 2 for loop song, 3 for play one song, 4 for random
+	//8 - "stop after playback" means it will stop after the current song, "stop after playlist" means it will stop when the playlist completes
+	//9 - Number of songs in the current playlist
+}
+
+
+
+
+
+
+//—————————— FUNCTIONS THAT SHOULD BE CUSTOMIZED ——————————
+//CUSTOMIZE: Functions that either must be customized, such as which surfaces are used for singing, as well as a few optional things you may want to tweak
+
+//Surfaces used for singing animation
+MusicPlayer.SingingSurfaces : all
+{
+	/*
+	_num = 0
+	foreach cookies; _cookie	{
+		if _cookie[0,"|"] == "shiningglitter" && _cookie[1,"|"] == 1;	"\0\s[25]"
+		elseif _cookie[1,"|"] == 1 || _cookie[1,"|"] == 2;	"\p[%(_num)]\s[%(_num)9]"
+		elseif _cookie[1,"|"] == 0;	"\p[%(_num)]\s[-1]"
+
+		num++
+	}
+	*/
+	_currentcookie = ""
+
+	//for loop
+	for _i = 0; _i < ARRAYSIZE(cookies); _i++	{
+		_currentcookie = cookies[_i]
+		LOGGING("++++++++++++++++++++++++++++++")
+		LOGGING("cookie: %(_currentcookie)")
+
+		if _currentcookie[0,"|"] == "shiningglitter" {
+			if _currentcookie[1,"|"] == 1;	"\0\s[25]"
+			elseif _currentcookie[1,"|"] == 0;	"\0\s[26]"
+		}
+		elseif _currentcookie[1,"|"] == 2;	"\p[%(_i)]\s[%(_i)8]"
+		elseif _currentcookie[1,"|"] == 1;	"\p[%(_i)]\s[%(_i)9]"
+		elseif _currentcookie[1,"|"] == 0;	"\p[%(_i)]\s[-1]"
+	}
+
+	"\0"
+	//"\0\s[25]"
+}
+
+//Surfaces to go to when music stops
+MusicPlayer.NonSingingSurfaces : all
+{
+	/*_num = 0
+	foreach cookies; _cookie	{
+		if _cookie[1,"|"] == 1 || _cookie[1,"|"] == 2;	"\p[%(_num)]\s[%(_num)0]"
+		elseif _cookie[1,"|"] == 0;	"\p[%(_num)]\s[-1]"
+
+		num++
+	}
+	*/
+	_currentcookie = ""
+
+	//for loop
+	for _i = 0; _i < ARRAYSIZE(cookies); _i++	{
+		_currentcookie = cookies[_i]
+		LOGGING("++++++++++++++++++++++++++++++")
+		LOGGING("cookie: %(_currentcookie)")
+
+		if _currentcookie[0,"|"] == "shiningglitter" && _currentcookie[1,"|"] == 0;	"\0\s[7]"
+		elseif _currentcookie[1,"|"] == 1 || _currentcookie[1,"|"] == 2;	"\p[%(_i)]\s[%(_i)0]"
+		elseif _currentcookie[1,"|"] == 0;	"\p[%(_i)]\s[-1]"
+	}
+
+	"\0"
+	//"\s[0]"
+}
+
+//Which scope will be used as the music player. \0 for the sakura, \1 for the kero, \p[*] for additional characters, replacing the * with the number of the character you want
+MusicPlayer.Scope
+{
+	"\0"
+}
+
+//Which balloons will be used for the menus in the music player.
+MusicPlayer.SmallBalloon
+{
+	"\b[0]"
+}
+
+MusicPlayer.LargeBalloon
+{
+	if SHIORI3FW.BalloonName == "Running Cookies"; "\b[6]"
+	else; "\b[2]"
+}
+
+//The default path to save playlists to. You should probably leave this alone, but you can change it if you like. Just make sure it is a relative path within the ghost's folder; the ghost will try to create this folder if it does not exist.
+MusicPlayer.DefaultPlaylistPath
+{
+	"../../playlists/"
+}
+
+//Maximum speed for the music player. Because of an SSP bug, this is capped at 435 at the time of writing. According to Ukadoc it should be able to go up to 10000. To avoid bugs I'm going to cap this at 400, but if the bug is fixed in the future you can change the rate to whatever cap you want here.
+MusicPlayer.MaxRate
+{
+	400
+}
+
+//Replace this number with the number of lines in the balloon that you'll be using for the music menu.
+//This is mostly used for the menu where you can change the order of songs in the playlist. This will be automatically set any time the user changes balloons, but it's good to make sure the initial value is correct. If you change balloons and then change back to your default, you can check %(MusicPlayer.BalloonLines) in script input to see what the default here should be.
+MusicPlayer.DefaultBalloonLines
+{
+	20
+}
+
+//Used for the pagination option. If more/fewer songs would suit your balloon better, you can adjust how many songs are displayed per page here.
+MusicPlayer.SongsPerPage
+{
+	10
+}
+
+/*
+//This should be added to OnSecondChange to track how long the user has been listening to music for in total. If you don't want this, make sure to comment out the associated display in MusicPlayer.Settings.Basic
+if MusicPlayer.Singing
+{
+	MusicPlayer.Playtime++
+}
+*/
+
+/*
+If you want to have a display on your main menu for the currently playing song, you need to add this after your \e in the menu:
+__GHOST_MAIN_MENU__
+
+This will let it know to run OnSakuraMenu again if the current song changes/stops/etc. If your menu is in a function other than OnSakuraMenu, you'll need to change it in a few places in this file. Ctrl F is your friend here.
+I don't recommend using this if you have menu greetings, or if your menu otherwise does not open instantly.
+*/
+
+
+
+
+
+
+
+//—————————— BUILT IN SHIORI EVENTS ——————————
+//These may or may not already exist in your ghost. You may need to make alterations to the code if you already have custom behavior for these functions. This is probably the hardest part of this music player to implement.
+
+//When the user manually closes the balloon when it's still typing out dialogue.
+OnBalloonBreak
+{
+	//Should make it so that if the user closes the balloon while the song is waiting to repeat, it repeats properly
+	if "\![raise,OnSoundStop]" _in_ MusicPlayer.LastTalk; "\![raise,OnSoundStop]"
+}
+
+//Hotkeys. reference0 is the name of the key as displayed on the keycap. reference4, for SSP only, will have things like ctrl and alt, separated by commas.
+//CUSTOMIZE: If you have OnKeyPress in your ghost already, you need to make it call this function if the hotkey changing menu is up, or if no other recognized hotkey is pressed. If you do not have OnKeyPress, then rename this to OnKeyPress
+MusicPlayer.OnKeyPress : all
+{
+	reference0 = TOSTR(reference0)
+	_key = TOUPPER(reference0)
+	if MusicPlayer.ChangingHotkeys; MusicPlayer.HotkeyChange //If the hotkey input is open
+	else //Actually using a hotkey
+	{
+		_inmenu = MusicPlayer.CheckWhichMenu
+		
+		if _key == MusicPlayer.Hotkeys[0] //Play/Pause
+		{
+			if MusicPlayer.MenuIsOpen; "\C"
+			
+			if MusicPlayer.PlayState == 0; "\![raise,OnMusicPlayer.PlaySong,,""%(_inmenu)""]"
+			elseif MusicPlayer.PlayState == 2; "\![raise,OnMusicPlayer.PauseSong,""%(_inmenu)"",resume]"
+			else; "\![raise,OnMusicPlayer.PauseSong,""%(_inmenu)"",pause]"
+		}
+		elseif _key == MusicPlayer.Hotkeys[1] //Next song
+		{
+			if MusicPlayer.PlayState != 0
+			{
+				if MusicPlayer.MenuIsOpen; "\C"
+				
+				"\![raise,OnMusicPlayer.NextSong,""%(_inmenu)""]"
+			}
+		}
+		elseif _key == MusicPlayer.Hotkeys[2] //Previous song
+		{
+			if MusicPlayer.PlayState != 0
+			{
+				if MusicPlayer.MenuIsOpen; "\C"
+				
+				"\![raise,OnMusicPlayer.PrevSong,""%(_inmenu)""]"
+			}
+		}
+		elseif _key == MusicPlayer.Hotkeys[3] //Stop song
+		{
+			if MusicPlayer.MenuIsOpen; "\C"
+			
+			"\![raise,OnMusicPlayer.StopSong,""%(_inmenu)""]"
+		}
+		elseif _key == MusicPlayer.Hotkeys[4] //Music menu
+		{
+			OnMusicPlayer.Menu("manual")
+		}
+		elseif _key == MusicPlayer.Hotkeys[5] //Song Bar
+		{
+			OnMusicPlayer.ToggleSongBar("Hotkey",_inmenu)
+		}
+		elseif _key == MusicPlayer.Hotkeys[6] //Volume up
+		{
+			OnMusicPlayer.QuickVolume("Up")
+		}
+		elseif _key == MusicPlayer.Hotkeys[7] //Volume down
+		{
+			OnMusicPlayer.QuickVolume("Down")
+		}
+		elseif _key == MusicPlayer.Hotkeys[8] //Speed up
+		{
+			OnMusicPlayer.QuickSpeed("Up")
+		}
+		elseif _key == MusicPlayer.Hotkeys[9] //Speed down
+		{
+			OnMusicPlayer.QuickSpeed("Down")
+		}
+		elseif _key == MusicPlayer.Hotkeys[10] //Balance left
+		{
+			OnMusicPlayer.QuickBalance("Left")
+		}
+		elseif _key == MusicPlayer.Hotkeys[11] //Balance right
+		{
+			OnMusicPlayer.QuickBalance("Right")
+		}
+	}
+}
+
+MusicPlayer.HotkeyChange : all
+{
+	_key = TOUPPER(reference0)
+	"\![no-autopause]%(MusicPlayer.Scope)%(MusicPlayer.SmallBalloon)\_q"
+	_changing = TOINT(SPLIT(MusicPlayer.LastTalk,"changing hotkey: ")[1])
+	
+	//CUSTOMIZE: Customizable list of reserved hotkeys. Add in any hotkeys you've already used in your ghost to this array.
+	_reserved_keys = ("T","R","F1")
+	
+	if ASEARCH(_key,_reserved_keys) != -1 //If it's reserved
+	{
+		//DIALOGUE: If the user tries to put in a hotkey that is reserved
+		"That hotkey is reserved, please choose another.\x"
+	}
+	elseif _key == MusicPlayer.Hotkeys[_changing] //Same option as was already entered
+	{
+		"\C\![raise,OnMusicPlayer.Settings,Hotkeys]"
+		return
+	}
+	elseif ASEARCH(_key,MusicPlayer.Hotkeys) != -1 //If this hotkey is already selected for something else
+	{
+		//DIALOGUE: If the user tries to enter a hotkey that is already being used
+		"That hotkey is already in use, please clear it before assigning it to another option.\x"
+	}
+	else //If it's a valid key
+	{
+		MusicPlayer.Hotkeys[_changing] = _key
+		"\C\![raise,OnMusicPlayer.Settings,Hotkeys]"
+		return
+	}
+	
+	"\![raise,OnMusicPlayer.ChangeHotkey,%(_changing)]"
+}
+
+//CUSTOMIZE: If you don't have OnMouseWheel in your ghost, you can rename this to just OnMouseWheel. Otherwise, you'll need to make your existing OnMouseWheel call this one.
+OnMouseWheel
+{
+	_character = REPLACE(MusicPlayer.Scope,"\","")
+	_character = REPLACE(_character,"p[","")
+	_character = REPLACE(_character,"]","")
+	
+	if TOSTR(reference3) == _character
+	{
+		_amt = TOSTR(reference2)
+		_direction = "Up"
+		if SUBSTR(_amt,0,1) == "-"; _direction = "Down"
+		
+		if MusicPlayer.Scroll == "Volume"
+		{
+			OnMusicPlayer.QuickVolume(_direction,1)
+		}
+		elseif MusicPlayer.Scroll == "Speed"
+		{
+			OnMusicPlayer.QuickSpeed(_direction,1)
+		}
+		elseif MusicPlayer.Scroll == "Balance"
+		{
+			if _direction == "Up"; _direction = "Right"
+			else; _direction = "Left"
+			
+			OnMusicPlayer.QuickBalance(_direction,1)
+		}
+	}
+}
+
+//When you drop a file on the ghost that isn't something it can install
+//reference0 is the file path, which is split up amongst the local variables below
+OnFileDrop2 : all
+{
+	_filearray = SPLIT(reference.raw[0],C_BYTE1)
+
+	if ARRAYSIZE(_filearray) == 1 //If it's a single file
+	{
+		_filepath = SPLITPATH(_filearray)
+		_filename = _filepath[2]
+		_fileext = TOLOWER(_filepath[3])
+		
+		//Incompatible audio types: cdda, cvs, cvsd, cvu, dvms, fssd, grst, htk, ima, prc, smp, sndr, sndt, sou, txw, vms, vox
+		if ASEARCH(_fileext,MusicPlayer.CompatibleMusicFileTypes) != -1 //If it's a compatible music file
+		{
+			MusicPlayer.CurrentPlaylist ,= _filearray
+			
+			MusicPlayer.ShuffledPlaylist = MusicPlayer.ShufflePlaylist(MusicPlayer.CurrentPlaylist[MusicPlayer.CurrentIndex],MusicPlayer.CurrentPlaylist)
+			MusicPlayer.ShuffledIndex = 0
+			_from = MusicPlayer.CheckWhichMenu
+			
+			"%(MusicPlayer.Scope)%(MusicPlayer.SmallBalloon)\_q\![no-autopause]\![set,autoscroll,disable]"
+			
+			//DIALOGUE: Added a file to the playlist
+			"Added ""\_?%(_filename)\_?"" to the playlist."
+			
+			"\n\n"
+			"\![*]\q[Play it now,OnMusicPlayer.PlaySong,,""%(_from)"",justadded]\n\![*]\q[Open music player,OnMusicPlayer.Menu]\n\n\![*]\q[Close,OnBlank]"
+		}
+		elseif _fileext == ".m3u" || _fileext == ".m3u8" //If it's a playlist
+		{
+			"%(MusicPlayer.Scope)%(MusicPlayer.SmallBalloon)\![no-autopause]\![set,autoscroll,disable]\_q"
+			
+			//DIALOGUE: Confirming loading a playlist after drag and drop
+			"Load the playlist ""\_?%(_filename)\_?""?\n\nThe current playlist will be lost unless it is already saved."
+			
+			"\n\n"
+			"\![*]\__q[OnMusicPlayer.PlaylistLoaded,,,""%(reference.raw[0])""]Yes, load the playlist\__q  \![*]\__q[OnBlank]No, do not load the playlist\__q"
+		}
+		elseif _fileext == "" //If it's a single folder
+		{
+			_files = FENUM(reference0,C_BYTE1) //Gets all the files in the folder
+			_orig = _files
+
+			_musicfiles = MusicPlayer.FindSongs(reference0,_files)
+			
+			_path = SPLITPATH(reference0)[1]
+			SETDELIM(_path,"\")
+			_len = ARRAYSIZE(_path) - 2
+			_folder = _path[_len] //This stuff gets the folder name
+			
+			if ARRAYSIZE(_musicfiles) == 0 //If there were no compatible songs inside
+			{
+				"%(MusicPlayer.Scope)%(MusicPlayer.SmallBalloon)\_q\![no-autopause]\![set,autoscroll,disable]\_q"
+				
+				//DIALOGUE: The user dropped a folder on the ghost, but nothing inside was a compatible music file
+				"None of the files in ""\_?%(_folder)\_?"" are compatible music files."
+			}
+			else //If there are compatible songs
+			{
+				_num = ARRAYSIZE(_musicfiles)
+				_s = ""; if _num != 1; _s = "s"
+				
+				"%(MusicPlayer.Scope)%(MusicPlayer.SmallBalloon)\![no-autopause]\![set,autoscroll,disable]\_q"
+				
+				//DIALOGUE: The user dropped a folder on the ghost, and some files inside were compatible music files. %(_s) can be used to add an s if the number of compatible files is plural, %(_num) can be used to list the number of files, and %(_folder) is the name of the folder that was dropped.
+				"Added %(_num) song%(_s) from ""\_?%(_folder)\_?""."
+				
+				"\n\n\_q\![*]\q[Open music player,OnMusicPlayer.Menu]\n\![*]\q[Close,blank]"
+			}
+		}
+		else //Incompatible
+		{
+			"%(MusicPlayer.Scope)%(MusicPlayer.SmallBalloon)\![no-autopause]\![set,autoscroll,disable]\_q"
+			
+			//DIALOGUE: Any file that is not music or a playlist
+			"This isn't a recognized file type."
+		}
+	}
+	else //More than 1 file
+	{
+		_musicfiles = MusicPlayer.FindSongs(,_filearray)
+
+		if ARRAYSIZE(_musicfiles) == 0 //If there are no music files
+		{
+			"%(MusicPlayer.Scope)%(MusicPlayer.SmallBalloon)\![no-autopause]\![set,autoscroll,disable]\_q"
+			
+			//DIALOGUE: Multiple files were dropped on the ghost, but none of them are compatible music files.
+			"None of these files are compatible with the music player."
+		}
+		else //If there are music files
+		{
+			_num = ARRAYSIZE(_musicfiles)
+			
+			_s = ""; if _num != 1; _s = "s"
+			
+			"%(MusicPlayer.Scope)%(MusicPlayer.SmallBalloon)\![no-autopause]\![set,autoscroll,disable]\_q"
+			
+			//DIALOGUE: Multiple files were dragged on the ghost, and some of them were music files. %(_s) can be used to add an s if the number of compatible files is plural, and %(_num) can be used to list the number of files.
+			"%(_num) compatible song%(_s) added to the playlist."
+			
+			"\n\n\![*]\q[Open music player,OnMusicPlayer.Menu]\n\![*]\q[Close,blank]"
+		}
+	}
+}
+
+//CUSTOMIZE: Hotspots. If you already have OnMouseDoubleClick in your ghost, you'll need to make it direct here if an unknown hotspot is clicked. If you do not have OnMouseDoubleClick, just renae this one to OnMouseDoubleClick. If you rename this one, you may want to put in a check to open your main menu if the mouse is not over a hotspot.
+MusicPlayer.OnMouseDoubleClick : all
+{
+	_inmenu = MusicPlayer.CheckWhichMenu
+	
+	if reference4 == "stop_button"//Stopping the music
+	{
+		if MusicPlayer.MenuIsOpen; "\C"
+		
+		"\![raise,OnMusicPlayer.StopSong,""%(_inmenu)""]"
+	}
+	elseif reference4 == "play_button" //Playing a song. This should always start the next one, probably? If none is playing, it should either start at 0 or a random position... If something is playing, it should skip to the next, I think.
+	{
+		if MusicPlayer.MenuIsOpen; "\C"
+		
+		if MusicPlayer.PlayState == 0 //If no song is playing
+		{
+			"\![raise,OnMusicPlayer.PlaySong,,""%(_inmenu)""]"
+		}
+		elseif MusicPlayer.PlayState == 2
+		{
+			"\![raise,OnMusicPlayer.PauseSong,""%(_inmenu)"",resume]"
+		}
+		else //If a song is already playing, go to the next one
+		{
+			"\![raise,OnMusicPlayer.NextSong,""%(_inmenu)""]"
+		}
+	}
+	elseif reference4 == "pause_resume_button"
+	{
+		if MusicPlayer.MenuIsOpen; "\C"
+		
+		if MusicPlayer.PlayState == 2; "\![raise,OnMusicPlayer.PauseSong,%(_inmenu),resume]"
+		else; "\![raise,OnMusicPlayer.PauseSong,%(_inmenu),pause]"
+	}
+	elseif reference4 == "next_button"
+	{
+		if MusicPlayer.PlayState != 0
+		{
+			if MusicPlayer.MenuIsOpen; "\C\![raise,OnMusicPlayer.NextSong,%(_inmenu)]"
+			else; "\![raise,OnMusicPlayer.NextSong,%(_inmenu)]"
+		}
+	}
+	elseif reference4 == "previous_button"
+	{
+		if MusicPlayer.PlayState != 0
+		{
+			if MusicPlayer.MenuIsOpen; "\C\![raise,OnMusicPlayer.PrevSong,%(_inmenu)]"
+			else; "\![raise,OnMusicPlayer.PrevSong,%(_inmenu)]"
+		}
+	}
+	elseif reference4 == "stop_after_current_button"
+	{
+		if MusicPlayer.StopAfterCurrent != "stop after playback"
+		{
+			MusicPlayer.StopAfterCurrent = "stop after playback"
+		}
+		else
+		{
+			MusicPlayer.StopAfterCurrent = ""
+		}
+		if _inmenu == "OnMusicPlayer.Settings"; "\C\![raise,OnMusicPlayer.Settings]"
+	}
+	elseif reference4 == "stop_after_playlist_button"
+	{
+		if MusicPlayer.StopAfterCurrent != "stop after playlist"
+		{
+			MusicPlayer.StopAfterCurrent = "stop after playlist"
+		}
+		else
+		{
+			MusicPlayer.StopAfterCurrent = ""
+		}
+		if _inmenu == "OnMusicPlayer.Settings"; "\C\![raise,OnMusicPlayer.Settings]"
+	}
+	elseif reference4 == "music_menu_button"
+	{
+		OnMusicPlayer.Menu("manual")
+	}
+	elseif reference4 == "clear_button" //Clearing the current playlist
+	{
+		OnMusicPlayer.ClearPlaylist
+	}
+	elseif reference4 == "song_bar_button" //Song Bar
+	{
+		OnMusicPlayer.ToggleSongBar("Hotspot",_inmenu)
+	}
+	elseif reference4 == "volume_up_button" //Volume up
+	{
+		OnMusicPlayer.QuickVolume("Up")
+	}
+	elseif reference4 == "volume_down_button" //Volume down
+	{
+		OnMusicPlayer.QuickVolume("Down")
+	}
+	elseif reference4 == "speed_up_button" //Speed up
+	{
+		OnMusicPlayer.QuickSpeed("Up")
+	}
+	elseif reference4 == "speed_down_button" //Speed down
+	{
+		OnMusicPlayer.QuickSpeed("Down")
+	}
+	elseif reference4 == "balance_left_button" //Balance left
+	{
+		OnMusicPlayer.QuickBalance("Left")
+	}
+	elseif reference4 == "balance_right_button" //Balance right
+	{
+		OnMusicPlayer.QuickBalance("Right")
+	}
+}
+
+//When a song ends on its own
+OnSoundStop : all
+{
+	_inmenu = MusicPlayer.CheckWhichMenu
+	MusicPlayer.PlayState = 0 //Clear paused song if there somehow was one
+	if MusicPlayer.BalloonIsOpen && MusicPlayer.Priority != "Seamless music" || _inmenu != ""; "\C\_l[0,0]"
+	
+	if MusicPlayer.PlayMode == 3 || reference1 == "close" //If it's set to play one song and then stop, or the user clicked the X on the playback window
+	{
+		"\![raise,OnMusicPlayer.StopSong,""%(_inmenu)""]"
+	}
+	else //If another song needs to play
+	{
+		_next = 0
+		_lastsong = 0
+		
+		if MusicPlayer.PlayMode == 2 //Loop one song
+		{
+			_next = MusicPlayer.CurrentSongIndex
+		}
+		elseif MusicPlayer.PlayMode == 4 //Random
+		{
+			_next = RAND(ARRAYSIZE(MusicPlayer.CurrentPlaylist))
+		}
+		elseif MusicPlayer.PlayMode == 1 //Shuffle and loop
+		{
+			if MusicPlayer.ShuffledIndex >= (ARRAYSIZE(MusicPlayer.CurrentPlaylist) - 1) //If this was the last song on the list
+			{
+				MusicPlayer.ShuffledIndex = 0
+				_lastsong = 1
+			}
+			else //If there are more songs to go
+			{
+				MusicPlayer.ShuffledIndex++
+			}
+			_next = MusicPlayer.ShuffledPlaylist[MusicPlayer.ShuffledIndex]
+		}
+		else //Loop playlist or shuffle
+		{
+			if MusicPlayer.CurrentSongIndex >= (ARRAYSIZE(MusicPlayer.CurrentPlaylist) - 1) //If it was the last song on the list
+			{
+				_next = 0
+				_lastsong = 1
+			}
+			else
+			{
+				_next = MusicPlayer.CurrentSongIndex + 1
+			}
+		}
+		
+		MusicPlayer.CurrentSongIndex = _next //Song index
+		
+		//If it's set to stop after the current song, make sure it stops. Down here so the index number still advances if you're not set to loop a single song
+		if MusicPlayer.StopAfterCurrent == "stop after playback" || (MusicPlayer.StopAfterCurrent == "stop after playlist" && _lastsong)
+		{
+			"\![raise,OnMusicPlayer.StopSong,""%(_inmenu)""]"
+		}
+		else
+		{
+			if MusicPlayer.IsMinimized
+			{
+				OnMusicPlayer.PlaySong(_next)
+			}
+			else
+			{
+				"%(MusicPlayer.SingingSurfaces)\![raise,OnMusicPlayer.PlaySong,%(MusicPlayer.CurrentSongIndex),""%(_inmenu)""]"
+			}
+		}
+	}
+}
+
+//If a song fails to play for some reason
+OnSoundError : all
+{
+	_playnext = 0
+	if !(MusicPlayer.PlayMode == 2 || MusicPlayer.PlayMode == 3 || MusicPlayer.StopAfterCurrent == "stop after playback" || (MusicPlayer.StopAfterCurrent == "stop after playlist" && MusicPlayer.CurrentSongIndex >= (ARRAYSIZE(MusicPlayer.CurrentPlaylist) - 1)) || ARRAYSIZE(MusicPlayer.CurrentPlaylist) <= 1); _playnext = 1 //If it IS able to play another song
+	
+	if _playnext == 0
+	{
+		MusicPlayer.PlayState = 0 //Clearing paused song
+	}
+	if MusicPlayer.IsMinimized && !_playnext; MusicPlayer.MakeValueNotify("%(OnMusicPlayer.NotifySongInfo)")
+	else; "%(OnMusicPlayer.NotifySongInfo)"
+	
+	"%(MusicPlayer.Scope)\![unlock,balloonrepaint]\c%(MusicPlayer.SmallBalloon)\![no-autopause]\_q"
+	
+	//DIALOGUE: If there is an error, it will tell the user and try to play the next song. reference3 is the error message, reference2 is the file name. Below is dialogue for attempting to play the next song
+	"Cannot play file ""\f[color,default.anchor]\_?%(reference2)\_?\f[color,default]""\n\n""%(reference3)"""
+	
+	//If it's able to play another song
+	if _playnext
+	{
+		"\n\nStarting next song..."
+		
+		"\_w[5000]\![raise,OnSoundStop]"
+	}
+}
+
+//When the balloon is changed. This gets the number of lines in the current balloon, so that in certain menus it doesn't jump around so much.
+OnBalloonChange : all
+{
+	if MusicPlayer.BalloonIsOpen; "\C"
+	
+	"%(MusicPlayer.LargeBalloon)\![get,property,OnMusicPlayer.BalloonLines,currentghost.balloon.scope(0).lines.initial]"
+}
+
+//Not a built in event, but related to the above
+OnMusicPlayer.BalloonLines
+{
+	MusicPlayer.BalloonLines = TOINT(reference0)
+}
+
+//When the user closes an inputbox. Not strictly necessary, can be removed if you don't want it. Just makes things a little more polished.
+OnUserInputCancel
+{
+	if reference0 == "OnMusicPlayer.Speed" || reference0 == "OnMusicPlayer.Volume" || reference0 == "OnMusicPlayer.Balance" || reference0 == "OnPlaylistName"; "\C\![raise,OnMusicPlayer.Settings]"
+	elseif reference0 == "OnMusicPlayer.JumpIndex"; "\C\![raise,OnMusicPlayer.Menu]"
+}
+
+//When the user closes a system dialog for saving/loading playlists. Not strictly necessary, same as the above but for playlist saving/loading with file explorer.
+OnSystemDialogCancel
+{
+	if reference1 == "OnMusicPlayer.PlaylistSaved" || reference1 == "OnMusicPlayer.PlaylistLoaded"; "\![raise,OnMusicPlayer.Settings]"
+}
+
+//reference4 is the name of the collision identifier as written in surfaces.txt
+On_tooltip
+{
+	//CUSTOMIZE: Setting up tooltips for hotspots
+	//You can adjust the tooltips here if you need, or if you used different collision names you'll need to replace the defaults here.
+	//Note: if you assign tooltips on the shell side, they will take precedence. But I recommend doing it here so that users can toggle them off if they prefer!
+	
+	if MusicPlayer.Tooltips == "On"
+	{
+		if reference4 == "play_button"
+		{
+			if MusicPlayer.Singing; "Play / Next"
+			else; "Play"
+		}
+		elseif reference4 == "pause_resume_button"
+		{
+			if MusicPlayer.PlayState == 1; "Pause"
+			else; "Resume"
+		}
+		elseif reference4 == "stop_button"; "Stop"
+		elseif reference4 == "next_button"; "Next song"
+		elseif reference4 == "previous_button"; "Previous song"
+		elseif reference4 == "music_menu_button"; "Music menu"
+		elseif reference4 == "clear_button"; "Clear playlist"
+		elseif reference4 == "stop_after_current_button"; "Stop after current song"
+		elseif reference4 == "stop_after_playlist_button"; "Stop when playlist ends"
+		elseif reference4 == "song_bar_button"; "Toggle song bar"
+		elseif reference4 == "volume_up_button"; "Volume up"
+		elseif reference4 == "volume_down_button"; "Volume down"
+		elseif reference4 == "speed_up_button"; "Speed up"
+		elseif reference4 == "speed_down_button"; "Speed down"
+		elseif reference4 == "balance_left_button"; "Balance left"
+		elseif reference4 == "balance_right_button"; "Balance right"
+	}
+}
+
+OnTranslateInternal.MusicPlayer
+{
+	_id = SHIORI3FW.Eventid
+	_end = SPLIT(_id,".")
+	_end = _end[ARRAYSIZE(_end) - 1]
+	
+	_filter = ("visible","caption","recommendsites","portalsites")
+	
+	if !(_id == "On_tooltip" || SUBSTR(_id,0,3) == "On_" && ASEARCH(_end,_filter) != -1)
+	{
+		MusicPlayer.LastTalk = _argv[0]
+	}
+}
+
+//CUSTOMIZE: If you don't have OnInitialize, rename this to OnInitialize. If you do have it, make sure to call this function in that event. This just means that when the ghost opens, it'll ensure it doesn't think it's already playing music.
+MusicPlayer.OnInitialize
+{
+	if reference0 != "reload" //If NOT reloading
+	{
+		MusicPlayer.PlayState = 0
+	}
+}
+
+//CUSTOMIZE: If you don't have OnDestroy, rename this to OnDestroy. If you do have it, make sure to call this function in that event. This just means that when the ghost closes, it'll stop playing music.
+MusicPlayer.OnDestroy
+{
+	if reference0 != "reload" //If NOT reloading
+	{
+		MusicPlayer.PlayState = 0
+	}
+}
+
+
+
+
+//—————————— TOOLS ——————————
+//These are (mostly) pure functions that aid in various places in the code.
+
+//Checks if the balloon is currently open. 1 if yes, 0 if no.
+MusicPlayer.BalloonIsOpen
+{
+	"balloon" _in_ status
+}
+
+//Checks if the balloon is open and there are menu choices. 1 if yes, 0 if no.
+MusicPlayer.MenuIsOpen
+{
+	"choosing" _in_ status
+}
+
+//Checks if the ghost is currently minimized. 1 if yes, 0 if no.
+MusicPlayer.IsMinimized
+{
+    "minimizing" _in_ status
+}
+
+//Returns 1 if singing, 0 if not
+MusicPlayer.Singing
+{
+	MusicPlayer.PlayState == 1
+}
+
+//Helps with alignment commands
+MusicPlayer.newline
+{
+	"\_l[]"
+}
+
+MusicPlayer.CurrentSongName
+{
+	SPLITPATH(MusicPlayer.CurrentSongPath)[2] //Picks out just the name of the file, no extension
+}
+
+MusicPlayer.CurrentSongPath
+{
+	MusicPlayer.CurrentPlaylist[MusicPlayer.CurrentSongIndex]
+}
+
+MusicPlayer.MaxPages
+{
+	_max_page = (ARRAYSIZE(MusicPlayer.CurrentPlaylist) / MusicPlayer.SongsPerPage) - 1
+	if ARRAYSIZE(MusicPlayer.CurrentPlaylist) % MusicPlayer.SongsPerPage != 0; _max_page++
+	
+	if ARRAYSIZE(MusicPlayer.CurrentPlaylist) == 0; 0
+	else; _max_page
+}
+
+//Added with help from steve02081504. Send an argument to this function to send it with ValueNotify. This can be used even while the ghost is minimized to run tags like the sound command.
+MusicPlayer.MakeValueNotify : void
+{
+	SHIORI3FW.PushAdditionalReturn('ValueNotify',_argv)
+}
+
+//A list of compatible music file types.
+MusicPlayer.CompatibleMusicFileTypes : array
+{
+	/*
+		//In an order that makes sense to me
+		//Available without LAV Filters
+		".mid"; ".mp3"; ".wav"; ".wma" 
+		
+		//With LAV Filters. I have tested this whole block myself and they work.
+		".8svx"; ".ac3"; ".aiff"; ".amb"; ".au"; ".avr"; ".caf"; ".dts"; ".fap"; ".flac"; ".hcom"
+		".ircam"; ".m4a"; ".m4r"; ".maud"; ".mp2"; ".nist"; ".oga"; ".ogg"; ".opus"; ".paf"
+		".pfv"; ".ra"; ".sln"; ".snd"; ".sph"; ".spx"; ".tta"; ".voc"; ".w64"; ".wv"; ".wve"
+		
+		//With LAV Filters. I have not tested these, but they should work. Also includes video files!
+		".ape"; ".avo"; ".wmv"; ".rm"; ".rmvb"; ".mp4"; ".mkv"; ".flv"; ".mpg"
+	*/
+	
+	//Alphabetical so I don't get complaints lol
+	
+	".8svx"; ".ac3"; ".aiff"; ".amb"; ".ape"; ".au"; ".avo"; ".avr"; ".caf"; ".dts"; ".fap"; ".flac"; ".flv"; ".hcom"
+	".ircam"; ".m4a"; ".m4r"; ".maud"; ".mid"; ".mkv"; ".mp2"; ".mp3"; ".mp4"; ".mpg"; ".nist"; ".oga"; ".ogg"; ".opus"; ".paf"
+	".pfv"; ".ra"; ".rm"; ".rmvb"; ".sln"; ".snd"; ".sph"; ".spx"; ".tta"; ".voc"; ".w64"; ".wav"; ".wma"; ".wmv"; ".wv"; ".wve"
+}
+
+MusicPlayer.DisplayPlaytime : all
+{
+	_num = TOINT(_argv[0])
+	
+	_units = ( /
+	"yr,31536000",/
+	"d,86400",/
+	":,3600",/
+	":,60",/
+	",1"/
+	)
+	
+	_output = ""
+	foreach _units; _unit
+	{
+		_duration = TOINT(_unit[1])
+		_amt = _num / _duration
+		_num = _num % _duration
+		
+		if _amt > 0 || _unit[0] == "" || _unit[0] == ":"
+		{
+			//The second function call here handles whether the unit name should be displayed as plural or not, depending on if the amount of that unit is greater than 1
+			if _unit[0] == "" || _unit[0] == ":"
+			{
+				if _amt < 10; _amt = "0" + TOSTR(_amt)
+			}
+			_output += "%(_amt)%(_unit[0])"
+			if !(_unit[0] == "" || _unit[0] == ":")
+			{
+				_output += " "
+			}
+		}
+	}
+	_output
+}
+
+MusicPlayer.ChangingHotkeys
+{
+	"changing hotkey: " _in_ SPLIT(MusicPlayer.LastTalk,"\e")[1]
+}
+
+MusicPlayer.SetDefaultSettings
+{
+	MusicPlayer.CurrentSongIndex = -1
+	MusicPlayer.PlayState = 0
+	MusicPlayer.LastRemovedSong = ""
+	
+	MusicPlayer.Volume = 100
+	MusicPlayer.Speed = 100
+	MusicPlayer.Balance = 0
+	MusicPlayer.PlayMode = 0 //Play mode - 0 for loop playlist, 1 for shuffle playlist, 2 for loop song, 3 for play one song, 4 for random
+	MusicPlayer.StopAfterCurrent = ""
+	MusicPlayer.SongBar = "Off"
+	
+	MusicPlayer.CurrentPlaylist = IARRAY
+	MusicPlayer.ShuffledPlaylist = IARRAY
+	MusicPlayer.ShuffledIndex = 0
+	
+	MusicPlayer.Hotkeys = IARRAY
+	MusicPlayer.BalloonLines = MusicPlayer.DefaultBalloonLines
+	MusicPlayer.Playtime = 0 //Only needed if you implement the Playtime counter below
+	
+	MusicPlayer.DiscordDisplay = "On" //These two are only needed if you implement the Discord functions
+	MusicPlayer.DiscordDisplayFlag = 0
+	
+	MusicPlayer.Tooltips = "On"
+	MusicPlayer.AnnounceSongs = "Off"
+	MusicPlayer.Priority = "Dialogue"
+	MusicPlayer.Scroll = "Volume"
+	MusicPlayer.PreviousButton = "Restarts song" //Behavior of the previous button
+	MusicPlayer.Pagination = "Paginated" //Playlist display option
+	
+	MusicPlayer.PageIndex = 0
+	MusicPlayer.PlaylistPath = MusicPlayer.DefaultPlaylistPath //Default playlist folder, change if desired
+	
+	void MKDIR(MusicPlayer.PlaylistPath)
+}
+
+//Set default values if these get deleted or are not set
+MusicPlayer.ResetDefaultSettings
+{
+	if !ISVAR("MusicPlayer.CurrentSongIndex"); MusicPlayer.CurrentSongIndex = -1
+	if !ISVAR("MusicPlayer.PlayState"); MusicPlayer.PlayState = 0
+	if !ISVAR("MusicPlayer.LastRemovedSong"); MusicPlayer.LastRemovedSong = ""
+	
+	if !ISVAR("MusicPlayer.Volume"); MusicPlayer.Volume = 100
+	if !ISVAR("MusicPlayer.Speed"); MusicPlayer.Speed = 100
+	if !ISVAR("MusicPlayer.Balance"); MusicPlayer.Balance = 0
+	if !ISVAR("MusicPlayer.PlayMode"); MusicPlayer.PlayMode = 0 //Play mode - 0 for loop playlist, 1 for shuffle playlist, 2 for loop song, 3 for play one song, 4 for random
+	if !ISVAR("MusicPlayer.StopAfterCurrent"); MusicPlayer.StopAfterCurrent = ""
+	if !ISVAR("MusicPlayer.SongBar"); MusicPlayer.SongBar = "Off"
+	
+	if !ISVAR("MusicPlayer.CurrentPlaylist"); MusicPlayer.CurrentPlaylist = IARRAY
+	if !ISVAR("MusicPlayer.ShuffledPlaylist"); MusicPlayer.ShuffledPlaylist = IARRAY
+	if !ISVAR("MusicPlayer.ShuffledIndex"); MusicPlayer.ShuffledIndex = 0
+	
+	if !ISVAR("MusicPlayer.Hotkeys"); MusicPlayer.Hotkeys = IARRAY
+	if !ISVAR("MusicPlayer.BalloonLines"); MusicPlayer.BalloonLines = MusicPlayer.DefaultBalloonLines
+	if !ISVAR("MusicPlayer.Playtime"); MusicPlayer.Playtime = 0
+	
+	if !ISVAR("MusicPlayer.DiscordDisplay"); MusicPlayer.DiscordDisplay = "On"
+	
+	if !ISVAR("MusicPlayer.Tooltips"); MusicPlayer.Tooltips = "On"
+	if !ISVAR("MusicPlayer.SongAnnouncement"); MusicPlayer.SongAnnouncement = "Off"
+	if !ISVAR("MusicPlayer.Priority"); MusicPlayer.Priority = "Dialogue" //Whether it interrupts dialogue or not when going to the next song
+	if !ISVAR("MusicPlayer.Scroll"); MusicPlayer.Scroll = "Volume"
+	if !ISVAR("MusicPlayer.PreviousButton"); MusicPlayer.PreviousButton = "Restarts song" //Behavior of the previous button
+	if !ISVAR("MusicPlayer.Pagination"); MusicPlayer.Pagination = "Paginated" //Playlist display option
+	
+	if !ISVAR("MusicPlayer.PageIndex"); MusicPlayer.PageIndex = 0
+	if !ISVAR("MusicPlayer.PlaylistPath"); MusicPlayer.PlaylistPath = MusicPlayer.DefaultPlaylistPath //Default playlist folder
+	
+	void MKDIR(MusicPlayer.PlaylistPath)
+}
+
+//——— ArrayScootEx ———
+//Array scoot EX. Scoots a value forwards or backwards in an array by 1. You'll need to plan ahead with your menus and set them up to send the element number rather than the name of the item you want to scoot.
+//Argument 0: Number of the element that you want to scoot
+//Argument 1: - if you want to scoot it backwards, + if you want to scoot it forwards
+//Argument 2: The array you want to scoot in
+
+//MusicPlayer.ShuffledPlaylist = MusicPlayer.ArrayScootEx(5,"+",MusicPlayer.ShuffledPlaylist)
+
+MusicPlayer.ArrayScootEx
+{
+	_array = _argv //Take in all the arguments as an array
+	_array[1] = IARRAY //Erase the other arguments because we don't want them in the array
+	_array[0] = IARRAY
+	_index = TOINT(_argv[0])
+	if _index > (ARRAYSIZE(_array) - 1) || _index < 0 //Not sure why this is here... perhaps investigate later
+	{
+		_array
+		return
+	}
+	if _argv[1] == "-" //Backwards
+	{
+		if _argv[0] == 0 //If it's already at the start of the array
+		{
+			_array
+			return
+		}
+		_curnum = _index //Get positions
+		_prvnum = _curnum - 1
+		
+		_current = _array[_curnum] //Assign elements to temp vars
+		_prev = _array[_prvnum]
+		
+		_array[_curnum] = _prev //Replace elements with swapped elements
+		_array[_prvnum] = _current
+	}
+	else //Forwards
+	{
+		if _argv[0] == (ARRAYSIZE(_array) - 1) //If it's already at the end of the array
+		{
+			_array
+			return
+		}
+		_curnum = _index //Get positions
+		_nxtnum = _curnum + 1
+		
+		_current = _array[_curnum] //Assign elements to temp vars
+		_next = _array[_nxtnum]
+		
+		_array[_curnum] = _next //Replace elements with swapped elements
+		_array[_nxtnum] = _current
+	}
+	_array
+}
+
+//Shuffles the array but keeps the first element the same
+MusicPlayer.ShufflePlaylist
+{
+	_start = IARRAY
+	for _i = 0; _i < _argc - 1; _i++
+	{
+		if _i == _argv[0]; continue
+		else; _start ,= _i
+	}
+	
+	_len = ARRAYSIZE(_start)
+	_output = IARRAY
+	if _argv[0] != "|removed|"; _output ,= TOINT(_argv[0])
+	for _i = 0; _i < _len; _i++
+	{
+		_l = ARRAYSIZE(_start)
+		_rand = RAND(_l)
+		_output ,= _start[_rand]
+		_start[_rand] = IARRAY
+	}
+	_output
+}
+
+//Checks for music files in folders and multiple files
+MusicPlayer.FindSongs
+{
+	//This portion normalizes the input to a general purpose array
+	_added = IARRAY
+	_input = IARRAY
+	_recursive = IARRAY
+	if _argv[0] != ""
+	{
+		if _argv[1] == ""; {_added = ""; return}
+		else; _input = SPLIT(_argv[1],C_BYTE1) //If it came from FENUM
+	}
+	else //If it came from multiple files
+	{
+		for _i = 1; _i < _argc; _i++ //Probably a bug to not be argc - 1... but it seems to be working????
+		{
+			if _argv[_i] != ""; _input ,= _argv[_i]
+		}
+	}
+	
+	foreach _input; _file
+	{
+		_path = SPLITPATH(_file)
+		_ext = TOLOWER(_path[3])
+		if ASEARCH(_ext,MusicPlayer.CompatibleMusicFileTypes) != -1
+		{
+			MusicPlayer.CurrentPlaylist ,= "%(_argv[0])%(_file)"
+			_added ,= _file
+		}
+		elseif _ext == ""
+		{
+			_recursive = MusicPlayer.FindSongs("%(_argv[0])%(_file)\",FENUM("%(_argv[0])%(_file)",C_BYTE1))
+			if _recursive != ""; _added ,= _recursive
+		}
+	}
+	if ARRAYSIZE(_added) > 0
+	{
+		MusicPlayer.ShuffledPlaylist = MusicPlayer.ShufflePlaylist(MusicPlayer.CurrentPlaylist[MusicPlayer.CurrentIndex],MusicPlayer.CurrentPlaylist)
+		MusicPlayer.ShuffledIndex = 0
+	}
+	
+	_added
+}
+
+//Checks for special text to determine which menu the ghost is currently in, and returns 
+MusicPlayer.CheckWhichMenu
+{
+	_inmenu = ""
+	if MusicPlayer.BalloonIsOpen
+	{
+		if "__MUSIC_PLAYER_MAIN_MENU__" _in_ MusicPlayer.LastTalk; _inmenu = "OnMusicPlayer.Menu"
+		elseif "__GHOST_MAIN_MENU__" _in_ MusicPlayer.LastTalk; _inmenu = "OnSakuraMenu"
+		elseif "__MUSIC_SETTINGS_MENU__" _in_ MusicPlayer.LastTalk; _inmenu = "OnMusicPlayer.Settings"
+		elseif "changing hotkey: " _in_ MusicPlayer.LastTalk; _inmenu = "OnMusicPlayer.ChangeHotkey,%(SPLIT(MusicPlayer.LastTalk,'changing hotkey: ')[1])"
+	}
+	_inmenu
+}
+
+
+
+//—————————— DISCORD ——————————
+
+/*
+//CUSTOMIZE: Discord plugin functions
+//All of the stuff in here is for handling the Discord plugin. You can completely ignore this if you're not interested. If you ARE interested, the setup is a bit involved, and I can't really include all of the code here.
+//I recommend reading this guide on how to set up everything you need for the Discord plugin: https://gist.github.com/steve02081504/a3cccec1d7e70bceebcc70ac99e3558a
+//I would also recommend looking at how FLUX handles the plugin. Some of the code is below, but there are other bits that are important.
+//Of note is that MusicPlayer.DiscordDisplay is an On/Off toggle for the user to be able to choose if they want the ghost to send info to discord at all
+//MusicPlayer.DiscordDisplayFlag handles when the plugin turns on and off, since when you first select the ghost it won't immediately set your custom details.
+//I am glad to try and help with this if you want to set it up and you're not quite sure what you're doing. The guide linked above is very helpful though, it's how I figured this all out.
+//Note that if you use this, there's also a bit in OnMusicPlayer.NotifySongInfo that you'll also want to uncomment.
+
+OnDiscordPluginCustom
+{
+	MusicPlayer.DiscordDisplayFlag = 2
+}
+
+OnDiscordPluginCustomEnd
+{
+	MusicPlayer.DiscordDisplayFlag = 0
+}
+
+OnMusicPlayer.DiscordPluginBoot : all
+{
+	_song = " "
+	if MusicPlayer.Singing; _song = "♫ %(MusicPlayer.CurrentSongName) ♫"
+	
+	"\![raiseplugin,Discord Rich Presence,OnDiscordPluginCustomALL,YOUR APP ID HERE,,,thumbnail,YOUR GHOST'S URL OR A MESSAGE HERE,]"
+	
+	if MusicPlayer.DiscordDisplay == "On"
+	{
+		"\![raiseplugin,Discord Rich Presence,OnDiscordPluginCustomDetail,""%(_song)""]"
+		
+		"\![raiseplugin,Discord Rich Presence,OnDiscordPluginCustomState,WHATEVER YOU WANT HERE]"
+	}
+	
+	if SHIORI3FW.DebugMode //To turn this on, tick "Enable SHIORI Debug Mode" in the dev palette
+	{
+		"\![raiseplugin,Discord Rich Presence,OnDiscordPluginCustomSmallImageKey,dev]"
+		
+		"\![raiseplugin,Discord Rich Presence,OnDiscordPluginCustomSmallImageText,Dev]"
+	}
+}
+
+//This bit has to go in OnSecondChange
+if MusicPlayer.DiscordDisplayFlag == 2 && SHIORI3FW.CanTalk //If this ghost was chosen in the Discord plugin, and that hasn't been handled yet
+{
+	MusicPlayer.DiscordDisplayFlag = 1
+	if MusicPlayer.BalloonIsOpen; "\C"
+	--
+	"\![raise,OnMusicPlayer.DiscordPluginBoot]"
+}
+
+//Toggle for the settings menu. Make sure you uncomment the option that calls this.
+OnMusicPlayer.ToggleDiscordPlugin : all
+{
+	if MusicPlayer.DiscordDisplay != "On"
+	{
+		_song = " "
+		if MusicPlayer.Singing; _song = "♫ %(MusicPlayer.CurrentSongName) ♫"
+
+		MusicPlayer.DiscordDisplay = "On"
+		"\![raiseplugin,Discord Rich Presence,OnDiscordPluginCustomDetail,""%(_song)""]"
+		
+		"\![raiseplugin,Discord Rich Presence,OnDiscordPluginCustomState,WHATEVER YOU WANT HERE]"
+	}
+	else
+	{
+		MusicPlayer.DiscordDisplay = "Off"
+		"\![raiseplugin,Discord Rich Presence,OnDiscordPluginCustomDetail, ]"
+		
+		"\![raiseplugin,Discord Rich Presence,OnDiscordPluginCustomState, ]"
+	}
+	
+	OnMusicPlayer.Settings
+}
+*/

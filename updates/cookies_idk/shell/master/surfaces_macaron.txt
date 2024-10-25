@@ -1,0 +1,97 @@
+//macaron cookie
+
+charset,UTF-8
+
+descript
+{
+version,1
+animation-sort,ascend
+}
+
+//Idle
+surface40
+{
+	//body, mouth, arms, inst
+	//surfaces_parts.txt
+
+	//mouth
+	animation1.interval,runonce
+	animation1.pattern0,overlay,10400,0,0,0
+
+	//Blink
+	animation4.interval,random,4
+	animation4.pattern0,replace,20401,0,75,90
+	animation4.pattern1,overlay,-1,85,0,0
+}
+
+//drums
+surface48
+{
+	//body
+	//surfaces_parts.txt
+
+	//eyes
+	animation0.interval,runonce
+	animation0.pattern0,overlay,10401,0,0,0
+
+	//mouth
+	animation1.interval,runonce
+	animation1.pattern0,replace,20401,0,75,90
+
+	//hand motion
+	animation341.interval,always
+	animation341.pattern0,overlay,30403,0,0,0
+	animation341.pattern1,overlay,30404,1000,0,0
+	animation341.pattern2,overlay,30403,1000,0,0
+}
+
+//Singing
+surface49
+{
+	//body, mouth, arms, inst
+	//surfaces_parts.txt
+
+	//mouth
+	animation1.interval,runonce
+	animation1.pattern0,overlay,10401,0,0,0
+
+	//Blink
+	animation4.interval,random,4
+	animation4.pattern0,replace,20401,0,75,90
+	animation4.pattern1,overlay,-1,85,0,0
+}
+
+//------------------------------
+
+surface40
+{
+    element0,base,4\mac_body.png,0,0
+    element1,overlay,4\mac_eye.png,0,0
+    element2,interpolate,4\mac_arms.png,0,0
+    element3,overlay,4\mac_inst.png,0,0
+}
+surface41
+{
+    element0,base,4\mac_body.png,0,0
+    element1,overlay,surface10401.png,0,0
+    element2,overlay,surface20401.png,0,0
+    element3,interpolate,4\mac_arms.png,0,0
+    element4,overlay,4\mac_inst.png,0,0
+}
+surface48
+{
+    element0,base,4\mac_body.png,0,0
+    element1,overlay,4\mac_arms3.png,0,0
+    element2,overlay,4\mac_inst.png,0,0
+}
+surface49
+{
+    element0,base,4\mac_body.png,0,0
+    element1,overlay,4\mac_eye.png,0,0
+    element2,overlay,4\mac_arms2.png,0,0
+    element3,overlay,4\mac_inst.png,0,0
+}
+surface10400
+{
+    element0,base,4\mac_mouth.png,0,0
+}

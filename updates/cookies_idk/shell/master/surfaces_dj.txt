@@ -1,0 +1,174 @@
+//dj cookie
+
+charset,UTF-8
+
+descript
+{
+version,1
+animation-sort,ascend
+}
+
+//Idle
+surface100
+{
+	//body, mouth, arms,
+	//surfaces_parts.txt
+
+	//eyes
+	animation0.interval,runonce
+	animation0.pattern0,overlay,21000,0,0,0
+
+	//Blink
+	animation4.interval,random,4
+	animation4.pattern0,stop,0
+	animation4.pattern1,overlay,21000,0,0,0
+	animation4.pattern2,overlay,21001,150,0,0
+	animation4.pattern3,overlay,21002,150,0,0
+	animation4.pattern4,overlay,21003,150,0,0
+	animation4.pattern5,overlay,21000,150,0,0
+	animation4.pattern6,overlay,21001,150,0,0
+	animation4.pattern7,overlay,21002,150,0,0
+	animation4.pattern8,overlay,21003,150,0,0
+	animation4.pattern9,overlay,21000,150,0,0
+}
+
+//turntable
+surface108
+{
+	//body
+	//surfaces_parts.txt
+
+
+	//guitar-animations
+
+	animation320.interval,runonce
+	animation320.pattern1,parallelstop,(321,322)
+	animation320.pattern2,parallelstop,(323,324)
+	animation320.pattern3,alternativestart,(321,322)
+	animation320.pattern4,alternativestart,(323,324)
+
+	//arm-1
+	animation321.interval,never
+	animation321.pattern0,overlay,31004,0,0,0
+	animation321.pattern1,overlay,31004,2000,0,0
+	animation321.pattern2,start,320
+
+	animation322.interval,never
+	animation322.pattern0,overlay,31005,0,0,0
+	animation322.pattern1,overlay,31005,1600,0,0
+	animation322.pattern2,start,320
+
+	//arm-2
+	animation323.interval,never
+	animation323.pattern0,overlay,31006,0,0,0
+	animation323.pattern1,overlay,31006,1700,0,0
+	animation323.pattern2,start,320
+
+	animation324.interval,never
+	animation324.pattern0,overlay,31007,0,0,0
+	animation324.pattern1,overlay,31007,2000,0,0
+	animation324.pattern2,start,320
+
+	//inst
+	animation361.interval,always
+	animation361.pattern0,overlay,51001,150,0,41
+	animation361.pattern1,overlay,51002,50,0,41
+	animation361.pattern2,overlay,51003,100,0,41
+	animation361.pattern3,overlay,51004,250,0,41
+	animation361.pattern4,overlay,51005,150,0,41
+	animation361.pattern5,overlay,51006,150,0,41
+	animation361.pattern6,overlay,51001,150,0,41
+	animation361.option,shared-index
+
+	//head-animation
+	animation362.interval,always
+	animation362.pattern0,overlay,41004,0,0,0
+	animation362.pattern1,overlay,41005,50,0,0
+	animation362.pattern2,overlay,41006,50,0,0
+	animation362.pattern3,overlay,41007,50,0,0
+	animation362.pattern4,overlay,41004,50,0,0
+	animation362.pattern5,overlay,41004,800,0,0
+
+
+	//pose2
+	animation325.interval,periodic,12
+	//animation45.pattern0,parallelstop,(50,51,52,53,102)
+	animation325.pattern0,parallelstart,(326,327,361,363)
+	animation325.pattern1,overlay,-1,8000,0,0
+	animation325.pattern2,parallelstart,(320,362)
+	animation325.pattern3,parallelstop,(326,327,363)
+	animation325.option,exclusive
+
+	//arm-1: chord
+	animation326.interval,never
+	animation326.pattern0,interpolate,31002,0,0,0
+	animation326.pattern1,interpolate,31002,2000,0,0
+
+	//arm-2: strum
+	animation327.interval,never
+	animation327.pattern0,overlay,31007,0,0,0
+	animation327.pattern2,overlay,31006,1000,0,0
+	animation327.pattern1,overlay,31007,1000,0,0
+	animation327.pattern3,start,327
+
+	//head-animation 2
+	animation363.interval,never
+	animation363.pattern0,overlay,41008,0,0,0
+	animation363.pattern1,overlay,41009,50,0,0
+	animation363.pattern2,overlay,41010,50,0,0
+	animation363.pattern3,overlay,41011,50,0,0
+	animation363.pattern4,overlay,41008,50,0,0
+	animation363.pattern5,overlay,41008,800,0,0
+	animation363.pattern6,start,363
+}
+
+//Singing
+surface109
+{
+	//body, arm L
+	//surfaces_parts.txt
+
+	//arm R
+	animation4.interval,runonce
+	animation4.pattern0,overlay,31003,0,0,0
+
+	//head-animation
+	animation362.interval,always
+	animation362.pattern0,overlay,41000,0,0,0
+	animation362.pattern1,overlay,41001,50,0,0
+	animation362.pattern2,overlay,41002,50,0,0
+	animation362.pattern3,overlay,41003,50,0,0
+	animation362.pattern4,overlay,41000,50,0,0
+	animation362.pattern5,overlay,41000,800,0,0
+}
+
+//------------------------------
+
+surface100
+{
+    element0,base,10\dj_body.png,0,0
+    element1,overlay,10\dj_mouth.png,0,0
+    element2,overlay,10\dj_arm1.png,0,0
+    element3,overlay,10\dj_arm2.png,0,0
+}
+surface101
+{
+    element0,base,10\dj_body.png,0,0
+    element1,overlay,10\dj_mouth.png,0,0
+    element2,overlay,surface31002.png,0,0
+    element3,overlay,surface31003.png,0,0
+}
+surface108
+{
+    element0,base,10\dj_body2.png,0,0
+    element1,overlay,10\dj_inst.png,0,41
+}
+surface109
+{
+    element0,base,10\dj_body2.png,0,0
+    element1,overlay,10\dj_arm1.png,0,0
+}
+surface21000
+{
+    element0,base,10\dj_eye.png,0,0
+}

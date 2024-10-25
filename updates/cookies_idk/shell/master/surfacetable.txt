@@ -1,0 +1,201 @@
+charset,UTF-8
+version,1
+option,DisableNoDefineSurfaces
+
+//A group defined as __disabled will not show up in surface test. __parts means it's mainly used as an animation or piece of something, and won't be assigned a name.
+//group,__disabled
+//{
+	//100,__parts
+//}
+
+
+group,Shining Glitter Cookie
+{
+	scope,0
+	
+	0,Idle
+	1,Pet
+	6,Action
+	7,hidden
+
+	25,Singing
+}
+
+group,Popping Candy Cookie
+{
+	scope,1
+	
+	10,Idle
+	
+	19,Singing
+}
+
+group,Parfait Cookie
+{
+	scope,2
+	
+	20,Idle
+
+	28,Instrument
+	29,Singing
+}
+
+group,Rockstar Cookie
+{
+	scope,3
+	
+	30,Idle
+	
+	38,Instrument
+	39,Singing
+}
+
+group,Macaron
+{
+	scope,4
+	
+	40,Idle
+	
+	48,Instrument
+	49,Singing
+}
+
+group,Marshmallow Cookie
+{
+	scope,5
+	
+	50,Idle
+	
+	58,Instrument
+	59,Singing
+}
+
+group,Clover Cookie
+{
+	scope,6
+	
+	60,Idle
+	
+	68,Instrument
+	69,Singing
+}
+
+group,Carol Cookie
+{
+	scope,7
+	
+	70,Idle
+	
+	78,Instrument
+	79,Singing
+}
+
+group,Bellflower Cookie
+{
+	scope,8
+	
+	80,Idle
+	
+	88,Instrument
+	89,Singing
+}
+
+group,Pudding Cookie
+{
+	scope,9
+	
+	90,Idle
+	
+	98,Instrument
+	99,Singing
+}
+
+group,DJ Cookie
+{
+	scope,10
+	
+	100,Idle
+	
+	108,Instrument
+	109,Singing
+}
+
+group,Mint Choco Cookie
+{
+	scope,11
+	
+	110,Idle
+	
+	118,Instrument
+	119,Singing
+}
+
+group,Strawberry Stick Cookie
+{
+	scope,12
+	
+	120,Idle
+	
+	128,Instrument
+	129,Singing
+}
+
+group,Mint Wafer Cookie
+{
+	scope,13
+	
+	130,Idle
+	
+	138,Instrument
+	139,Singing
+}
+
+
+group,__disabled
+{
+	10000,__parts
+	10100,__parts
+	10200,__parts
+	10300,__parts
+	10400,__parts
+	10500,__parts
+	10600,__parts
+	10700,__parts
+	10800,__parts
+	10900,__parts
+	11000,__parts
+	11100,__parts
+	11200,__parts
+	11300,__parts
+	20000,__parts
+	20100,__parts
+	20200,__parts
+	20300,__parts
+	20400,__parts
+	20500,__parts
+	20600,__parts
+	20700,__parts
+	20800,__parts
+	20900,__parts
+	21000,__parts
+	21100,__parts
+	21200,__parts
+	21300,__parts
+	30000,__parts
+	30001,__parts
+	30100,__parts
+	30101,__parts
+	30200,__parts
+	30201,__parts
+	30300,__parts
+	30301,__parts
+	30500,__parts
+	30600,__parts
+	40200,__parts
+	40300,__parts
+	40301,__parts
+	40500,__parts
+	41101,__parts
+	50800,__parts
+}
+//You can add as many groups as you like! Having a surface table will also make it so individual blink and talk frames, or any other frames you haven't defined, won't show up in the surface test window.

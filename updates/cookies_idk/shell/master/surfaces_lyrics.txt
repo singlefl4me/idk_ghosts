@@ -1,0 +1,1783 @@
+//lyrics card surfaces
+
+charset,UTF-8
+
+descript
+{
+version,1
+animation-sort,ascend
+}
+
+//shining glitter cookie
+surface1000
+{
+    element0,base,0\shi_body.png,0,0
+    element2,base,0\shi_eye.png,0,0
+
+
+	//arm_l
+	//arm-animation0
+	animation31.interval,runonce
+	animation31.pattern0,overlay,30000,0,0,0
+	animation31.option,shared-index
+
+	//arm_r
+	//arm-animation0
+	animation36.interval,runonce
+	animation36.pattern0,overlay,30001,0,0,0
+	animation36.option,shared-index
+}
+surface1001
+{
+    element0,base,0\shi_body.png,0,0
+    element2,base,0\shi_eye.png,0,0
+
+
+	//arm_l
+	//arm-animation1
+	animation32.interval,runonce
+	animation32.pattern0,overlay,30002,0,0,0
+	animation32.option,shared-index
+
+	//arm_r
+	//arm-animation0
+	animation36.interval,runonce
+	animation36.pattern0,overlay,30001,0,0,0
+	animation36.option,shared-index
+}
+surface1002
+{
+    element0,base,0\shi_body.png,0,0
+    element2,base,0\shi_eye.png,0,0
+
+
+	
+	//arm_l
+	//arm-animation0
+	animation31.interval,runonce
+	animation31.pattern0,overlay,30000,0,0,0
+	animation31.option,shared-index
+
+	//arm_r
+	//arm-animation1
+	animation37.interval,runonce
+	animation37.pattern0,overlay,30003,0,0,0
+	animation37.option,shared-index
+}
+surface1003
+{
+    element0,base,0\shi_body.png,0,0
+    element2,base,0\shi_eye.png,0,0
+
+
+	//arm_l
+	//arm-animation1
+	animation32.interval,runonce
+	animation32.pattern0,overlay,30002,0,0,0
+	animation32.option,shared-index
+
+	//arm_r
+	//arm-animation1
+	animation37.interval,runonce
+	animation37.pattern0,overlay,30003,0,0,0
+	animation37.option,shared-index
+}
+surface1004
+{
+    element0,base,0\shi_body.png,0,0
+    element2,base,0\shi_eye.png,0,0
+
+
+	//arm_l
+	//arm-animation2
+	animation33.interval,runonce
+	animation33.pattern0,overlay,30004,0,0,0
+	animation33.option,shared-index
+
+	//arm_r
+	//arm-animation0
+	animation36.interval,runonce
+	animation36.pattern0,overlay,30001,0,0,0
+	animation36.option,shared-index
+}
+surface1005
+{
+    element0,base,0\shi_body.png,0,0
+	element1,overlay,surface30005.png,0,0
+    element2,base,0\shi_eye.png,0,0
+
+
+	//arm_l
+	//arm-animation2
+	animation33.interval,runonce
+	animation33.pattern0,overlay,30004,0,0,0
+
+	//arm_r
+	//arm-animation2
+}
+surface1006
+{
+    element0,base,0\shi_body.png,0,0
+    element2,base,0\shi_eye.png,0,0
+
+
+	//arm_l
+	//arm-animation2
+	animation33.interval,runonce
+	animation33.pattern0,overlay,30004,0,0,0
+	animation33.option,shared-index
+
+	//arm_r
+	//arm-animation1
+	animation37.interval,runonce
+	animation37.pattern0,overlay,30003,0,0,0
+	animation37.option,shared-index
+}
+surface1007
+{
+    element0,base,0\shi_body.png,0,0
+    element2,base,0\shi_eye.png,0,0
+
+
+	//arm_l
+	//arm-animation1
+	animation32.interval,runonce
+	animation32.pattern0,overlay,30002,0,0,0
+	animation32.option,shared-index
+
+	//arm_r
+	//arm-animation2
+	animation38.interval,runonce
+	animation38.pattern0,overlay,30005,0,0,0
+	animation38.option,shared-index
+}
+
+surface1000-1007
+{
+	//-----mouth-----
+
+	//close
+	animation11.interval,never
+	animation11.pattern0,overlay,10000,0,0,0
+	//a
+	animation12.interval,never
+	animation12.pattern0,overlay,10001,0,0,0
+	//e, ii
+	animation13.interval,never
+	animation13.pattern0,overlay,10002,0,0,0
+	//i
+	animation14.interval,never
+	animation14.pattern0,overlay,10003,0,0,0
+	//o
+	animation15.interval,never
+	animation15.pattern0,overlay,10004,0,0,0
+	//oo, u
+	animation16.interval,never
+	animation16.pattern0,overlay,10005,0,0,0
+
+
+	//-----eyes-----
+
+	//blink
+	animation22.interval,never
+	animation22.pattern0,replace,20004,0,60,95
+	animation22.pattern1,overlay,20000,85,0,0
+	//eyes closed
+	animation23.interval,never
+	animation23.pattern0,replace,20004,0,60,95
+	//grin
+	animation24.interval,never
+	animation24.pattern0,replace,20005,0,60,95
+
+
+	//sparkle
+	animation400.interval,always
+	animation400.pattern0,overlay,40000,100,0,0
+	animation400.pattern1,overlay,40001,170,0,0
+	animation400.pattern2,overlay,40000,200,0,0
+	animation400.pattern3,overlay,-1,150,0,0
+	animation400.option,shared-index
+}
+
+//------------------------------
+
+//popping candy cookie
+surface1010
+{
+	//body
+	//surfaces_parts.txt
+
+	//arm_l
+	//arm-animation0
+	animation31.interval,runonce
+	animation31.pattern0,overlay,30100,0,0,0
+	animation31.option,shared-index
+
+	//arm_r
+	//arm-animation0
+	animation36.interval,runonce
+	animation36.pattern0,interpolate,30101,0,0,0
+	animation36.option,shared-index
+}
+surface1011
+{
+	//arm_l
+	//arm-animation0
+	animation31.interval,runonce
+	animation31.pattern0,overlay,30100,0,0,0
+	animation31.option,shared-index
+
+	//arm_r
+	//arm-animation2
+	animation38.interval,runonce
+	animation38.pattern0,overlay,30105,0,0,0
+	animation38.option,shared-index
+}
+surface1012
+{
+	//arm_l
+	//arm-animation0
+	animation31.interval,runonce
+	animation31.pattern0,overlay,30100,0,0,0
+	animation31.option,shared-index
+
+	//arm_r
+	//arm-animation1
+	animation37.interval,runonce
+	animation37.pattern0,interpolate,30103,0,0,0
+	animation37.option,shared-index
+}
+surface1013
+{
+	//arm_l
+	animation32.interval,runonce
+	animation32.pattern0,overlay,30102,0,0,0
+	animation32.option,shared-index
+
+	//arm_r
+	//arm-animation0
+	animation36.interval,runonce
+	animation36.pattern0,interpolate,30101,0,0,0
+	animation36.option,shared-index
+}
+surface1014
+{
+	//arm_l
+	//arm-animation1
+	animation32.interval,runonce
+	animation32.pattern0,overlay,30102,0,0,0
+	animation32.option,shared-index
+
+	//arm_r
+	//arm-animation1
+	animation37.interval,runonce
+	animation37.pattern0,interpolate,30103,0,0,0
+	animation37.option,shared-index
+}
+surface1015
+{
+	//arm_l
+	//arm-animation2
+	animation33.interval,runonce
+	animation33.pattern0,overlay,30104,0,0,0
+	animation33.option,shared-index
+
+	//arm_r
+	//arm-animation1
+	animation37.interval,runonce
+	animation37.pattern0,interpolate,30103,0,0,0
+	animation37.option,shared-index
+}
+surface1016
+{
+	//arm_l
+	//arm-animation1
+	animation32.interval,runonce
+	animation32.pattern0,overlay,30102,0,0,0
+	animation32.option,shared-index
+
+	//arm_r
+	//arm-animation2
+	animation38.interval,runonce
+	animation38.pattern0,overlay,30105,0,0,0
+	animation38.option,shared-index
+}
+surface1017
+{
+	//arm_l
+	//arm-animation2
+	animation33.interval,runonce
+	animation33.pattern0,overlay,30104,0,0,0
+	animation33.option,shared-index
+
+	//arm_r
+	//arm-animation2
+	animation38.interval,runonce
+	animation38.pattern0,overlay,30105,0,0,0
+	animation38.option,shared-index
+}
+
+surface1010-1017
+{
+    element0,base,1\pop_body.png,0,0
+	element1,overlay,1\pop_eye.png,0,0
+
+
+	//-----mouth-----
+
+	//close
+	animation11.interval,never
+	animation11.pattern0,overlay,10100,0,0,0
+	//a
+	animation12.interval,never
+	animation12.pattern0,overlay,10101,0,0,0
+	//e, ii
+	animation13.interval,never
+	animation13.pattern0,overlay,10102,0,0,0
+	//i
+	animation14.interval,never
+	animation14.pattern0,overlay,10103,0,0,0
+	//o
+	animation15.interval,never
+	animation15.pattern0,overlay,10104,0,0,0
+	//oo, u
+	animation16.interval,never
+	animation16.pattern0,overlay,10105,0,0,0
+
+
+	//-----eyes-----
+
+	//blink
+	animation22.interval,never
+	animation22.pattern0,replace,20101,0,79,95
+	animation22.pattern1,overlay,-1,85,0,0
+	//eyes closed
+	animation23.interval,never
+	animation23.pattern0,replace,20101,0,79,95
+	//grin
+	animation24.interval,never
+	animation24.pattern0,replace,20102,0,79,95
+}
+
+//------------------------------
+
+//parfait cookie
+surface1020
+{
+	//arm_l
+	//arm-animation0
+	animation31.interval,runonce
+	animation31.pattern0,overlay,30200,0,0,0
+	animation31.option,shared-index
+
+	//arm_r
+	//arm-animation0
+	animation36.interval,runonce
+	animation36.pattern0,overlay,30201,0,0,0
+	animation36.option,shared-index
+}
+surface1021
+{
+	//arm_l
+	//arm-animation2
+	animation33.interval,runonce
+	animation33.pattern0,overlay,30204,0,0,0
+	animation33.option,shared-index
+
+	//arm_r
+	//arm-animation0
+	animation36.interval,runonce
+	animation36.pattern0,overlay,30201,0,0,0
+	animation36.option,shared-index
+}
+surface1022
+{
+	//arm_l
+	//arm-animation0
+	animation31.interval,runonce
+	animation31.pattern0,overlay,30200,0,0,0
+	animation31.option,shared-index
+
+	//arm_r
+	//arm-animation1
+	animation37.interval,runonce
+	animation37.pattern0,overlay,30203,0,0,0
+	animation37.option,shared-index
+}
+surface1023
+{
+	//arm_l
+	//arm-animation1
+	animation32.interval,runonce
+	animation32.pattern0,overlay,30202,0,0,0
+	animation32.option,shared-index
+
+	//arm_r
+	//arm-animation0
+	animation36.interval,runonce
+	animation36.pattern0,overlay,30201,0,0,0
+	animation36.option,shared-index
+}
+surface1024
+{
+	//arm_l
+	//arm-animation1
+	animation32.interval,runonce
+	animation32.pattern0,overlay,30202,0,0,0
+	animation32.option,shared-index
+
+	//arm_r
+	//arm-animation1
+	animation37.interval,runonce
+	animation37.pattern0,overlay,30203,0,0,0
+	animation37.option,shared-index
+}
+surface1025
+{
+	//arm_l
+	//arm-animation2
+	animation33.interval,runonce
+	animation33.pattern0,overlay,30204,0,0,0
+	animation33.option,shared-index
+
+	//arm_r
+	//arm-animation1
+	animation37.interval,runonce
+	animation37.pattern0,overlay,30203,0,0,0
+	animation37.option,shared-index
+}
+surface1026
+{
+	//arm_l
+	//arm-animation1
+	animation32.interval,runonce
+	animation32.pattern0,overlay,30202,0,0,0
+	animation32.option,shared-index
+
+	//arm_r
+	//arm-animation2
+	animation38.interval,runonce
+	animation38.pattern0,overlay,30205,0,0,0
+	animation38.option,shared-index
+}
+surface1027
+{
+	//arm_l
+	//arm-animation2
+	animation33.interval,runonce
+	animation33.pattern0,overlay,30204,0,0,0
+	animation33.option,shared-index
+
+	//arm_r
+	//arm-animation2
+	animation38.interval,runonce
+	animation38.pattern0,overlay,30205,0,0,0
+	animation38.option,shared-index
+}
+
+surface2020
+{
+	//arm-1: chord
+	animation321.interval,runonce
+	animation321.pattern0,overlay,30206,0,0,0
+
+	//arm-2: strum
+	animation323.interval,never
+	animation323.pattern0,overlay,30208,0,0,0
+
+	animation324.interval,never
+	animation324.pattern0,overlay,30209,0,0,0
+}
+surface2021
+{
+	//arm-1: chord
+	animation322.interval,runonce
+	animation322.pattern0,overlay,30207,0,0,0
+
+	//arm-2: strum
+	animation323.interval,never
+	animation323.pattern0,overlay,30208,0,0,0
+
+	animation324.interval,never
+	animation324.pattern0,overlay,30209,0,0,0
+}
+surface2022
+{
+	//pose2
+	animation325.interval,runonce
+	animation325.pattern0,base,40200,0,0,0
+
+	//arm-2: strum
+	animation326.interval,never
+	animation326.pattern0,overlay,30211,0,0,0
+
+	animation327.interval,never
+	animation327.pattern0,overlay,30210,0,0,0
+}
+
+surface1020-1027
+{
+    element0,base,2\par_body.png,0,0
+    element1,overlay,2\inst_back.png,0,0
+	element2,overlay,2\par_eye.png,0,0
+
+
+	//-----mouth-----
+
+	//close
+	animation11.interval,never
+	animation11.pattern0,overlay,10200,0,0,0
+	//a
+	animation12.interval,never
+	animation12.pattern0,overlay,10201,0,0,0
+	//e, ii
+	animation13.interval,never
+	animation13.pattern0,overlay,10202,0,0,0
+	//i
+	animation14.interval,never
+	animation14.pattern0,overlay,10203,0,0,0
+	//o
+	animation15.interval,never
+	animation15.pattern0,overlay,10204,0,0,0
+	//oo, u
+	animation16.interval,never
+	animation16.pattern0,overlay,10205,0,0,0
+
+
+	//-----eyes-----
+
+	//blink
+	animation22.interval,never
+	animation22.pattern0,replace,20201,0,40,115
+	animation22.pattern1,overlay,-1,85,0,0
+	//eyes closed
+	animation23.interval,never
+	animation23.pattern0,replace,20201,0,40,115
+	//grin
+	animation24.interval,never
+	animation24.pattern0,replace,20202,0,40,115
+}
+surface2020-2022
+{
+    element0,base,2\par_body.png,0,0
+    element1,overlay,2\par_inst.png,0,0
+
+
+	//-----eyes-----
+	//eyes closed
+	animation13.interval,never
+	animation13.pattern0,replace,20201,0,40,115
+	//grin
+	animation14.interval,never
+	animation14.pattern0,replace,20202,0,40,115
+
+
+	//-----mouth-----
+
+	//mouth
+	animation1.interval,runonce
+	animation1.pattern0,overlay,10200,0,0,0
+}
+
+//------------------------------
+
+//rockstar cookie
+surface1030
+{
+	//arm_l
+	//arm-animation0
+	animation31.interval,runonce
+	animation31.pattern0,overlay,30300,0,0,0
+	animation31.option,shared-index
+
+	//arm_r
+	//arm-animation0
+	animation36.interval,runonce
+	animation36.pattern0,overlay,30301,0,0,0
+	animation36.option,shared-index
+}
+surface1031
+{
+	//arm_l
+	//arm-animation1
+	animation32.interval,runonce
+	animation32.pattern0,overlay,30302,0,0,0
+	animation32.option,shared-index
+
+
+	//arm_r
+	//arm-animation0
+	animation36.interval,runonce
+	animation36.pattern0,overlay,30301,0,0,0
+	animation36.option,shared-index
+}
+surface1032
+{
+	//arm_l
+	//arm-animation0
+	animation31.interval,runonce
+	animation31.pattern0,overlay,30300,0,0,0
+	animation31.option,shared-index
+
+	//arm_r
+	//arm-animation1
+	animation37.interval,runonce
+	animation37.pattern0,overlay,30303,0,0,0
+	animation37.option,shared-index
+}
+surface1033
+{
+	//arm_l
+	//arm-animation1
+	animation32.interval,runonce
+	animation32.pattern0,overlay,30302,0,0,0
+	animation32.option,shared-index
+
+	//arm_r
+	//arm-animation1
+	animation37.interval,runonce
+	animation37.pattern0,overlay,30303,0,0,0
+	animation37.option,shared-index
+}
+
+surface2030
+{
+	//arm-1: chord
+	animation321.interval,runonce
+	animation321.pattern0,overlay,30304,0,0,0
+
+	//arm-2: strum
+	animation323.interval,never
+	animation323.pattern0,overlay,30307,0,0,0
+	
+	animation324.interval,never
+	animation324.pattern0,overlay,30306,0,0,0
+}
+surface2031
+{
+	//arm-1: chord
+	animation322.interval,runonce
+	animation322.pattern0,overlay,30305,0,0,0
+
+	//arm-2: strum
+	animation323.interval,never
+	animation323.pattern0,overlay,30307,0,0,0
+	
+	animation324.interval,never
+	animation324.pattern0,overlay,30306,0,0,0
+}
+surface2032
+{
+	//pose2
+	animation320.interval,runonce
+	animation320.pattern0,base,40300,0,0,0
+
+	//arm-1: chord
+	animation326.interval,runonce
+	animation326.pattern0,overlay,30308,0,0,0
+
+	//arm-2: strum
+	animation328.interval,never
+	animation328.pattern0,overlay,30311,0,0,0
+	
+	animation329.interval,never
+	animation329.pattern0,overlay,30310,0,0,0
+}
+surface2033
+{
+	//pose2
+	animation320.interval,runonce
+	animation320.pattern0,base,40300,0,0,0
+
+	//arm-1: chord 2
+	animation327.interval,runonce
+	animation327.pattern0,overlay,30309,0,0,0
+
+	//arm-2: strum
+	animation328.interval,never
+	animation328.pattern0,overlay,30311,0,0,0
+	
+	animation329.interval,never
+	animation329.pattern0,overlay,30310,0,0,0
+}
+surface2034
+{
+	//head+body alt
+	animation325.interval,runonce
+	animation325.pattern0,base,40301,0,0,0
+
+	//arm-1: chord
+	animation326.interval,runonce
+	animation326.pattern0,overlay,30308,0,0,0
+
+	//arm-2: strum
+	animation328.interval,never
+	animation328.pattern0,overlay,30311,0,0,0
+	
+	animation329.interval,never
+	animation329.pattern0,overlay,30310,0,0,0
+}
+surface2035
+{
+	//head+body alt
+	animation325.interval,runonce
+	animation325.pattern0,base,40301,0,0,0
+
+	//arm-1: chord 2
+	animation327.interval,runonce
+	animation327.pattern0,overlay,30309,0,0,0
+
+	//arm-2: strum
+	animation328.interval,never
+	animation328.pattern0,overlay,30311,0,0,0
+	
+	animation329.interval,never
+	animation329.pattern0,overlay,30310,0,0,0
+}
+
+surface1030-1033
+{
+    element0,base,3\rock_body.png,0,0
+    element1,overlay,3\inst_back.png,0,0
+	element2,overlay,3\rock_eye.png,0,0
+
+
+	//-----mouth-----
+
+	//close
+	animation11.interval,never
+	animation11.pattern0,overlay,10300,0,0,0
+	//a
+	animation12.interval,never
+	animation12.pattern0,overlay,10301,0,0,0
+	//e, ii
+	animation13.interval,never
+	animation13.pattern0,overlay,10302,0,0,0
+	//i
+	animation14.interval,never
+	animation14.pattern0,overlay,10303,0,0,0
+	//o
+	animation15.interval,never
+	animation15.pattern0,overlay,10304,0,0,0
+	//oo, u
+	animation16.interval,never
+	animation16.pattern0,overlay,10305,0,0,0
+
+
+	//-----eyes-----
+
+	//blink
+	animation22.interval,never
+	animation22.pattern0,replace,20301,0,65,65
+	animation22.pattern1,overlay,-1,85,65,65
+	//eyes closed
+	animation23.interval,never
+	animation23.pattern0,replace,20301,0,65,65
+}
+surface2030,2031
+{
+    element0,base,3\rock_body.png,0,0
+    element1,overlay,3\rock_inst.png,0,0
+
+	//eye animation
+	animation0.interval,runonce
+	animation0.pattern0,replace,20301,0,65,65
+
+	//mouth
+	animation1.interval,runonce
+	animation1.pattern0,overlay,10300,0,0,0
+}
+
+//------------------------------
+
+//macaron cookie
+surface1040
+{
+    element0,base,4\mac_body.png,0,0
+    element1,overlay,4\mac_eye.png,0,0
+    element2,overlay,4\mac_inst.png,0,0
+
+	//close
+	animation11.interval,runonce
+	animation11.pattern0,overlay,10400,0,0,0
+
+	//blink
+	animation22.interval,random,4
+	animation22.pattern0,replace,20401,0,75,90
+	animation22.pattern1,overlay,-1,85,75,90
+}
+
+surface2040
+{
+	//hand motion
+	animation341.interval,runonce
+	animation341.pattern0,overlay,30403,0,0,0
+}
+surface2041
+{
+	//hand motion
+	animation341.interval,runonce
+	animation341.pattern0,overlay,30404,0,0,0
+}
+surface2040,2041
+{
+    element0,base,4\mac_body.png,0,0
+    element1,overlay,4\mac_arms3.png,0,0
+    element2,overlay,4\mac_inst.png,0,0
+
+
+	//-----mouth-----
+
+	//open
+	animation12.interval,runonce
+	animation12.pattern0,overlay,10401,0,0,0
+
+
+	//-----eyes-----
+
+	//eyes closed
+	animation23.interval,runonce
+	animation23.pattern0,replace,20401,0,75,90
+}
+
+//------------------------------
+
+//marshmallow cookie
+surface1050
+{
+	//mouth
+	animation1.interval,runonce
+	animation1.pattern0,overlay,10500,0,0,0
+
+	//arms
+	animation2.interval,runonce
+	animation2.pattern0,overlay,30500,0,0,0
+}
+surface1051
+{
+	//mouth
+	animation1.interval,runonce
+	animation1.pattern0,overlay,10501,0,0,0
+
+	//arms
+	animation2.interval,runonce
+	animation2.pattern0,overlay,30501,0,0,0
+}
+
+surface2050
+{
+	//start
+	animation350.interval,runonce
+	animation350.pattern0,base,40500,0,0,0
+}
+surface2051
+{
+	//arm_1
+	animation351.interval,runonce
+	animation351.pattern0,overlay,30504,0,0,0
+}
+surface2052
+{
+	//arm_1
+	animation351.interval,runonce
+	animation351.pattern0,overlay,30505,0,0,0
+}
+surface2053
+{
+	//arm_2
+	animation352.interval,runonce
+	animation352.pattern0,overlay,30506,0,0,0
+
+}
+surface2054
+{
+	//arm_2
+	animation352.interval,runonce
+	animation352.pattern0,overlay,30507,0,0,0
+
+}
+surface2055
+{
+	//arm_3
+	animation353.interval,runonce
+	animation353.pattern0,overlay,30508,0,0,0
+}
+surface2056
+{
+	//arm_3
+	animation353.interval,runonce
+	animation353.pattern0,overlay,30509,0,0,0
+}
+
+surface3051
+{
+	//alt_1
+	animation356.interval,runonce
+	animation356.pattern0,replace,40501,0,10,0
+}
+surface3052
+{
+	//alt_1
+	animation356.interval,runonce
+	animation356.pattern0,replace,40502,0,10,0
+}
+surface3053
+{
+	//arm_2
+	animation352.interval,runonce
+	animation352.pattern0,replace,40503,0,10,0
+}
+surface3054
+{
+	//arm_2
+	animation352.interval,runonce
+	animation352.pattern0,replace,40504,0,10,0
+}
+surface3055
+{
+	//alt_3
+	animation358.interval,runonce
+	animation358.pattern0,replace,40505,0,10,0
+}
+surface3056
+{
+	//alt_3
+	animation358.interval,runonce
+	animation358.pattern0,replace,40506,0,10,0
+}
+
+surface1050,1051
+{
+    element0,base,5\mar_body.png,0,0
+    element1,overlay,5\mar_eye.png,0,0
+
+
+	//-----eyes-----
+
+	//Blink
+	animation4.interval,random,4
+	animation4.pattern0,replace,20501,0,74,115
+	animation4.pattern1,overlay,-1,85,74,115
+}
+surface2051-2056,3051-3056
+{
+    element0,base,5\mar_body.png,0,0
+
+
+	//-----eyes-----
+	
+	animation450.interval,never
+	animation450.pattern0,stop,451
+	animation450.pattern1,overlay,20502,0,0,0
+
+	animation451.interval,never
+	animation451.pattern0,stop,450
+	animation451.pattern1,overlay,20503,0,0,0
+
+}
+
+//------------------------------
+
+//clover cookie
+surface1060
+{
+	//arms
+	animation320.interval,runonce
+	animation320.pattern0,overlay,30600,0,0,0
+}
+
+surface2060
+{
+	//arm-1: chord
+	animation321.interval,runonce
+	animation321.pattern0,overlay,30601,0,0,0
+
+	//arm-2: strum
+	animation323.interval,never
+	animation323.pattern0,overlay,30603,0,0,0
+
+	animation324.interval,never
+	animation324.pattern0,overlay,30604,0,0,0
+}
+surface2061
+{
+	//arm-1: chord
+	animation322.interval,runonce
+	animation322.pattern0,overlay,30602,0,0,0
+
+	//arm-2: strum
+	animation323.interval,never
+	animation323.pattern0,overlay,30603,0,0,0
+
+	animation324.interval,never
+	animation324.pattern0,overlay,30604,0,0,0
+}
+
+surface1060,2060,2061
+{
+    element0,base,6\clo_body.png,0,0
+    element1,overlay,6\clo_eye.png,0,0
+
+	//-----mouth-----
+
+	//close
+	animation11.interval,never
+	animation11.pattern0,overlay,10600,0,0,0
+	//a
+	animation12.interval,never
+	animation12.pattern0,overlay,10601,0,0,0
+	//e, ii
+	animation13.interval,never
+	animation13.pattern0,overlay,10602,0,0,0
+	//i
+	animation14.interval,never
+	animation14.pattern0,overlay,10603,0,0,0
+	//o
+	animation15.interval,never
+	animation15.pattern0,overlay,10604,0,0,0
+	//oo, u
+	animation16.interval,never
+	animation16.pattern0,overlay,10605,0,0,0
+
+
+	//-----eyes-----
+
+	//blink
+	animation22.interval,never
+	animation22.pattern1,replace,20601,0,115,55
+	animation22.pattern2,overlay,-1,85,0,0
+	//eyes closed
+	animation23.interval,never
+	animation23.pattern0,replace,20601,0,115,55
+	//grin
+	animation24.interval,never
+	animation24.pattern0,replace,20602,0,115,55
+}
+surface2060,2061
+{
+    element2,overlay,6\clo_inst.png,0,0
+}
+//------------------------------
+
+//carol cookie
+surface1070
+{
+	//arm-animation1
+	animation31.interval,runonce
+	animation31.pattern0,overlay,30701,0,0,0
+	animation31.option,shared-index
+}
+surface1071
+{
+	//arm-animation2
+	animation32.interval,runonce
+	animation32.pattern0,overlay,30702,0,0,0
+	animation32.option,shared-index
+}
+surface1072
+{
+	//arm-animation3
+	animation33.interval,runonce
+	animation33.pattern0,overlay,30703,0,0,0
+	animation33.option,shared-index
+}
+surface1073
+{
+	//arm-animation4
+	animation36.interval,runonce
+	animation36.pattern0,overlay,30704,0,0,0
+	animation36.option,shared-index
+}
+surface1074
+{
+	//arm-animation5
+	animation37.interval,runonce
+	animation37.pattern0,overlay,30705,0,0,0
+	animation37.option,shared-index
+}
+surface1075
+{
+	//arm-animation6
+	animation38.interval,runonce
+	animation38.pattern0,overlay,30706,0,0,0
+	animation38.option,shared-index
+}
+
+surface2070
+{
+	//arm-2: strum
+	animation323.interval,runonce
+	animation323.pattern0,overlay,30707,0,0,0
+
+	//strings
+	animation325.interval,runonce
+	animation325.pattern0,overlay,50700,0,0,0
+}
+surface2071
+{
+	//arm-2: strum
+	animation323.interval,runonce
+	animation323.pattern0,overlay,30708,0,0,0
+
+	//strings
+	animation325.interval,runonce
+	animation325.pattern0,overlay,50700,0,0,0
+	animation325.pattern1,overlay,50701,75,0,0
+	animation325.pattern2,overlay,50702,75,0,0
+	animation325.pattern3,overlay,50701,75,0,0
+	animation325.pattern4,overlay,50702,75,0,0
+	animation325.pattern5,overlay,50700,75,0,0
+}
+
+surface1070-1075
+{
+    element0,base,7\car_body.png,0,0
+    element1,overlay,7\car_eye.png,0,0
+
+
+	//-----mouth-----
+
+	//close
+	animation11.interval,never
+	animation11.pattern0,overlay,10700,0,0,0
+	//a
+	animation12.interval,never
+	animation12.pattern0,overlay,10701,0,0,0
+	//e, ii
+	animation13.interval,never
+	animation13.pattern0,overlay,10702,0,0,0
+	//i
+	animation14.interval,never
+	animation14.pattern0,overlay,10703,0,0,0
+	//o
+	animation15.interval,never
+	animation15.pattern0,overlay,10704,0,0,0
+	//oo, u
+	animation16.interval,never
+	animation16.pattern0,overlay,10705,0,0,0
+
+
+	//-----eyes-----
+
+	//blink
+	animation22.interval,never
+	animation22.pattern1,replace,20701,0,80,80
+	animation22.pattern2,replace,-1,85,0,0
+	//eyes closed
+	animation23.interval,never
+	animation23.pattern1,replace,20701,0,80,80
+	//grin
+	animation24.interval,never
+	animation24.pattern0,replace,20702,0,80,80
+}
+surface2070-2071
+{
+    element0,base,7\car_body.png,0,0
+
+
+	//-----eyes-----
+
+	animation10.interval,runonce
+	animation10.pattern0,replace,20703,0,80,80
+
+
+	//-----mouth-----
+
+	animation1.interval,runonce
+	animation1.pattern0,overlay,10705,0,0,0
+}
+
+//------------------------------
+
+//bellflower cookie
+surface1080
+{
+    element0,base,8\bell_body.png,0,0
+    element1,base,8\bell_eye.png,0,0
+
+	//-----eyes-----
+	animation0.interval,runonce
+	animation0.pattern0,replace,20802,0,70,120
+
+	//Blink
+	animation4.interval,random,4
+	animation4.pattern0,replace,20801,0,70,120
+	animation4.pattern1,overlay,-1,85,0,0
+
+
+	//-----mouth-----
+
+	//mouth
+	animation1.interval,runonce
+	animation1.pattern0,overlay,10800,0,0,0
+}
+
+surface2080
+{
+	//arm
+	animation2.interval,runonce
+	animation2.pattern0,overlay,30801,0,0,0
+
+	//strings
+	animation325.interval,runonce
+	animation325.pattern0,overlay,50800,0,0,0
+}
+surface2081
+{
+	//arm-2: strum
+	animation323.interval,runonce
+	animation323.pattern0,overlay,30802,0,0,0
+
+	//strings
+	animation325.interval,runonce
+	animation325.pattern0,overlay,50800,0,0,0
+}
+surface2082
+{
+	//arm-2: strum
+	animation323.interval,runonce
+	animation323.pattern1,overlay,30801,0,0,0
+
+	//strings
+	animation325.interval,runonce
+	animation325.pattern0,overlay,50800,0,0,0
+	animation325.pattern1,overlay,50801,75,0,0
+	animation325.pattern2,overlay,50802,75,0,0
+	animation325.pattern3,overlay,50801,75,0,0
+	animation325.pattern4,overlay,50802,75,0,0
+	animation325.pattern5,overlay,50800,75,0,0
+}
+
+surface2080-2082
+{
+    element0,base,8\bell_body2.png,0,0
+    element1,overlay,8\bell_face.png,0,0
+}
+
+//------------------------------
+
+//pudding cookie
+surface1090
+{
+    element0,base,9\pud_body.png,0,0
+    element1,overlay,9\pud_eye.png,0,0
+    element2,overlay,9\pud_mouth.png,0,0
+    element3,overlay,9\pud_arm1.png,0,0
+    element4,interpolate,9\pud_arm2.png,0,0
+
+
+	//Blink
+	animation4.interval,random,4
+	animation4.pattern0,replace,20901,0,80,150
+	animation4.pattern1,overlay,-1,85,0,0
+}
+surface1091
+{
+    element0,base,9\pud_body.png,0,0
+    element1,overlay,9\pud_eye2.png,80,150
+
+	//mouth
+	animation1.interval,runonce
+	animation1.pattern0,overlay,10902,0,0,0
+
+	//arms
+	animation2.interval,runonce
+	animation2.pattern0,overlay,30902,0,0,0
+
+	//Blink
+	animation4.interval,random,4
+	animation4.pattern1,replace,20901,0,80,150
+	animation4.pattern2,overlay,20900,85,0,0
+}
+surface2090
+{
+	//start
+	animation340.interval,runonce
+	animation340.pattern0,overlay,30902,0,0,0
+}
+surface2091
+{
+	//arm-1: lead
+	animation341.interval,runonce
+	animation341.pattern0,overlay,30904,0,0,0
+
+	//arm-2: follow
+	animation342.interval,runonce
+	animation342.pattern0,interpolate,30905,0,0,0
+}
+surface2092
+{
+	//arm-1: lead
+	animation341.interval,runonce
+	animation341.pattern0,overlay,30903,0,0,0
+
+	//arm-2: follow
+	animation342.interval,runonce
+	animation342.pattern0,interpolate,30906,0,0,0
+}
+
+surface2090-2092
+{
+    element0,base,9\pud_body.png,0,0
+    element1,overlay,9\pud_face.png,0,0
+}
+
+//------------------------------
+
+//dj cookie
+surface1100
+{
+    element0,base,10\dj_body.png,0,0
+    element1,overlay,10\dj_mouth.png,0,0
+    element2,overlay,10\dj_arm1.png,0,0
+    element3,overlay,10\dj_arm2.png,0,0
+
+	//eyes
+	animation0.interval,runonce
+	animation0.pattern0,overlay,21000,0,0,0
+
+	//Blink
+	animation4.interval,random,4
+	animation4.pattern0,stop,0
+	animation4.pattern1,overlay,21000,0,0,0
+	animation4.pattern2,overlay,21001,150,0,0
+	animation4.pattern3,overlay,21002,150,0,0
+	animation4.pattern4,overlay,21003,150,0,0
+	animation4.pattern5,overlay,21000,150,0,0
+	animation4.pattern6,overlay,21001,150,0,0
+	animation4.pattern7,overlay,21002,150,0,0
+	animation4.pattern8,overlay,21003,150,0,0
+	animation4.pattern9,overlay,21000,150,0,0
+}
+surface1101
+{
+    element0,base,10\dj_body2.png,0,0
+    element1,overlay,10\dj_mouth.png,0,0
+    element2,overlay,surface31002.png,0,0
+    element3,overlay,surface31003.png,0,0
+
+	//arm R
+	animation4.interval,runonce
+	animation4.pattern0,overlay,31003,0,0,0
+
+	//head-animation
+	animation362.interval,runonce
+	animation362.pattern0,overlay,41000,0,0,0
+	animation362.pattern1,overlay,41001,50,0,0
+	animation362.pattern2,overlay,41002,50,0,0
+	animation362.pattern3,overlay,41003,50,0,0
+	animation362.pattern4,overlay,41000,50,0,0
+	animation362.pattern5,overlay,41000,800,0,0
+}
+surface2100
+{
+	//arm-1
+	animation322.interval,runonce
+	animation322.pattern0,overlay,31005,0,0,0
+
+	//arm-2
+	animation324.interval,runonce
+	animation324.pattern0,overlay,31007,0,0,0
+
+	//inst
+	animation361.interval,runonce
+	animation361.pattern0,overlay,51001,150,0,41
+	animation361.pattern1,overlay,51002,50,0,41
+	animation361.pattern2,overlay,51003,100,0,41
+	animation361.pattern3,overlay,51004,250,0,41
+	animation361.pattern4,overlay,51005,150,0,41
+	animation361.pattern5,overlay,51006,150,0,41
+	animation361.pattern6,overlay,51001,150,0,41
+	animation361.option,shared-index
+
+	//head-animation
+	animation362.interval,runonce
+	animation362.pattern0,overlay,41004,0,0,0
+	animation362.pattern1,overlay,41005,50,0,0
+	animation362.pattern2,overlay,41006,50,0,0
+	animation362.pattern3,overlay,41007,50,0,0
+	animation362.pattern4,overlay,41004,50,0,0
+}
+surface2101
+{
+	//arm-1
+	animation321.interval,runonce
+	animation321.pattern0,overlay,31004,0,0,0
+
+	//arm-2
+	animation323.interval,runonce
+	animation323.pattern0,overlay,31006,0,0,0
+
+	//inst
+	animation361.interval,runonce
+	animation361.pattern0,overlay,51001,150,0,41
+	animation361.pattern1,overlay,51002,50,0,41
+	animation361.pattern2,overlay,51003,100,0,41
+	animation361.pattern3,overlay,51004,250,0,41
+	animation361.pattern4,overlay,51005,150,0,41
+	animation361.pattern5,overlay,51006,150,0,41
+	animation361.pattern6,overlay,51001,150,0,41
+	animation361.option,shared-index
+
+	//head-animation
+	animation362.interval,runonce
+	animation362.pattern0,overlay,41004,0,0,0
+	animation362.pattern1,overlay,41005,50,0,0
+	animation362.pattern2,overlay,41006,50,0,0
+	animation362.pattern3,overlay,41007,50,0,0
+	animation362.pattern4,overlay,41004,50,0,0
+}
+surface2102
+{
+	//arm-1
+	animation321.interval,runonce
+	animation321.pattern0,overlay,31004,0,0,0
+
+	//arm-2
+	animation324.interval,runonce
+	animation324.pattern0,overlay,31007,0,0,0
+
+	//inst
+	animation361.interval,runonce
+	animation361.pattern0,overlay,51001,150,0,41
+	animation361.pattern1,overlay,51002,50,0,41
+	animation361.pattern2,overlay,51003,100,0,41
+	animation361.pattern3,overlay,51004,250,0,41
+	animation361.pattern4,overlay,51005,150,0,41
+	animation361.pattern5,overlay,51006,150,0,41
+	animation361.pattern6,overlay,51001,150,0,41
+	animation361.option,shared-index
+
+	//head-animation
+	animation362.interval,runonce
+	animation362.pattern0,overlay,41004,0,0,0
+	animation362.pattern1,overlay,41005,50,0,0
+	animation362.pattern2,overlay,41006,50,0,0
+	animation362.pattern3,overlay,41007,50,0,0
+	animation362.pattern4,overlay,41004,50,0,0
+}
+surface2103
+{
+	//arm-1
+	animation322.interval,runonce
+	animation322.pattern0,overlay,31005,0,0,0
+
+	//arm-2
+	animation323.interval,runonce
+	animation323.pattern0,overlay,31006,0,0,0
+
+	//inst
+	animation361.interval,runonce
+	animation361.pattern0,overlay,51001,150,0,41
+	animation361.pattern1,overlay,51002,50,0,41
+	animation361.pattern2,overlay,51003,100,0,41
+	animation361.pattern3,overlay,51004,250,0,41
+	animation361.pattern4,overlay,51005,150,0,41
+	animation361.pattern5,overlay,51006,150,0,41
+	animation361.pattern6,overlay,51001,150,0,41
+	animation361.option,shared-index
+
+	//head-animation
+	animation362.interval,runonce
+	animation362.pattern0,overlay,41004,0,0,0
+	animation362.pattern1,overlay,41005,50,0,0
+	animation362.pattern2,overlay,41006,50,0,0
+	animation362.pattern3,overlay,41007,50,0,0
+	animation362.pattern4,overlay,41004,50,0,0
+}
+surface2104
+{
+	//arm-1: chord
+	animation326.interval,runonce
+	animation326.pattern0,interpolate,31002,0,0,0
+
+	//arm-2: strum
+	animation327.interval,runonce
+	animation327.pattern0,overlay,31007,0,0,0
+	
+	//inst
+	animation361.interval,runonce
+	animation361.pattern0,overlay,51001,150,0,41
+	animation361.pattern1,overlay,51002,50,0,41
+	animation361.pattern2,overlay,51003,100,0,41
+	animation361.pattern3,overlay,51004,250,0,41
+	animation361.pattern4,overlay,51005,150,0,41
+	animation361.pattern5,overlay,51006,150,0,41
+	animation361.pattern6,overlay,51001,150,0,41
+	animation361.option,shared-index
+
+	//head-animation 2
+	animation363.interval,runonce
+	animation363.pattern0,overlay,41008,0,0,0
+	animation363.pattern1,overlay,41009,50,0,0
+	animation363.pattern2,overlay,41010,50,0,0
+	animation363.pattern3,overlay,41011,50,0,0
+	animation363.pattern4,overlay,41008,50,0,0
+}
+surface2105
+{
+	//arm-1: chord
+	animation326.interval,runonce
+	animation326.pattern0,interpolate,31002,0,0,0
+
+	//arm-2: strum
+	animation328.interval,runonce
+	animation328.pattern2,overlay,31006,0,0,0
+	
+	//inst
+	animation361.interval,runonce
+	animation361.pattern0,overlay,51001,150,0,41
+	animation361.pattern1,overlay,51002,50,0,41
+	animation361.pattern2,overlay,51003,100,0,41
+	animation361.pattern3,overlay,51004,250,0,41
+	animation361.pattern4,overlay,51005,150,0,41
+	animation361.pattern5,overlay,51006,150,0,41
+	animation361.pattern6,overlay,51001,150,0,41
+	animation361.option,shared-index
+
+	//head-animation 2
+	animation363.interval,runonce
+	animation363.pattern0,overlay,41008,0,0,0
+	animation363.pattern1,overlay,41009,50,0,0
+	animation363.pattern2,overlay,41010,50,0,0
+	animation363.pattern3,overlay,41011,50,0,0
+	animation363.pattern4,overlay,41008,50,0,0
+}
+
+surface2100-2105
+{
+    element0,base,10\dj_body2.png,0,0
+    element1,overlay,10\dj_inst.png,0,41
+}
+
+//------------------------------
+
+//mint choco cookie
+surface1110
+{
+    element4,interpolate,11\mc_arm2.png,0,0
+}
+surface1111
+{
+	//inst
+	animation411.interval,runonce
+	animation411.pattern0,overlay,51100,0,0,0
+}
+
+surface2110
+{
+	//arm-2: strum
+	animation323.interval,runonce
+	animation323.pattern0,overlay,31102,0,0,0
+}
+surface2111
+{
+	//arm-2: strum
+	animation323.interval,runonce
+	animation323.pattern0,overlay,31103,0,0,0
+}
+surface2112
+{
+	animation325.interval,runonce
+	animation325.pattern0,base,41101,0,0,0
+
+	//arm-2: strum
+	animation328.interval,runonce
+	animation328.pattern0,overlay,31104,0,0,0
+}
+surface2113
+{
+	animation325.interval,runonce
+	animation325.pattern0,base,41101,0,0,0
+
+	//arm-2: strum
+	animation328.interval,runonce
+	animation328.pattern1,overlay,31105,0,0,0
+}
+
+surface1110-1111
+{
+    element0,base,11\mc_body.png,0,0
+    element1,overlay,11\mc_eye.png,0,0
+    element2,overlay,11\mc_arm1.png,0,0
+    element3,overlay,11\mc_mouth.png,0,0
+
+
+	//-----eyes-----
+
+	//Blink
+	animation4.interval,random,4
+	animation4.pattern0,replace,21101,0,55,75
+	animation4.pattern1,overlay,-1,85,0,0
+}
+surface2110-2113
+{
+    element0,base,11\mc_body2.png,0,0
+}
+
+//------------------------------
+
+//strawberry stick cookie
+surface1121
+{
+	//body, mouth
+	//surfaces_parts.txt
+
+    animation340.interval,runonce
+    animation340.pattern0,overlay,31201,0,20,0
+}
+surface1122
+{
+	//body, mouth
+	//surfaces_parts.txt
+
+    animation341.interval,runonce
+    animation341.pattern0,overlay,31202,0,20,0
+    animation341.pattern1,overlay,31203,180,20,0
+}
+
+surface2120
+{
+    animation341.interval,runonce
+    animation341.pattern0,interpolate,41204,0,0,0
+
+    //inst
+    animation345.interval,runonce
+    animation345.pattern0,overlay,51200,0,0,0
+}
+surface2121
+{
+    animation341.interval,runonce
+    animation341.pattern0,interpolate,41205,0,0,0
+    animation341.pattern1,interpolate,41205,240,0,0
+    animation341.pattern2,interpolate,41204,180,0,0
+
+    //inst
+    animation345.interval,runonce
+    animation345.pattern0,overlay,51201,0,0,0
+    animation345.pattern1,overlay,51201,240,0,0
+    animation345.pattern2,overlay,51200,180,0,0
+}
+surface2122
+{
+    animation342.interval,runonce
+    animation342.pattern0,interpolate,41211,0,0,0
+
+    //inst
+    animation346.interval,runonce
+    animation346.pattern0,overlay,51200,0,0,0
+}
+surface2123
+{
+
+    animation342.interval,runonce
+    animation342.pattern0,interpolate,41206,0,0,0
+    animation342.pattern1,interpolate,41206,120,0,0
+    animation342.pattern2,interpolate,41207,240,0,0
+
+    //inst
+    animation346.interval,runonce
+    animation346.pattern0,overlay,51202,0,0,0
+    animation346.pattern1,overlay,51202,120,0,0
+    animation346.pattern2,overlay,51200,240,0,0
+}
+surface2124
+{
+    animation343.interval,runonce
+    animation343.pattern0,interpolate,41212,0,0,0
+
+    //inst
+    animation347.interval,runonce
+    animation347.pattern0,overlay,51200,0,0,0
+}
+surface2125
+{
+    animation343.interval,runonce
+    animation343.pattern0,interpolate,41209,0,0,0
+    animation343.pattern1,interpolate,41209,120,0,0
+    animation343.pattern2,interpolate,41208,240,0,0
+
+    //inst
+    animation347.interval,runonce
+    animation347.pattern0,overlay,51203,0,0,0
+    animation347.pattern1,overlay,51203,120,0,0
+    animation347.pattern2,overlay,51204,240,0,0
+    animation347.pattern3,overlay,51205,180,0,0
+    animation347.pattern4,overlay,51200,180,0,0
+}
+
+surface3120
+{
+    animation348.interval,runonce
+    animation348.pattern0,base,41202,0,0,0
+}
+surface3121
+{
+    animation348.interval,runonce
+    animation348.pattern0,base,41203,0,0,0
+}
+
+surface1120
+{
+    element0,base,12\ss_body.png,0,0
+    element1,overlay,12\ss_eye.png,0,0
+    element2,overlay,12\ss_mouth.png,0,0
+    element3,overlay,12\ss_arms.png,0,0
+
+    animation4.interval,random,4
+    animation4.pattern0,replace,21201,0,65,95
+    animation4.pattern1,replace,-1,85,0,0
+}
+surface1121,1122
+{
+    element0,base,12\ss_body2.png,20,0
+    element1,overlay,12\ss_eye2.png,20,0
+    element2,overlay,12\ss_mouth2.png,20,0
+}
+
+//------------------------------
+
+//mint wafer cookie
+surface1130
+{
+    element0,base,13\mw_body.png,0,0
+    element2,overlay,13\mw_arms.png,0,0
+    element3,overlay,13\mw_mouth.png,0,0
+    element4,overlay,13\mw_inst_b.png,0,0
+    element5,interpolate,13\mw_inst.png,0,0
+}
+surface1131
+{
+    element0,base,13\mw_body2.png,0,0
+    element2,overlay,13\mw_mouth.png,0,0
+}
+
+surface2130
+{
+    animation321.interval,runonce
+    animation321.pattern0,overlay,41300,0,0,0
+}
+surface2131
+{
+    animation322.interval,runonce
+    animation322.pattern0,overlay,41301,0,0,0
+}
+surface2132
+{
+    animation323.interval,runonce
+    animation323.pattern0,overlay,41302,0,0,0
+}
+surface2133
+{
+    animation324.interval,runonce
+    animation324.pattern0,overlay,41303,0,0,0
+}
+
+surface1130-1131
+{
+    element1,overlay,13\mw_eye.png,0,0
+
+    animation1.interval,random,4
+    animation1.pattern0,replace,21301,0,55,85
+    animation1.pattern1,replace,-1,85,0,0
+}

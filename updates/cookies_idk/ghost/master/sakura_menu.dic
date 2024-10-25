@@ -1,0 +1,148 @@
+SakuraMenuGreetings : nonoverlap
+{
+	"Hello."
+	"How can I help you?"
+}
+
+//Because there is an all modifier here, you don't need to write -- between menu options
+OnSakuraMenu : all
+{
+	if MusicPlayer.Singing;	RestoreCookies
+
+	"\b2\![set,autoscroll,disable]"
+	if SHIORI3FW.Eventid == "OnMouseDoubleClick"; SakuraMenuGreetings //The check here is so they won't comment if you click the back button. Remove if you prefer
+	else;	"\C\![lock,balloonrepaint]\c"
+	
+	"\n\n\_q"
+	
+	//"\![*]\q[Talk to me,OnAiTalk]"
+	//if LastTalk != ""; "  \![*]\q[Say that again,OnLastTalk]"
+	//"\n\n"
+	
+	"\![*]\q[Music player,OnMusicPlayer.Menu]\n\n"
+
+	"\![*]\q[Change Cookies,OnChangeCookie]\n\n"
+	
+	//"\![*]\q[Change talk rate,OnTalkRateMenu]\n\n"
+	
+	"\![*]\q[Nevermind,script:\e]\![unlock,balloonrepaint]"
+}
+
+OnLastTalk
+{
+	LastTalk
+}
+
+OnChangeCookie : all
+{
+	_cookielabels = ("Shining Glitter Cookie","Popping Candy Cookie","Parfait Cookie","Rockstar Cookie","Macaron Cookie","Marshmallow Cookie","Clover Cookie","Carol Cookie","Bellflower Cookie","Pudding Cookie","DJ Cookie","Mint Choco Cookie","Strawberry Stick Cookie","Mint Wafer Cookie")
+	_cookiecount = 0
+
+	"\C\![lock,balloonrepaint]\c%(MusicPlayer.LargeBalloon)\![set,autoscroll,disable]"
+	"\_qSelect a character to add or remove.\_q\n\n[half]\*"
+
+	foreach _cookielabels ; _cookielabel	{
+
+		"\q[%(_cookielabel),OnSelectCookie,%(cookies[_cookiecount][0,'|'])]"
+
+		if _cookiecount > 1	{
+			if cookies[_cookiecount][1,"|"] == 2; "\n[0]\f[align,right]\__q[OnSelectCookie,%(cookies[_cookiecount][0,'|']),off]●\__q"
+			else; "\n[0]\f[align,right]\__q[OnSelectCookie,%(cookies[_cookiecount][0,'|']),on]○\__q"
+		}
+		"\n\f[align,default]"
+
+		_cookiecount++
+	}
+	--
+	"\n[half]\f[align,default]"
+	--
+	"\![*]\q[Main Menu,OnSakuraMenu]\![unlock,balloonrepaint]"
+}
+
+OnSelectCookie
+{
+	//set up locals
+	_num = 0
+	_currentcookie = ""
+	_currentstate = ""
+	_selected = reference0
+	_instrument = reference1
+	_activestate = 0
+
+	//for loop
+	for _i = 0; i < ARRAYSIZE(cookies); _i++	{
+		_num = _i
+		_currentcookie = cookies[_i][0,"|"]
+		LOGGING("++++++++++++++++++++++++++++++")
+		LOGGING("cookie: %(_currentcookie)")
+		LOGGING("placement: %(_num)")
+
+		if _currentcookie == _selected	{
+			_currentstate = cookies[_i]
+			LOGGING("old state: %(_currentstate)")
+			_activestate = _currentstate[1,"|"]
+			LOGGING("old activestate: %(_activestate)")
+
+			if _instrument == "on"	{
+				if _activestate == 1;	_activestate = 2
+				elseif _activestate == 0;	_activestate = 0
+			}
+			elseif _instrument == "off"	{
+				if _activestate == 2;	_activestate = 1
+				elseif _activestate == 0;	_activestate = 0
+			}
+			else	{
+				if _activestate == 1 || _activestate == 2;	_activestate = 0
+				elseif _activestate == 0;	_activestate = 1
+			}
+			
+			LOGGING("new activestate: %(_activestate)")
+
+			_currentstate[1,"|"] = _activestate
+			LOGGING("new state: %(_currentstate)")
+			cookies[_i] = _currentstate
+
+			break
+		}
+	}
+
+	//"cookie: %(cookies[_num][0,'|'])\nnow state: %(cookies[_num][1,'|'])"
+	//if _activestate == 0;	"\p[%(_num)]\s[-1]"
+	//elseif _activestate == 1;	"\p[%(_num)]\s[%(cookies[_num][1,'|'])0]"
+	RestoreCookies.SakuraMenu
+}
+
+RestoreCookies.SakuraMenu : all
+{
+	"\C\![lock,balloonrepaint]"
+	RestoreCookies
+	"\![raise,OnChangeCookie]"
+}
+
+OnTalkRateMenu : all
+{	
+	//This is just setting up a label, you may need to add to it or tweak it if you change what rates are available
+	_talkrate = "Off"
+	if aitalkinterval == 30; _talkrate = "30 seconds"
+	elseif aitalkinterval == 60; _talkrate = "1 minute"
+	elseif aitalkinterval == 180; _talkrate = "3 minutes"
+	elseif aitalkinterval == 300; _talkrate = "5 minutes"
+	elseif aitalkinterval == 600; _talkrate = "10 minutes"
+	
+	"\0\s[0]\b2\![set,autoscroll,disable]\_q"
+	"Current interval: %(_talkrate)\n\n"
+	
+	"\![*]\q[Off,OnTalkRateChange,0]\n"
+	"\![*]\q[30 seconds,OnTalkRateChange,30]\n"
+	"\![*]\q[1 minute,OnTalkRateChange,60]\n"
+	"\![*]\q[3 minutes,OnTalkRateChange,180]\n"
+	"\![*]\q[5 minutes,OnTalkRateChange,300]\n"
+	"\![*]\q[10 minutes,OnTalkRateChange,600]\n"
+	"\n"
+	"\![*]\q[Back,OnSakuraMenu]  \![*]\q[Nevermind,script:\e]"
+}
+
+OnTalkRateChange
+{
+	aitalkinterval = TOINT(reference0)
+}

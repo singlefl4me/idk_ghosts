@@ -1,0 +1,105 @@
+//mint choco cookie
+
+charset,UTF-8
+
+descript
+{
+version,1
+animation-sort,ascend
+}
+
+//Idle
+surface110
+{
+	//body, mouth, arms
+	//surfaces_parts.txt
+
+	//Blink
+	animation4.interval,random,4
+	animation4.pattern0,replace,21101,0,55,75
+	animation4.pattern1,overlay,-1,85,0,0
+}
+
+//violin
+surface118
+{
+	//violin-animations
+
+	//arm-2: strum
+	animation323.interval,always
+	animation323.pattern0,overlay,31102,0,0,0
+	animation323.pattern1,overlay,31103,1000,0,0
+	animation323.pattern2,overlay,31102,1000,0,0
+
+
+	//pose2
+	
+	animation325.interval,periodic,12
+	animation325.pattern0,start,328
+	animation325.pattern1,base,41101,0,0,0
+	animation325.pattern2,base,-1,8000,0,0
+	animation325.pattern3,stop,328
+	animation325.pattern4,start,323
+	animation325.option,exclusive
+
+	//arm-2: strum
+	animation328.interval,never
+	animation328.pattern0,overlay,31104,0,0,0
+	animation328.pattern1,overlay,31105,1000,0,0
+	animation328.pattern2,overlay,31104,1000,0,0
+	animation328.pattern3,start,328
+}
+
+//Singing
+surface119
+{
+	//body, mouth, arm
+	//surfaces_parts.txt
+
+	//inst
+	animation411.interval,runonce
+	animation411.pattern0,overlay,51100,0,0,0
+
+	//Blink
+	animation4.interval,random,4
+	animation4.pattern0,replace,21101,0,55,75
+	animation4.pattern1,overlay,-1,85,0,0
+}
+
+//------------------------------
+
+surface110
+{
+    element0,base,11\mc_body.png,0,0
+    element1,overlay,11\mc_mouth.png,0,0
+    element2,overlay,11\mc_eye.png,0,0
+    element3,overlay,11\mc_arm1.png,0,0
+    element4,interpolate,11\mc_arm2.png,0,0
+}
+surface111
+{
+    element0,base,11\mc_body.png,0,0
+    element1,overlay,surface21101.png,0,0
+    element2,overlay,11\mc_mouth.png,0,0
+    element3,overlay,11\mc_arm1.png,0,0
+    element4,interpolate,11\mc_arm2.png,0,0
+}
+surface118
+{
+    element0,base,11\mc_body2.png,0,0
+}
+surface119
+{
+    element0,base,11\mc_body.png,0,0
+    element1,overlay,11\mc_eye.png,0,0
+    element2,overlay,11\mc_arm1.png,0,0
+    element3,overlay,11\mc_mouth.png,0,0
+}
+surface21100
+{
+    element0,base,11\mc_eye.png,0,0
+}
+surface41101
+{
+    element0,overlay,11\mc_body3.png,0,0
+}

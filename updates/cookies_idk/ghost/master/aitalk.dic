@@ -1,0 +1,31 @@
+OnAiTalk
+{
+	if CHAIN.IDName == ""
+	{
+		LastTalk = RandomTalk
+	}
+	else
+	{
+		LastTalk = ChainTalk
+	}
+	LastTalk
+}
+
+RandomTalk : nonoverlap_pool
+{
+	/*
+	//10 lines per cookie 
+
+	//shining glitter cookie
+	""
+
+	//popping candy cookie
+	""
+
+	//parfait cookie
+	""
+
+	//rockstar cookie
+	""
+	*/
+}

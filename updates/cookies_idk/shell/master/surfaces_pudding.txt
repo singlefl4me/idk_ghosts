@@ -1,0 +1,109 @@
+//pudding cookie
+
+charset,UTF-8
+
+descript
+{
+version,1
+animation-sort,ascend
+}
+
+//Idle
+surface90
+{
+	//body, inst, arms
+	//surfaces_parts.txt
+
+	//mouth
+	animation1.interval,runonce
+	animation1.pattern0,overlay,10900,0,0,0
+
+	//Blink
+	animation4.interval,random,4
+	animation4.pattern1,replace,20901,0,80,150
+	animation4.pattern2,overlay,-1,85,0,0
+}
+
+//bells
+surface98
+{
+	//body, face
+	//surfaces_parts.txt
+
+	//arm-animations
+
+	//start
+	animation340.interval,runonce
+	animation340.pattern0,overlay,30902,0,0,0
+	animation340.pattern1,overlay,-1,1000,0,0
+	animation340.pattern2,parallelstart,(341,342)
+
+	//arm-1: lead
+	animation341.interval,never
+	animation341.pattern0,overlay,30904,0,0,0
+	animation341.pattern1,overlay,30903,1000,0,0
+	animation341.pattern2,overlay,30904,1000,0,0
+	animation341.pattern3,start,341
+
+	//arm-2: follow
+	animation342.interval,never
+	animation342.pattern0,interpolate,30905,0,0,0
+	animation342.pattern1,interpolate,30906,1000,0,0
+	animation342.pattern2,interpolate,30905,1000,0,0
+	animation342.pattern3,start,342
+}
+
+//Singing
+surface99
+{
+	//body
+	//surfaces_parts.txt
+
+	//mouth
+	animation1.interval,runonce
+	animation1.pattern0,overlay,10902,0,0,0
+
+	//arms
+	animation2.interval,runonce
+	animation2.pattern0,overlay,30902,0,0,0
+
+	//Blink
+	animation4.interval,random,4
+	animation4.pattern1,replace,20901,0,80,150
+	animation4.pattern2,overlay,-1,85,0,0
+}
+
+//------------------------------
+
+surface90
+{
+    element0,base,9\pud_body.png,0,0
+    element1,overlay,9\pud_eye.png,0,0
+    element2,overlay,9\pud_arm1.png,0,0
+    element3,interpolate,9\pud_arm2.png,0,0
+}
+surface91
+{
+    element0,base,9\pud_body.png,0,0
+    element1,overlay,9\pud_face.png,0,0
+    element2,overlay,9\pud_arm1.png,0,0
+    element3,interpolate,9\pud_arm2.png,0,0
+}
+surface98
+{
+    element0,base,9\pud_body.png,0,0
+    element1,overlay,9\pud_face.png,0,0
+}
+surface99
+{
+    element0,base,9\pud_body.png,0,0
+    element1,overlay,9\pud_eye2.png,80,150
+}
+surface10900
+{
+    element0,overlay,9\pud_mouth.png,0,0
+}
+surface20900
+{
+    element1,overlay,9\pud_eye2.png,80,150
+}

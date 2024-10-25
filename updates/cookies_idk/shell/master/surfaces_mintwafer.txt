@@ -1,0 +1,73 @@
+//mint wafer cookie
+
+charset,UTF-8
+
+descript
+{
+version,1
+animation-sort,ascend
+}
+
+surface130
+{
+	//body, mouth, arms
+	//surfaces_parts.txt
+
+    animation1.interval,random,4
+    animation1.pattern0,replace,21301,0,55,85
+    animation1.pattern1,overlay,-1,85,0,0
+}
+
+//keyboard
+surface138
+{
+    animation320.interval,always
+    animation320.pattern0,parallelstop,(321,322,323,324)
+    animation320.pattern1,alternativestart,(321,322,323,324)
+    animation320.pattern2,overlay,-1,1000,0,0
+
+    animation321.interval,never
+    animation321.pattern0,overlay,41300,0,0,0
+
+    animation322.interval,never
+    animation322.pattern0,overlay,41301,0,0,0
+
+    animation323.interval,never
+    animation323.pattern0,overlay,41302,0,0,0
+
+    animation324.interval,never
+    animation324.pattern0,overlay,41303,0,0,0
+}
+
+//Singing
+surface139
+{
+	//body, mouth, arms
+	//surfaces_parts.txt
+
+    animation1.interval,random,4
+    animation1.pattern0,replace,21301,0,55,85
+    animation1.pattern1,overlay,-1,85,0,0
+}
+
+//------------------------------
+
+surface130
+{
+    element0,base,13\mw_body.png,0,0
+    element1,overlay,13\mw_eye.png,0,0
+    element2,overlay,13\mw_arms.png,0,0
+    element3,overlay,13\mw_mouth.png,0,0
+    element4,overlay,13\mw_inst_b.png,0,0
+    element5,interpolate,13\mw_inst.png,0,0
+}
+surface139
+{
+    element0,base,13\mw_body2.png,0,0
+    element1,overlay,13\mw_eye.png,0,0
+    element2,overlay,13\mw_mouth.png,0,0
+}
+surface21300
+{
+    element0,overlay,13\mw_eye.png,0,0
+}

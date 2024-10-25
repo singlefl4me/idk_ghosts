@@ -1,0 +1,117 @@
+//strawberry stick cookie
+
+charset,UTF-8
+
+descript
+{
+version,1
+animation-sort,ascend
+}
+
+//Idle
+surface120
+{
+	//body, mouth, arms
+	//surfaces_parts.txt
+
+    animation4.interval,random,4
+    animation4.pattern0,replace,21201,0,65,95
+    animation4.pattern1,replace,-1,85,0,0
+}
+
+//drums
+surface128
+{
+    //base
+    animation340.interval,always
+    animation340.pattern0,parallelstop,(341,342,343,345,346,347)
+    animation340.pattern1,alternativestart,(341,342,343)
+    animation340.pattern2,overlay,-1,1000,0,0
+
+    animation341.interval,never
+    animation341.pattern0,start,345
+    animation341.pattern1,interpolate,41204,0,0,0
+    animation341.pattern2,interpolate,41205,240,0,0
+    animation341.pattern3,interpolate,41204,180,0,0
+    animation341.pattern4,interpolate,41204,820,0,0
+
+    animation342.interval,never
+    animation342.pattern0,start,346
+    animation342.pattern1,interpolate,41211,0,0,0
+    animation342.pattern2,interpolate,41206,120,0,0
+    animation342.pattern3,interpolate,41207,240,0,0
+    animation342.pattern4,interpolate,41207,720,0,0
+
+    animation343.interval,never
+    animation343.pattern0,start,347
+    animation343.pattern1,interpolate,41212,0,0,0
+    animation343.pattern2,interpolate,41209,120,0,0
+    animation343.pattern3,interpolate,41208,240,0,0
+    animation343.pattern4,interpolate,41208,720,0,0
+
+    //inst
+    animation345.interval,never
+    animation345.pattern0,overlay,51200,0,0,0
+    animation345.pattern1,overlay,51201,240,0,0
+    animation345.pattern2,overlay,51200,180,0,0
+    animation345.pattern3,overlay,51200,820,0,0
+
+    animation346.interval,never
+    animation346.pattern0,overlay,51200,0,0,0
+    animation346.pattern1,overlay,51202,120,0,0
+    animation346.pattern2,overlay,51200,240,0,0
+    animation346.pattern3,overlay,51200,740,0,0
+
+    animation347.interval,never
+    animation347.pattern0,overlay,51200,0,0,0
+    animation347.pattern1,overlay,51203,120,0,0
+    animation347.pattern2,overlay,51204,240,0,0
+    animation347.pattern3,overlay,51205,180,0,0
+    animation347.pattern4,overlay,51200,180,0,0
+    animation347.pattern5,overlay,51200,740,0,0
+
+    animation348.interval,never
+    animation348.pattern0,base,41202,0,0,0
+    animation348.pattern1,base,41203,400,0,0
+    animation348.pattern2,base,41202,200,0,0
+    animation348.pattern3,base,41203,200,0,0
+    animation348.pattern4,base,41202,200,0,0
+    animation348.pattern5,base,41203,200,0,0
+    animation348.pattern6,base,41202,200,0,0
+    animation348.pattern7,base,41203,200,0,0
+    animation348.option,exclusive
+
+}
+
+//Singing
+surface129
+{
+	//body, mouth
+	//surfaces_parts.txt
+
+    animation340.interval,always
+    animation340.pattern0,overlay,31201,0,20,0
+    animation340.pattern1,overlay,31202,1000,20,0
+    animation340.pattern2,overlay,31203,180,20,0
+    animation340.pattern3,overlay,31201,1000,20,0
+}
+
+//------------------------------
+
+surface120
+{
+    element0,base,12\ss_body.png,0,0
+    element1,overlay,12\ss_eye.png,0,0
+    element2,overlay,12\ss_mouth.png,0,0
+    element3,overlay,12\ss_arms.png,0,0
+}
+surface129
+{
+    element0,base,12\ss_body2.png,20,0
+    element1,overlay,12\ss_eye2.png,20,0
+    element2,overlay,12\ss_mouth2.png,20,0
+}
+surface21200
+{
+    element0,overlay,12\ss_eye.png,0,0
+}

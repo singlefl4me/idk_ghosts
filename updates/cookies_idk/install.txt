@@ -1,0 +1,7 @@
+charset,UTF-8
+type,ghost
+
+name,Cookie Chorus
+directory,cookies_idk
+
+balloon.directory,runcookies

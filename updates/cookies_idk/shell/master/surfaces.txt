@@ -1,0 +1,38 @@
+//animations
+charset,UTF-8
+
+descript
+{
+version,1
+animation-sort,ascend
+}
+
+//These collisions are appended to surfaces 0 through 25, except surface10 because that's the default Kero surface (which this shell isn't using)
+surface0,1,6,25
+{
+	//The only collision that is strictly mandatory for FLELE compatibility is the one labelled 'menu'. All the others are optional, but you can add them if you like.
+	//menu == main menu (Any areas of the shell that do NOT have a hotspot will also act as the main menu in FLUX. In FLELE, ONLY this hotspot will let the user access the main menu.)
+	
+	//These ones are standard for most FLELE shells:
+	//stroke_p == pettable area
+	//play_button == play song, next song if already playing music, resume if a song is paused
+	//stop_button1 or stop_button2 == stop song
+	//k_window == music panel (music bar in FLELE)
+	//clear_button == Clear the playlist
+	
+	//These are additional ones that you can use if you like:
+	//minimize == minimizes the ghost
+	//end_sect == closes the ghost
+	
+	//And these four you can use if you want, but they will not work with FLELE!
+	//next_button == next song
+	//previous_button == previous song
+	//pause_button == pause/resume button
+	//stop_after_current == sets the music to stop after the current song finishes playing
+
+	//collisionex0,stroke_p,ellipse,65,63,152,104
+	collision1,100,120,124,143,play_button
+	collision3,70,139,102,168,clear_button
+	collision4,125,139,157,168,clear_button
+	//collision5,100,143,124,168,menu
+}

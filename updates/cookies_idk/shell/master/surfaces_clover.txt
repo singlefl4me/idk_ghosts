@@ -1,0 +1,243 @@
+//clover cookie
+
+charset,UTF-8
+
+descript
+{
+version,1
+animation-sort,ascend
+}
+
+//Idle
+surface60
+{
+	//body, mouth, arms
+	//surfaces_parts.txt
+
+	//Blink
+	animation4.interval,random,4
+	animation4.pattern0,replace,20601,0,115,55
+	animation4.pattern1,overlay,-1,85,0,0
+}
+
+//lute
+surface68
+{
+	//body
+	//surfaces_parts.txt
+
+
+	//eye animation
+	animation20.interval,runonce
+	animation20.pattern0,parallelstop,(23,24)
+	animation20.pattern1,alternativestart,(23,24)
+
+	//eyes closed
+	animation23.interval,never
+	animation23.pattern0,replace,20601,0,115,55
+	animation23.pattern1,overlay,-1,5000,0,0
+	animation23.pattern2,start,20
+	animation23.option,shared-index
+
+	//grin
+	animation24.interval,never
+	animation24.pattern0,replace,20602,0,115,55
+	animation24.pattern1,overlay,-1,5000,0,0
+	animation24.pattern2,start,20
+	animation24.option,shared-index
+	
+
+	//close
+	animation11.interval,never
+	animation11.pattern0,overlay,10600,0,0,0
+	animation11.pattern1,overlay,10600,240,0,0
+	animation11.pattern2,start,10
+	animation11.option,shared-index
+	//a
+	animation12.interval,never
+	animation12.pattern0,overlay,10601,0,0,0
+	animation12.pattern1,overlay,10601,180,0,0
+	animation12.pattern2,start,10
+	animation12.option,shared-index
+	//e, ii
+	animation13.interval,never
+	animation13.pattern0,overlay,10602,0,0,0
+	animation13.pattern1,overlay,10602,160,0,0
+	animation13.pattern2,start,10
+	animation13.option,shared-index
+	//i
+	animation14.interval,never
+	animation14.pattern0,overlay,10603,0,0,0
+	animation14.pattern1,overlay,10603,220,0,0
+	animation14.pattern2,start,10
+	animation14.option,shared-index
+	//o
+	animation15.interval,never
+	animation15.pattern0,overlay,10604,0,0,0
+	animation15.pattern1,overlay,10604,320,0,0
+	animation15.pattern2,start,10
+	animation15.option,shared-index
+	//oo, u
+	animation16.interval,never
+	animation16.pattern0,overlay,10605,0,0,0
+	animation16.pattern1,overlay,10605,360,0,0
+	animation16.pattern2,start,10
+	animation16.option,shared-index
+
+	//guitar-animations
+
+	animation320.interval,runonce
+	animation320.pattern0,parallelstop,(321,322)
+	animation320.pattern1,alternativestart,(321,322)
+
+	//arm-1: chord
+	animation321.interval,never
+	animation321.pattern0,overlay,30601,0,0,0
+	animation321.pattern1,overlay,30601,2000,0,0
+	animation321.pattern2,start,320
+
+	animation322.interval,never
+	animation322.pattern0,overlay,30602,0,0,0
+	animation322.pattern1,overlay,30602,2000,0,0
+	animation322.pattern2,start,320
+
+	//arm-2: strum
+	animation323.interval,always
+	animation323.pattern0,overlay,30603,0,0,0
+	animation323.pattern1,overlay,30604,1000,0,0
+	animation323.pattern2,overlay,30603,1000,0,0
+	
+
+	//mouth animation
+	animation10.interval,runonce
+	animation10.pattern0,parallelstop,(11,12,13,14,15,16)
+	animation10.pattern1,alternativestart,(11,12,13,14,15,16)
+}
+
+//Singing
+surface69
+{
+	//body
+	//surfaces_parts.txt
+
+
+	//mouth animation
+	animation10.interval,runonce
+	animation10.pattern0,parallelstop,(11,12,13,14,15,16)
+	animation10.pattern1,alternativestart,(11,12,13,14,15,16)
+	animation10.option,shared-index
+
+	//close
+	animation11.interval,never
+	animation11.pattern0,overlay,10600,0,0,0
+	animation11.pattern1,overlay,10600,240,0,0
+	animation11.pattern2,start,10
+	animation11.option,shared-index
+	//a
+	animation12.interval,never
+	animation12.pattern0,overlay,10601,0,0,0
+	animation12.pattern1,overlay,10601,180,0,0
+	animation12.pattern2,start,10
+	animation12.option,shared-index
+	//e, ii
+	animation13.interval,never
+	animation13.pattern0,overlay,10602,0,0,0
+	animation13.pattern1,overlay,10602,160,0,0
+	animation13.pattern2,start,10
+	animation13.option,shared-index
+	//i
+	animation14.interval,never
+	animation14.pattern0,overlay,10603,0,0,0
+	animation14.pattern1,overlay,10603,220,0,0
+	animation14.pattern2,start,10
+	animation14.option,shared-index
+	//o
+	animation15.interval,never
+	animation15.pattern0,overlay,10604,0,0,0
+	animation15.pattern1,overlay,10604,320,0,0
+	animation15.pattern2,start,10
+	animation15.option,shared-index
+	//oo, u
+	animation16.interval,never
+	animation16.pattern0,overlay,10605,0,0,0
+	animation16.pattern1,overlay,10605,360,0,0
+	animation16.pattern2,start,10
+	animation16.option,shared-index
+	
+
+	//eye animation
+	animation20.interval,runonce
+	animation20.pattern0,parallelstop,(21,22,23,24)
+	animation20.pattern1,alternativestart,(21,22,23,24)
+	animation20.option,shared-index
+
+	//open
+	animation21.interval,never
+	animation21.pattern0,parallelstop,(22,23,24)
+	animation21.pattern1,overlay,20600,0,0,0
+	animation21.pattern2,overlay,-1,1000-8000,0,0
+	animation21.pattern3,alternativestart,(20,22)
+	animation21.option,shared-index
+	//blink
+	animation22.interval,never
+	animation22.pattern0,parallelstop,(21,23,24)
+	animation22.pattern1,replace,20601,0,115,55
+	animation22.pattern2,overlay,-1,85,0,0
+	animation22.pattern3,alternativestart,(20,22,23)
+	animation22.option,shared-index
+	//eyes closed
+	animation23.interval,never
+	animation23.pattern0,parallelstop,(21,22,24)
+	animation23.pattern1,replace,20601,0,115,55
+	animation23.pattern2,overlay,-1,5000,0,0
+	animation23.pattern3,start,20
+	animation23.option,shared-index
+	//grin
+	animation24.interval,never
+	animation24.pattern0,replace,20602,0,115,55
+	animation24.pattern1,overlay,-1,5000,0,0
+	animation24.pattern2,start,20
+	animation24.option,shared-index
+	//clear
+	//animation100.interval,never
+	//animation100.pattern0,parallelstop,(11,12,13,14,15,16)
+}
+
+//------------------------------
+
+surface60
+{
+    element0,base,6\clo_body.png,0,0
+    element1,overlay,6\clo_eye.png,0,0
+    element2,overlay,6\clo_mouth.png,0,0
+    element3,overlay,6\clo_arms.png,0,0
+}
+surface61
+{
+    element0,base,6\clo_body.png,0,0
+    element1,overlay,surface10602.png,0,0
+    element2,overlay,surface20601.png,0,0
+    element3,overlay,6\clo_arms.png,0,0
+}
+surface68
+{
+    element0,base,6\clo_body.png,0,0
+    element1,overlay,6\clo_inst.png,0,0
+}
+surface69
+{
+    element0,base,6\clo_body.png,0,0
+    element1,overlay,6\clo_arms.png,0,0
+}
+surface10600
+{
+    element0,base,6\clo_mouth.png,0,0
+}
+surface20600
+{
+    element0,base,6\clo_eye.png,0,0
+}
+surface30600
+{
+    element0,base,6\clo_arms.png,0,0
+}

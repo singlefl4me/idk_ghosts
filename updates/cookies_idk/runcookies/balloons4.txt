@@ -1,0 +1,31 @@
+//——— Display area ———
+validrect.left,50
+validrect.top,26
+validrect.right,-51
+validrect.bottom,-39
+
+
+//——— Arrows ———
+arrow0.x,128
+arrow0.y,18
+
+arrow1.x,128
+arrow1.y,-38
+
+
+//——— Online marker ———
+onlinemarker.x,56
+onlinemarker.y,-38
+
+
+//——— SSTP ———
+sstpmarker.x,18
+sstpmarker.y,-18
+
+sstpmessage.x,50
+sstpmessage.y,18
+
+
+//——— Number ———
+number.xr,213
+number.y,18

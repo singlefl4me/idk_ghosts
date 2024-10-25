@@ -1,0 +1,294 @@
+//shining glitter cookie
+
+charset,UTF-8
+
+descript
+{
+version,1
+animation-sort,ascend
+}
+
+//Idle
+surface0
+{
+	//body, mouth, arm l, arm r
+	//surfaces_parts.txt
+
+	//mouth
+	animation1.interval,runonce
+	animation1.pattern0,overlay,10000,0,0,0
+
+	//Blink
+	animation4.interval,random,4
+	animation4.pattern0,replace,20004,0,60,95
+	animation4.pattern1,overlay,-1,85,0,0
+
+	//sparkle
+	animation400.interval,always
+	animation400.pattern0,overlay,40000,100,0,0
+	animation400.pattern1,overlay,40001,170,0,0
+	animation400.pattern2,overlay,40000,200,0,0
+	animation400.pattern3,overlay,-1,150,0,0
+	animation400.option,shared-index
+
+	//menu collision
+	collisionex2,music_menu_button,polygon,113,64,128,49,140,47,144,57,144,75,128,65
+}
+
+//Petting
+surface1
+{
+	//body, eyes, mouth, arm l, arm r
+	//surfaces_parts.txt
+
+	//sparkle
+	animation400.interval,always
+	animation400.pattern0,overlay,40000,100,0,0
+	animation400.pattern1,overlay,40001,170,0,0
+	animation400.pattern2,overlay,40000,200,0,0
+	animation400.pattern3,overlay,-1,150,0,0
+	animation400.option,shared-index
+
+	//menu collision
+	collisionex2,menu,polygon,113,64,128,49,140,47,144,57,144,75,128,65
+}
+
+//Action
+surface6
+{
+	//body, mouth, arm l, arm r
+	//surfaces_parts.txt
+
+	//eyes
+	animation0.interval,runonce
+	animation0.pattern0,replace,20005,0,60,95
+
+	//sparkle
+	animation400.interval,always
+	animation400.pattern0,overlay,40000,100,0,0
+	animation400.pattern1,overlay,40001,170,0,0
+	animation400.pattern2,overlay,40000,200,0,0
+	animation400.pattern3,overlay,-1,150,0,0
+	animation400.option,shared-index
+
+	//menu collision
+	collisionex2,menu,polygon,113,64,128,49,140,47,144,57,144,75,128,65
+}
+
+//hide
+surface7
+{
+	collision0,113,51,134,73,next_button
+	collision1,113,73,134,92,clear_button
+	collision2,113,92,134,115,menu
+	collision3,113,115,134,135,play_button
+	collision4,113,135,134,157,stop_button
+	collision5,113,157,134,179,pause_resume_button
+	collision6,113,179,134,201,previous_button
+}
+
+//Singing
+surface25
+{
+	//body
+	//surfaces_parts.txt
+
+	//sparkle
+	animation400.interval,always
+	animation400.pattern0,overlay,40000,100,0,0
+	animation400.pattern1,overlay,40001,170,0,0
+	animation400.pattern2,overlay,40000,200,0,0
+	animation400.pattern3,overlay,-1,150,0,0
+	animation400.option,shared-index
+
+
+	//mouth animation
+	animation10.interval,runonce
+	animation10.pattern0,parallelstop,(11,12,13,14,15,16)
+	animation10.pattern1,alternativestart,(11,12,13,14,15,16)
+	animation10.option,shared-index
+
+	//close
+	animation11.interval,never
+	animation11.pattern0,overlay,10000,0,0,0
+	animation11.pattern1,overlay,10000,240,0,0
+	animation11.pattern2,start,10
+	animation11.option,shared-index
+
+	//a
+	animation12.interval,never
+	animation12.pattern0,overlay,10001,0,0,0
+	animation12.pattern1,overlay,10001,180,0,0
+	animation12.pattern2,start,10
+	animation12.option,shared-index
+	//e, ii
+	animation13.interval,never
+	animation13.pattern0,overlay,10002,0,0,0
+	animation13.pattern1,overlay,10002,160,0,0
+	animation13.pattern2,start,10
+	animation13.option,shared-index
+	//i
+	animation14.interval,never
+	animation14.pattern0,overlay,10003,0,0,0
+	animation14.pattern1,overlay,10003,220,0,0
+	animation14.pattern2,start,10
+	animation14.option,shared-index
+	//o
+	animation15.interval,never
+	animation15.pattern0,overlay,10004,0,0,0
+	animation15.pattern1,overlay,10004,320,0,0
+	animation15.pattern2,start,10
+	animation15.option,shared-index
+	//oo, u
+	animation16.interval,never
+	animation16.pattern0,overlay,10005,0,0,0
+	animation16.pattern1,overlay,10005,360,0,0
+	animation16.pattern2,start,10
+	animation16.option,shared-index
+
+
+	//eye animation
+	animation20.interval,runonce
+	animation20.pattern0,parallelstop,(21,22,23,24)
+	animation20.pattern1,alternativestart,(21,22,23,24)
+	animation20.option,shared-index
+
+	//open
+	animation21.interval,never
+	animation21.pattern1,overlay,20000,0,0,0
+	animation21.pattern2,overlay,-1,1000-8000,0,0
+	animation21.pattern3,alternativestart,(20,22)
+	//blink
+	animation22.interval,never
+	animation22.pattern1,replace,20004,0,60,95
+	animation22.pattern2,overlay,-1,85,0,0
+	animation22.pattern3,alternativestart,(20,22,23)
+	//eyes closed
+	animation23.interval,never
+	animation23.pattern1,replace,20004,0,60,95
+	animation23.pattern2,replace,20004,5000,60,95
+	animation23.pattern3,start,20
+	//grin
+	animation24.interval,never
+	animation24.pattern0,replace,20005,0,60,95
+	animation24.pattern1,replace,20005,5000,60,95
+	animation24.pattern2,start,20
+
+
+	//arm animation (l)
+	animation30.interval,runonce
+	animation30.pattern0,parallelstop,(31,32,33)
+	animation30.pattern1,alternativestart,(31,32,33)
+	animation30.option,shared-index
+
+	//arm-animation0
+	animation31.interval,never
+	animation31.pattern0,overlay,30000,0,0,0
+	animation31.pattern1,overlay,30000,6000,0,0
+	animation31.pattern2,start,30
+	animation31.option,shared-index
+
+	//arm-animation1
+	animation32.interval,never
+	animation32.pattern0,overlay,30002,0,0,0
+	animation32.pattern1,overlay,30002,6000,0,0
+	animation32.pattern2,start,30
+	animation32.option,shared-index
+	//arm-animation2
+	animation33.interval,never
+	animation33.pattern0,overlay,30004,0,0,0
+	animation33.pattern1,overlay,30004,6000,0,0
+	animation33.pattern2,start,30
+	animation33.option,shared-index
+
+	//arm animation (r)
+	animation35.interval,runonce
+	animation35.pattern0,parallelstop,(36,37,38)
+	animation35.pattern1,alternativestart,(36,37,38)
+	animation35.option,shared-index
+
+	//arm-animation0
+	animation36.interval,never
+	animation36.pattern0,overlay,30001,0,0,0
+	animation36.pattern1,overlay,30001,6000,0,0
+	animation36.pattern2,start,35
+	animation36.option,shared-index
+	//arm-animation1
+	animation37.interval,never
+	animation37.pattern0,overlay,30003,0,0,0
+	animation37.pattern1,overlay,30003,6000,0,0
+	animation37.pattern2,start,35
+	animation37.option,shared-index
+	//arm-animation2
+	animation38.interval,never
+	animation38.pattern0,overlay,30005,0,0,0
+	animation38.pattern1,overlay,30005,6000,0,0
+	animation38.pattern2,start,35
+	animation38.option,shared-index
+
+	//These collisions only show up on the singing surface, since for this shell the buttons to stop only appear while it is singing. They're also polygon collisions because I didn't want them to be square, but you don't need to do that if you don't want to. You could make these use the same format as the rest of the collisions below and that would work fine.
+	collisionex2,music_menu_button,polygon,113,64,128,49,140,47,144,57,144,75,128,65
+	collision5,100,120,124,143,pause_resume_button
+	collisionex6,next_button,polygon,92,60,96,42,109,29,119,34,130,65
+	collisionex7,previous_button,polygon,133,67,145,59,160,55,174,57,168,78,156,93
+}
+
+surface26
+{
+	//hide : sing
+	animation101.interval,runonce
+	animation101.pattern0,overlay,7,0,0,0
+	animation101.collision1,113,51,134,73,next_button
+	animation101.collision2,113,73,134,92,clear_button
+	animation101.collision3,113,92,134,115,music_menu_button
+	animation101.collision4,113,115,134,135,play_button
+	animation101.collision5,113,135,134,157,stop_button
+	animation101.collision6,113,157,134,179,pause_resume_button
+	animation101.collision7,113,179,134,201,previous_button
+	animation101.option,exclusive
+}
+
+//------------------------------
+
+surface0
+{
+    element0,base,0\shi_body.png,0,0
+	element1,overlay,0\shi_eye.png,0,0
+    element3,overlay,0\shi_arm1.png,0,0
+    element4,overlay,0\shi_arm2.png,0,0
+}
+surface1
+{
+    element0,base,0\shi_body.png,0,0
+    element1,overlay,surface10001.png,0,0
+    element2,overlay,surface20004.png,0,0
+    element3,overlay,0\shi_arm1.png,0,0
+    element4,overlay,0\shi_arm2.png,0,0
+}
+surface6
+{
+    element0,base,0\shi_body.png,0,0
+    element1,overlay,surface10001.png,0,0
+    element2,overlay,surface30004.png,0,0
+    element3,overlay,surface30005.png,0,0
+}
+surface25
+{
+    element0,base,0\shi_body.png,0,0
+}
+surface10000
+{
+    element0,base,0\shi_mouth.png,0,0
+}
+surface20000
+{
+    element0,base,0\shi_eye.png,0,0
+}
+surface30000
+{
+    element0,base,0\shi_arm1.png,0,0
+}
+surface30001
+{
+    element0,base,0\shi_arm2.png,0,0
+}

@@ -1,0 +1,34 @@
+charset,UTF-8
+
+name,Cookie Chorus
+type,ghost
+
+shiori,yaya.dll
+
+craftman,idk
+craftmanw,idk
+craftmanurl,https://github.com/singlefl4me
+
+sakura.name,Shining Glitter Cookie
+kero.name,Popping Candy Cookie
+char2.name,Parfait Cookie
+char3.name,Rockstar Cookie
+char4.name,Macaron Cookie
+char5.name,Marshmallow Cookie
+char6.name,Clover Cookie
+char7.name,Carol Cookie
+char8.name,Lilybell Cookie
+char9.name,Pudding Cookie
+char10.name,DJ Cookie
+char11.name,Mint Choco Cookie
+char12.name,Strawberry Stick Cookie
+char13.name,Mint Wafer Cookie
+char14.name,Black Lemonade Cookie
+//char*.name,(name)
+
+balloon,Running Cookies
+
+icon,cc_icon.ico
+//icon.minimize,cc_icon2.ico
+
+sstp.allowunspecifiedsend,0
