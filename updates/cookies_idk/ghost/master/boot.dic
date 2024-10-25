@@ -1,4 +1,4 @@
-OnFirstBoot
+OnFirstBoot : all
 {
 	//If you add variables, make sure to initialize them here!
 	//Note - I haven't added anything about username or pronouns here because it's all handled by the SSP prefs
