@@ -1,0 +1,99 @@
+charset,UTF-8
+type,balloon
+use_self_alpha,1
+use_input_alpha,1
+//overlay_outside_balloon,1
+
+
+//——— Basic information ———
+name,dream bubble
+craftman,idk
+craftmanw,idk
+craftmanurl,https://github.com/singlefl4me
+homeurl,https://raw.githubusercontent.com/singlefl4me/idk_ghosts/main/updates/db_idk
+
+
+//——— Display area ———
+origin.x,0
+origin.y,0
+
+validrect.left,88
+validrect.top,38
+validrect.right,-78
+validrect.bottom,-42
+
+wordwrappoint.x,-82
+
+
+//——— Font ———
+font.name,Calibri
+font.height,14
+
+font.color.r,0
+font.color.g,0
+font.color.b,0
+
+anchor.font.color.r,132
+anchor.font.color.g,66
+anchor.font.color.b,234
+
+cursor.font.color.r,132
+cursor.font.color.g,66
+cursor.font.color.b,234
+
+disable.font.color.r,105
+disable.font.color.g,93
+disable.font.color.b,124
+
+cursor.style,underline
+
+
+//——— Arrows ———
+arrow0.x,157
+arrow0.y,15
+
+arrow1.x,159
+arrow1.y,-33
+
+
+//——— Online marker ———
+onlinemarker.x,80
+onlinemarker.y,-56
+
+//onlinemarker.interval,175
+
+
+//——— SSTP ———
+sstpmarker.x,98
+sstpmarker.y,-55
+
+sstpmessage.font.name,Calibri
+sstpmessage.font.height,11
+
+sstpmessage.x,109
+sstpmessage.xr,-100
+sstpmessage.y,-55
+
+sstpmessage.font.color.r,155
+sstpmessage.font.color.g,155
+sstpmessage.font.color.b,155
+
+
+//——— Number ———
+number.font.name,Calibri
+number.font.height,11
+
+number.xr,-78
+number.y,-55
+
+number.font.color.r,155
+number.font.color.g,155
+number.font.color.b,155
+
+
+//——— Input box ———
+communicatebox.x,21
+communicatebox.y,24
+
+communicatebox.width,368
+communicatebox.height,26

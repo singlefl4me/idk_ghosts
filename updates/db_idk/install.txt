@@ -1,0 +1,4 @@
+charset,UTF-8
+type,balloon
+name,dream bubble
+directory,db_idk
