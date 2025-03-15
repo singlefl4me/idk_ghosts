@@ -1,0 +1,4 @@
+charset,UTF-8
+type,shell
+name,Noodly (B)
+directory,noodly_b_idk

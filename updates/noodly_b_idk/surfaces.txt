@@ -1,0 +1,28 @@
+//A quick note about comments: Surfaces.txt does NOT support same line comments. If you want to write a comment, ALWAYS PUT IT ON ITS OWN LINE. If you put comments after other bits of code in the same line, it may seem to work at first, but it can cause cryptic errors down the line. Save yourself the trouble. Always put comments on their own lines in here. Additionally, it doesn't do block comments with /* and */
+
+
+descript
+{
+	version,1
+    animation-sort,ascend
+}
+
+//—————————————————————————————— Sakura surfaces ——————————————————————————————
+
+surface0
+{
+    animation100.interval,bind
+    animation100.pattern0,add,100,0,0,0
+	
+    animation200.interval,bind
+    animation200.pattern0,add,200,0,0,0
+	
+    animation300.interval,bind
+    animation300.pattern0,add,300,0,0,0
+	
+    animation400.interval,bind
+    animation400.pattern0,add,400,0,0,0
+	
+    animation500.interval,bind
+    animation500.pattern0,add,500,0,0,0
+}

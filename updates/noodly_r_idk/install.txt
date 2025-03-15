@@ -1,0 +1,4 @@
+charset,UTF-8
+type,shell
+name,Noodly (R)
+directory,noodly_r_idk
