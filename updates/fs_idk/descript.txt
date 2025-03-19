@@ -1,0 +1,103 @@
+charset,UTF-8
+type,balloon
+use_self_alpha,1
+use_input_alpha,1
+//overlay_outside_balloon,1
+
+
+//——— Basic information ———
+name,Fabric of Space
+craftman,idk
+craftmanw,idk
+craftmanurl,https://github.com/singlefl4me
+homeurl,https://raw.githubusercontent.com/singlefl4me/idk_ghosts/main/updates/fs_idk/
+
+
+//——— Display area ———
+origin.x,0
+origin.y,0
+
+validrect.left,103
+validrect.top,92
+validrect.right,-112
+validrect.bottom,-101
+
+wordwrappoint.x,-103
+
+
+//——— Font ———
+font.name,Gravity-LightItalic.otf
+font.height,15
+
+font.color.r,255
+font.color.g,255
+font.color.b,255
+
+font.shadowstyle,offset
+
+anchor.font.color.r,255
+anchor.font.color.g,255
+anchor.font.color.b,255
+
+cursor.font.color.r,255
+cursor.font.color.g,255
+cursor.font.color.b,255
+
+cursor.style,underline
+
+disable.font.color.r,150
+disable.font.color.g,150
+disable.font.color.b,150
+
+font.italic,1
+
+
+//——— Arrows ———
+arrow0.x,-119
+arrow0.y,86
+
+arrow1.x,-119
+arrow1.y,-112
+
+
+//——— Online marker ———
+onlinemarker.x,115
+onlinemarker.y,99
+
+//onlinemarker.interval,175
+
+
+//——— SSTP ———
+sstpmarker.x,93
+sstpmarker.y,-100
+
+sstpmessage.font.name,Ebrima
+sstpmessage.font.height,10
+
+sstpmessage.x,104
+sstpmessage.xr,-20
+sstpmessage.y,-101
+
+sstpmessage.font.color.r,200
+sstpmessage.font.color.g,200
+sstpmessage.font.color.b,200
+
+
+//——— Number ———
+number.font.name,Ebrima
+number.font.height,10
+
+number.xr,-115
+number.y,-101
+
+number.font.color.r,200
+number.font.color.g,200
+number.font.color.b,200
+
+
+//——— Input box ———
+communicatebox.x,88
+communicatebox.y,88
+
+communicatebox.width,428
+communicatebox.height,24

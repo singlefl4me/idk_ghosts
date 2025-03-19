@@ -1,0 +1,4 @@
+charset,UTF-8
+type,balloon
+name,Fabric of Space
+directory,fs_idk

@@ -1,0 +1,4 @@
+charset,UTF-8
+type,balloon
+name,Void of Space
+directory,vs_idk
