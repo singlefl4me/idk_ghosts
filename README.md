@@ -1,24 +1,59 @@
-a repository/update directory of all of my public ukagaka projects
+a repository/update directory of all of my public ukagaka projects.
 
-ghosts:
- - released
-   - [bugsnax](https://ukagakadreamteam.com/wiki/ghost/bugsnax) ![icon](https://github.com/singlefl4me/singlefl4me/assets/111165084/228541a2-b660-43bc-89ea-690e5205edd6)
-   - [gingerbrave](https://ukagakadreamteam.com/wiki/ghost/gingerbrave) ![icon_gingerbrave](https://github.com/singlefl4me/singlefl4me/assets/111165084/569c0c53-e9c1-4e94-85c3-e9c42214edb5)
-   - [welcome home](https://ukagakadreamteam.com/wiki/ghost/welcome_home) ![wh_icon](https://github.com/singlefl4me/singlefl4me/assets/111165084/741d2af7-b662-4426-b2e7-2b44909094c7)
-   - [hazy days](https://ukagakadreamteam.com/wiki/ghost/hazy_days) ![icon (2)](https://github.com/singlefl4me/singlefl4me/assets/111165084/b0bd42be-29e9-4e30-863e-561912ad06e4)
- - unreleased
-   - [sackboy](https://ukagakadreamteam.com/wiki/event/ghost_jam_2022#submissions)
+downloads can be found in the section headers.
 
-shells
-   - released
-     - [cookie band](https://ukagakadreamteam.com/wiki/shell/flux/cookie_band)
-     - [flele template](https://ukagakadreamteam.com/wiki/shell/flele/flele_template)
-     - [hydrate enhancer](https://ukagakadreamteam.com/wiki/shell/hydrate/hydrate_enhancer)
-     - [needy](https://ukagakadreamteam.com/wiki/shell/needle/needy)
+# ghosts
+### [bugsnax](/releases/re_bugsnax.nar)
+   ![bugsnax thumbnail](/updates/re_bugsnax/thumbnail.png)
+### [cookie chorus](/releases/cookies_idk.nar)
+   ![cookiechorus thumbnail](/updates/cookies_idk/thumbnail0.png)
+### [express urself](/releases/express_idk.nar)
+   ![expressurself thumbnail](/updates/express_idk/thumbnail.png)
+### [hazy days](/releases/hazy_ghostjam_24.nar)
+   ![hazy days](/updates/hazy_ghostjam_24/thumbnail.png)
+### [gingerbrave](https://github.com/ScardyFluff/Fluff_Ghost_GingerBrave/blob/e0a328f9241d3968fd34e890077a67a26f8590f1/nar/Fluff_GingerBrave.nar)
+   ![gingerbrave thumbnail](https://ukagakadreamteam.com/wiki/_media/ghost/gingerbrave/thumbnail.png)
+### [welcome home](/releases/wh_ghostjam_23.nar)
+   ![welcome home](https://ukagakadreamteam.com/wiki/_media/ghost/welcome_home/appearance.png)
 
-balloons
-   - released
-     - [running cookies](https://ukagakadreamteam.com/wiki/balloon/running_cookies)
-     - [vn style](https://ukagakadreamteam.com/wiki/balloon/vn_style)
+# shells
+### [cookie band](/releases/cb_new.nar)
+   ![cookieband thumbnail](/updates/cb_new/thumbnail.png)
+### [flele template](/releases/flele_temp.nar)
+   ![fleletemplate thumbnail](https://ukagakadreamteam.com/wiki/_media/shell/flele/flele_template/thumbnail.png)
+### [hydrate enhancer](/releases/hydrate_enhancer.nar)
+   ![hydrateenhancer thumbnail](/updates/hydrate_enhancer/thumbnail.png)
+### [needy](/releases/needy_idk.nar)
+   ![needy thumbanail](https://ukagakadreamteam.com/wiki/_media/shell/needle/needy/thumbnail.png?cache=)
+### [noodly b](/releases/noodly_b_idk.nar)
+   ![noodly thumbnail](/updates/noodly_b_idk/thumbnail.png)
+### [noodly m](/releases/noodly_m_idk.nar)
+   ![noodly thumbnail](/updates/noodly_m_idk/thumbnail.png)
+### [noodly r](/releases/noodly_r_idk.nar)
+   ![noodly thumbnail](/updates/noodly_r_idk/thumbnail.png)
+### [yours and mine](/releases/yours_mine_idk.nar)
+   ![yoursandmine thumbnail](/updates/yours_mine_idk/thumbnail.png)
 
-downloads are in the "releases" folder
+# balloons
+### [cat's box](/releases/cb_idk.nar)
+   ![catsbox thumbnail](/updates/cb_idk/thumbnail.png)
+### [dream balloon](/releases/db_idk.nar)
+   ![dreamballoon thumbnail](/updates/db_idk/thumbnail.png)
+### [fabric of space](/releases/fs_idk.nar)
+   ![fos thumbnail](/updates/fs_idk/thumbnail.png)
+### [green n' blue](/releases/gb_idk.nar)
+   ![gnb thumbnail](/updates/gb_idk/thumbnail.png)
+### [ice cream cone](/releases/icey_idk.nar)
+   ![icc thumbnail](/updates/icey_idk/thumbnail.png)
+### [moonlight](/releases/ml_idk.nar)
+   ![moonlight thumbnail](/updates/ml_idk/thumbnail.png)
+### [photo negative](/releases/pn_idk.nar)
+   ![photonegative thumbnail](/updates/pn_idk/thumbnail.png)
+### [photo negative (small)](/releases/pn_s_idk.nar)
+   ![photonegative(s) thumbnail](/updates/pn_s_idk/thumbnail.png)
+### [running cookies](/releases/runcookies.nar)
+   ![runningcookies thumbnail](/updates/runcookies/thumbnail.png)
+### [vn style](/releases/vn_style.nar)
+   ![vnstyle thumbnail](https://ukagakadreamteam.com/wiki/_media/balloon/vn_style/thumbnail.png)
+### [void of space](/releases/vs_idk.nar)
+   ![vos thumbnail](/updates/vs_idk/thumbnail.png)
