@@ -9,7 +9,9 @@ hotspots:
 ------------------------------------------------------------------------
 
 art, code: idk (idkimtired)
-made in minimum template 1.03 by zichqec
+
+made in minimum yaya template 1.03 by zichqec
+https://ukagaka.zichqec.com/template/minimum_yaya_template
 
 ------------------------------------------------------------------------
 

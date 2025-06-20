@@ -1,6 +1,6 @@
 charset,OSNative
 file,install.txt17447f88420de378d2cd8951ca4d3039size=73date=2025-06-19T21:45:37
-file,readme.txte40da999f4ecacc404062b143af7f0f9size=440date=2025-06-19T21:04:05
+file,readme.txtfd3f5841c3397600082454d7b5d2a46bsize=507date=2025-06-19T22:03:57
 file,thumbnail.pna1e2eb6ed2f2d657e18ba7f8b3d791f69size=454date=2025-06-19T21:38:11
 file,thumbnail.png6dece23da185db92ec4467e84ed06ac8size=2344date=2025-06-19T21:37:35
 file,ghost/master/descript.txtabd760f0c3811cf1857d0c0aba5aa5fbsize=245date=2025-06-19T21:40:29
