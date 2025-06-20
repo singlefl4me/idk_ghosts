@@ -1,0 +1,5 @@
+charset,UTF-8
+type,ghost
+
+name,Tiny Toy
+directory,tinytoy_ghostjam_25

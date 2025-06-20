@@ -1,0 +1,62 @@
+OnBoot  {
+    currentdir = "left"
+    currentscale = 100
+    stroke = 0
+    offscreenleft = 0
+    "\0\s[0]\![move,--X=%(offscreenright - 150),--base=primaryscreen]"
+}
+
+OnMouseDoubleClick  {
+    if reference4 == "key"    {
+        OnMoveStart
+    }
+    //else; OnMenu
+}
+OnMouseWheel    {
+    if reference4 == "key"  {
+        if reference2 > 300;    OnMoveStart
+    }
+}
+
+OnMoveStart  {
+    "\i[1]\__w[animation,1]\__w[500]\i[1]\__w[animation,1]\__w[500]\i[1]\__w[animation,1]\__w[500]\![raise,OnMove]"
+}
+OnMove : all  {
+    _movement = RAND(10) + 1
+    _movecalc = currentcoord
+
+    for _i = 1; _i < _movement; _i++   {
+        if currentdir == "right"    {
+            currentcoord = _movecalc + 25 * _i
+            "\![set,scaling,-%(currentscale),%(currentscale)]"
+        }
+        elseif currentdir == "left" {
+            currentcoord = _movecalc - 25 * _i
+            "\![set,scaling,%(currentscale),%(currentscale)]"
+        }
+
+        "\s[5]\![move,--X=%(currentcoord),--time=2000,--base=primaryscreen]\__w[1500]"
+
+        if currentcoord <= offscreenleft    {
+            currentdir = "right"
+            break
+        }
+        elseif currentcoord >= offscreenright - 150   {
+            currentdir = "left"
+            break
+        }
+    }
+    "\s[0]"
+}
+
+OnDisplayChange {
+    offscreenright = reference1
+    currentcoord = reference1 - 150
+}
+OnShellScaling  {
+    currentscale = reference0
+}
+
+On_homeurl  {
+    "https://raw.githubusercontent.com/singlefl4me/idk_ghosts/main/updates/tinytoy_ghostjam_25/"
+}

@@ -1,0 +1,30 @@
+charset,UTF-8
+
+descript
+{
+    version,1
+}
+
+surface0
+{
+    animation0.interval,runonce
+    animation0.pattern0,interpolate,100,0,0,0
+
+    animation1.interval,never
+    animation1.pattern0,stop,0
+    animation1.pattern1,interpolate,100,0,0,0
+    animation1.pattern2,interpolate,101,180,0,0
+    animation1.pattern3,interpolate,102,180,0,0
+    animation1.pattern4,interpolate,103,180,0,0
+    animation1.pattern5,interpolate,100,180,0,0
+
+    collisionex0,key,region,surface100.png,146,119,65
+}
+surface5
+{
+    animation1.interval,runonce
+    animation1.pattern0,base,2,0,0,0
+    animation1.pattern1,base,3,640,0,0
+    animation1.pattern2,base,4,640,0,0
+    animation1.pattern3,base,1,640,0,0
+}
