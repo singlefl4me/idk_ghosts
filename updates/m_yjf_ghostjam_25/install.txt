@@ -1,0 +1,5 @@
+charset,UTF-8
+type,ghost
+
+name,Mango Boys
+directory,m_yjf_ghostjam_25

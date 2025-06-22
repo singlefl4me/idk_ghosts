@@ -1,0 +1,34 @@
+OnFirstBoot
+{
+	stroke = 0
+	LastTalk = ""
+
+	"\0\s[0]"
+}
+
+OnInitialize
+{
+	if reference0 != "reload"
+	{
+		LastTalk = ""
+	}
+	currentmode = 1
+	writemode = "off"
+	oldtime = GETSECCOUNT()
+}
+
+OnBoot
+{
+	/*
+	_temp = SHIORI3FW.UserBirthday
+	_user_birthday = "%(_temp[1])/%(_temp[2])" //M/D, if you want it D/M you can switch it around
+	_today = "%(month)/%(day)" //Again, switch this around if using D/M
+	*/
+	
+	OnSwitchMode
+}
+
+OnClose
+{
+	"\w8\w8\-"
+}

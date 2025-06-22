@@ -1,0 +1,57 @@
+SakuraMenuGreetings : nonoverlap
+{
+	""
+}
+
+OnSakuraMenu : all
+{
+	"\0\s[0]\b[2]\![set,autoscroll,disable]"
+	if SHIORI3FW.Eventid == "OnMouseDoubleClick"; SakuraMenuGreetings
+	
+	"\n\n\_q"
+	
+	"\![*]\q[Talk to me,OnAiTalk]  "
+	switch LastTalk == ""
+	{
+		"\![*]\q[Say that again,OnLastTalk]"
+		"\![*]\f[color,disable]Say that again\f[color,default]"
+	}
+	
+	"\n\n"
+	
+	//"\![*]\q[Change talk rate,OnTalkRateMenu]\n\n"
+	
+	"\![*]\q[Cancel,blank]"	
+}
+
+OnLastTalk
+{
+	LastTalk
+}
+
+OnTalkRateMenu : all
+{	
+	_talkrate = "Off"
+	if aitalkinterval == 30; _talkrate = "30 seconds"
+	elseif aitalkinterval == 60; _talkrate = "1 minute"
+	elseif aitalkinterval == 180; _talkrate = "3 minutes"
+	elseif aitalkinterval == 300; _talkrate = "5 minutes"
+	elseif aitalkinterval == 600; _talkrate = "10 minutes"
+	
+	"\0\s[0]\b[2]\![set,autoscroll,disable]\_q"
+	"Current interval: %(_talkrate)\n\n"
+	
+	"\![*]\q[Off,OnTalkRateChange,0]\n"
+	"\![*]\q[30 seconds,OnTalkRateChange,30]\n"
+	"\![*]\q[1 minute,OnTalkRateChange,60]\n"
+	"\![*]\q[3 minutes,OnTalkRateChange,180]\n"
+	"\![*]\q[5 minutes,OnTalkRateChange,300]\n"
+	"\![*]\q[10 minutes,OnTalkRateChange,600]\n"
+	"\n"
+	"\![*]\q[Back,OnSakuraMenu]  \![*]\q[Cancel,blank]"
+}
+
+OnTalkRateChange
+{
+	aitalkinterval = TOINT(reference0)
+}

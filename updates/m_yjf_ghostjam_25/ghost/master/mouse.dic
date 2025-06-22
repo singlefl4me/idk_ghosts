@@ -1,0 +1,48 @@
+/*
+OnMouseDoubleClick
+{
+	if reference5 == 0
+	{
+		if reference3 == 0
+		{
+			OnSakuraMenu
+		}
+	}
+}
+
+OnMouseMove
+{
+
+	if reference4 != ""
+	{
+		stroke++
+		
+		if stroke % 40 == 0
+		{
+			if reference3 == 0; OnMouseMove.Sakura
+			else; OnMouseMove.Kero
+		}
+	}
+}
+
+OnMouseMove.Sakura
+{
+	if reference4 == "head"
+	{
+		"\0\s[0]Petting??"
+	}
+}
+
+OnMouseMove.Kero
+{
+	if reference4 == "head"
+	{
+		"\1\s[10]Petting..."
+	}
+}
+
+OnMouseLeaveAll
+{
+	stroke = 0
+}
+*/
