@@ -1,0 +1,18 @@
+charset,UTF-8
+
+name,The Eternal WIP
+type,ghost
+
+shiori,yaya.dll
+
+craftman,idk
+craftmanw,idkimtired
+craftmanurl,https://github.com/singlefl4me
+
+sakura.name,Idea
+kero.name,
+
+icon,icon.ico
+
+seriko.alignmenttodesktop,bottom
+sstp.allowunspecifiedsend,0

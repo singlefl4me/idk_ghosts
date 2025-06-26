@@ -1,0 +1,134 @@
+
+descript
+{
+	version,1
+}
+
+//—————————————————————————————— Sakura surfaces ——————————————————————————————
+
+surface0
+{
+	//collision0,0,0,130,65,head
+
+	animation0.interval,runonce
+	animation0.pattern0,overlay,100,0,200,232
+	
+	//Example code for blink animation - uncomment if you want it
+	animation1.interval,random,4
+	animation1.pattern0,overlay,102,0,295,254
+	animation1.pattern1,overlay,-1,180,295,254
+	
+	animation2.interval,talk,6
+	animation2.pattern0,stop,0
+	animation2.pattern1,overlay,100,0,200,232
+	animation2.pattern2,overlay,101,200,200,232
+	animation2.pattern3,overlay,100,200,200,232
+	
+	//animation3.interval,talk,6
+	//animation3.pattern0,overlay,-1,0,295,254
+	//animation3.pattern1,overlay,103,200,295,254
+	//animation3.pattern2,overlay,104,100,295,254
+	//animation3.pattern3,overlay,-1,100,295,254
+}
+
+surface1
+{
+	animation0.interval,always
+	animation0.pattern0,overlay,110,0,200,232
+	animation0.pattern1,overlay,111,120,200,232
+	animation0.pattern2,overlay,110,120,200,232
+}
+
+surface2
+{
+	animation0.interval,always
+	animation0.pattern0,overlay,120,0,200,232
+	animation0.pattern1,overlay,121,260,200,232
+	animation0.pattern2,overlay,120,260,200,232
+}
+
+surface3
+{
+	animation0.interval,always
+	animation0.pattern0,overlay,130,0,200,232
+	animation0.pattern1,overlay,131,240,200,232
+	animation0.pattern2,overlay,130,240,200,232
+}
+
+surface4
+{
+	animation0.interval,always
+	animation0.pattern0,overlay,140,0,200,232
+	animation0.pattern1,overlay,141,360,200,232
+	animation0.pattern2,overlay,140,360,200,232
+}
+
+surface5
+{
+	animation0.interval,always
+	animation0.pattern0,overlay,150,0,200,232
+	animation0.pattern1,overlay,151,320,200,232
+	animation0.pattern2,overlay,150,320,200,232
+}
+
+surface6
+{
+	animation0.interval,runonce
+	animation0.pattern0,overlay,160,0,200,232
+}
+
+surface7
+{
+	animation0.interval,always
+	animation0.pattern0,overlay,170,0,200,232
+	animation0.pattern1,overlay,171,120,200,232
+	animation0.pattern2,overlay,170,120,200,232
+}
+
+surface8
+{
+	animation0.interval,always
+	animation0.pattern0,overlay,180,0,200,232
+	animation0.pattern1,overlay,181,200,200,232
+	animation0.pattern2,overlay,180,200,200,232
+}
+
+surface9
+{
+	animation0.interval,always
+	animation0.pattern0,overlay,190,0,200,232
+	animation0.pattern1,overlay,191,180,200,232
+	animation0.pattern2,overlay,190,180,200,232
+}
+
+//background
+surface0-9
+{
+	element0,base,bg.png,0,0
+
+	animation100.interval,bind+runonce
+	animation100.pattern0,overlaymultiply,500,0,0,0
+
+	animation101.interval,bind+runonce
+	animation101.pattern0,overlaymultiply,501,0,0,0
+
+	animation102.interval,bind
+	animation102.pattern0,overlay,502,0,0,0
+
+	animation103.interval,never
+	animation103.pattern0,overlay,503,0,0,0
+
+	collisionex0,switch,region,col.png,255,0,0
+	collisionex1,head,region,col.png,0,255,0
+}
+
+sakura.cursor
+{
+	mouseup0,switch,system:hand
+	mousedown0,switch,system:hand
+}
+
+sakura.tooltips
+{
+	switch,Turn On/Off
+}

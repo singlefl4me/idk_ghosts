@@ -1,0 +1,51 @@
+OnMouseDoubleClick
+{
+	if reference5 == 0	{
+		if reference4 != "switch";	OnSakuraMenu
+	}
+}
+
+OnMouseClick
+{
+	if reference5 == 0 && reference4 == "switch"	{
+		"%(switchdialogue)"
+	}
+}
+
+OnMouseWheel
+{
+	if reference2 > 50 && reference4 == "switch"	{
+		"%(switchdialogue)"
+	}
+}
+
+switchdialogue
+{
+	if firstboot == 1;	"\![bind,lighting,on,1]\_w[3000]\s[0]\w8.\w8.\w8.\w8%(username)?\w8\s[3] Is that you?\x.\w8.\w8.\w8\s[2]It is!\w8 I can't believe it!\w8 You came back for me!!\x[noclear]\n\n[half]\s[1]Omygoshimsoexcited!!\w4 Ineverthoughthisdaywouldcome!!\w4 OmygoshOmygosh!!!!!!\x\w8\w8\s[3]Oh, \w6sorry.\w8 It's just.\w8.\w8.\w8 \w8I'm really happy you're here.\w8\n\s[5]Now that you came back you can finally finish me!\x\w8\w8\s[3].\w8.\w8.\w8Oh,\w6 right. \w8I can see you need a minute. \w8\s[0]That's fine! \w8I'll wait until you're ready.\x\s[8]I'll wait as long as i need to.\w8.\w8.\w8\![raise,OnFlagSwitch,firstboot,0]"
+	else;	"\![bind,lighting,on,0]\_w[3000]\![raise,OnClose]"
+}
+
+OnMouseMove
+{
+	if reference4 != ""	{
+		stroke++
+		
+		if stroke % 40 == 0	{
+			OnMouseMove.Sakura
+		}
+	}
+}
+
+OnMouseMove.Sakura
+{
+	if reference4 == "head"	{
+		"\0\s[2]"
+		"\0\s[1]"
+		"\0\s[9]"
+	}
+}
+
+OnMouseLeaveAll
+{
+	stroke = 0
+}

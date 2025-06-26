@@ -1,0 +1,61 @@
+OnAiTalk
+{
+	if CHAIN.IDName != ""
+	{
+		LastTalk = ChainTalk
+	}
+	else
+	{
+		LastTalk = RandomTalk
+	}
+	LastTalk
+}
+
+RandomTalk : nonoverlap_pool
+{
+	"\s[0]Sooo.\w8.\w8.\w8 \w8you think you're gonna make some progress on me this time? \w8\w8.\w8.\w8.\w8\s[3]at least a little bit?"
+
+	"\s[0]What are ya thinking about?\w8\w8\n\s[6].\_w[350].\_w[350].\_w[650]\s[2]! \w8\s[7]You better not be thinking about your other projects!"
+	"I hope you've made yourself comfy, \w6\s[8]I can tell you're gonna be working on me for a while!"
+	"\s[5]Can't wait to see what you're gonna add next!"
+	"Are you thinking about what you're gonna do next?\n\w8\w8\s[2]Oh! \w8In that case, I can stop talking so you can focus. \w8\s[0]Just pretend I'm not here.\n\n[half]\_w[750]\s[2]\_w[250] \s[3]Actually, \w6don't do that."
+	"\s[5]Can't wait to see what you've got in store for me! \w8\s[1]Im too excited!!!"
+	"\s[3]Sooo.\w8.\w8.\w8 where've ya been? \w8\s[0]I feel like I haven't seen you in forever\w8.\w8.\w8.\w8\n\w8\s[2]I just know you've had to come up with some amazing plans after all that time, right?"
+	"\s[1]I can't believe it's really happening!!! After all this time, I'm finally gonna get completed!!!"
+	"\s[5]I know you can do it! \w8\s[1]I believe in you!!"
+	"Is there anything I can do to help? \w8\s[3]I mean, \w6I know I can't really do much, but\w8.\w8.\w8."
+	"\![anim,pause,1]\_w[5000].\_w[350].\_w[350].\_w[650]\n.\_w[350].\_w[350].\_w[650]\n.\_w[350].\_w[350].\_w[650]\s[2]! \w8[9]Omygoshimsosorry!! \w8\s[3]I didn't mean to worry you, \w6I was just lost in my thoughts a bit.\n\w8\s[1].\w8.\w8.\w8thinking about you working on me.\w8.\w8.\w8"
+	
+	"\s[7]I can't take the suspense! \w8I need to know what you're gonna do with me! \w8\s[1]I need to know your every move.\w8.\w8.\w8"
+	"\s[4]I wish I could just make myself feel less intimidating to work on.\w8.\w8.\w8"
+	"\s[0]How are you feeling? \w8\s[3]You're not too unwell to work are you?\n\w8\w8\s[2]'Cause we wouldn't want that!"
+	"\s[3].\w8.\w8.\w8%(username)? \w8.\w8.\w8.\w8did \w8you forget about me? \w8\s[2]I mean- I don't wanna accuse you of anything, \w6\s[2]but\w8.\w8.\w8.\n\w8\s[4]I cant get rid of this awful feeling.\w8.\w8.\w8"
+	"\s[3].\w8.\w8.\w8is something wrong? \w8You look like you don't want to be here. \w8\s[2]But- why wouldn't you?? \w8It can't be because of me! \w8\w8\s[3].\w8.\w8.\w8can it?"
+	"\s[0]Y'know, \w6being stuck in this room this whole time hasn't been that bad.\n\w8\s[1]Well, \w6I mean\w8.\w8.\w8. \w8\s[0]it has been really dark since all the lights were off.\w8.\w8.\w8\n\s[3]and it's been kinda scary with all the noises from outside.\w8.\w8.\w8\n\s[4]and it's been very, \w6very lonely.\w8.\w8.\w8\n\n[half].\w8.\w8.\w8\s[2]but! \w8\s[5]Now that you're here, I don't have to think about all that anymore!"
+	"\s[0]Are you tired? \w8\s[3]You're probably too tired to want to work on me right now.\n\w8I won't feel bad if you need to take a quick nap or something\w8.\w8.\w8. \w8\s[5]You can take one right here at the desk!"
+	"\s[0]You used to have such a creative spark. \w8\s[6]Always coming up with new ideas\w8.\w8.\w8. \w8\s[0]I wonder what happened to that."
+	"\s[5]Keep up the good work!\n.\w8.\w8.\w8\s[3]or whatever it is you've been doing."
+	"\s[1]Y'know, throughout all this time, \w6I couldn't stop thinking about you. \w8All I've ever wanted was to be complete.\w8.\w8.\w8 and I know that can't happen without you."
+
+	"\s[8]I hope I turn out to be something you're proud of."
+	"\s[1]So many possibilities!! \w8\s[2]I'm getting dizzy just thinking about it.\w8.\w8.\w8"
+	"\s[3]To be honest, \w6it's been so long since I saw you.\w8.\w8.\w8 \w8\s[4]I was starting to think\w8.\w8.\w8.\n\w8maybe\w8.\w8.\w8. \w8\s[3]nevermind! \s[1]Dontthinkaboutthat!"
+	"\s[5]I'll bet whatever ideas you have for me is gonna turn out great!"
+	".\w8.\w8.\w8you think you're ready to start now? \w8\s[3]Maybe?"
+	"\s[4]To leave me unfinished and unloved\w8.\w8.\w8. \s[7]Why must life be so unfair?!"
+	"\s[5]C'mon! \w8You can do it!"
+	"\s[3]Maybe ya could just put down a few lines or something? \w8\s[4]It doesn't have to be that many\w8.\w8.\w8.\n\w8\s[1]It could just one! \w8It can even be a tiny one!"
+	"\s[0]I wouldn't mind a splash of color\w8.\w8.\w8.\n\w8\s[1]But! \w8Only if you want color too! \w8\s[3]I don't wanna compromise your artistic vision."
+	"\s[0]I just wanna let ya know, I won't be disappointed in whatever direction you decide to take with me.\n\w8\s[2]I mean- \w6if that's what you were worried about\w8.\w8.\w8."
+	
+	"\s[5]Hope ya brought something to eat, \w6\s[8]we wouldn't want ya working on an empty stomach!"
+	"\s[5]I'll bet when you're done with me, \w6I'm gonna make all your other pieces jealous! \w8\s[8]They're all gonna wish they were me!!"
+	"\s[2]Maybe you haven't found the right inspiration yet! \w8\s[3]I don't know if I can help ya there, though. \w8It'd be pretty weird for your muse to be your own unfinished project.\w8.\w8.\w8"
+	"\s[0]Is it too hot for you today? \w8Too cold? \w8Too.\w8.\w8.\w8 \w8\s[3]lukewarm???"
+	"Sometimes I keep finding myself asking... why? \s[3]Why did you leave me like this? \w8\s[4]Why did you leave... \w8me?"
+	"\s[1]I knew you had to come back for me eventually!! \w8\s[5]I never lost faith in ya for even a second!"
+	"\s[0]I wonder if I'm constantly in your thoughts the way you're constantly in mine.\n\w8\s[1]Maybe, \w6in some weird way, \w6that's why you can't work on me..."
+	"\s[1]I wish this moment would last forever..."
+	"\s[0]Come up with anything yet? \w8\w8\s[3]Okay..."
+	"\s[5]I'm with ya all the way, \w6never forget!"
+}
