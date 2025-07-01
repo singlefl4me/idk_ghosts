@@ -1,0 +1,8 @@
+---------------------------Changelog--------------------------
+/7-1/
+- fixed switch mechanic in onboot and while writing
+- update readme
+- changelog added
+
+/6-22/
+- ghost jam release
