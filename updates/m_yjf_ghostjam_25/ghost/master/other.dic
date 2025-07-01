@@ -58,11 +58,14 @@ OnMinuteChange
 {
 	_currenttime = GETSECCOUNT() - oldtime
 
-	if _currenttime > 30	{
-		_writechance = RAND(2) + 1
+	if writemode != "on"	{
+		if _currenttime > 30	{
+			_writechance = RAND(2) + 1
 
-		if _writechance == 2;	OnWriteMode
+			if _writechance == 2;	OnWriteMode
+		}
 	}
+	
 	if _currenttime > 60	{
 		_switchchance = RAND(5) + 1
 
@@ -73,6 +76,7 @@ OnMinuteChange
 OnSwitchMode
 {
     _switchto = RAND(3) + 1
+	
 	while currentmode == _switchto; {_switchto = RAND(3) + 1}
     case _switchto    {
         when 1	{
@@ -94,12 +98,16 @@ OnSwitchMode
 			else;	"\0\s[2]\i[4]"
 		}
     }
+	
 	oldtime = GETSECCOUNT()
 }
 
 OnWriteMode
 {
 	writemode = "on"
+
+	LOGGING("+++++++++++++++")
+	LOGGING("current mode: %(currentmode)")
 
 	case currentmode    {
         when 1; "\0\s[11]"

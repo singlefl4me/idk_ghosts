@@ -1,5 +1,6 @@
 OnFirstBoot
 {
+	currentmode = 1
 	stroke = 0
 	LastTalk = ""
 
@@ -12,7 +13,7 @@ OnInitialize
 	{
 		LastTalk = ""
 	}
-	currentmode = 1
+	currentmode = 0
 	writemode = "off"
 	oldtime = GETSECCOUNT()
 }
