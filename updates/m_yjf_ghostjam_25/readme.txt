@@ -8,6 +8,8 @@ a/n: there's not much going on with this one, i mainly wanted to make it as a tr
 ------------------------------------------------------------------------
 
 art, coding: idk (idkimtired)
+any questions and bug reports can be sent via discord or email. links can be accessed by right click -> "main dev: idk"
+
 characters owned by McLeodGaming and World Entertainment Studios
 
 made in simplicity template 1.09 by zichqec
