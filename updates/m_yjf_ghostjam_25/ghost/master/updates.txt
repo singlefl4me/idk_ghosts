@@ -1,5 +1,5 @@
 charset,OSNative
-file,changelog.txtf2aa09329cd0de8269e21e5486040d52size=189date=2025-07-01T12:40:30
+file,changelog.txt9ad43370264dca3a2cd542ab4f8fc4besize=204date=2025-07-01T12:47:32
 file,install.txt5f838b4addcfad6bc515a24ca65b6952size=69date=2025-06-21T20:01:57
 file,readme.txtcc693330705a7c99af73ed60844fc510size=899date=2025-07-01T12:29:44
 file,thumbnail.pnad0cc65916db4a2bc62b91d727095a027size=523date=2025-06-22T04:01:08
@@ -13,7 +13,7 @@ file,ghost/master/icon.png8979ef6e3c03df5fb57c3e7537e5a465size=320date=2025-0
 file,ghost/master/menu_sakura.dic393a7719838839d640bc5d0a2ecd7734size=1245date=2025-06-21T20:09:25
 file,ghost/master/meta.dic99acd613f8a8ea6b0831de4e770ccb3dsize=5777date=2025-03-07T12:54:28
 file,ghost/master/mouse.dic009023c902f11d799586b02a19f94850size=441date=2025-06-21T20:09:25
-file,ghost/master/other.dicea66b65db58d9bb38b450e391429e832size=6837date=2025-07-01T12:26:39
+file,ghost/master/other.dice126eaffa5c8c07590f5b7527740c574size=6838date=2025-07-01T12:46:26
 file,ghost/master/yaya.dll7ca71c0691df0379655530fcf6d0fa7csize=884736date=2025-03-07T12:54:28
 file,ghost/master/yaya.txt9a85f4a5a6423c1980a541ec237c067asize=668date=2025-06-21T20:09:25
 file,ghost/master/yaya_emerg.txt989601a00fa715b67cb4c3fab7844789size=588date=2025-03-07T12:54:28
