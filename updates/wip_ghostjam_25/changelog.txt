@@ -1,0 +1,10 @@
+---------------------------Changelog--------------------------
+/7-5/
+- fixed onfirstboot sequence
+- fixed surface tag in aitalk dialogue
+- add boot/close dialogues
+- edited readme
+- changelog added
+
+/6-26/
+- ghost jam release
