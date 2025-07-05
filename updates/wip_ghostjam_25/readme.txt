@@ -1,5 +1,5 @@
 ﻿
-Content warning: unreality, potentially unsettling
+Content warning: unreality, potentially unsettling dialogue
 
 Hang out with a manefestation of that one project you abandoned long ago. Maybe you'll finish it next time.
 
