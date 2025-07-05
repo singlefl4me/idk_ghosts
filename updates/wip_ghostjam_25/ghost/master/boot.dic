@@ -4,7 +4,7 @@ OnFirstBoot
 	//Note - I haven't added anything about username or pronouns here because it's all handled by the SSP prefs
 	stroke = 0
 	LastTalk = ""
-	firstboot = 1
+	if !ISVAR(firstboot); firstboot = 1
 	
 	"\1\s[10]\0\s[0]\![bind,lighting,off,1]\_w[10000]\i[103]"
 }
@@ -25,18 +25,30 @@ OnInitialize
 
 OnBoot
 {
-	"\![bind,lighting,on,1]"
-	--
-	"\0\s[5]Oh, thank goodness! You're here."
+	if firstboot == 0	{
+		"\0\![bind,lighting,on,1]"
+		--
+		"\s[5]Oh, thank goodness! You're here."
+		"\s[5]You're back!"
+		"\s[0]What happened? \w8\s[2]Did you need to step out or something...?"
+	}
+	else	{
+		"\![raise,OnFirstBoot]"
+	}
+	
 }
 
 OnClose
 {
-	"\0\s[2]Huh???"
-	"\0\s[4]Please don't leave..."
-	"\0\s[2]Wait a minute!"
-	"\0\s[4]Oh..."
-	"\0\s[3]Where did you go...?"
+	if firstboot == 0	{
+		"\0\![bind,lighting,on,0]\_w[3000]"
+		--
+		"\s[2]Huh???"
+		"\s[4]Please don't leave..."
+		"\s[2]Wait a minute!"
+		"\s[4]Oh..."
+		"\s[3]Where did you go...?"
+	}
 	--
 	"\w8\w8\-" //This is what makes the ghost close (after a short pause), do not remove the \- , and MAKE SURE you don't use a \e before this point or it won't work
 }
