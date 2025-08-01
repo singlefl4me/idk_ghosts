@@ -1,0 +1,4 @@
+charset,UTF-8
+type,shell
+name,flashback
+directory,flash_idk

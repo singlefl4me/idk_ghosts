@@ -1,0 +1,155 @@
+//Some quick notes:
+//1: surfaces.txt does NOT support same line comments. If you want to write a comment, ALWAYS PUT IT ON ITS OWN LINE. If you put comments after other bits of code in the same line, it may seem to work at first, but it can cause cryptic errors down the line. Save yourself the trouble. Always put comments on their own lines in here. Additionally, it doesn't do block comments with /* and */
+//2: The example blink code is set up with the new definition, which I recommend you use. Here is my guide to what that means: https://ukagaka.zichqec.com/guide/old_definition_vs_new_definition
+//If you want to use old definition, make sure to erase that 'version,1' bit.
+//3: It is very common for people to feel stuck on how to start, because they don't know what expressions to make without having dialogue, but they don't know what dialogue to write without having expressions. If you're feeling that way, I highly suggest using emoji as substitutes just to get you started! That may sound weird if you're not fond of emoji, but seriously, just give it a try. I've found that just writing a few messages in Discord and using the emoji to signify surface changes is a great help to get me past that initial hump where it feels impossible.
+//4: Also consider taking a look at Ukadoc's list of recommended surfaces! https://ukagakadreamteam.github.io/ukadoc/manual/descript_shell_surfaces.html#caption_standarddef This can give you an idea of how to start, but also, some external SHIORI events use these surfaces by default! If your ghost has them, it will react as intended! It's not required, but it's something you can consider.
+//5: If you'd like a bit more structure to start with, I have a shell template you can use! https://ukagaka.zichqec.com/template/simplicity_shell
+
+
+descript
+{
+	version,1
+}
+
+//—————————————————————————————— Sakura surfaces ——————————————————————————————
+
+surface0-2,11,15,21,25,31,35
+{
+	element0,interpolate,base.png,0,0
+
+	//Example code for blink animation - uncomment if you want it
+	//animation0.interval,random,4
+	//animation0.pattern0,overlay,101,0,0,0
+	//animation0.pattern1,overlay,102,100,0,0
+	//animation0.pattern2,overlay,-1,50,0,0
+}
+
+//default
+surface0
+{
+	element1,base,y_base.png,0,0
+	
+	animation4.interval,never
+	animation4.pattern0,overlayfast,50,0,0,0
+	animation4.pattern1,overlayfast,51,60,0,0
+	animation4.pattern2,overlayfast,52,60,0,0
+	animation4.pattern3,overlayfast,-1,60,0,0
+}
+
+//writing
+surface11
+{
+	animation0.interval,runonce
+	animation0.pattern0,overlay,110,0,0,0
+
+	//write speeds
+	animation1.interval,sometimes
+	animation1.pattern0,stop,0
+	animation1.pattern1,overlay,111,0,0,0
+	animation1.pattern2,overlay,110,600-680,0,0
+	animation1.pattern3,overlay,111,600-680,0,0
+
+	animation2.interval,never
+	animation2.pattern0,overlay,111,0,0,0
+	animation2.pattern1,overlay,110,620,0,0
+	animation2.pattern2,overlay,111,620,0,0
+	
+	animation4.interval,never
+	animation4.pattern0,overlayfast,60,0,0,0
+	animation4.pattern1,overlayfast,61,60,0,0
+	animation4.pattern2,overlayfast,62,60,0,0
+	animation4.pattern3,overlayfast,-1,60,0,0
+}
+surface15
+{
+	element1,base,y_write_base.png,0,0
+	element2,base,surface110.png,0,0
+	element3,base,y_write_exp2.png,0,0
+}
+
+//default
+surface1
+{
+	element1,base,j_base.png,0,0
+
+	animation4.interval,never
+	animation4.pattern0,overlayfast,53,0,0,0
+	animation4.pattern1,overlayfast,54,60,0,0
+	animation4.pattern2,overlayfast,55,60,0,0
+	animation4.pattern3,overlayfast,-1,60,0,0
+}
+
+//writing
+surface21
+{
+	animation0.interval,runonce
+	animation0.pattern0,overlay,120,0,0,0
+
+	//write speeds
+	animation1.interval,sometimes
+	animation1.pattern0,stop,0
+	animation1.pattern1,overlay,121,0,0,0
+	animation1.pattern2,overlay,120,260-280,0,0
+	animation1.pattern3,overlay,121,260-280,0,0
+
+	animation2.interval,never
+	animation2.pattern0,overlay,121,0,0,0
+	animation2.pattern1,overlay,120,280,0,0
+	animation2.pattern2,overlay,121,280,0,0
+
+	animation4.interval,never
+	animation4.pattern0,overlayfast,63,0,0,0
+	animation4.pattern1,overlayfast,64,60,0,0
+	animation4.pattern2,overlayfast,65,60,0,0
+	animation4.pattern3,overlayfast,-1,60,0,0
+}
+surface25
+{
+	element1,base,j_write_base.png,0,0
+	element2,base,surface120.png,0,0
+	element3,base,j_write_exp2.png,0,0
+}
+
+//default
+surface2
+{
+	element1,base,f_base.png,0,0
+	
+	animation4.interval,never
+	animation4.pattern0,overlayfast,56,0,0,0
+	animation4.pattern1,overlayfast,57,60,0,0
+	animation4.pattern2,overlayfast,58,60,0,0
+	animation4.pattern3,overlayfast,-1,60,0,0
+}
+
+//writing
+surface31
+{
+	animation0.interval,runonce
+	animation0.pattern0,overlay,132,0,0,0
+
+	//write speeds
+	animation1.interval,sometimes
+	animation1.pattern0,stop,0
+	animation1.pattern1,overlay,133,0,0,0
+	animation1.pattern2,overlay,132,1240-1260,0,0
+	animation1.pattern3,overlay,133,1240-1260,0,0
+	
+	animation2.interval,never
+	animation2.pattern0,overlay,133,0,0,0
+	animation2.pattern1,overlay,132,1090,0,0
+	animation2.pattern2,overlay,133,1090,0,0
+	
+	animation4.interval,never
+	animation4.pattern0,overlayfast,66,0,0,0
+	animation4.pattern1,overlayfast,67,60,0,0
+	animation4.pattern2,overlayfast,68,60,0,0
+	animation4.pattern3,overlayfast,-1,60,0,0
+}
+surface35
+{
+	element1,base,f_write_base.png,0,0
+	element2,base,surface130.png,0,0
+	element3,base,f_write_exp2.png,0,0
+}
