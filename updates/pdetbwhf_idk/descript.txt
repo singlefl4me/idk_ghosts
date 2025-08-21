@@ -3,7 +3,7 @@ seriko.use_self_alpha,1
 
 charset,UTF-8
 type,shell
-name,Predynastic Egyptian Teracotta Bowl with Human Feet
+name,Predynastic Egyptian Terracotta Bowl with Human Feet
 craftman,idk
 craftmanw,idkimtired
 craftmanurl,https://github.com/singlefl4me

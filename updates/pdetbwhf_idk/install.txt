@@ -1,4 +1,4 @@
 Charset,UTF-8
 type,shell
-name,Predynastic Egyptian Teracotta Bowl with Human Feet
+name,Predynastic Egyptian Terracotta Bowl with Human Feet
 directory,pdetbwhf_idk
