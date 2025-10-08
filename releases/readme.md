@@ -8,7 +8,7 @@ all of the ghosts i've worked on over the years
 ### [express urself](/express_idk.nar)
    ![expressurself thumbnail](/updates/express_idk/thumbnail.png)
 ### [into the darkness...](https://github.com/singlefl4me/itd_gm7)
-   ![intothedarkness thumbnail](https://ukagakadreamteam.com/wiki/_media/ghost/gingerbrave/thumbnail.png)
+   ![intothedarkness thumbnail](/../../../../singlefl4me/itd_gm7/blob/main/thumbnail.png)
 ### [Mango Boys](/m_yjf_ghostjam_25.nar)
    ![mangoboys thumbnail](/updates/m_yjf_ghostjam_25/thumbnail.png)
 ### [The Eternal WIP](/wip_ghostjam_25.nar)
