@@ -47,6 +47,8 @@ ghosts that i've worked on with others
    ![noodly thumbnail](/updates/noodly_m_idk/thumbnail.png)
 ### [noodly r](/releases/noodly_r_idk.nar)
    ![noodly thumbnail](/updates/noodly_r_idk/thumbnail.png)
+### [mosqueedle](/releases/mosqueedle_idk.nar)
+   ![mosqueedle thumbnail](/updates/mosqueedle_idk/thumbnail.png)
 ### [Predynastic Egyptian Terracotta Bowl with Human Feet](/releases/pdetbwhf_idk.nar)
    ![pdetbwhf thumbnail](/updates/pdetbwhf_idk/thumbnail.png)
 ### [yours and mine](/releases/yours_mine_idk.nar)
