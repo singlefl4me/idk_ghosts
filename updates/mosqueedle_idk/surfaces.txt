@@ -1,0 +1,13 @@
+descript
+{
+	version,1
+}
+
+surface0
+{
+	animation0.interval,always
+	animation0.pattern0,base,0,0,0,0
+	animation0.pattern1,base,1,100,0,0
+	animation0.pattern2,base,2,100,0,0
+	animation0.pattern3,base,0,100,0,0
+}
