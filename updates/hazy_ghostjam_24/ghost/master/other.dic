@@ -50,7 +50,7 @@ OnNeedlePoke
 		if reference1 == "mosqueedle"	{
 			"\s[300]i keep trying to swat at them yet they keep coming back..."
 			"\s[0]owch. \w8\w8\s[301]thats gonna leave a nasty welt."
-			"\s[5]how may of these things are there???"
+			"\s[5]how many of these things are there???"
 			"\s[5]i could've sworn i got that one earlier"
 			"\s[301]the buzzing...\w8\w8\noh god the buzzing"
 			"\s[300]these guys are starting to get on my nerves..."
