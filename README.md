@@ -3,7 +3,7 @@ a repository/update directory of all of my public ukagaka projects.
 downloads can be found in the [releases directory](https://github.com/singlefl4me/idk_ghosts/blob/main/releases/readme.md).
 
 
- # Ghost License Terms
+ # Ghost Fan Creation Terms
 
 [Template Used (translated from Japanese)](https://emily.shillest.net/specwiki/index.php?%E7%A5%9E%E5%A4%9C%E3%81%BF%E3%82%85%E3%82%93/%E3%82%B4%E3%83%BC%E3%82%B9%E3%83%88%E3%81%AE%E4%BA%8C%E6%AC%A1%E5%89%B5%E4%BD%9C%E3%82%AC%E3%82%A4%E3%83%89%E3%83%A9%E3%82%A4%E3%83%B3)
 
