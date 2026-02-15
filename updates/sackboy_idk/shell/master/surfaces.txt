@@ -1,0 +1,115 @@
+version,1
+
+surface0
+{
+    //eyes
+    animation0.interval,runonce
+    animation0.pattern0,overlay,100,0,0,0
+
+    //blink
+    animation1.interval,random,4
+    animation1.pattern0,stop,11,0,0
+    animation1.pattern1,alternativestart,(2,3)
+
+    animation2.interval,never
+    animation2.pattern0,stop,3,0,0
+    animation2.pattern1,overlay,-1,100,0,0
+    animation2.pattern2,overlayfast,103,50,0,0
+    animation2.pattern3,overlayfast,102,40,0,0
+    animation2.pattern4,overlayfast,101,100,0,0
+    animation2.pattern5,overlay,-1,40,0,0
+
+    animation3.interval,never
+    animation3.pattern0,stop,2,0,0
+    animation3.pattern1,overlay,-1,100,0,0
+    animation3.pattern2,overlayfast,102,50,0,0
+    animation3.pattern3,overlayfast,105,100,0,0
+    animation3.pattern4,overlay,-1,30,0,0
+
+    //closed
+    animation4.interval,never
+    animation4.pattern0,parallelstop,(0,1,5,11,12)
+    animation4.pattern1,overlay,102,0,0,0
+
+    animation5.interval,never
+    animation5.pattern0,parallelstop,(0,1,4,11,12)
+    animation5.pattern1,overlay,106,0,0,0
+
+
+    //idle1
+    animation10.interval,sometimes
+    animation10.pattern0,replace,200,500,0,173
+    animation10.pattern1,overlay,-1,500,0,0
+    animation10.pattern2,replace,201,500,0,173
+    animation10.pattern3,overlay,-1,500,0,0
+    //idle2
+    animation11.interval,random,100
+    animation11.pattern0,parallelstop,(0,1,13)
+    animation11.pattern1,replace,250,0,0,0
+    animation11.pattern2,overlay,-1,3000,0,0
+    animation11.pattern3,parallelstart,(0,1,)
+    //idle3
+    animation12.interval,never
+    animation12.pattern0,parallelstop,(0,1,11,13)
+    animation12.pattern1,replace,260,0,0,0
+    animation12.pattern2,overlay,-1,4000,0,0
+    animation12.pattern3,parallelstart,(0,1,11)
+    //idle4
+    animation13.interval,random,200
+    animation13.pattern0,parallelstop,(0,1,11)
+    animation13.pattern1,replace,270,0,0,0
+    animation13.pattern2,overlay,-1,3000,0,0
+    animation13.pattern3,parallelstart,(0,1)
+
+    //wave_1
+    animation14.interval,never
+    animation14.pattern0,replace,280,275,0,0
+    animation14.pattern1,replace,281,275,0,0
+    animation14.pattern2,replace,280,275,0,0
+    animation14.pattern3,replace,281,275,0,0
+    animation14.pattern4,replace,280,275,0,0
+    animation14.pattern5,replace,281,275,0,0
+    animation14.pattern6,stop,14,0,0
+    //wave_2
+    animation15.interval,never
+    animation15.pattern0,replace,282,275,0,0
+    animation15.pattern1,replace,283,275,0,0
+    animation15.pattern2,replace,282,275,0,0
+    animation15.pattern3,replace,283,275,0,0
+    animation15.pattern4,replace,282,275,0,0
+    animation15.pattern5,replace,283,275,0,0
+    animation15.pattern6,stop,15,0,0
+
+    //collision
+    collisionex0,Head,polygon,72,75,75,65,84,52,94,48,120,49,144,59,155,75
+}
+
+surface1 //menu
+{
+    element0,overlay,menubase.png,0,0
+
+    animation0.interval,runonce
+    animation0.pattern0,overlay,100,0,0,0
+
+    animation1.interval,random,4
+    animation1.pattern0,alternativestart,(2,3)
+
+    animation2.interval,runonce
+    animation2.pattern0,stop,3,0,0
+    animation2.pattern1,overlay,-1,100,0,0
+    animation2.pattern2,overlayfast,103,50,0,0
+    animation2.pattern3,overlayfast,102,40,0,0
+    animation2.pattern4,overlayfast,101,100,0,0
+    animation2.pattern5,overlay,-1,40,0,0
+
+    animation3.interval,runonce
+    animation3.pattern0,stop,2,0,0
+    animation3.pattern1,overlay,-1,100,0,0
+    animation3.pattern2,overlayfast,102,50,0,0
+    animation3.pattern3,overlayfast,105,100,0,0
+    animation3.pattern4,overlay,-1,30,0,0
+}
+
+surface11-18
+{
+}

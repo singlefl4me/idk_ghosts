@@ -1,0 +1,182 @@
+//boot
+OnFirstBoot  {
+    givesticker = "off"
+    stickerchance = 0
+    stickerarray = IARRAY
+    stickerarray ,= ""
+    stickercount = 8
+}
+
+OnBoot  {
+    OnSurfaceInitialization
+}
+
+//menu
+OpenSakuraMenu : all  {
+    "\0\s[1]\b2\![quicksection,1]"
+
+    "\f[italic,1]%(stickercount)/8 sticker(s) available.\n\f[italic,0]"
+
+    if stickerarray != ""   {
+        "\![*]\q[Remove Last Sticker,OnStickerClear,last]\n"
+        "\![*]\q[Remove All Stickers,OnStickerClear,all]\n\n[half]"
+    }
+    
+    "\![*]\q[Change Ghost,script:\+]\n\n[half]"
+    {
+        "\![*]Stickers? (Stickers are %(givesticker).)\n\q[On,OnModeYes]        \q[Off,OnModeNo]\n\n[half]"
+    }
+    //"\![*]\q[Stick to Window,OnStartSaori]\n\n[half]"
+
+    "\![*]\q[Close,script:\e]\![quicksection,0]"
+}
+
+
+//mouse
+OnMouseMove {
+    if reference4 != ""  {
+        stroke++
+        if stroke >= 40 {
+            stroke = 0
+            if reference4 == "Head" {
+                "\0\s[0]\i[4]\e"
+                "\0\s[0]\i[5]\e"
+            }
+        }
+    }
+    else    {
+        stroke = 0
+    }
+}
+OnMouseDoubleClick  {
+    OpenSakuraMenu
+}
+
+//gimmick
+OnStickerChoose {
+    _stickerchoice = RAND(8) + 11
+    _placement = 0
+
+    for _i = 0; _i < 8; _i++    {
+        if stickerarray[_i] == ""   {
+            _placement = _i + 1
+            stickercount--
+            stickerarray[_i] = _stickerchoice
+
+            "\p[%(_placement)]\s[%(_stickerchoice)]"
+
+            break
+        }
+    }
+    if _placement == 8; givesticker = "off"
+}
+
+OnStickerClear : all    {
+    if reference0 == "last" {
+        for _i = 0; _i < ARRAYSIZE(stickerarray); _i++    {
+            if _i == ARRAYSIZE(stickerarray) - 1   {
+                _placement = _i + 1
+                stickerarray[_i] = IARRAY
+
+                "\p[%(_placement)]\s[-1]"
+
+                break
+            }
+        }
+        if stickercount != 8;    stickercount++
+    }
+    elseif reference0 == "all"  {
+        for _i = 0; _i < ARRAYSIZE(stickerarray); _i++    {
+            _placement = _i + 1
+
+            "\p[%(_placement)]\s[-1]"
+        }
+        stickerarray = IARRAY
+        stickerarray ,= ""
+        stickercount = 8
+    }
+
+    "\0\s[0]"
+}
+
+OnMinuteChange : all  {
+    if givesticker == "on"  {
+        stickerchance = RAND(2)
+        
+        if stickerchance != 0   {
+            "\![lock,balloonrepaint]\0\s[0]\i[12,wait]\![quicksection,1](Sackboy gives you a sticker!\n\n[half]Do you want to put it on your desktop?)\n\![quicksection,0]"
+            "\t\![*]\q[Yes,OnStickerChoose]      \![*]\q[No,script:\e]\![unlock,balloonrepaint]"
+        }
+    }
+}
+
+OnModeYes   {
+    givesticker = "on"
+    OpenSakuraMenu
+}
+OnModeNo  {
+    givesticker = "off"
+    OpenSakuraMenu
+}
+OnBalloonClose  {
+    "\0\s[0]"
+}
+
+//restore
+OnSurfaceRestore : all    {
+    OnSurfaceInitialization
+}
+OnWindowStateRestore{
+    OnSurfaceInitialization
+}
+
+OnSurfaceInitialization : all   {
+    for _i = 0; _i < ARRAYSIZE(stickerarray); _i++    {
+        if stickerarray[_i] != ""   {
+            _placement = _i + 1
+
+            "\p[%(_placement)]\s[%(stickerarray[_i])]"
+        }
+    }
+
+    "\0\s[0]"
+}
+
+//other
+OnOtherGhostBooted  {
+    "\0\s[0]\i[14]"
+    "\0\s[0]\i[15]"
+}
+OnGhostCallComplete {
+    "\0\s[0]\i[14]"
+    "\0\s[0]\i[15]"
+}
+
+/*
+//osuwari
+OnStartSaori    {
+    ""
+}
+*/
+
+//other
+OnTranslate
+{
+	_talk = reference0
+	
+	//This is the bit that runs embedded elements in script input
+	if reference1 == "" && reference2 == "" //If this is from script input
+	{
+		
+		EVAL('"' + REPLACE(_talk,'"','""') + '"')
+	}
+	else
+	{
+		TOSTR(_talk)
+	}
+}
+
+On_homeurl
+{
+	"https://raw.githubusercontent.com/singlefl4me/sackboy_idk/main/"
+}
