@@ -9,13 +9,14 @@ OnFirstBoot  {
 
 OnBoot  {
     OnSurfaceInitialization
+    stickercount.update
 }
 
 //menu
 OpenSakuraMenu : all  {
     "\0\s[1]\b2\![quicksection,1]"
 
-    "\f[italic,1]%(stickercount)/8 sticker(s) available.\n\f[italic,0]"
+    "\f[italic,1]%(stickerdisplay)/%(stickercount) sticker(s) available.\n\f[italic,0]"
 
     if stickerarray != ""   {
         "\![*]\q[Remove Last Sticker,OnStickerClear,last]\n"
@@ -60,10 +61,12 @@ OnStickerChoose {
     for _i = 0; _i < 8; _i++    {
         if stickerarray[_i] == ""   {
             _placement = _i + 1
-            stickercount--
             stickerarray[_i] = _stickerchoice
+            stickerarray[_i] ,= ""
 
             "\p[%(_placement)]\s[%(_stickerchoice)]"
+            
+            stickercount.update
 
             break
         }
@@ -74,7 +77,7 @@ OnStickerChoose {
 OnStickerClear : all    {
     if reference0 == "last" {
         for _i = 0; _i < ARRAYSIZE(stickerarray); _i++    {
-            if _i == ARRAYSIZE(stickerarray) - 1   {
+            if _i == (ARRAYSIZE(stickerarray) - 2)   {
                 _placement = _i + 1
                 stickerarray[_i] = IARRAY
 
@@ -83,7 +86,8 @@ OnStickerClear : all    {
                 break
             }
         }
-        if stickercount != 8;    stickercount++
+
+        if !stickercount.check;    stickercount.update
     }
     elseif reference0 == "all"  {
         for _i = 0; _i < ARRAYSIZE(stickerarray); _i++    {
@@ -93,7 +97,7 @@ OnStickerClear : all    {
         }
         stickerarray = IARRAY
         stickerarray ,= ""
-        stickercount = 8
+        stickercount.reset
     }
 
     "\0\s[0]"
@@ -150,6 +154,19 @@ OnOtherGhostBooted  {
 OnGhostCallComplete {
     "\0\s[0]\i[14]"
     "\0\s[0]\i[15]"
+}
+
+stickercount.update
+{
+    stickerdisplay = (stickercount - (ARRAYSIZE(stickerarray) - 1))
+}
+stickercount.reset
+{
+    stickerdisplay = stickercount
+}
+stickercount.check
+{
+    stickerdisplay == (stickercount - (ARRAYSIZE(stickerarray) - 1))
 }
 
 /*
