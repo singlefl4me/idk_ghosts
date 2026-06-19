@@ -5,11 +5,11 @@
 
 OnMouseActSuccess : "\0\s[1]\w9\w9\w9\1\s[10]I think that did it! \w7Now to- \w4wait a minute...\w7\w7\nWhat was I gonna say again?\![open,inputbox,OnMouseActEnd,0]"
 
-# surfaceNum : 2, 3, 4, 5
+surfaceNum : 2, 3, 4, 5
 
 OnMouseActEnd : (
     "\1\s[10]\f[italic,1]\f[bold,1]"$(Reference 0)"\f[bold,0]\n\n[half]"
-    "\0\w9\w9\w9\i[2,wait]\w9\w9\w9\s["$[ ${rand 4} + 3 ]"]\_w[3000]\s[0]\w9\w9"
+    "\0\w9\w9\w9\i[2,wait]\w9\w9\w9\s["${surfaceNum}"]\_w[3000]\s[0]\w9\w9"
 	"\1\s[10]\f[italic,1]No, \w5that wasn't what I wanted to say...\w9\w9\nGuess I'll have to try that again."
 )
 
