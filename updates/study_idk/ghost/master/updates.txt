@@ -1,6 +1,7 @@
 charset,OSNative
 file,install.txt7f46d42df9a58dc0e1868427fb168940size=94date=2026-06-18T20:48:12
-file,readme.txt7689e00642a2dbd7ed0e3757d05a9df8size=535date=2026-06-19T04:20:32
+file,mesomeso_readme.txt4eea74ebfd4ee1547850fb8dc60f4d0bsize=426date=2023-12-13T17:24:56
+file,readme.txtc30c32ad4db25ec04de7420c6cb3bc08size=616date=2026-06-19T14:09:06
 file,thumbnail.pngcf6bbaf9904f4812b470c205e74b50bbsize=3327date=2026-06-19T04:10:32
 file,ghost/master/aitalk.kisd31bf2675eded7fb4040e9035913198fsize=1004date=2026-06-19T03:08:17
 file,ghost/master/bootend.kis9dc7ef92dafe0cf963a7c2e4e10b35dbsize=2520date=2026-06-19T04:53:20
