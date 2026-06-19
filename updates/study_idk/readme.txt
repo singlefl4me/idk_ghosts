@@ -14,4 +14,6 @@ hotspots (click, hover/scroll): laptop, backpack, book
 
 art, code, writing: idk (idkimtired)
 
+mesomeso template v1.0.1 by okuajub [https://okuajub-netspace.neocities.org/]
+
 thanks for playing!
