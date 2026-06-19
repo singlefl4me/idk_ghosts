@@ -13,7 +13,7 @@
 
 resource.homeurl : $(
 	if $[${devmode} = 1] "https://dummy.url/"
-	else "https://raw.githubusercontent.com/singlefl4me/study_idk/refs/heads/main/"
+	else "https://raw.githubusercontent.com/singlefl4me/idk_ghosts/refs/heads/main/updates/study_idk/"
 )
 
 #--

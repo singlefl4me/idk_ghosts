@@ -17,7 +17,7 @@ craftmanw,idkimtired
 craftmanurl,https://github.com/singlefl4me
 
 //Update URL
-homeurl,https://raw.githubusercontent.com/singlefl4me/study_idk/refs/heads/main/
+homeurl,https://raw.githubusercontent.com/singlefl4me/idk_ghosts/refs/heads/main/updates/study_idk/
 
 //Balloon(s) to highlight
 //balloon,balloon name
