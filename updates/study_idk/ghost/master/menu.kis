@@ -1,0 +1,218 @@
+#--
+# Menus
+#--
+# Double click menus.
+
+
+#--
+# Sakura Menu
+#--
+
+# Menu opening dialogue(s).
+SakuMenuTalk : "\0\s[0]MesoMeso..."
+SakuMenuTalk : "\0\s[0]MesoMeso.. MesoMeso..."
+SakuMenuTalk : "\0\s[0]Meso..Meso..."
+
+# Repeat what the Ghost last said when used.
+OnLastTalk : ${lastTalk}
+
+OnSakuraMenu : (
+    # Remembers what dialogue the user saw when changing the talk interval.
+    # If you would like to have it reset every time/not load instantly, simply comment this line out.
+    $( if $[ $(Reference 0) != 1 ] $(setstr MenuDialogue ${SakuMenuTalk}\w4 ) else if $[ $( match ${MenuDialogue} "\_q" ) = -1 ] $(setstr MenuDialogue \_q${MenuDialogue}\_q ) )
+
+    # Menu start:
+    \t\*\b2${MenuDialogue}\_q\![set,autoscroll,disable]
+    \n\n[half]
+    \![*]\q[Say Something,OnAITalk]
+    $( if $[ ${lastTalk} ] (\n\![*]\q[Repeat Yourself,OnLastTalk]) )
+    \n\n[half]
+    \![*]\q[Config Menu,OnConfigMenu]
+    \n\n[half]
+    \![*]\q[Quit Menu,OnQuit,0]
+    \n\n
+
+    # Talkrate Assignment
+    $(setstr @interval ${talkinterval})
+    $( if $[ ${@interval} = 'Never' ] $(setstr @form "") else if $[ ${@interval} > 59 ] $( setstr @interval $[ ${@interval} / 60 ]; setstr @form minutes ) else $( setstr @form seconds ) )
+    $(if $[${@interval} == 1] $(setstr @form minute))
+
+    # Talkrate Display
+    "\f[italic,true]Talkrate:" ${@interval} ${@form}\n\f[italic,default]
+    \![*]\q[30s,OnAssignTalkRate,30] \![*]\q[1m,OnAssignTalkRate,60] \![*]\q[3m,OnAssignTalkRate,180]
+    "\![*]\q[5m,OnAssignTalkRate,300] \![*]\q[10m,OnAssignTalkRate,600] \![*]\q[15m,OnAssignTalkRate,900] \![*]\q[Never,OnAssignTalkRate,Never]"
+    \n\n[half]
+
+    # Retrieves info about the present time
+    $(setstr @weekday $(if $[$(date %w) = 0] "Sun" else if $[$(date %w) = 1] "Mon" else if $[$(date %w) = 2] "Tues" else if $[$(date %w) = 3] "Weds" else if $[$(date %w) = 4] "Thurs" else if $[$(date %w) = 5] "Fri" else if $[$(date %w) = 6] "Sat"))
+    $(setstr @hour $(date %H); setstr @minute $(date %M))
+
+    # Displays the time
+    \f[italic,true]${@weekday}", %month/%day, "${@hour}":"${@minute}\f[italic,default]
+)
+
+#--
+# Config Menu
+#--
+# Configuration options.
+
+# Same function as the Sakura Menu Talk but for configuration.
+ConfigMenuTalk : "\0\s[0]Configuration.. MesoMeso..."
+
+OnConfigMenu : (
+    \t\*\b2${ConfigMenuTalk}\w4\_q\![set,autoscroll,disable]
+    \n\n[half]
+    \![*]\q[Change Name,OnChangeName]
+    \n
+    \![*]\q[Change Pronouns,OnChangePronouns]
+    \n
+    \![*]"Uninstall: "\q[$( if $[${vanishFlag} = 1] $(echo "ON") else $(echo "OFF") ),OnToggleVanish]
+    \n\n[half]
+    \![*]\q[Back,OnSakuraMenu]
+)
+
+# An optional name blacklist. Add your blacklisted words uncapitalized and with no spaces.
+blacklist : heckity, hecker
+
+#-- Name Change Talk
+# These talks are used as reactions to name choices.
+# Editing dialogue into the code itself would be a headache. See it in dict-menu if you feel the need to change it.
+
+# This is what your Ghost will say when selecting the name config.
+talk.OnChangeName : "\0\s[0]Names... MesoMeso..."
+
+# This is what your Ghost will say when selecting the add name option.
+talk.OnAddName : "\0\s[0]New name, too?"
+
+# This is what your Ghost will say when selecting the replace name option.
+talk.OnReplaceName : "\0\s[0]New name?"
+
+# This is what your Ghost will say when selecting the delete name option.
+talk.OnDeleteName : "\0\s[0]Delete name?"
+
+# A response for if the name was the same as the name they already had.
+talk.UnchangedName : "\0\s[0]No change.. MesoMeso..."
+
+# A response for if the user didn't input anything.
+talk.NoName : "\0\s[0]No name? New name "${username}".. MesoMeso..."
+
+# A response for if the User inputs a name which is the same as the characters' names.
+talk.SelfName : "\0\s[0]Same name.. MesoMeso... Use another?"
+
+# A response for if the User inputs a name which is in the blacklist. You can edit the blacklist in dict-menu.kis.
+talk.BadName : "\0\s[0]Can't say that.. MesoMeso... Another?"
+
+# This is what your Ghost will say to confirm if the user's name is correct. $(Reference 0) is the inputted name name.
+talk.OnConfirmName : "\0\s[0]MesoMeso... Name "$(Reference 0)"?"
+
+# This is what the Ghost will say after the name has been changed.
+talk.OnNameChanged : "\0\s[0]Name "$(Reference 0)".. MesoMeso..."
+
+# This is what the Ghost will say to confirm if the user wants to delete a name. $(Reference 0) is the name to be deleted.
+talk.ConfirmNameDelete : "\0\s[0]MesoMeso... Not "$username[$(Reference 0)]"?"
+
+# This is what the Ghost will say when the name has been deleted.
+talk.OnNameDeleted : "\0\s[0]Not name anymore.. MesoMeso..."
+
+#-- Pronouns Change Talk
+# These talks are used when configuring the pronoun change options.
+
+# This is what your Ghost will say when selecting the change pronouns option.
+talk.OnChangePronouns : "\0\s[0]MesoMeso... Your pronouns..."
+
+# What your Ghost says when providing the default pronouns.
+talk.OnChoosePronouns : "\0\s[0]Which? MesoMeso..."
+
+# When successfully changing pronouns.
+talk.OnPronounsChanged : "\0\s[0]Will use it.. MesoMeso..."
+
+# When choosing a pronoun set to delete.
+talk.OnDeletePronouns : "\0\s[0]Not pronouns? MesoMeso..."
+
+# When successsfully deleting a set of pronouns.
+talk.OnPronounsDeleted : "\0\s[0]Not pronouns... MesoMeso.."
+
+# When inputting custom pronouns.
+# I do suggest giving an example of the pronoun for the ease of the user.
+talk.Pronouns1 : "\0\s[0]MesoMeso.\n\n[half]*What would it be instead of 'he' in 'He talked'?\n\n[half]MesoMeso..."
+
+talk.Pronouns2 : "\0\s[0]Keep going.. MesoMeso..\n\n[half]* Instead of 'him' in 'That's him'?"
+
+talk.Pronouns3 : "\0\s[0]MesoMeso...\n\n[half]* Instead of 'his' in 'His dog'?"
+
+talk.Pronouns4 : "\0\s[0] \n\n[half]* Instead of 'hers' in 'That's hers'?\n\n[half]MesoMeso..."
+
+talk.Pronouns5 : "\0\s[0]Last.. MesoMeso... \n\n[half]* Instead of 'herself' in 'She knows herself'?"
+
+talk.Pronouns6 : "\0\s[0]MesoMeso... Singular or plural? \n\n[half]* '"${temp.they}" are tired.' is plural."
+
+# When checking with the User if they typed their pronouns right.
+talk.OnConfirmPronouns : "\0\s[0]MesoMeso... Pronouns "${temp.they}/${temp.them}/${temp.their}/${temp.theirs}/${temp.themself}"?"
+
+# When the User cancels the pronoun change.
+talk.OnExitPronouns : "\0\s[0]MesoMeso...."
+
+# When a user tests their pronouns. If you add another, remember to use the '$user.they[${i}]' format.
+talk.OnTestPronouns : (
+    "MesoMeso... "${username}" went for a swim. "$(cap $user.they[${i}])" swam for hours.. The whole ocean was "$user.theirs[${i}]"...\w8 "
+    $(cap $user.their[${i}])" lungs were bursting for air. MesoMeso... For "$user.them[${i}]", water was life. "
+    $user.they[${i}] $(SP 'is' 'are')" the sea life. The ocean all to "$user.themself[${i}]"."
+)
+
+OnAssignTalkRate : (
+    $( setstr talkinterval $(Reference 0); set @dialogue $(Reference 1) )
+    "\![raise,OnSakuraMenu,1]"
+)
+
+# Quitting dialogue handler.
+OnQuit : $(
+    if $[$(Reference 0) == 0] \![close,inputbox,__SYSTEM_ALL_INPUT__]${SakuraQuit}
+    else \![close,inputbox,__SYSTEM_ALL_INPUT__]${KeroQuit}
+)
+
+# Used for quitting activities.
+SakuraQuit : "\0\s[0]MesoMeso...", "\0\s[0]MesoMeso... Later..."
+
+#--
+# Kero Menu
+#--
+
+KeroMenuTalk : "\1\s[10]MesoMeso..?","\1\s[10]MesoMeso... "${username}"."
+
+KeroQuit : "\1\s[10]MesoMeso..", "\1\s[10]Quit.. MesoMeso.."
+
+OnKeroMenu : (
+    \1\t\*\b2${KeroMenuTalk}\w4\_q\![set,autoscroll,disable]
+    \n\n[half]
+    \![*]\q[Who are you?,OnIntroduceSelf]
+    # 'devmode' is an entry to engage development mode. To engage it, put '$(setstr devmode 1)' in the script input.
+    $(if $[${devmode} = 1] $(echo \n\n[half]\![*]\q[Debug Menu,OnDebugMenu]))
+    \n\n[half]
+    \![*]\q[Quit Menu,OnQuit,1]
+)
+
+OnIntroduceSelf : (
+    "\1\s[10]\t...\w8...\_w[2000] MesoMeso..."
+)
+
+# Having a debug menu can be helpful as you can hide it from the user as needed.
+OnDebugMenu : (
+    "\1\t\*\b2\s[10]\b2"
+    "Debug.. MesoMeso..."
+    "\n\n[half]"\w4\_q\![set,autoscroll,disable]
+    \![*]\q[Show All Saved Entries,OnShowData]
+    \n
+    \![*]\q[Test Variable,OnTestVariable]
+    \n\n[half]
+    \![*]\q[Quit Menu,OnQuit,1]
+)
+
+# Shows the current user data. Note: When more than 1 value is saved to one entry, it will randomly pick from said entry, as any entry call would.
+OnShowData : $(
+    foreach @entries savedataParam $( echo "\b2"${@entries}": "; echo ${${@entries}}"\n" )
+)
+
+# This entry can be used to test code on demand. Very helpful for longer and more complex SakuraScript or KIS.
+OnTestVariable : (
+    "\1\s[10]Testing!\n\n[half]"
+)

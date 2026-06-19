@@ -1,0 +1,52 @@
+#--
+# Random Talk
+#--
+# Ghost's random chatter.
+
+# Talk rate variable.
+# talkcounter : 0
+
+# Random talk handler.
+# OnSecondChange : $(
+#     if ${System.Request.Reference3} $(
+#         inc talkcounter;
+#         if $[ ${talkcounter} >= ${talkinterval} ] $(
+#         	echo ${OnAITalk};
+#             setstr talkcounter 0;
+#         );
+#     );
+# )
+
+# Old specification support and empty string handler.
+# OnAITalk : $(
+# 	setstr lastTalk ${sentence};
+# 	if $[ ${lastTalk} = ''] $(return ${OnAITalk});
+# 	echo ${lastTalk};
+# )
+
+# When the minute changes.
+OnMinuteChange : $(
+	SaveData;
+)
+
+#--
+# Sentence
+#--
+# Dialogue entry.
+
+sentence : ""
+
+# Optional top of the hour event.
+#OnHourTimeSignal : (
+#	$(setstr @minute $(date %M)) "\0\s[0]It is %hour:"${@minute}"..."
+#)
+
+#--
+# IMPORTANT, DO NOT DELETE. DO NOT WRITE AFTER THIS POINT.
+#--
+# Forces no repeat dialogues.
+# Definitions written after it will not be recognized.
+
+=kis
+Nonoverlap sentence;
+=end

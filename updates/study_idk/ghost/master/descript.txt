@@ -1,0 +1,23 @@
+//Ghost descript.
+
+charset,UTF-8
+type,ghost
+shiori,shiori.dll
+icon,icon.ico
+readme.charset,UTF-8
+
+//Ghost and character names.
+name,Study Buddies
+sakura.name,MARI
+kero.name,
+
+//Creator Credit
+craftman,idk
+craftmanw,idkimtired
+craftmanurl,https://github.com/singlefl4me
+
+//Update URL
+homeurl,https://raw.githubusercontent.com/singlefl4me/study_idk/refs/heads/main/
+
+//Balloon(s) to highlight
+//balloon,balloon name

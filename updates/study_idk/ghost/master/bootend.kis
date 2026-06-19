@@ -1,0 +1,42 @@
+#--
+# Bootend Events
+#--
+# When the Ghost is initialized or stopped.
+
+# This happens on ALL booting.
+OnInitialize : (
+	${SaveLoad}
+)
+# This happens on ALL closing.
+OnDestroy : $(
+	SaveData;
+)
+
+# Default surfaces the Ghost returns to when idle.
+OnSurfaceRestore : "\1\s[10]\0\s[0]"
+
+# This happens the first time a user boots the Ghost.
+OnFirstBoot : $(
+	SaveData;
+	# First boot:
+	if $[$(Reference 0) == 0] ${firstBootDialogue}
+)
+
+firstBootDialogue : (
+	"\t\0\s[0]\1\s[10]\f[italic,1]*Man...\w9\w9 study hall in the library is always so boring. \w7I've been stuck on this one problem for like half the day.*\w7\n*I would rather do literally anything else right now...\w9\w9 but I've gotta focus! \w7The exam's coming up soon and I need to try and \w9\f[italic,0]not\f[italic,1]\w9 fail this time.*\x"
+	"\1\s[10]\f[italic,1]\_w[1500]*Hey, is that...? \w7\w7That cool robot girl from my class! \w7Didn't expect her to be studying here for the exam. \w7Actually, I didn't think she would even need to study at all...*\x"
+	"\1\s[10]\f[italic,1]*Y'know... \w9I think there was something I wanted to tell her...\w7\nThat rumor I heard from a friend of a friend of a friend? \w7What the answers are for today's homework? \w7What was it??*\n\n[half]\w9\w9\w9\w9"
+	"\1\s[10]\f[italic,1]*I remember now! Now for the tricky part... how do I get her attention? \w7I can't make too much noise or else I'll get kicked out, \w7and if I have to study at home then I'll never get anything done!\w7\n\n[half]I think I might be able to talk at least a little bit... \w7Let's see.*\x"
+	"\1\s[10]\f[italic,1]\f[bold,1]Hey! \w7Hey, \w5you! \w7Heeey! \n\n[half]\w7\w7Heeeeeeeeeeeeey!!\w9\n\n[half]\f[align,right](Shh!)\w9\f[bold,0]\n\n[half]\f[align,left]Aw, \w5man... \w7\w7there's gotta be another way..."
+)
+
+# This happens during the specific event "OnBoot".
+OnBoot : "\0\s[0]\1\s[10]\f[italic,1]Oh! Looks like we're both here again. \w7That's great, \w5cause I finally remembered what I wanted to say last time!"
+
+# This happens during the specific event "OnClose". Don't forget the "\-" tag to close the Ghost.
+OnClose : "\f[italic,1]\0\s[0]\1\s[10]Library's closing soon. Guess I better get going.\-\e"
+OnClose : "\f[italic,1]\0\s[0]\1\s[10]I'll try to finish the rest of this when I get home.\-\e"
+OnClose : "\f[italic,1]\0\s[0]\1\s[10]I don't think I made any progress today...\w7\w7\nI'll be fine. \w7I still have time.\-\e"
+
+# When being unminimized.
+OnWindowStateRestore : "\1\s[10]\0\s[0]"

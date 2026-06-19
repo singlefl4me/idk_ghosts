@@ -1,0 +1,28 @@
+#--
+# Kawarirc.kis
+#--
+# Load order for your Ghost.
+# If you need to add a new file, you can add it to the load order here.
+
+=kis
+
+# Load files:
+load dict-function.kis;
+load dict-menu.kis;
+load bootend.kis;
+load resource.kis;
+load mouse.kis;
+load aitalk.kis;
+load menu.kis;
+load etc.kis;
+
+# Profile data:
+load profile\dict-savedata.txt;
+
+# Logs error/behavior information and event information. Can be disabled on release for tidiness.
+loglevel error warning info baseevents;
+
+# Records said logs in 'kawari.log'.
+logfile kawari.log;
+
+=end

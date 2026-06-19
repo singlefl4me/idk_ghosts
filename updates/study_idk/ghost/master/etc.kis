@@ -1,0 +1,213 @@
+#--
+# Miscelleaneous Events
+#--
+# Catch-all for other important but not easily grouped events.
+
+OnMouseActSuccess : "\0\s[1]\w9\w9\w9\1\s[10]I think that did it! \w7Now to- \w4wait a minute...\w7\w7\nWhat was I gonna say again?\![open,inputbox,OnMouseActEnd,0]"
+
+surfaceNum : 2, 3, 4, 5
+
+OnMouseActEnd : (
+    "\1\s[10]\f[italic,1]\f[bold,1]"$(Reference 0)"\f[bold,0]\n\n[half]"
+    "\0\w9\w9\w9\i[2,wait]\w9\w9\w9\s["${surfaceNum}"]\_w[3000]\s[0]\w9\w9"
+	"\1\s[10]\f[italic,1]No, \w5that wasn't what I wanted to say...\w9\w9\nGuess I'll have to try that again."
+)
+
+#--
+# OnTranslate
+#--
+# Modifies the script with a second layer of processing.
+OnTranslate : $(
+	# This first bit of code that checks if a surface is valid was adapted from a YAYA equivalent created by Zichqec. 
+	# Be aware that it will replace the Kero's invalid surfaces with surface0 as well.
+
+	# Make an array of the current dialogue, with each element starting with a surface call
+	setstr @talk $(Reference 0);
+	split @checksurfaces ${@talk} "\s[";
+	# Erase the first element since it won't have a surface call
+	clear @checksurfaces[0];
+
+	# Split off the rest of this bit of dialogue so that we just have the surface number
+	foreach @element @checksurfaces $(split @surface ${@element} "]"); 
+	# If it isn't valid, as in not present in ValidSurfaces, replace it. ValidSurfaces is found in NotifyShellInfo.
+	foreach @element @surface $(
+		setstr @isvalid $(find ValidSurfaces ${@element}); 
+		if $[ ${@isvalid} = -1 && ${@element} >= 0 ] $(
+			setstr @talk $( gsub ${@talk} "\s["${@element}"]" "\s[0]" );
+		);
+	);
+	clear @surface; clear @isvalid;
+
+	# Uses consistent pronouns when ForceSet is true.
+	if $[ ${ForceSet} != 0 ] $( 
+		setstr currentPronoun $(rand $[ $( size user.they ) ]); 
+	);
+
+	# Allows code to be evaluated in script input. Checks that there's no event in reference2 and no special flag in reference1. Code, very loosely, referenced from Girl and Triangle.
+	if $[ $( Reference 1 ) == "" && $( Reference 2 ) == ""] $(
+		echo $(eval ${@talk})
+	)
+    else $(
+		echo ${@talk}
+	);
+
+)
+
+#--
+# Network Update
+#--
+
+# When the Ghost begins the Network Update process. Reference 0 is your Ghost name.
+OnUpdateBegin    : $(
+	"\0\s[0]Updating "$(Reference 0)"...\w[500]";
+)
+
+# When the Ghost has successfully checked for updates.
+OnUpdateReady    : $(
+	"\0\s[0]"$(Reference 0)" new files.";
+)
+
+# When the Ghost has updated.
+OnUpdateComplete : $(
+	"\0\s[0]Successfully updated.";
+)
+
+# When the Ghost's update failed.
+OnUpdateFailure  : $(
+	"\0\s[0]The update failed. '"$(Reference 0)"' is the reason.";
+)
+
+#-- 
+# NTP Time Sync Option
+#--
+# When the Ghost attempts to change the clock.
+
+# Attempts to connect to server.
+OnSNTPBegin   : $(
+	"\0\s[0]Connecting to "$(Reference 0)"...\w[500]";
+)
+
+# Successfully connect to server and prompts user to change time.
+OnSNTPCompare : $(
+    # Comma delimited time
+	split @servertime $(Reference 1) ",";
+	split @localtime $(Reference 2) ",";
+    # Now time
+	setstr @ntime $@servertime[3]":"$@servertime[4]", "$@servertime[1]"/"$@servertime[2]", "$@servertime[0]; 
+    # Worse time
+	setstr @wtime $@localtime[3]":"$@localtime[4]", "$@localtime[1]"/"$@localtime[2]", "$@localtime[0];
+
+    # If clock does not match:
+	if $[$(Reference 3) != 0] $(echo 
+	"\0\s[0]The time retrieved from "$(Reference 0)" is "${@ntime}". Your device's time is "${@wtime}"."
+    "\w8 Would you like to fix the clock?"
+    "\n\n[half]\q[Yes,OnSNTPChange]"
+    "\n\q[No,OnQuit,0]")
+	else $(echo "The clock's already correct.")
+)
+
+# User-created. Simple call to \6 (Time sync tag).
+OnSNTPChange  : "\6\e"
+
+# Successfully corrected the time.
+OnSNTPCorrect : $(
+	"\0\s[0]The clock's been corrected.";
+)
+
+# Unsuccessful correction of the time.
+OnSNTPFailure : $(
+	"\0\s[0]Failed to connect to "$(Reference 0)".\w[500]";
+)
+
+#--
+# BIFF Email Check
+#--
+# The Ghost checks email.
+
+# When asked to check email.
+# Reference0 is the account/server being connected to.
+OnBIFFBegin : $(
+	"\0\s[0]Connecting to "$(Reference 0)"...\w[500]"
+)
+
+# When mail check is successful. BIFF2 occurs when no script is returned from OnBIFFComplete, only unusual circumstance.
+# Reference0 is the number of emails.
+OnBIFFComplete, OnBIFF2Complete : $(
+	if $[$(Reference 0) == 0] "\0\s[0]There are no new emails." 
+    else if $[$(Reference 0) = 1] "\0\s[0]There is 1 email." 
+    else "\0\s[0]There are "$(Reference 0)" emails."
+)
+
+# When the Ghost has failed to check email. 
+# Reference2 is the name of the account/server they were connecting to. Reference 0 is the reason for failure.
+OnBIFFFailure : $(
+	"\0\s[0]Failed to connect to "$(Reference 2)". The reason was '"$(Reference 0)"'.\w[500]"
+)
+
+#--
+# Headlines and RSS
+#--
+
+# Checking both headlines and RSS feeds. Reference0 is the feed name.
+OnHeadlinesenseBegin, OnRSSBegin : (
+	"\0\s[0]Checking the feed of "$(Reference 0)"..."\w[500]
+)
+
+# Failed to check headlines or RSS feeds. Reference0 is the feed name.
+OnHeadlinesenseFailure, OnRSSFailure : $(
+	"\0\s[0]Failed to check the feed. The reason was '"$(Reference 0)"'."
+)
+
+#--
+# Notify
+#--
+# Silent events that primarily inform the Ghost.
+
+# Gathers user information from SSP.
+notify.OnNotifyUserInfo : $(
+    # Sets default user information.
+	echo ${SaveLoad};
+	if $[$(length $(Reference 0) > 0)] $(setstr tempUser $(Reference 0));
+	setstr userfull $(Reference 1);
+	setstr birthdate $(Reference 2);
+	setstr usergender $(Reference 3);
+	if $[ $(length ${user.they}) < 1 || $(length ${user.them}) < 1 || $(length ${user.their}) < 1 || $(length ${user.theirs}) < 1 || $(length ${user.themself}) < 1 || $(length ${user.singularplural}) < 1 ] $(
+		if $[ ${usergender} = "female" ] $(copytree pronounsFem user)
+		else if $[ ${usergender} = "male" ] $(copytree pronounsMasc user)
+		else $(copytree pronounsNeut user);
+	);
+	echo ${OnInitializeVars};
+)
+
+# Initializes variables. Used in OnNotifyUserInfo
+# Add variables to 'savedataParam' in dict-function if you need them to be saved across sessions.
+OnInitializeVars : $(
+	# Sets the user's name to the name in SSP's preferences.
+	if $[ $(length ${username}) < 1 ] $(setstr username ${tempUser});
+	# Second check, for if the first doesn't work for some reason.
+	if $[ $(length ${username}) < 1 ] $(setstr username "User");
+	# Sets a default value for singular/plural pronouns.
+	if $[ $(length ${lastSP}) = 0 ] $(setstr lastSP '0');
+	# Sets a default value for if pronouns should be mixed or not.
+	if $[ $(length ${ForceSet}) = 0 ] $(setstr ForceSet '0');
+	# Sets a talk interval if there is none.
+    if $[ $(length ${talkinterval}) = 0 ] $(setstr talkinterval '300');
+	setstr vanishFlag '0';
+)
+
+# Gathers info on itself from SSP.
+notify.OnNotifySelfInfo : $(
+    # Record self information.
+	setstr ghostSelf $(Reference 0);
+	setstr ghostSakura $(Reference 1);
+	setstr ghostKero $(Reference 2);
+	setstr currentShell $(Reference 3);
+	setstr currentBalloon $(Reference 5);
+)
+
+# Gathers info on its shell from SSP.
+notify.OnNotifyShellInfo : $(
+	# reference2 is the list of surfaces in the shell.
+	setstr @reference2 $(Reference 2);
+	split ValidSurfaces ${@reference2} ",";
+)

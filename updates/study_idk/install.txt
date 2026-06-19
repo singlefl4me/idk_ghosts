@@ -1,0 +1,7 @@
+charset,UTF-8
+type,ghost
+
+//Menu name
+name,Study Buddies
+//Directory name
+directory,study_idk

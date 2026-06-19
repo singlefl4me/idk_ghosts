@@ -1,0 +1,57 @@
+#--
+# Resources
+#--
+# Resources are information your Ghost draws upon to create the right click menu and a couple other things.
+# https://ukagakadreamteam.github.io/ukadoc/manual/list_shiori_resource.html
+
+#--
+# Network Update URL
+#--
+# The Ghost will check this for the update URL.
+# When devmode is ON, it will instead check the DUMMY url.
+# Change the URL after 'else'.
+
+resource.homeurl : $(
+	if $[${devmode} = 1] "https://dummy.url/"
+	else "https://raw.githubusercontent.com/singlefl4me/study_idk/refs/heads/main/"
+)
+
+#--
+# Uninstallation Option
+#--
+# Toggles the uninstall option depending on if the flag is 0 or 1.
+
+resource.vanishbutton.visible : (
+	${vanishFlag}
+)
+
+#--
+# Recommended Sites
+#--
+# Right click menu 'Portal' and 'Recommendations'.
+
+resource.sakura.portalsites : $(urllist
+	"Okuajub's Netspace" 
+	"https://okuajub-netspace.neocities.org/ukagaka" 
+	"https://okuajub-netspace.neocities.org/eva_button.png"
+	"-" "-" "-"
+	"MesoMeso Github"
+	"https://github.com/Okuajub/mesomeso/"
+	"-"
+)
+
+resource.sakura.recommendsites : $(urllist
+	"Kawari Landing Page (JP)"
+	"https://kawari.github.io/"
+	"-" 
+	"Kawari Documentation (EN)"
+	"https://okuajub-netspace.neocities.org/Kawari/"
+	"-"
+	"-" "-" "-"
+	"SakuraScript Documentation (EN)"
+	"https://ukagakadreamteam.github.io/ukadoc/manual/list_sakura_script.html"
+	"-"
+	"SHIORI Event Documentation (EN)"
+	"https://ukagakadreamteam.github.io/ukadoc/manual/list_shiori_event.html"
+	"-"
+)

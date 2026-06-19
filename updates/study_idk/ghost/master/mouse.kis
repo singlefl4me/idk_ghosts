@@ -1,0 +1,62 @@
+#--
+# Mouse Events
+#--
+# Events related to the mouse.
+# Reference 3 is the character. 0 refers to the Sakura, while 1 refers to the Kero, and so on.
+# Reference 4 is the hotspot name. An empty string means there is no hotspot.
+
+# When double-clicking the Ghost.
+OnMouseDoubleClick : $(
+    # If it is the Sakura and there is no hotspot:
+	if $[ $(Reference 4) == 'book' || $(Reference 4) == 'laptop' || $(Reference 4) == 'backpack'] ${OnMouseActChance};
+)
+
+#-- Petting
+# When you rub a hotspot.
+
+# When moving the mouse on the Ghost or scrolling the mousewheel on the Ghost.
+# Pets specified characters. Mousewheel option included for accessibility
+OnMouseMove, OnMouseWheel : $(
+    # Increase stroke counter.
+	inc stroke;
+	# Pets the Ghost if stroke limit is met and Ghost is not talking.
+	if $[ $[ ${stroke} > ${strokeLimit} ] && $[ $(match ${System.Request.Status} talking) < 0 ] ] $(
+		setstr stroke 0;
+		if $[ $(Reference 4) == 'book' || $(Reference 4) == 'laptop' || $(Reference 4) == 'backpack'] ${OnMouseActChance};
+	);
+)
+
+# Waiting time for petting response. Adjustable.
+strokeLimit : 40
+
+# Sets the stroke counter to 0 when the mouse isn't on the Ghost.
+OnMouseLeaveAll : $(
+	setstr stroke 0;
+)
+
+#-- Key presses
+# Reference 0 is the key pressed.
+OnKeyPress: $(
+    # R for Repeat
+	# if $[ $(Reference 0) == 'r' ] ${lastTalk}
+    # T for Talk
+    # else if $[ $(Reference 0) == 't' ] ${OnAITalk}
+	# F1 for Readme
+	if $[ $(Reference 0) == 'f1' ] "\![open,readme]\e";
+)
+
+OnMouseActChance : $(
+	set @successRate $(rand 10);
+	if $[ ${@successRate} == '1' ] "\![raise,OnMouseActSuccess]"
+	else ${mouseActFail};
+)
+
+mouseActFail : "\1\s[10]I'm gonna have to try something else."
+mouseActFail : "\1\s[10]I don't think this is working."
+mouseActFail : "\1\s[10]"
+mouseActFail : "\1\s[10]"
+mouseActFail : "\1\s[10]"
+mouseActFail : "\1\s[10]"
+mouseActFail : "\1\s[10]"
+mouseActFail : "\1\s[10]"
+mouseActFail : "\1\s[10]"

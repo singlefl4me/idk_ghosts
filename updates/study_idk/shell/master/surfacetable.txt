@@ -1,0 +1,23 @@
+//Surface table. Define surfaces for Surface Test.
+
+charset,UTF-8
+version,1
+option,DisableNoDefineSurfaces
+
+
+group,Saku
+{
+scope,0
+
+0,Default
+
+}
+
+
+group,Kero
+{
+scope,1
+
+10,Default
+
+}
