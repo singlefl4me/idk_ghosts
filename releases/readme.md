@@ -1,9 +1,9 @@
 # ghosts
 all of the ghosts i've worked on over the years
 
-### [bugsnax](re_bugsnax.nar)
+### [Bugsnax](re_bugsnax.nar)
    ![bugsnax thumbnail](/updates/re_bugsnax/thumbnail.png)
-### [cookie chorus](cookies_idk.nar)
+### [Cookie Chorus](cookies_idk.nar)
    ![cookiechorus thumbnail](/updates/cookies_idk/thumbnail0.png)
 ### [express urself](express_idk.nar)
    ![expressurself thumbnail](/updates/express_idk/thumbnail.png)
@@ -75,6 +75,8 @@ ghosts that i've worked on with others
    ![dreamballoon thumbnail](/updates/db_idk/thumbnail.png)
 ### [fabric of space](fs_idk.nar)
    ![fos thumbnail](/updates/fs_idk/thumbnail.png)
+### [ghostly whisper](ghost_idk.nar)
+   ![ghost thumbnail](https://ukagakadreamteam.com/wiki/_media/balloon/ghostly_whisper/thumbnail.png?cache=)
 ### [green n' blue](gb_idk.nar)
    ![gnb thumbnail](/updates/gb_idk/thumbnail.png)
 ### [ice cream cone](icey_idk.nar)
