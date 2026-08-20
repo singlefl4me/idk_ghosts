@@ -1,0 +1,10 @@
+﻿seriko.alignmenttodesktop,free
+seriko.use_self_alpha,1
+
+charset,UTF-8
+type,shell
+name,Mississippian Bowl with Face
+craftman,idk
+craftmanw,idkimtired
+craftmanurl,https://github.com/singlefl4me
+homeurl,https://raw.githubusercontent.com/singlefl4me/idk_ghosts/refs/heads/main/updates/bwf_idk/

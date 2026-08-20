@@ -1,0 +1,4 @@
+Charset,UTF-8
+type,shell
+name,Mississippian Bowl with Face
+directory,bwf_idk

@@ -1,0 +1,33 @@
+descript
+{
+	version,1
+}
+
+surface0
+{
+	animation0.interval,random,25
+	animation0.pattern0,base,100,0,0,0
+	animation0.pattern1,base,101,72,0,0
+	animation0.pattern2,base,102,72,0,0
+	animation0.pattern3,base,103,72,0,0
+	animation0.pattern4,base,104,72,0,0
+	animation0.pattern5,base,105,72,0,0
+	animation0.pattern6,base,106,72,0,0
+	animation0.pattern7,base,107,72,0,0
+	animation0.pattern8,base,100,72,0,0
+	animation0.pattern9,base,108,144,0,0
+	animation0.pattern10,base,109,72,0,0
+	animation0.pattern11,base,110,72,0,0
+	animation0.pattern12,base,111,72,0,0
+	animation0.pattern13,base,112,72,0,0
+	animation0.pattern14,base,113,72,0,0
+	animation0.pattern15,base,114,72,0,0
+	animation0.pattern16,base,115,72,0,0
+	animation0.pattern17,base,116,72,0,0
+	animation0.pattern18,base,100,72,0,0
+	animation0.pattern19,start,1
+
+	animation1.interval,never
+	animation1.pattern0,stop,0
+	animation1.pattern1,base,100,0,0,0
+}
